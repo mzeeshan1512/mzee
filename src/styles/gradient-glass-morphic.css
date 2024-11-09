@@ -1,0 +1,42 @@
+/* Glassmorphic Effect Start*/
+.glassmorphic {
+  background: transparent !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+}
+
+.glassmorphic-primary {
+  background: var(--primary) !important;
+}
+
+
+.glassomorhpic-effect-center-nav {
+    background: transparent !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  }
+
+.glassomorhpic-effect {
+    background: rgba("#1a1a1a", 0.2) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+}
+/* Glassmorphic Effect End */
+
+/* Gradient Background */
+.gradient-background {
+  background: var(--primary-25);
+  background: -webkit-linear-gradient(to left, var(--primary-25) 0%, var(--secondary-25) 100%);
+  background: -moz-linear-gradient(to left, var(--primary-25) 0%, var(--secondary-25) 100%);
+  background: var(--primary-text-gradient) !important;
+}
+
+/* Text Gradient */
+.text-gradient {
+  background: var(--primary-text-gradient);
+  filter: drop-shadow();
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent;
+}

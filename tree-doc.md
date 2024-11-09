@@ -1,0 +1,49 @@
+Restructure project directory and add configuration, assets, components, and utilities
+
+- **.vscode/settings.json**: Added VS Code settings file to enforce consistent editor configuration across the team.
+- **public/**:
+  - Added SVG files (`file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `window.svg`) for reusable images/icons in the project.
+  - These images are intended for UI elements or branding across the site.
+- **src/app/**:
+  - **(public)/(home)**: Organized the home-specific sections with `page.tsx` and `template.tsx` files, improving the structure and modularity of the home page.
+  - **out-bound-redirect/page.tsx**: Implemented redirect page logic for handling external redirection.
+  - **favicon.ico**: Added a favicon for better user experience and consistent branding across all pages.
+  - **global-error.tsx**: Centralized error handling logic to provide a fallback UI when errors occur.
+  - **layout.tsx**: Created layout components to provide consistent structure across the application.
+  - **not-found.tsx**: Added 404 page for handling non-existent routes.
+- **src/assets/**:
+  - **bgs/**: Added background images such as `home-dark.png` and `whatsapp.jpg` to be used across the app.
+  - **logos/**: Included app logos (`appLogo.png`, `chat.png`) for consistent brand representation.
+  - **about.png**: Added image to be used in the about section or similar content.
+- **src/shared/**:
+  - **components/**: Created reusable components like `button.tsx`, `particles-animation.tsx`, `pop-up.tsx`, `show-if.tsx`, `svg-gradient-binder.tsx`, `tooltip.tsx`, and `trusted-redirect.tsx` to support common UI patterns across the app.
+  - **config/**: Added configuration files (`firebase.ts`, `index.ts`) to manage app-specific setups like Firebase.
+  - **hooks/**:
+    - Added custom hooks such as `use-scroll-into-view.ts`, `use-debounced-value.ts`, `use-media-query.ts`, `use-network.ts`, `use-reduced-motion.ts`, `use-timeout.ts`, and `use-window-event.ts` for improving app interactivity and performance.
+    - **utils/**:
+      - Included helper functions (`ease-in-out-quad.ts`, `get-relative-position.ts`, `get-scroll-start.ts`, `set-scroll-param.ts`) to aid scroll-related logic within `use-scroll-into-view`.
+  - **icon/**: Added social media icons (`common.tsx`, `social.tsx`) to standardize icon usage across the application.
+  - **layouts/**:
+    - Improved app layout organization by adding components such as `header/`, `footer/`, and various layout templates (`app-layout.tsx`, `horizontal-layout.tsx`, `content-renderer.tsx`).
+    - **error/**: Implemented `error-boundary.tsx` and fallback layout for handling app crashes and rendering a fallback UI.
+    - **offline-view/**: Added offline page view (`index.tsx`, `style.css`) for better user experience during no network conditions.
+    - **settings/**: Improved settings and functionality with components like `scroll-to-top.tsx` and `whats-app-chat.tsx`.
+  - **theme/**: Created theme-related components, including `provider.tsx` and `theme-toggler.tsx` for dark/light mode toggling.
+  - **utils/common.ts**: Added utility functions for shared operations across the app.
+- **src/styles/**:
+  - Added **`globals.css`** to define global styles that apply across the entire application.
+  - Created **`gradient-glass-morphic.css`** for implementing a glassmorphic design style.
+  - Added **`hover-bottom-outline-effect.css`** to create hover effects for interactive elements.
+- **.env**: Created environment configuration file to manage environment-specific variables (e.g., API keys, DB URLs).
+- **.env.example**: Added example `.env` file to provide a template for environment variable setup.
+- **.eslintrc.json**: Configured ESLint for consistent code style, error detection, and best practices across the codebase.
+- **.gitignore**: Updated `.gitignore` to ensure proper exclusion of build artifacts, dependencies, and environment files.
+- **LICENSE**: Included the license file for the project, specifying terms of use and distribution.
+- **next-env.d.ts**: Added TypeScript declaration file for Next.js environment variables and types.
+- **next.config.ts**: Configured Next.js build and runtime options, including custom webpack configurations.
+- **package-lock.json**: Updated package lock to ensure consistent installation of dependencies.
+- **package.json**: Updated dependencies and scripts to reflect current project needs and tools.
+- **postcss.config.mjs**: Configured PostCSS for styling purposes, ensuring compatibility with modern CSS features.
+- **README.md**: Updated documentation with details about the project structure, setup instructions, environment configuration, and running the app.
+- **tailwind.config.ts**: Configured Tailwind CSS for utility-first styling and responsive design.
+- **tsconfig.json**: Added and configured TypeScript settings to ensure proper type-checking and code structure.
