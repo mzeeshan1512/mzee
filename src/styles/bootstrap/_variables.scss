@@ -1,0 +1,14 @@
+:root {
+  --bs-primary: #{$primary} !important;
+  --bs-btn-color: #{$primary} !important;
+  --bs-link-color-rgb: #{$primary} !important;
+  --bs-secondary-bg:rgba(162, 162, 162, 0.418);
+}
+
+.bg-primary{
+  background: $primary !important;
+}
+
+.border-primary {
+  border-color: $primary !important;
+}

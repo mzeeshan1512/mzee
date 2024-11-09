@@ -1,0 +1,35 @@
+.bread--crumbs{
+    @include flexControl(flex-start,stretch);
+    gap:6px;
+    .title{
+        @include textGradient;
+        font-size: x-large;
+        font-weight: 600;
+        border-right: 2px solid grey;
+        padding-right: 10px;
+    }
+    ul{
+        @include flexControl(flex-start,center);
+        flex-wrap: wrap;
+        list-style: none;
+        gap:10px;
+        li{
+            @include hoverBottomOutlineEffect;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+           a{
+                font-size: large;
+            }
+            .content{
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+            span{
+                line-height: 1;
+            }
+            
+        }
+    }
+}

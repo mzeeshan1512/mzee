@@ -1,0 +1,33 @@
+.color-transform {
+  animation: colorTransform 4.3s ease-in-out infinite;
+  max-width: 100%;
+  width: 300px !important;
+  height: 150px;
+  @media #{$large-mobile} {
+    width: 200px !important;
+    height: 100px;
+  }
+  @keyframes colorTransform {
+    0%,
+    100% {
+      filter: grayscale(0%);
+    }
+    50% {
+      filter: grayscale(100%);
+    }
+  }
+}
+
+.screen-Loader{
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    @include flexControl(center !important,center !important);
+    background-color: rgba(249, 249, 249, 0) !important;
+    border: none !important;
+    box-shadow: none !important;
+}

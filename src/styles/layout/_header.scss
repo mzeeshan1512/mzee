@@ -1,0 +1,36 @@
+.header {
+  padding: 15px 0;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: 0.3s;
+  z-index: 50;
+  background-color: transparent;
+  box-shadow: 0 2px 6px -6px inherit !important;
+  transition: all ease-in-out 0.2s;
+  height: 5rem;
+}
+
+.md-content-wrapper {
+  min-height: 100%;
+  width: 100%;
+  padding: 24px;
+  margin-top: clamp(5rem, 2vw, 5rem);
+  .height-100vh-n-rem{
+    min-height: calc(100vh - 15rem);
+  }
+}
+
+.container-override{
+  &.container{
+    max-width: 100% !important; 
+  }
+  .container{
+    max-width: 100% !important; 
+  }.w-calc{
+    padding-right: 2rem !important;
+  }
+}

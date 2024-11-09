@@ -1,0 +1,90 @@
+@mixin flexControl($justifyContent, $alignItems) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+@mixin rotate($value) {
+  rotate: $value;
+}
+
+@mixin messageContainer($top, $left) {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #fdfeff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top: $top;
+  left: $left;
+}
+
+@mixin gradientBackground{
+  background: $primary !important;
+  background: -webkit-linear-gradient(
+    to left,
+    $primary 0%,
+  $secondary 100%
+  
+  );
+  background: -moz-linear-gradient(
+    to left,
+    $primary 0%,
+    $secondary 100%
+  
+  ) !important;
+  background: $primary-gradient !important;
+}
+
+@mixin textGradient{
+  @include gradientBackground;
+  filter: drop-shadow();
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+@mixin hoverBottomOutlineEffect() {
+  > a {
+    display: inline-block;
+    position: relative;
+    font-weight: 900;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      bottom: 0;
+      height: 2px;
+      margin: -2px 0;
+      left: 0;
+      background-color: $secondary;
+      transition: all 0.3s ease-in 0s;
+    }
+    &:hover {
+      color: $primary !important;
+      @include textGradient;
+      .tooltip{
+        color: white !important;
+      }
+    }
+    &:hover:after {
+      width: 100%;
+    }
+
+  }
+  .active-tab {
+    color: $primary !important;
+    text-decoration: none !important;
+    @include textGradient;
+    border-bottom: 2px solid $primary-gradient !important;
+    &:hover{
+      border-bottom: none !important;
+    }
+  }
+}
+
+@mixin widthHeightCal ($width,$height){
+  width: calc(100vw - #{$width});
+  height: calc(100vh - #{$height});
+}

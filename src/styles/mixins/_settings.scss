@@ -1,0 +1,87 @@
+@mixin settings($bottom, $right, $wxh: 35px, $bg: $primary, $margin: 0) {
+  position: fixed !important;
+  bottom: $bottom !important;
+  right: $right !important;
+  margin: $margin !important;
+  z-index: 10 !important;
+  padding: 2px !important;
+  background-color: $bg;
+  box-shadow: inherit;
+  width: $wxh;
+  height: $wxh;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  &:hover {
+    background: rgba($bg, 0.7);
+  }
+  @include flexControl(center, center);
+  transition: all ease-in 0.3s;
+}
+
+.scroll-to-top {
+  @include settings(1rem, 4rem);
+  display: none;
+  &.show {
+    display: flex;
+  }
+}
+
+$wxh: 35px;
+.settings-content {
+  padding: 2px !important;
+  background-color: $primary;
+  box-shadow: inherit;
+  width: $wxh;
+  height: $wxh;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  &:hover {
+    background: rgba($primary, 0.7);
+  }
+  @include flexControl(center, center);
+  transition: all ease-in 0.3s;
+}
+
+.setting-visibility {
+  position: fixed !important;
+  bottom: 1rem !important;
+  right: 1rem !important;
+  margin: 0 !important;
+  z-index: 10 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@mixin groupVisibility() {
+  visibility: visible;
+  bottom: 102%;
+  opacity: 1;
+}
+.group-setting-visibility {
+  @include settings(1rem, 1rem);
+  position: relative;
+  .content-visibility {
+    border: 1px solid $primary;
+    visibility: hidden;
+    padding: 5px;
+    border-radius: 20px;
+    transition: all ease-in-out 0.3s;
+    display: flex;
+    bottom: 0;
+    position: absolute;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+  }
+  &:hover {
+    .content-visibility {
+      @include groupVisibility;
+    }
+  }
+  .group-visibility{
+    @include groupVisibility;
+  }
+}

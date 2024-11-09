@@ -1,0 +1,17 @@
+$m-01: #FB8A8A;
+$m-02: #FFEDC0;
+
+$bg-01: $primary;
+$bg-02: $primary;
+$bg-03: yellow;
+
+$g-01: linear-gradient(90deg, #FFEDC0 0%, #FF9D87 100%);
+$g-02: linear-gradient(90deg, #be3662 13.7%, #e97c9e 94.65%);
+
+$cubic: cubic-bezier(0.4, 0.35, 0, 1.53);
+$cubic2: cubic-bezier(0.18, 0.89, 0.32, 1.15);
+
+$circleShadow: inset 5px 20px 40px rgba($bg-02, 0.25),
+inset 5px 0px 5px rgba($bg-03, 0.3),
+inset 5px 5px 20px rgba($bg-03, 0.25),
+2px 2px 5px rgba(white, 0.2);

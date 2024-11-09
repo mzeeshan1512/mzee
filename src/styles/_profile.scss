@@ -1,0 +1,78 @@
+.profile {
+  position: relative;
+  @media #{$large-mobile} {
+    margin-right: 10px;
+  }
+  .profile-container {
+    display: flex;
+    align-items: center;
+    .avatar {
+      vertical-align: middle;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: 1px solid $primary;
+      padding: 5px;
+    }
+  }
+  .drop-down {
+    display: none;
+    position: absolute;
+    width: 140px;
+    right: 0;
+    top: 35px;
+    z-index: 150 !important;
+    padding: 0 10px;
+    max-height: 300px !important;
+    flex-direction: column;
+    text-align: left;
+    .item {
+      padding: 12px;
+      text-decoration: none;
+      border-bottom: 1px solid rgb(226, 222, 222);
+
+      &:last-child {
+        border: 0 !important;
+      }
+      &:hover {
+        font-style: italic;
+        font-weight: bold !important;
+        color: $primary;
+      }
+    }
+    @media #{$large-mobile} {
+      right: 0;
+    }
+  }
+  &:hover {
+    .drop-down {
+      display: flex;
+    }
+  }
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 10px;
+  height: fit-content;
+  align-items: stretch;
+  
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.image-delete-remove{
+  position: absolute;
+  top: -10px;
+  right: 0;
+  color: red;
+  z-index: 10;
+}

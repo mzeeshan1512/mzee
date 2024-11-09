@@ -1,0 +1,187 @@
+.error-container {
+  margin: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  .content-container {
+    @include flexControl(center, center);
+    height: 100%;
+    width: 100%;
+  }
+  .error-animated-text {
+    text-align: center;
+    font-size: clamp(100px, 14vw, 20vw);
+    font-family: "Catamaran", sans-serif;
+    font-weight: 800;
+
+    > span {
+      display: inline-block;
+      line-height: 0.7;
+      position: relative;
+      color: $primary;
+
+      &:nth-of-type(1) {
+        color: $primaryDark;
+        animation: colordancing 4s infinite;
+      }
+
+      &:nth-of-type(3) {
+        color: $primary35;
+        animation: colordancing2 4s infinite;
+      }
+
+      &:nth-of-type(2) {
+        width: clamp(10vw, 100px, 100px);
+        height: clamp(10vw, 100px, 100px); 
+        border-radius: 50%; 
+
+        &:before,
+        &:after {
+          border-radius: 0%;
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: inherit;
+          height: inherit;
+          border-radius: 999px;
+          box-shadow: inset 30px 0 0 rgba($primaryDark25, 0.4),
+            inset 0 30px 0 rgba($primary, 0.4),
+            inset -30px 0 0 rgba($primary35, 0.4),
+            inset 0 -30px 0 rgba($primaryDark35, 0.4);
+          animation: shadowsdancing 4s infinite;
+        }
+
+        &:before {
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    @keyframes shadowsdancing {
+      0% {
+        box-shadow: inset 30px 0 0 rgba($primaryDark25, 0.4),
+          inset 0 30px 0 rgba($primary, 0.4),
+          inset -30px 0 0 rgba($primary35, 0.4),
+          inset 0 -30px 0 rgba($primaryDark35, 0.4);
+      }
+      25% {
+        box-shadow: inset 30px 0 0 rgba($primaryDark35, 0.4),
+          inset 0 30px 0 rgba($primaryDark25, 0.4),
+          inset -30px 0 0 rgba($primary, 0.4),
+          inset 0 -30px 0 rgba($primary35, 0.4);
+      }
+      50% {
+        box-shadow: inset 30px 0 0 rgba($primary35, 0.4),
+          inset 0 30px 0 rgba($primaryDark35, 0.4),
+          inset -30px 0 0 rgba($primaryDark25, 0.4),
+          inset 0 -30px 0 rgba($primary, 0.4);
+      }
+      75% {
+        box-shadow: inset 30px 0 0 rgba($primary, 0.4),
+          inset 0 30px 0 rgba($primary35, 0.4),
+          inset -30px 0 0 rgba($primaryDark35, 0.4),
+          inset 0 -30px 0 rgba($primaryDark25, 0.4);
+      }
+      100% {
+        box-shadow: inset 30px 0 0 rgba($primaryDark25, 0.4),
+          inset 0 30px 0 rgba($primary, 0.4),
+          inset -30px 0 0 rgba($primary35, 0.4),
+          inset 0 -30px 0 rgba($primaryDark35, 0.4);
+      }
+    }
+
+    @keyframes colordancing {
+      0% {
+        color: $primaryDark;
+      }
+      25% {
+        color: $primary35;
+      }
+      50% {
+        color: $primary;
+      }
+      75% {
+        color: $primary25;
+      }
+      100% {
+        color: $primaryDark;
+      }
+    }
+
+    @keyframes colordancing2 {
+      0% {
+        color: $primary;
+      }
+      25% {
+        color: $primary25;
+      }
+      50% {
+        color: $primaryDark;
+      }
+      75% {
+        color: $primary35;
+      }
+      100% {
+        color: $primary;
+      }
+    }
+  }
+  .error-text {
+    .typewriter {
+      margin-bottom: 20px;
+      .text {
+        width: fit-content;
+        //max-width: 80% !important;
+        color: white;
+        overflow: hidden;
+        border-right: 10px solid green;
+        white-space: nowrap;
+        margin: 0 auto;
+        &.no-animation{
+          animation: none;
+          border-right: none;
+          white-space: wrap;
+          text-align: center;
+        }
+        animation: typing 6s steps(80, end), blink-caret 0.5s step-end infinite;
+        @media #{$large-mobile} {
+          animation: none;
+          border-right: none;
+          white-space: wrap;
+          text-align: center;
+        }
+      }
+      @media #{$large-mobile} {
+        width: 280px;
+      }
+
+      /* The typing effect */
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      /* The typewriter cursor effect */
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: green;
+        }
+      }
+    }
+  }
+}
+
+.invalid-feedback{
+  margin-top: 0 !important;
+}

@@ -1,0 +1,25 @@
+.max-table-h-scroll {
+    max-height: calc(100vh - 380px) !important;
+    overflow: auto !important;
+    &::-webkit-scrollbar-track {
+      background: transparent !important;
+      opacity: 0 !important;
+      margin-top: 57px !important;
+      margin-bottom: 15px !important;
+    }
+  }
+
+  .max-form-table-h-scroll {
+    max-height: calc(100vh - 380px) !important;
+    overflow: auto !important;
+  }
+  
+  .max-tab-h-scroll {
+    max-height: calc(100vh - 300px) !important;
+    overflow: auto !important;
+    &::-webkit-scrollbar-track {
+      background: transparent !important;
+      opacity: 0 !important;
+      margin: 10px !important;
+    }
+  }  

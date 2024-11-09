@@ -1,0 +1,71 @@
+@mixin ql_stroke_fill($fill) {
+  .ql-stroke.ql-fill {
+    fill: $fill !important;
+  }
+}
+
+@mixin ql_fill($fill) {
+  .ql-fill {
+    fill: $fill !important;
+  }
+} 
+
+@mixin ql_stroke($fill){
+  .ql-stroke{
+  stroke: $fill !important;
+}}
+
+@mixin ql_stroke_miter($fill){
+  .ql-stroke-miter{
+  stroke: $fill !important;
+}}
+
+
+@mixin quillEffect($fill){
+    &:hover {
+        @include ql_fill($fill);
+        @include ql_stroke_fill($fill);
+        @include ql_stroke($fill);
+        @include ql_stroke_miter($fill);
+        &::before{
+          color:$fill
+        }
+      }
+      &:focus {
+        @include ql_fill($fill);
+        @include ql_stroke_fill($fill);
+        @include ql_stroke($fill);
+        @include ql_stroke_miter($fill);
+      }
+      &.ql-active{
+          @include ql_fill($fill);
+          @include ql_stroke_fill($fill);
+          @include ql_stroke($fill);
+          @include ql_stroke_miter($fill);
+      }
+      
+    }
+
+@mixin cssQuillFill($fill) {
+  button {
+    color: white;
+    @include quillEffect($fill)
+  }
+  .ql-picker-label{
+    @include quillEffect($fill);
+  }
+  .ql-picker-item{
+    @include quillEffect($fill);
+    &.ql-selected{
+        @include ql_fill($fill);
+        @include ql_stroke($fill);
+        &::before{
+          color: $fill !important;
+          
+        }
+        &:hover{
+          font-weight: bold !important
+        }
+    }
+  }
+}
