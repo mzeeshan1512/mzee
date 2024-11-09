@@ -1,0 +1,84 @@
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: $primary;
+    color: white !important;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 150;
+
+    &::after {
+      content: "";
+      position: absolute;
+      border-width: 5px;
+      border-style: solid;
+    }
+  }
+
+  &:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &.top .tooltip {
+    bottom: 125%; /* Position the tooltip above the text */
+    left: 50%;
+    margin-left: -60px;
+
+    &::after {
+      top: 100%; /* At the bottom of the tooltip */
+      left: 50%;
+      margin-left: -5px;
+      border-color: $primary transparent transparent transparent;
+    }
+  }
+
+  &.bottom .tooltip {
+    top: 125%; /* Position the tooltip below the text */
+    left: 50%;
+    margin-left: -60px;
+
+    &::after {
+      bottom: 100%; /* At the top of the tooltip */
+      left: 50%;
+      margin-left: -5px;
+      border-color: transparent transparent $primary transparent;
+    }
+  }
+
+  &.left .tooltip {
+    top: 50%;
+    right: 125%; /* Position the tooltip to the left of the text */
+    margin-top: -15px; /* Center the tooltip vertically */
+
+    &::after {
+      top: 50%;
+      left: 100%; /* At the right of the tooltip */
+      margin-top: -5px;
+      border-color: transparent transparent transparent $primary;
+    }
+  }
+
+  &.right .tooltip {
+    top: 50%;
+    left: 125%; /* Position the tooltip to the right of the text */
+    margin-top: -15px; /* Center the tooltip vertically */
+
+    &::after {
+      top: 50%;
+      right: 100%; /* At the left of the tooltip */
+      margin-top: -5px;
+      border-color: transparent $primary transparent transparent;
+    }
+  }
+}

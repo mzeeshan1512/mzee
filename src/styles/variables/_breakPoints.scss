@@ -1,0 +1,14 @@
+// custom
+$laptop-device: 'only screen and (min-width: 1200px) and (max-width: 1599px)';
+$lg-layout: 'only screen and (min-width: 992px) and (max-width: 1199px)';
+$md-layout:'only screen and (min-width: 768px) and (max-width: 991px)';
+$sm-layout:'only screen and (max-width: 768px)';
+$large-mobile: 'only screen and (max-width: 575px)';
+$small-mobile: 'only screen and (max-width: 479px)';
+
+//bootstrap
+$xx-large-device:"only screen and (min-width: 1400px)";  // XX-Large devices (larger desktops, 1400px and up)
+$x-large-device:"only screen and (min-width: 1200px)";   // X-Large devices (large desktops, 1200px and up)
+$large-device: "only screen and (min-width: 992px)";     // Large devices (desktops, 992px and up)
+$medium-device: "only screen and (min-width: 768px)";    // Medium devices (tablets, 768px and up)
+$small-device: "only screen and (min-width: 576px)";     // Small devices (landscape phones, 576px and up)

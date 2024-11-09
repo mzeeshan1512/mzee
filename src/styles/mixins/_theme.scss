@@ -1,0 +1,304 @@
+@import "./quill";
+
+@mixin myTheme(
+  $bg: "",
+  $clr: "",
+  $even: "",
+  $odd: "",
+  $p: $clr,
+  $glassColor: $bg
+) {
+  height: auto;
+  background-color: $bg !important;
+  color: $clr !important;
+  border-color: $clr;
+  min-height: 100vh;
+  // bootstrap variables
+  --bs-body-color: #{$clr} !important;
+
+  &.bg {
+    background-color: $bg;
+    color: $clr !important;
+    box-shadow: rgba($clr, 0.19) 0px 10px 20px, rgba($clr, 0.23) 0px 6px 6px !important;
+  }
+
+  .theme-bg {
+    background-color: $bg !important;
+    color: $clr !important;
+  }
+
+
+  section {
+    &:nth-child(odd) {
+      background: $odd;
+      .control-label {
+        background-color: $odd !important;
+      }
+      .glassomorhpic-effect {
+        background: rgba($even, 0.2) !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+      }
+       .theme-bg {
+    background-color: $odd !important;
+    color: $clr !important;
+  }
+    }
+    &:nth-child(even) {
+      background: $even;
+      .glassomorhpic-effect {
+        background: rgba($odd, 0.2) !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+      }
+      .control-label {
+        background-color: $even !important;
+      }
+      .theme-bg {
+        background-color: $even !important;
+        color: $clr !important;
+      }
+    }
+  }
+
+  .even-odd-bg {
+    &:nth-child(odd) {
+      background: $odd !important;
+    }
+    &:nth-child(even) {
+      background: $even !important;
+    }
+  }
+  .ql-editor.ql-blank::before,
+  ::placeholder {
+    color: rgba($clr, 0.6) !important;
+    font-style: normal !important;
+  }
+  .shadow {
+    box-shadow: rgba($clr, 0.16) 0px 3px 6px, rgba($clr, 0.23) 0px 3px 6px !important;
+  }
+  .glassomorhpic-effect {
+    background: rgba($glassColor, 0.2) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  }
+  .form-control {
+    --bs-body-bg: transparent !important;
+    --bs-body-color: #{$clr} !important;
+    //--bs-border-color: #{lighten($clr, 10)} !important;
+  }
+  .is-invalid {
+    border-color: var(--bs-form-invalid-border-color) !important;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    .border-bottom {
+      border-color: var(--bs-form-invalid-border-color) !important;
+    }
+  }
+  .is-valid {
+    border-color: var(--bs-form-valid-border-color) !important;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    .border-bottom {
+      border-color: var(--bs-form-valid-border-color) !important;
+    }
+  }
+  .select-invalid{
+    border-color: var(--bs-form-invalid-border-color) !important;
+  }
+  .select-valid{
+    border-color: var(--bs-form-valid-border-color) !important;
+  }
+  a {
+    color: $clr;
+    text-decoration: none;
+  }
+  .bottom-shadow {
+    box-shadow: rgba($clr, 0.25) 0px 2px 0px;
+  }
+  // table-bootstrap-variables
+  .table {
+    --bs-table-color: #{$clr} !important;
+    --bs-table-bg: #{$bg} !important;
+  }
+  .ben-loader {
+    border-color: rgba($clr, 0.3) !important;
+    &::after {
+      border-color: transparent rgba($clr, 0.15) !important;
+    }
+  }
+  // react-date-picker
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container {
+    input {
+      width: 100% !important;
+      background: transparent;
+      padding: 5px 10px;
+      color: $clr;
+    }
+  }
+  .react-datepicker__header__dropdown--select {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+  }
+  .react-datepicker__month-dropdown-container--select,
+  .react-datepicker__year-dropdown-container--select {
+    select {
+      background: transparent;
+      border: 1px solid $clr;
+      border-radius: 5px;
+      padding: 5px 10px;
+      color: $clr;
+    }
+    option {
+      background: $bg;
+      margin: 5px 0 !important;
+      &:hover {
+        background: $primary;
+        color: white;
+      }
+    }
+  }
+  .react-datepicker__day--today {
+    color: $primary !important;
+    font-weight: bolder !important;
+    &:hover {
+      color: $clr !important;
+    }
+  }
+  .react-datepicker__header {
+    background: $primary;
+  }
+  .react-datepicker {
+    border: none;
+    background: rgba($glassColor, 0.2) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    color: $clr;
+  }
+  .react-datepicker__day {
+    color: $clr;
+    &:hover {
+      background: $primary;
+    }
+  }
+  .react-datepicker__current-month,
+  .react-datepicker-time__header,
+  .react-datepicker-year-header {
+    color: $clr;
+  }
+  .react-datepicker-popper[data-placement^="bottom"]
+    .react-datepicker__triangle {
+    fill: $primary;
+    color: $primary;
+    stroke: $primary;
+  }
+  .react-datepicker__year-dropdown,
+  .react-datepicker__month-dropdown,
+  .react-datepicker__month-year-dropdown {
+    padding: 10px 0;
+    background: $bg;
+    color: $clr;
+    border-radius: 5px;
+  }
+  .react-datepicker__day:hover,
+  .react-datepicker__month-text:hover,
+  .react-datepicker__quarter-text:hover,
+  .react-datepicker__year-text:hover,
+  .react-datepicker__month-option:hover,
+  .react-datepicker__year-option:hover {
+    background-color: $primary;
+  }
+
+  .ql-snow {
+    &.ql-toolbar {
+      @include ql_fill($clr);
+      @include ql_stroke($clr);
+      @include cssQuillFill($primary);
+      .ql-picker-label {
+        &::before {
+          color: $clr;
+        }
+      }
+      border-color: inherit !important;
+      border-radius: inherit !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+    .ql-toolbar {
+      @include ql_fill($clr);
+      @include ql_stroke($clr);
+      @include cssQuillFill($primary);
+      .ql-picker-label {
+        &::before {
+          color: $clr;
+        }
+      }
+      border-color: inherit !important;
+      border-radius: inherit !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+    .ql-picker-options {
+      background: $bg !important;
+      color: $clr;
+    }
+  }
+  .ql-container.ql-snow {
+    border-color: inherit !important;
+    border-radius: inherit !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+  // .disabled {
+  //   all: unset !important;
+  // }
+  .disabled,
+  input:disabled {
+    cursor: default;
+    background-color: light-dark(
+      rgba(239, 239, 239, 0.3),
+      rgba(59, 59, 59, 0.3)
+    ) !important;
+    border-color: rgba(118, 118, 118, 0.3) !important;
+  }
+  input:disabled {
+    color: light-dark(rgb(84, 84, 84), rgb(170, 170, 170));
+  }
+
+  .clr {
+    color: rgba($clr,0.6) !important;
+  }
+  
+}
+
+.darkTheme {
+  @include myTheme(#1a1a1a, white, #2e2e2e, #282828, rgb(0, 0, 0));
+  .text-white{
+    color: white !important;
+  }
+}
+
+.lightTheme {
+  @include myTheme(rgb(255, 255, 255), rgb(0, 0, 0), #fdfdfd, #fffafa, #fdfdfd);
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+input:disabled {
+  cursor: default;
+  background-color: light-dark(
+    rgba(239, 239, 239, 0.3),
+    rgba(59, 59, 59, 0.3)
+  ) !important;
+  color: light-dark(rgb(84, 84, 84), rgb(170, 170, 170)) !important;
+  border-color: rgba(118, 118, 118, 0.3) !important;
+}

@@ -1,0 +1,21 @@
+.btn-primary {
+    --bs-btn-bg: #{$primary} !important;
+    --bs-btn-border-color:  #{$primary} !important;
+    --bs-btn-hover-bg: #{darken($primary, 10%)} !important;
+    --bs-btn-hover-border-color: #{darken($primary, 10%)} !important;
+    --bs-btn-active-bg: #{$primary} !important;
+    --bs-btn-active-border-color:  #{$primary} !important;
+    --bs-btn-disabled-bg:  #{$primary} !important;
+    --bs-btn-disabled-border-color:  #{$primary} !important;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #{$primary} !important;
+    --bs-btn-border-color: #{$primary} !important;
+    --bs-btn-hover-bg: #{$primary} !important;
+    --bs-btn-hover-border-color: #{$primary} !important;
+    --bs-btn-active-bg: #{$primary} !important;
+    --bs-btn-active-border-color: #{$primary} !important;
+    --bs-btn-disabled-color: #{$primary} !important;
+    --bs-btn-disabled-border-color: #{$primary} !important;
+}

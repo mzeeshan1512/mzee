@@ -1,0 +1,74 @@
+.tab-navigation-pane {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1vw, 24px);
+  list-style: none;
+  li {
+    transition: all 0.3s;
+    padding: clamp(4px, 0.5vw, 8px) clamp(8px, 1vw, 16px);
+    cursor: pointer;
+    //font-size: clamp(12px, 1vw, 2vw + 0.5rem);
+    &.hover {
+      @include hoverBottomOutlineEffect;
+    }
+    &.active {
+      @include gradientBackground;
+      color: white;
+      transition: all 0.3s;
+      &:hover {
+        @include hoverBottomOutlineEffect;
+        background: transparent !important;
+      }
+    }
+    &.tab-disabled {
+      color: grey !important;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.circular-progress {
+  $default-width: 100px;
+  $default-height: 100px;
+  $default-border-width: 10px;
+  $default-bg-color: #e0e0e0;
+  $default-fill-color: $primary;
+  $default-text-color: #333;
+  
+  .circular-progress-container {
+    position: relative;
+    width: var(--width, #{$default-width});
+    height: var(--height, #{$default-height});
+  }
+  
+  .circular-progress {
+    transform: rotate(-90deg); /* Rotate to start the progress bar from the top */
+    width: 100%;
+    height: 100%;
+  }
+  
+  .progress-bg {
+    fill: none;
+    stroke: var(--bg-color, #{$default-bg-color});
+    stroke-width: var(--border-width, #{$default-border-width});
+    opacity: 0.3;
+  }
+  
+  .progress-bar {
+    fill: none;
+    stroke: var(--fill-color, #{$default-fill-color});
+    stroke-width: var(--border-width, #{$default-border-width});
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+  }
+  
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: calc(var(--width, #{$default-width}) / 5);
+    color: var(--text-color, #{$default-text-color});
+    font-weight: bold;
+  }
+}
