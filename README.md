@@ -57,29 +57,29 @@ After running the server, open [http://localhost:4040](http://localhost:4040) in
 
 Below is an overview of the main structure of this Next.js project:
 
-  src/
-  ├── app/                    # Main application logic and routes
-  ├── assets/                 # Static assets like images and icons
-  ├── routes/                 # Routing logic for the application
-  ├── screens/
-  │   └── previewer/          # Specific screens for content previewing
-  ├── shared/                 # Shared modules and utilities across the app
-  │   ├── apiServices/        # API service modules for HTTP requests
-  │   ├── components/         # Reusable components
-  │   ├── config/             # Configuration files and settings
-  │   ├── constants/          # Constant values used throughout the project
-  │   ├── context/            # Context API files for global state management
-  │   ├── fields-list/        # Configurations or lists related to form fields
-  │   ├── firebase-services/  # Modules for Firebase services
-  │   ├── hook-forms/         # Form-related hooks (React Hook Form)
-  │   ├── hooks/              # Custom React hooks
-  │   ├── icons/              # Icon components
-  │   ├── layouts/            # Layout components for structuring pages
-  │   ├── types/              # TypeScript types and interfaces
-  │   ├── utils/              # Utility functions used throughout the app
-  │   └── validation/         # Validation logic for forms and inputs
-  ├── meta-data.ts            # Metadata configurations (SEO, etc.)
-  └── styles/                 # Sass/CSS files for global styling
+- **`src/`**
+  - **`app/`**: Main application logic and routes.
+  - **`assets/`**: Holds static assets like images and icons.
+  - **`routes/`**: Routing logic for the application.
+  - **`screens/`**
+    - **`previewer/`**: Specific screens for content previewing.
+  - **`shared/`**: Shared modules and utilities across the app.
+    - **`apiServices/`**: API service modules for HTTP requests.
+    - **`components/`**: Reusable components.
+    - **`config/`**: Configuration files and settings.
+    - **`constants/`**: Constant values used throughout the project.
+    - **`context/`**: Context API files for global state management.
+    - **`fields-list/`**: Configurations or lists related to form fields.
+    - **`firebase-services/`**: Modules for Firebase services.
+    - **`hook-forms/`**: Form-related hooks (React Hook Form).
+    - **`hooks/`**: Custom React hooks.
+    - **`icons/`**: Icon components.
+    - **`layouts/`**: Layout components for structuring pages.
+    - **`types/`**: TypeScript types and interfaces.
+    - **`utils/`**: Utility functions used throughout the app.
+    - **`validation/`**: Validation logic for forms and inputs.
+  - **`meta-data.ts`**: Metadata configurations (SEO, etc.).
+  - **`styles/`**: Sass/CSS files for global styling.
 
 ## Deployment
 
