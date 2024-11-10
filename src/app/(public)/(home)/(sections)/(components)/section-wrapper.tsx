@@ -30,7 +30,13 @@ const SectionContainer = ({
       <h1
         {...titleProps}
         data-aos="flip-up"
-        className={`text-center m-0 mt-2 pt-2 ${titleProps?.className || ""}`}
+        className={`text-center m-0 mt-2 pt-2 !text-[clamp(30px, 5vw, 2vw+60px)] ${
+          titleProps?.className || ""
+        }`}
+        style={{
+          fontSize: "clamp(25px, 4vw, 2vw + 45px)",
+          ...titleProps?.style
+        }}
       >
         <b>{title}</b>
       </h1>
@@ -38,9 +44,13 @@ const SectionContainer = ({
         <h5
           {...quotationProps}
           data-aos="flip-up"
-          className={`text-center m-0 mt-2 text-gray ${
+          className={`text-center m-0 text-gray-500 ${
             quotationProps?.className || ""
           }`}
+          style={{
+            fontSize: "clamp(16px, 3vw, 1vw + 5px)",
+            ...quotationProps?.style
+          }}
         >
           <i>{quotation}</i>
         </h5>
@@ -51,7 +61,7 @@ const SectionContainer = ({
         data-aos-anchor-placement="top-bottom"
         data-aos-duration="1000"
         className={
-          "container mx-auto h-full mt-4 pt-4" +
+          "container mx-auto h-full mt-4 pt-4 !w-calc-10 " +
           (containerProps?.className || "")
         }
       >

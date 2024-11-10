@@ -9,9 +9,19 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{html,js,jsx,ts,tsx}"
   ],
-  // darkMode: 'class',
   theme: {
     extend: {
+       width: {
+      'calc-10': 'calc(100vw - 10%)', 
+        'calc-20': 'calc(100vw - 20%)', 
+        'calc-30': 'calc(100vw - 30%)', 
+        'calc-40': 'calc(100vw - 40%)', 
+        'calc-50': 'calc(100vw - 50%)', 
+        'calc-60': 'calc(100vw - 60%)', 
+        'calc-70': 'calc(100vw - 70%)', 
+        'calc-80': 'calc(100vw - 80%)', 
+        'calc-90': 'calc(100vw - 90%)',
+      },
       colors: {
          light: {
           background: '#ffffff',
@@ -53,9 +63,14 @@ const config: Config = {
         "primary-gradient-left": "linear-gradient(to left, #ffbf00, #cc0c40)",
       },
     },
+    variants: {
+    extend: {
+      width: ['responsive'],
+    },
+  },
   },
   plugins: [
-    typography, // Add typography plugin here
+    typography,
   ],
 };
 

@@ -41,7 +41,7 @@ export function useScrollIntoView<
   axis = "y",
   onScrollFinish,
   easing = easeInOutQuad,
-  offset = 0,
+  offset = -1,
   cancelable = true,
   isList = false,
   targetId

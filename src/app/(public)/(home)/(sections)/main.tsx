@@ -5,13 +5,11 @@ import {
 } from "@/shared/constants-enums/navigation-list";
 import { DefaultBg } from "@/shared/config";
 import ParticleAnimation from "@/shared/components/particles-animation";
-import JumbledTextAnimation from "./(components)/text-loop/jumbled-text-animation";
+import JumbledTextAnimation from "@/shared/components/text-loop/jumbled-text-animation";
 import Button from "@/shared/components/button";
 import SocialIcons from "@/shared/components/social-share";
-import { ContentProps } from "../page";
 
-const Main = ({ hide }: ContentProps) => {
-  if (hide) return null;
+const Main = () => {
   return (
     <section
       id={sectionIds.home}
