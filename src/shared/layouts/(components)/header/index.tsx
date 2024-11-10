@@ -18,6 +18,7 @@ const Header = ({
   menuProps,
   /* header props */
   hideHeader = false,
+  hideNavOnScroll = false,
   headerContainerProps,
   callBackComponent,
   centeredMode,
@@ -42,11 +43,13 @@ const Header = ({
     const value = window?.scrollY;
     if (value > 0) {
       if (matchMedia && centeredMode && floatingMenu) {
-        toggleFloating(true);
-        if (scrollTimeout) clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          toggleFloating(false);
-        }, 200);
+        if (!hideNavOnScroll) {
+          toggleFloating(true);
+          if (scrollTimeout) clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            toggleFloating(false);
+          }, 200);
+        }
       } else {
         document.querySelector(".fixed")?.classList.add("glassomorhpic-effect");
       }

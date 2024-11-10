@@ -23,7 +23,7 @@ To set up the project, make sure you have npm installed. If not, install the req
 
 ```bash
 # Clone the repository
-git clone https://github.com/mzeeshan1512/mzee/tree/v1/user-interfaces
+git clone https://github.com/mzeeshan1512/mzee/tree/user-interfaces/v1
 
 # Navigate to the project directory
 cd mzee

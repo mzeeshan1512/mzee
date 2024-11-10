@@ -19,7 +19,8 @@ export default function Layout({
         },
         centeredMode: true,
         floatingMenu: true,
-        showStickyNavRoutesOrId: sectionIds.home
+        showStickyNavRoutesOrId: sectionIds.home,
+        hideNavOnScroll: true
       }}
     >
       {children}
