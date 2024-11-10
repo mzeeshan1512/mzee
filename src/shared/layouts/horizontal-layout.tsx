@@ -2,7 +2,6 @@ import React from "react";
 import { FooterProps, HeaderProps } from "./(components)/types";
 import Header from "./(components)/header";
 import Footer from "./(components)/footer";
-import ContentRender from "./content-renderer";
 import Settings from "./(components)/settings";
 
 type LayoutProps = {
@@ -17,12 +16,12 @@ const HorizontalLayout = ({
   footerProps
 }: LayoutProps) => {
   return (
-    <ContentRender>
+    <>
       <Header {...headerProps} />
       {children}
       <Footer {...footerProps} />
       <Settings />
-    </ContentRender>
+    </>
   );
 };
 

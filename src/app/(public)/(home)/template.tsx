@@ -1,3 +1,4 @@
+import { navLinks, sectionIds } from "@/shared/constants-enums/navigation-list";
 import HorizontalLayout from "@/shared/layouts/horizontal-layout";
 
 export default function Layout({
@@ -9,24 +10,16 @@ export default function Layout({
     <HorizontalLayout
       headerProps={{
         menuProps: {
-          menuList: [
-            {
-              link: "1",
-              title: "1"
-            },
-            {
-              link: "2",
-              title: "2"
-            }
-          ],
+          menuList: navLinks,
           staticScrollSpyPath: ["/"],
           showLogoAsRoute: {
             show: true,
             route: "home"
-          },
-          centeredMode: true,
-          floatingMenu: true
-        }
+          }
+        },
+        centeredMode: true,
+        floatingMenu: true,
+        showStickyNavRoutesOrId: sectionIds.home
       }}
     >
       {children}

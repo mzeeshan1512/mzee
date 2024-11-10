@@ -39,7 +39,6 @@
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
-  border-bottom: 2px solid var(--primary);
 }
 
 .active-tab:hover {

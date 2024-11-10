@@ -58,6 +58,10 @@ const MobileMenu = ({ appIcon, close, menuProps, open }: MobileMenuProps) => {
               ...menuProps?.ulTagProps,
               className: `flex-col ${menuProps?.ulTagProps?.className || ""}`
             }}
+            showLogoAsRoute={{
+              show: false,
+              route: ""
+            }}
           />
         </div>
       </div>

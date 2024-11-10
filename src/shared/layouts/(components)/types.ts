@@ -31,10 +31,11 @@ type showLogoAsRoute = {
   route: string;
 };
 
-interface MenuProps {
+type showFloatingStickyNav =  | { floatingMenu: true; showStickyNavRoutesOrId: string } 
+  | { floatingMenu?: false; showStickyNavRoutesOrId?: never };
+
+interface MenuProps  {
   verticalLayout?: boolean;
-  centeredMode?: boolean;
-  floatingMenu?: boolean;
   hideMenu?: boolean;
   isExactPath?: boolean;
   showToolTip?: boolean;
@@ -50,12 +51,14 @@ interface MenuProps {
   activeClass?:string;
 }
 
-interface Header extends React.ComponentProps<"header"> {
+type Header = React.ComponentProps<"header"> & showFloatingStickyNav & {
   hideHeader?: boolean;
+  centeredMode?: boolean;
   headerContainerProps?: React.ComponentProps<"div">;
   appIcon?: AppIconProps;
   menuProps?: MenuProps;
   callBackComponent?: React.ReactNode;
+  
 }
 
 type HeaderProps = Header & Record<string, unknown>;

@@ -1,16 +1,11 @@
-import React from "react";
+import Main from "./(sections)/main";
 
-const ThemeToggle: React.FC = () => {
+const page = () => {
   return (
     <>
-      <section className="flex justify-center items-center h-screen" id="1">
-        1
-      </section>
-      <section className="flex justify-center items-center h-screen" id="2">
-        2
-      </section>
+      <Main />
     </>
   );
 };
 
-export default ThemeToggle;
+export default page;

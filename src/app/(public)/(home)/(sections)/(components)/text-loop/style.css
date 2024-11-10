@@ -1,0 +1,40 @@
+@keyframes wordAnimation {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-container .title {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: auto;
+  overflow: hidden;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.animate-container .word {
+  display: flex;
+  grid-column: 2;
+  grid-row: auto;
+}
+
+.animate-container .word span {
+  display: inline-block;
+  opacity: 0;
+  animation: wordAnimation ease-in-out both;
+}
