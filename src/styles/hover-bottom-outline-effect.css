@@ -16,13 +16,13 @@
   height: 2px;
   margin: -2px 0;
   left: 0;
-  background: var(--primary-text-gradient);
+  background: var(--primary-gradient);
   transition: width 0.3s ease-in;
 }
 
 .hover-bottom-outline > a:hover {
   color: var(--primary);
-  background: var(--primary-text-gradient);
+  background: var(--primary-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -35,7 +35,7 @@
 
 .active-tab {
   color: var(--primary) !important;
-  background: var(--primary-text-gradient) !important;
+  background: var(--primary-gradient) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;

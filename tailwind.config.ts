@@ -50,6 +50,7 @@ const config: Config = {
       backgroundImage: {
         "primary-gradient": "linear-gradient(to right, #ffbf00, #cc0c40)",
         "primary-hover-gradient": "linear-gradient(to left, #ffbf00a3, #cc0c3fa3)",
+        "primary-gradient-left": "linear-gradient(to left, #ffbf00, #cc0c40)",
       },
     },
   },

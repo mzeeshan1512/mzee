@@ -1,6 +1,6 @@
 import { HeaderMenuList } from "@/shared/layouts/(components)/types";
-// import { Email, GitHub, LinkedIn, WhatsApp } from "@/shared/icon/social";
-
+import { Email, GitHub, LinkedIn, WhatsApp } from "@/shared/icon/social";
+import { SocialShareContent } from "../components/social-share";
 
 const sectionIds = {
   home: "home",
@@ -38,31 +38,31 @@ const navLinks: HeaderMenuList[] = [
   },
 ];
 
-// const socialContact:SocialShare[] = [
-//   {
-//     title: "linkedin",
-//     icon: LinkedIn,
-//     link: process.env.NEXT_PUBLIC_LINKEDIN,
-//     color:"#0077b5"
-//   },
-//   {
-//     title: "github",
-//     icon: GitHub,
-//     link: process.env.NEXT_PUBLIC_GITHUB,
-//     color:"linear-gradient(to right, #ffbf00, #cc0c40)"
-//   },
-//   {
-//     title: "email",
-//     icon: Email,
-//     link: process.env.NEXT_PUBLIC_EMAIL,
-//      color:"linear-gradient(to right, #ffbf00, #cc0c40)"
-//   },
-//   {
-//     title: "whatsapp",
-//     icon: WhatsApp,
-//     link: process.env.NEXT_PUBLIC_WHATSAPP,
-//     color:"rgb(37, 211, 102)"
-//   },
-// ]
+const socialContact:SocialShareContent[] = [
+  {
+    title: "linkedin",
+    icon: LinkedIn,
+    link: process.env.NEXT_PUBLIC_LINKEDIN,
+    color:"#0077b5"
+  },
+  {
+    title: "github",
+    icon: GitHub,
+    link: process.env.NEXT_PUBLIC_GITHUB,
+    color:"linear-gradient(to right, #ffbf00, #cc0c40)"
+  },
+  {
+    title: "email",
+    icon: Email,
+    link: process.env.NEXT_PUBLIC_EMAIL,
+     color:"linear-gradient(to right, #ffbf00, #cc0c40)"
+  },
+  {
+    title: "whatsapp",
+    icon: WhatsApp,
+    link: process.env.NEXT_PUBLIC_WHATSAPP,
+    color:"rgb(37, 211, 102)"
+  },
+]
 
-export { navLinks, sectionIds };
+export { navLinks, sectionIds, socialContact };

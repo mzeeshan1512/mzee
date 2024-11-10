@@ -28,12 +28,31 @@
   background: var(--primary-25);
   background: -webkit-linear-gradient(to left, var(--primary-25) 0%, var(--secondary-25) 100%);
   background: -moz-linear-gradient(to left, var(--primary-25) 0%, var(--secondary-25) 100%);
-  background: var(--primary-text-gradient) !important;
+  background: var(--primary-gradient) !important;
 }
 
 /* Text Gradient */
 .text-gradient {
-  background: var(--primary-text-gradient);
+  background: var(--primary-gradient);
+  filter: drop-shadow();
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent;
+}
+
+/* Text Gradient */
+.text-gradient-left {
+  background: var(--primary-gradient-left);
+  filter: drop-shadow();
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent;
+}
+
+.hovered-text-gradient {
+  background: var(--primary-hover-gradient);
   filter: drop-shadow();
   -webkit-background-clip: text !important;
   background-clip: text !important;
