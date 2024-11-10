@@ -2,6 +2,7 @@ import React from "react";
 import SectionContainer from "./(components)/section-wrapper";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import Counter from "@/shared/components/counter";
+import Globe from "./(components)/globe";
 
 const About = () => {
   return (
@@ -11,8 +12,19 @@ const About = () => {
       quotation="Failure teaches me that I can actually do this!"
     >
       {/* time and overview */}
-      <div className="grid grid-flow-row md:grid-cols-2 gap-8">
-        <div className="border">time zone</div>
+      <div className="grid grid-flow-row md:grid-cols-2 gap-8 items-center">
+        <div className="h-full w-full">
+          <Globe />
+          <h3
+            className="text-gradient text-center"
+            style={{
+              fontSize: "clamp(1rem, 3vw, 2rem)",
+              fontWeight: "bold"
+            }}
+          >
+            flexible with timezones
+          </h3>
+        </div>
         <article
           className="html-danger-text"
           data-aos="fade-right"

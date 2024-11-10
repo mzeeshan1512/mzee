@@ -57,7 +57,7 @@ const Main = () => {
           <SocialIcons
             socialContact={socialContact}
             linkProps={{
-              className: "text-white hover-gradient-background",
+              className: "!text-[white] hover-gradient-background",
               style: { "--hover-color": "white" } as React.CSSProperties
             }}
           />

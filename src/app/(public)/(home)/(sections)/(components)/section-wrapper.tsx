@@ -30,7 +30,7 @@ const SectionContainer = ({
       <h1
         {...titleProps}
         data-aos="flip-up"
-        className={`text-center m-0 mt-2 pt-2 !text-[clamp(30px, 5vw, 2vw+60px)] ${
+        className={`text-center m-0 !text-[clamp(30px, 5vw, 2vw+60px)] ${
           titleProps?.className || ""
         }`}
         style={{
@@ -61,7 +61,7 @@ const SectionContainer = ({
         data-aos-anchor-placement="top-bottom"
         data-aos-duration="1000"
         className={
-          "container mx-auto h-full mt-4 pt-4 !w-calc-10 " +
+          "container mx-auto h-full !w-calc-10 " +
           (containerProps?.className || "")
         }
       >
