@@ -2,7 +2,7 @@ import React from "react";
 import SectionContainer from "./(components)/section-wrapper";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import Counter from "@/shared/components/counter";
-import Globe from "./(components)/globe";
+import { Globe as World } from "./(components)/globe";
 
 const About = () => {
   return (
@@ -14,7 +14,7 @@ const About = () => {
       {/* time and overview */}
       <div className="grid grid-flow-row md:grid-cols-2 gap-8 items-center">
         <div className="h-full w-full">
-          <Globe />
+          <World showArcs />
           <h3
             className="text-gradient text-center"
             style={{
