@@ -9,11 +9,11 @@ export type ContentProps = {
 const componentLists = [
   {
     component: <Main />,
-    show: true
+    show: false
   },
   {
     component: <About />,
-    show: true
+    show: false
   }
 ];
 
