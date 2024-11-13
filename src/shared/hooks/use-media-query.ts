@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useRef, useState } from 'react';
 
 export interface UseMediaQueryOptions {
@@ -14,7 +15,6 @@ function attachMediaListener(query: MediaQueryList, callback: MediaQueryCallback
   try {
     query.addEventListener('change', callback);
     return () => query.removeEventListener('change', callback);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     query.addListener(callback);
     return () => query.removeListener(callback);

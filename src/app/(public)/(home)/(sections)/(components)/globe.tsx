@@ -128,8 +128,8 @@ const Arc = ({ arcColors }: { arcColors?: string[] }) => {
         end: generateRandomPoint(),
         color: colors?.[Math.floor(Math.random() * colors?.length)],
         height: 15 + Math.random() * 5,
-        delay: i * 0.3,
-        speed: 0.5 + Math.random() * 0.5
+        delay: i * 0.01,
+        speed: 0.5 + Math.random() * 0.05
       });
     }
     return arcs;

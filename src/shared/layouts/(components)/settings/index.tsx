@@ -2,9 +2,10 @@ import React from "react";
 import ScrollToTop from "./scroll-to-top";
 import WhatsAppChat from "./whats-app-chat";
 import ThemeToggler from "@/shared/theme/theme-toggler";
-
-const settingContentTailwindClass = `h-9 w-9 p-0.5 rounded-full cursor-pointer transition-all ease-in duration-300 flex justify-center items-center`;
-const settingBgHoverTailwindClass = ` bg-primary-gradient hover:opacity-80`;
+import {
+  settingBgHoverTailwindClass,
+  settingContentTailwindClass
+} from "@/shared/constants-enums/reused-tailwind-css";
 
 const webSettings = [
   {
