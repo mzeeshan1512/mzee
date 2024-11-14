@@ -7,11 +7,17 @@ import { settingContentTailwindClass } from "@/shared/constants-enums/reused-tai
 import { ChevronIcon } from "@/shared/icon/common";
 import { useWindowEvent } from "@/shared/hooks/use-window-event";
 
-const CarouselButton = ({ className, ...buttonProps }: ButtonProps) => {
+const CarouselButton = ({
+  className,
+  disabled,
+  ...buttonProps
+}: ButtonProps) => {
   return (
     <Button
       {...buttonProps}
-      className={`${settingContentTailwindClass} !bg-black !bg-opacity-30 !rounded-full absolute top-1/2 transform -translate-y-1/2 ${
+      className={`${settingContentTailwindClass} !bg-black ${
+        disabled ? "!bg-opacity-10 cursor-not-allowed" : "!bg-opacity-30"
+      }  !rounded-full absolute top-1/2 transform -translate-y-1/2 ${
         className || ""
       }`}
     >
@@ -183,18 +189,24 @@ const Carousel = ({
 
       {showArrows && slidesElement?.length > visibleItems && (
         <>
-          <CarouselButton
-            {...leftArrowProps}
-            className={`${leftArrowProps?.className || ""} rotate-180 left-6`}
-            onClick={handlePrev}
-            disabled={!infinite && activeIndex === 0}
-          />
-          <CarouselButton
-            {...rightArrowProps}
-            onClick={handleNext}
-            className={`${rightArrowProps?.className || ""} -rotate-1 right-6`}
-            disabled={!infinite && activeIndex === slidesElement.length - 1}
-          />
+          {activeIndex > 0 && (
+            <CarouselButton
+              {...leftArrowProps}
+              className={`${leftArrowProps?.className || ""} rotate-180 left-6`}
+              onClick={handlePrev}
+              disabled={!infinite && activeIndex === 0}
+            />
+          )}
+          {activeIndex < slidesElement.length - 1 && (
+            <CarouselButton
+              {...rightArrowProps}
+              onClick={handleNext}
+              className={`${
+                rightArrowProps?.className || ""
+              } -rotate-1 right-6`}
+              disabled={!infinite && activeIndex === slidesElement.length - 1}
+            />
+          )}
         </>
       )}
 
