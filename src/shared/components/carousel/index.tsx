@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
-import { ArrowsProps, CarouselProps } from "./types";
+import { ButtonProps, CarouselProps } from "./types";
 import Button from "../button";
 import { settingContentTailwindClass } from "@/shared/constants-enums/reused-tailwind-css";
 import { ChevronIcon } from "@/shared/icon/common";
-import ShowIf from "../show-if";
 import { useWindowEvent } from "@/shared/hooks/use-window-event";
 
-const CarouselButton = ({ className, ...buttonProps }: ArrowsProps) => {
+const CarouselButton = ({ className, ...buttonProps }: ButtonProps) => {
   return (
     <Button
       {...buttonProps}
@@ -46,7 +45,7 @@ const Carousel = ({
   const [dragOffset, setDragOffset] = useState<number>(0);
 
   const slidesElement = useMemo(() => {
-    return slides ? slides : children ? React.Children.toArray(children) : [];
+    return slides ? slides : children ? React?.Children?.toArray(children) : [];
   }, [children, slides]);
 
   const handleResize = () => {
@@ -54,12 +53,12 @@ const Carousel = ({
     let items = 1;
 
     if (responsive) {
-      Object.entries(responsive).forEach(([_, config]) => {
+      Object?.entries(responsive)?.forEach(([_, config]) => {
         if (
-          windowWidth >= config.breakpoint.min &&
-          windowWidth <= config.breakpoint.max
+          windowWidth >= config?.breakpoint?.min &&
+          windowWidth <= config?.breakpoint?.max
         ) {
-          items = config.items;
+          items = config?.items;
         }
       });
     }
@@ -68,9 +67,7 @@ const Carousel = ({
   };
 
   useWindowEvent("resize", handleResize);
-  useEffect(() => {
-    handleResize();
-  }, []);
+
   useEffect(() => {
     if (autoPlay && !isAnimating && !dragStart) {
       const timer = setInterval(() => {
@@ -167,7 +164,7 @@ const Carousel = ({
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
       >
-        {slidesElement.map((slide, index) => (
+        {slidesElement?.map((slide, index) => (
           <li
             key={index}
             {...slidesProps}
@@ -184,27 +181,34 @@ const Carousel = ({
         ))}
       </ul>
 
-      {showArrows && slidesElement.length > visibleItems && (
+      {showArrows && slidesElement?.length > visibleItems && (
         <>
           <CarouselButton
             {...leftArrowProps}
-            className={`${leftArrowProps?.className || ""} rotate-180 left-2`}
+            className={`${leftArrowProps?.className || ""} rotate-180 left-6`}
             onClick={handlePrev}
             disabled={!infinite && activeIndex === 0}
           />
           <CarouselButton
             {...rightArrowProps}
             onClick={handleNext}
-            className={`${rightArrowProps?.className || ""} -rotate-1 right-2`}
+            className={`${rightArrowProps?.className || ""} -rotate-1 right-6`}
             disabled={!infinite && activeIndex === slidesElement.length - 1}
           />
         </>
       )}
 
       {showDots && (
-        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          {slidesElement.map((_, index) => (
+        <div
+          {...dotsContainerProps}
+          className={
+            "absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-2 " +
+            (dotsContainerProps?.className || "")
+          }
+        >
+          {slidesElement?.map((_, index) => (
             <Button
+              {...dotsProps}
               key={index}
               onClick={() => {
                 if (!isAnimating) {
@@ -217,7 +221,7 @@ const Carousel = ({
                 index === activeIndex
                   ? "bg-white w-4"
                   : "bg-white/50 hover:bg-white/75"
-              }`}
+              } ${dotsProps?.className || ""}`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}

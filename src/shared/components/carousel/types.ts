@@ -24,16 +24,16 @@ type ChildOrSlide =
       children?: never;
     };
 
-type ArrowsProps =  React.ComponentProps<"button">
+type ButtonProps =  React.ComponentProps<"button">
 
 type TagProps = {
     sliderContainerProps?:React.ComponentProps<"div">
     sliderProps?:React.ComponentProps<"ul">
     slidesProps?:React.ComponentProps<"li">
-    leftArrowProps?:ArrowsProps
-    rightArrowProps?:ArrowsProps
-    dotsContainerProps?:React.ComponentProps<"ul">
-    dotsProps?:React.ComponentProps<"li">
+    leftArrowProps?:ButtonProps
+    rightArrowProps?:ButtonProps
+    dotsContainerProps?:React.ComponentProps<"div">
+    dotsProps?:ButtonProps
 }    
 
 type CarouselProps = ChildOrSlide & TagProps & {
@@ -54,5 +54,5 @@ export type {
     ResponsiveObject,
     ChildOrSlide,
     CarouselProps,
-    ArrowsProps
+    ButtonProps
 }
