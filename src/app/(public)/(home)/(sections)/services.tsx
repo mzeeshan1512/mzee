@@ -85,7 +85,7 @@ const Services = () => {
           }}
         >
           {[1, 2, 3, 4, 5].map((item, index) => (
-            <ServiceCard toggleGradient key={index} slideId={index} />
+            <ServiceCard key={index} slideId={index} />
           ))}
         </Carousel>
       </ShowIf>

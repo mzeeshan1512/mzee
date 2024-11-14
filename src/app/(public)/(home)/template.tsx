@@ -24,7 +24,6 @@ export default function Layout({
       }}
       hideFooter
       hideHeader
-      hideSetting
     >
       {children}
     </HorizontalLayout>

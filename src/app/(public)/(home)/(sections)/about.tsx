@@ -2,27 +2,34 @@ import React from "react";
 import SectionContainer from "./(components)/section-wrapper";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import Counter from "@/shared/components/counter";
-import { Globe as World } from "./(components)/globe";
+import { Globe as World } from "./(components)/time-zone-globe";
 
 const About = () => {
   return (
     <SectionContainer
       id={sectionIds.about}
-      title="About"
+      title={sectionIds.about}
       quotation="Failure teaches me that I can actually do this!"
     >
       {/* time and overview */}
       <div className="grid grid-flow-row md:grid-cols-2 gap-8 items-center">
         <div className="h-full w-full">
-          <World showArcs />
+          <div
+            className={
+              "relative w-full h-[85%] overflow-hidden drop-shadow-lg mb-2"
+            }
+            style={{ boxShadow: "0 7px 4px -8px currentColor" }}
+          >
+            <World showArcs canvasClass="top-1/2" />
+          </div>
           <h3
-            className="text-gradient text-center"
+            className="text-gradient text-center mt-2 pt-2"
             style={{
               fontSize: "clamp(1rem, 3vw, 2rem)",
               fontWeight: "bold"
             }}
           >
-            flexible with timezones
+            flexible with timezone
           </h3>
         </div>
         <article

@@ -10,18 +10,30 @@ import ShowIf from "@/shared/components/show-if";
 const SpinningGlobe = () => {
   const texture = new TextureLoader().load(BG?.src);
   const meshRef = useRef<Mesh>(null);
+  const glowRef = useRef<Mesh>(null);
 
   useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.005;
+      meshRef.current.rotation.x += 0.005;
     }
   });
 
   return (
     <Suspense fallback={null}>
       <mesh ref={meshRef} castShadow>
-        <sphereGeometry args={[30, 64, 64]} />
+        <sphereGeometry args={[45, 84, 84]} />
         <meshBasicMaterial map={texture} />
+      </mesh>
+      {/* Glow Effect */}
+      <mesh ref={glowRef}>
+        <sphereGeometry args={[46, 84, 84]} />
+        <meshBasicMaterial
+          color={"#87CEFA"}
+          transparent
+          opacity={0.2}
+          depthWrite={false}
+        />
       </mesh>
     </Suspense>
   );
@@ -155,33 +167,33 @@ const Arc = ({ arcColors }: { arcColors?: string[] }) => {
 
 const Globe = ({
   showArcs,
-  arcColors
+  arcColors,
+  canvasClass
 }: {
   showArcs?: boolean;
   arcColors?: string[];
+  canvasClass?: string;
 }) => {
   return (
-    <div className="relative w-full h-[88%]">
-      <Canvas
-        camera={{ position: [0, 0, 120], fov: 45 }}
-        className="absolute inset-0 block drop-shadow"
-      >
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[5, 5, 5]} castShadow />
-        <SpinningGlobe />
-        <ShowIf conditionalRenderKey={showArcs}>
-          <Arc arcColors={arcColors} />
-        </ShowIf>
-        <OrbitControls
-          enablePan={false}
-          enableZoom={false}
-          autoRotateSpeed={0.5}
-          autoRotate={true}
-          minPolarAngle={Math.PI / 3.5}
-          maxPolarAngle={Math.PI - Math.PI / 3}
-        />
-      </Canvas>
-    </div>
+    <Canvas
+      camera={{ position: [0, 0, 120], fov: 45 }}
+      className={"absolute inset-0 block drop-shadow " + (canvasClass || "")}
+    >
+      <ambientLight intensity={0.3} />
+      <directionalLight position={[5, 5, 5]} castShadow />
+      <SpinningGlobe />
+      <ShowIf conditionalRenderKey={showArcs}>
+        <Arc arcColors={arcColors} />
+      </ShowIf>
+      <OrbitControls
+        enablePan={false}
+        enableZoom={false}
+        autoRotateSpeed={0.5}
+        autoRotate={true}
+        minPolarAngle={Math.PI / 3.5}
+        maxPolarAngle={Math.PI - Math.PI / 3}
+      />
+    </Canvas>
   );
 };
 

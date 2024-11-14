@@ -30,7 +30,7 @@ const SectionContainer = ({
       <h1
         {...titleProps}
         data-aos="flip-up"
-        className={`text-center m-0 !text-[clamp(30px, 5vw, 2vw+60px)] ${
+        className={`text-center m-0 !text-[clamp(30px, 5vw, 2vw+60px)] capitalize ${
           titleProps?.className || ""
         }`}
         style={{
