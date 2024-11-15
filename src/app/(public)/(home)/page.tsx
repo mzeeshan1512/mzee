@@ -13,7 +13,7 @@ export type ContentProps = {
 const componentLists = [
   {
     component: <Main />,
-    show: false
+    show: true
   },
   {
     component: <About />,
@@ -21,7 +21,7 @@ const componentLists = [
   },
   {
     component: <Services />,
-    show: false
+    show: true
   },
   {
     component: <TechHexGrid3D />,

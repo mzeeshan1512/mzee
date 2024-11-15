@@ -77,7 +77,7 @@ const Header = ({
           }
         >
           <MenuToggler
-            className="cursor-pointer hover:text-primary-500 block lg:hidden mx-1"
+            className="text-white cursor-pointer hover:text-primary-500 block lg:hidden mx-1"
             onClick={() => setShow(true)}
           />
         </ShowIf>

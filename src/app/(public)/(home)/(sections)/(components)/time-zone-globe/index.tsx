@@ -168,32 +168,48 @@ const Arc = ({ arcColors }: { arcColors?: string[] }) => {
 const Globe = ({
   showArcs,
   arcColors,
-  canvasClass
+  canvasClass,
+  containerProps
 }: {
   showArcs?: boolean;
   arcColors?: string[];
   canvasClass?: string;
+  containerProps?: React.ComponentProps<"div">;
 }) => {
   return (
-    <Canvas
-      camera={{ position: [0, 0, 120], fov: 45 }}
-      className={"absolute inset-0 block drop-shadow " + (canvasClass || "")}
+    <div
+      {...containerProps}
+      className={"relative h-[90%] " + (containerProps?.className || "")}
     >
-      <ambientLight intensity={0.3} />
-      <directionalLight position={[5, 5, 5]} castShadow />
-      <SpinningGlobe />
-      <ShowIf conditionalRenderKey={showArcs}>
-        <Arc arcColors={arcColors} />
-      </ShowIf>
-      <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        autoRotateSpeed={0.5}
-        autoRotate={true}
-        minPolarAngle={Math.PI / 3.5}
-        maxPolarAngle={Math.PI - Math.PI / 3}
-      />
-    </Canvas>
+      <Canvas
+        camera={{ position: [0, 0, 120], fov: 45 }}
+        className={"absolute inset-0 block drop-shadow " + (canvasClass || "")}
+      >
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[5, 5, 5]} castShadow />
+        <SpinningGlobe />
+        <ShowIf conditionalRenderKey={showArcs}>
+          <Arc arcColors={arcColors} />
+        </ShowIf>
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          autoRotateSpeed={0.5}
+          autoRotate={true}
+          minPolarAngle={Math.PI / 3.5}
+          maxPolarAngle={Math.PI - Math.PI / 3}
+        />
+      </Canvas>
+      <h3
+        className="absolute top-0 inset-x-0 text-gradient text-center mt-2 pt-2"
+        style={{
+          fontSize: "clamp(1rem, 3vw, 2rem)",
+          fontWeight: "bold"
+        }}
+      >
+        flexible with timezone
+      </h3>
+    </div>
   );
 };
 

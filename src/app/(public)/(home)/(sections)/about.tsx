@@ -3,6 +3,7 @@ import SectionContainer from "./(components)/section-wrapper";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import Counter from "@/shared/components/counter";
 import { Globe as World } from "./(components)/time-zone-globe";
+import Button, { BlendMode } from "@/shared/components/button";
 
 const About = () => {
   return (
@@ -10,35 +11,35 @@ const About = () => {
       id={sectionIds.about}
       title={sectionIds.about}
       quotation="Failure teaches me that I can actually do this!"
+      containerProps={{
+        className: "mb-4 p-4"
+      }}
     >
       {/* time and overview */}
-      <div className="grid grid-flow-row md:grid-cols-2 gap-8 items-center">
-        <div className="h-full w-full">
-          <div
-            className={
-              "relative w-full h-[85%] overflow-hidden drop-shadow-lg mb-2"
-            }
-            style={{ boxShadow: "0 7px 4px -8px currentColor" }}
-          >
-            <World showArcs canvasClass="top-1/2" />
-          </div>
-          <h3
-            className="text-gradient text-center mt-2 pt-2"
-            style={{
-              fontSize: "clamp(1rem, 3vw, 2rem)",
-              fontWeight: "bold"
+      <div className="relative grid grid-flow-row md:grid-cols-2 gap-8 items-center">
+        <div>
+          <article
+            className="html-danger-text prose text-current"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            dangerouslySetInnerHTML={{
+              __html: process.env.NEXT_PUBLIC_ABOUT_INFO!
             }}
+          />
+          <Button
+            blendMode={BlendMode.GRADIENT}
+            className="bg-primary-gradient hover:bg-primary-hover-gradient mt-4"
           >
-            flexible with timezone
-          </h3>
+            Find out more
+          </Button>
         </div>
-        <article
-          className="html-danger-text"
-          data-aos="fade-right"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          dangerouslySetInnerHTML={{
-            __html: process.env.NEXT_PUBLIC_ABOUT_INFO!
+        <World
+          showArcs
+          canvasClass="top-1/2"
+          containerProps={{
+            className: "!h-[85%] overflow-hidden",
+            style: { boxShadow: "0 7px 4px -8px currentColor" }
           }}
         />
       </div>

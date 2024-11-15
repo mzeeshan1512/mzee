@@ -56,7 +56,13 @@ const MobileMenu = ({ appIcon, close, menuProps, open }: MobileMenuProps) => {
             {...menuProps}
             ulTagProps={{
               ...menuProps?.ulTagProps,
-              className: `flex-col ${menuProps?.ulTagProps?.className || ""}`
+              className: `flex-col gap-4 ${
+                menuProps?.ulTagProps?.className || ""
+              }`
+            }}
+            liTagProps={{
+              ...menuProps?.liTagProps,
+              className: `!px-0 ${menuProps?.liTagProps?.className || ""}`
             }}
             showLogoAsRoute={{
               show: false,

@@ -22,8 +22,6 @@ export default function Layout({
         showStickyNavRoutesOrId: sectionIds.home,
         hideNavOnScroll: true
       }}
-      hideFooter
-      hideHeader
     >
       {children}
     </HorizontalLayout>

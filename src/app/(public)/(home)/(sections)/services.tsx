@@ -55,13 +55,16 @@ const Services = () => {
   return (
     <SectionContainer
       id={sectionIds.services}
-      title={""}
-      // quotation="Transforming ideas into reality with expert development, automation, and IT solutions"
+      title={sectionIds.services}
+      quotation="Transforming ideas into reality with expert development, automation, and IT solutions"
+      containerProps={{
+        className: "pt-4 mt-4"
+      }}
     >
       <ShowIf
         conditionalRenderKey={mediumDeviceMedia1024}
         elseComponent={
-          <div className="hidden lg:grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="hidden lg:grid grid-cols-1 gap-4 gap-y-12 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[1, 2, 3, 4, 5].map((item, index) => (
               <ServiceCard key={index} slideId={index} />
             ))}
@@ -69,6 +72,9 @@ const Services = () => {
         }
       >
         <Carousel
+          sliderContainerProps={{
+            className: ""
+          }}
           responsive={{
             desktop: {
               breakpoint: { max: 3000, min: 1024 },
