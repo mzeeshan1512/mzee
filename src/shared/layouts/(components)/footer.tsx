@@ -11,7 +11,7 @@ const Footer = ({
   return (
     <footer
       {...footerTagProps}
-      className={`container mx-auto p-4 flex justify-between items-center flex-col lg:flex-row ${
+      className={`container mx-auto w-calc-10 p-4 flex justify-between items-center flex-col lg:flex-row ${
         footerTagProps?.className || ""
       }`}
     >

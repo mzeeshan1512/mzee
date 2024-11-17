@@ -11,9 +11,13 @@ const About = () => {
       id={sectionIds.about}
       title={sectionIds.about}
       quotation="Failure teaches me that I can actually do this!"
+      className={
+        " !bg-grid-pattern-light dark:!bg-grid-pattern-dark !bg-grid-size relative"
+      }
       containerProps={{
         className: "mb-4 p-4"
       }}
+      showSpotLight
     >
       {/* time and overview */}
       <div className="relative grid grid-flow-row md:grid-cols-2 gap-8 items-center">
@@ -34,14 +38,18 @@ const About = () => {
             Find out more
           </Button>
         </div>
-        <World
-          showArcs
-          canvasClass="top-1/2"
-          containerProps={{
-            className: "!h-[85%] overflow-hidden",
-            style: { boxShadow: "0 7px 4px -8px currentColor" }
-          }}
-        />
+        <div className="flex flex-col border rounded">
+          <div className="w-full relative"></div>
+          <div className="flex-1">
+            <World
+              canvasClass="top-1/2"
+              containerProps={{
+                className: "!h-[85%] overflow-hidden",
+                style: { boxShadow: "0 7px 4px -8px currentColor" }
+              }}
+            />
+          </div>
+        </div>
       </div>
       {/* exp counts */}
       <div className="grid grid-flow-row-dense  md:grid-flow-col-dense  gap-8 mt-4 pt-4">

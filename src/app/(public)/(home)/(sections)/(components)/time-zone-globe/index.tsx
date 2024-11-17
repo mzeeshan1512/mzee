@@ -200,15 +200,16 @@ const Globe = ({
           maxPolarAngle={Math.PI - Math.PI / 3}
         />
       </Canvas>
-      <h3
-        className="absolute top-0 inset-x-0 text-gradient text-center mt-2 pt-2"
-        style={{
-          fontSize: "clamp(1rem, 3vw, 2rem)",
-          fontWeight: "bold"
-        }}
-      >
-        flexible with timezone
-      </h3>
+      <div className="absolute top-0 inset-x-0 mt-2 pt-2 flex justify-center">
+        <p
+          className="text-wrap text-gradient capitalize font-medium"
+          style={{
+            fontSize: "clamp(1rem, 3vw, 2rem)"
+          }}
+        >
+          flexible with timezone
+        </p>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,6 @@
 import React from "react";
+import ShowIf from "@/shared/components/show-if";
+import { Spotlight } from "@/shared/components/spot-light";
 
 export type SectionContainerProps = {
   id: string;
@@ -8,7 +10,26 @@ export type SectionContainerProps = {
   containerProps?: React.ComponentProps<"div">;
   titleProps?: React.ComponentProps<"h1">;
   quotationProps?: React.ComponentProps<"h5">;
+  showSpotLight?: boolean;
 } & React.ComponentProps<"section">;
+
+const Spotlights = [
+  {
+    className:
+      "top-[5vh] left-[0vw] md:top-[10vh] md:left-[-5vw] h-[80vh] w-[50vw]",
+    fill: "white"
+  },
+  {
+    className:
+      "top-[10vh] left-[8vw] md:top-[15vh] md:left-[5vw] h-[70vh] w-[50vw]",
+    fill: "var(--secondary)"
+  },
+  {
+    className:
+      "top-[15vh] left-[16vw] md:top-[20vh] md:left-[15vw] h-[60vh] w-[50vw]",
+    fill: "var(--primary)"
+  }
+];
 
 const SectionContainer = ({
   children,
@@ -19,14 +40,24 @@ const SectionContainer = ({
   containerProps,
   titleProps,
   quotationProps,
+  showSpotLight,
   ...rest
 }: SectionContainerProps) => {
   return (
     <section
       id={id}
-      className={"p-4 min-responsive-height w-full " + className}
+      className={"p-4 min-responsive-height w-full overflow-hidden" + className}
       {...rest}
     >
+      <ShowIf conditionalRenderKey={showSpotLight}>
+        {Spotlights?.map((item, index) => (
+          <Spotlight
+            key={index}
+            className={item.className || ""}
+            fill={item.fill || ""}
+          />
+        ))}
+      </ShowIf>
       <h1
         {...titleProps}
         data-aos="flip-up"
@@ -40,7 +71,7 @@ const SectionContainer = ({
       >
         <b>{title}</b>
       </h1>
-      {quotation && (
+      <ShowIf conditionalRenderKey={quotation}>
         <h5
           {...quotationProps}
           data-aos="flip-up"
@@ -54,7 +85,7 @@ const SectionContainer = ({
         >
           <i>{quotation}</i>
         </h5>
-      )}
+      </ShowIf>
       <div
         {...containerProps}
         data-aos="fade-up"
