@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setScrollParam = ({ axis, parent, distance }: any) => {
   if (!parent && typeof document === 'undefined') {
     return;

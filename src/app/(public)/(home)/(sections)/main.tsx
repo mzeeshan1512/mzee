@@ -6,8 +6,8 @@ import {
 import { DefaultBg } from "@/shared/config";
 import ParticleAnimation from "@/shared/components/particles-animation";
 import JumbledTextAnimation from "@/shared/components/text-loop/jumbled-text-animation";
-import Button from "@/shared/components/button";
 import SocialIcons from "@/shared/components/social-share";
+import LetsConnect from "./(components)/lets-connect";
 
 const Main = () => {
   return (
@@ -51,9 +51,7 @@ const Main = () => {
           data-aos-duration="2000"
           className="flex items-center gap-2 mt-2 pt-2"
         >
-          <Button className="bg-primary-gradient hover:bg-primary-hover-gradient ">
-            Hire Me.
-          </Button>
+          <LetsConnect />
           <SocialIcons
             socialContact={socialContact}
             linkProps={{

@@ -25,8 +25,8 @@ const componentLists = [
 
 const page = () => {
   return componentLists?.map((item, index) => (
-    <ShowIf key={index} conditionalRenderKey={item.show}>
-      {item.component}
+    <ShowIf key={index} conditionalRenderKey={item?.show || false}>
+      {item?.component ?? null}
     </ShowIf>
   ));
 };

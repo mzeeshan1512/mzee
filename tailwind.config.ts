@@ -79,10 +79,16 @@ const config: Config = {
             opacity: "1",
             transform: "translate(-50%,-40%) scale(1)"
           }
-        }
+        },
+        float: {
+          '0%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-15px)' },
+          '100%': { transform: 'translateY(0px)' },
+        },
       },
       animation: {
-        spotlight: "spotlight 2s ease .75s 1 forwards"
+        spotlight: "spotlight 2s ease .75s 1 forwards",
+        float:"float 6s ease-in-out infinite"
       }
     },
     variants: {

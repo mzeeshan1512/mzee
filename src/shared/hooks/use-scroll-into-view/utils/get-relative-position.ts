@@ -5,7 +5,6 @@ export const getRelativePosition = ({
   alignment,
   offset,
   isList,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any): number => {
   if (!target || (!parent && typeof document === 'undefined')) {
     return 0;

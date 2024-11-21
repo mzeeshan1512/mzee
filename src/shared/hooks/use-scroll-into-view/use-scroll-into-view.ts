@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "../use-reduced-motion";
 import { easeInOutQuad } from "./utils/ease-in-out-quad";

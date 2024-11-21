@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRouter } from "next/navigation";
 
 interface TrustedRedirectProps extends React.ComponentProps<"a"> {
