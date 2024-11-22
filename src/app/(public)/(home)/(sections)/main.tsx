@@ -3,7 +3,7 @@ import {
   sectionIds,
   socialContact
 } from "@/shared/constants-enums/navigation-list";
-import { DefaultBg } from "@/shared/config";
+import { DefaultBg } from "@/shared/app-config";
 import ParticleAnimation from "@/shared/components/particles-animation";
 import JumbledTextAnimation from "@/shared/components/text-loop/jumbled-text-animation";
 import SocialIcons from "@/shared/components/social-share";

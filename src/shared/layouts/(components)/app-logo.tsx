@@ -6,7 +6,7 @@ import {
   baseUrl as appBaseURL,
   chatLogo,
   appName
-} from "@/shared/config";
+} from "@/shared/app-config";
 import { AppIconProps } from "./types";
 
 const AppIcon = ({

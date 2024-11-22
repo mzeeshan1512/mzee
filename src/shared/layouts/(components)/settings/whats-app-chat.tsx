@@ -4,7 +4,7 @@ import { WhatsApp } from "@/shared/icon/social";
 import Popup from "@/shared/components/pop-up";
 import { AppIcon } from "../app-logo";
 import { Cross } from "@/shared/icon/common";
-import { ChatBG } from "@/shared/config";
+import { ChatBG } from "@/shared/app-config";
 import TrustedRedirect from "@/shared/components/trusted-redirect";
 
 type ChatBoxProps = {

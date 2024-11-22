@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultBg } from "@/shared/config";
+import { DefaultBg } from "@/shared/app-config";
 import ShowIf from "@/shared/components/show-if";
 import "./styles.css";
 import { useInterval } from "@/shared/hooks/use-interval";

@@ -2,6 +2,11 @@ import { HeaderMenuList } from "@/shared/layouts/(components)/types";
 import { Email, GitHub, LinkedIn, WhatsApp } from "@/shared/icon/social";
 import { SocialShareContent } from "../components/social-share";
 
+const cookiesName = {
+  info: "info",
+  redirect:"redirect_uri"
+};
+
 const sectionIds = {
   home: "home",
   about: "about",
@@ -65,4 +70,4 @@ const socialContact:SocialShareContent[] = [
   },
 ]
 
-export { navLinks, sectionIds, socialContact };
+export { navLinks, sectionIds, socialContact,cookiesName };
