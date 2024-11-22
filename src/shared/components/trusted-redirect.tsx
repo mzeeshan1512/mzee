@@ -2,22 +2,33 @@
 import { useRouter } from "next/navigation";
 
 interface TrustedRedirectProps extends React.ComponentProps<"a"> {
-  children: React.ReactNode;
-  trustedDomains?: string[];
+  trustedDomains?: string[]; // e.g.  ["linkedin.com"]
   autoInvoke?: boolean;
   redirectUrl?: string;
+  isTrusted?: boolean;
 }
 
-const TrustedRedirect: React.FC<TrustedRedirectProps> = ({
+const TrustedRedirect: React.FC<
+  TrustedRedirectProps & {
+    children: React.ReactNode;
+  }
+> = ({
   trustedDomains = [],
   children,
   href,
   target,
   autoInvoke = false,
+  isTrusted = false,
   redirectUrl = "/out-bound-redirect/",
   ...rest
 }) => {
   const router = useRouter();
+
+  const handleCopyClick = async (url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch (err) {}
+  };
 
   const validateURL = async (url: string) => {
     try {
@@ -47,9 +58,11 @@ const TrustedRedirect: React.FC<TrustedRedirectProps> = ({
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
-
+    handleCopyClick(href!);
+    if (isTrusted) {
+      window?.open(href, target);
+    }
     const validation = await validateURL(href!);
-
     if (validation?.valid) {
       window?.open(href, target);
     } else {
@@ -79,3 +92,5 @@ const TrustedRedirect: React.FC<TrustedRedirectProps> = ({
 };
 
 export default TrustedRedirect;
+
+export type { TrustedRedirectProps };

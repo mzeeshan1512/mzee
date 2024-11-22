@@ -3,18 +3,24 @@
 import React from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import dynamic from "next/dynamic";
 import ErrorBoundary from "./error-boundary";
-import Offline from "./offline-view";
 import { useNetwork } from "../hooks/use-network";
-import MaintenanceMode from "./maintenance-mode";
-import { logEvent } from "firebase/analytics";
-import { analytics } from "../firebase/config";
+import { analytics, logEvent } from "../firebase/config";
+import { saveVisit } from "../firebase/use-visit";
+
+const Offline = dynamic(() => import("./offline-view"), { ssr: true });
+const MaintenanceMode = dynamic(() => import("./maintenance-mode"), {
+  ssr: true
+});
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { online } = useNetwork();
+
   React.useLayoutEffect(() => {
     Aos.init();
     Aos.refresh();
+    saveVisit();
   }, []);
 
   React.useEffect(() => {
@@ -24,6 +30,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
     return online ? <MaintenanceMode /> : <Offline />;
   }
+
   return <ErrorBoundary>{online ? children : <Offline />}</ErrorBoundary>;
 };
 

@@ -31,7 +31,13 @@ const MaintenanceMode = () => {
             socialContact={socialContact}
             linkProps={{
               className: "!text-[white] hover-gradient-background mt-2",
-              style: { "--hover-color": "white" } as React.CSSProperties
+              style: { "--hover-color": "white" } as React.CSSProperties,
+              trustedDomains: [
+                "linkedin.com",
+                "whatsapp.com",
+                "github.com",
+                "api.wa.me"
+              ]
             }}
           />
         </div>

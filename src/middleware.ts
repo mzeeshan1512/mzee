@@ -1,22 +1,28 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { saveVisit } from "./shared/firebase/use-visit";
+import { encryptData } from "./shared/utils/encode-decode";
+import { cookiesName } from "./shared/constants-enums/navigation-list";
 
-export default function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   const { nextUrl } = req;
-  if (
+  if(
     nextUrl?.hostname !== "localhost" &&
     (nextUrl?.pathname === "/") &&
     req?.geo &&
     req?.ip
   ) {
-    const cookieValue = JSON.stringify({
-      ...req?.geo,
+  const encryptedData = await encryptData({
+ ...req?.geo,
       ip: req?.ip,
       hostname: nextUrl?.hostname,
+  })
+   return NextResponse.next({
+      headers: {
+        "Set-Cookie": `${cookiesName.info}=${encodeURIComponent(
+          encryptedData
+        )}; Max-Age=86400`,
+      },
     });
-
-    saveVisit(cookieValue)
   }
   return NextResponse.next();
 }

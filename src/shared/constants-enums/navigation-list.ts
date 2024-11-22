@@ -3,7 +3,7 @@ import { Email, GitHub, LinkedIn, WhatsApp } from "@/shared/icon/social";
 import { SocialShareContent } from "../components/social-share";
 
 const cookiesName = {
-  info: "info",
+  info: "_gm_tch",
   redirect:"redirect_uri"
 };
 

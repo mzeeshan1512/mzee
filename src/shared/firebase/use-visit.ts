@@ -5,12 +5,13 @@ import {
   getDocs,
   getFirestore,
   query,
-  where,
+  where
 } from "firebase/firestore";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 import { fireStore, firebaseApp } from "./config";
 import { cookiesName } from "@/shared/constants-enums/navigation-list";
 import { CollectionIDs } from "./collection-ids";
+import { decryptData } from "../utils/encode-decode";
 
 const getHtmlStringFromObject = (obj: { [key: string]: any }): string => {
   let htmlString = "";
@@ -34,52 +35,57 @@ const getRecord = async (colId: any, ip: any) => {
   return documents;
 };
 
-const saveVisit = async (req: any ) => {
-  const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
-  const emailTemplate: any =
-    process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_WEB_VISIT;
-  const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
-  const currentDate: Date | any = new Date();
-  const date = currentDate.toLocaleString();
-  const time = currentDate.toLocaleTimeString();
-  const payload: any = {
-    date: date,
-    time: time,
-    modified_at: currentDate?.toISOString(),
-    ...req,
-  };
-  try {
-    let docs = await getRecord(CollectionIDs.webInfo ,payload.ip);
-    let isAlready = false;
-    if (docs.length > 0) {
-      docs = docs[0];
-      const lastVisit: Date | any = new Date(docs?.modified_at);
-      const timeDiff = (currentDate - lastVisit) / (1000 * 60);
-      if (timeDiff <= 60) {
-        isAlready = true;
-      }
-    }
-    if (isAlready) return;
-    const db = getFirestore(firebaseApp);
-    await addDoc(
-      collection(db,  CollectionIDs.webInfo),
-      payload
-    );
+const saveVisit = async () => {
+  let req: any = getCookie(cookiesName.info);
+  deleteCookie(cookiesName.info);
+  if (req) {
+    req = decryptData(req!);
+  }
+  if (req && Object.keys(req)?.length > 0) {
+    const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
+    const emailTemplate: any =
+      process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_WEB_VISIT;
+    const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
+    const currentDate: Date | any = new Date();
+    const date = currentDate.toLocaleString();
+    const time = currentDate.toLocaleTimeString();
+    const payload: any = {
+      date: date,
+      time: time,
+      modified_at: currentDate?.toISOString(),
+      ...req
+    };
 
-    await emailjs.send(
-      serviceId,
-      emailTemplate,
-      {
-        message: getHtmlStringFromObject(payload),
-        text:  "Some one Visit your website",
-        subject: "New Web Visit" + ` (${payload.hostname}) ${date}`,
-      },
-      publicKey
-    );
-  } catch (e) {
-   // console.log({e})
-  } finally {
-    deleteCookie(cookiesName.info);
+    try {
+      if (payload?.ip) {
+        let docs = await getRecord(CollectionIDs.webInfo, payload?.ip);
+        let isAlready = false;
+        if (docs?.length > 0) {
+          docs = docs[0];
+          const lastVisit: Date | any = new Date(docs?.modified_at);
+          const timeDiff = (currentDate - lastVisit) / (1000 * 60);
+          if (timeDiff <= 60) {
+            isAlready = true;
+          }
+        }
+        if (isAlready) return;
+      }
+      const db = getFirestore(firebaseApp);
+      await addDoc(collection(db, CollectionIDs.webInfo), payload);
+
+      await emailjs.send(
+        serviceId,
+        emailTemplate,
+        {
+          message: getHtmlStringFromObject(payload),
+          text: "Some one Visit your website",
+          subject: "New Web Visit" + ` (${payload.hostname})`
+        },
+        publicKey
+      );
+    } catch (error) {
+      // console.log({ error, req });
+    }
   }
 };
 

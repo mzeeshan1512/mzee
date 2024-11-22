@@ -1,5 +1,5 @@
 import React, { ComponentProps } from "react";
-import TrustedRedirect from "../trusted-redirect";
+import TrustedRedirect, { TrustedRedirectProps } from "../trusted-redirect";
 import "./style.css";
 
 interface SocialShareContent {
@@ -9,6 +9,7 @@ interface SocialShareContent {
   content?: string;
   label?: string;
   color?: string;
+  isTrusted?: boolean;
 }
 
 interface SocialShareProps {
@@ -23,7 +24,7 @@ const SocialIcons = ({
   ...rest
 }: SocialShareProps &
   ComponentProps<"div"> & {
-    linkProps?: ComponentProps<"a">;
+    linkProps?: TrustedRedirectProps;
   }) => {
   return (
     <div className="social-icons" {...rest}>
@@ -44,6 +45,10 @@ const SocialIcons = ({
           key={index}
           target={linkProps?.target || "_blank"}
           title={data?.title}
+          isTrusted={
+            data?.isTrusted ||
+            process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true"
+          }
         >
           {<data.icon width={size} height={size} />}
         </TrustedRedirect>
