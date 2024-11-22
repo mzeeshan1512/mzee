@@ -72,7 +72,7 @@ const RenderErrorComponent = ({
 const FallBackLayout = (props: FallBackErrorLayoutProps) => {
   return (
     <div
-      className="error-container"
+      className="error-container relative"
       style={{
         backgroundImage: `url(${DefaultBg?.src})`
       }}

@@ -1,7 +1,7 @@
 "use client";
 import Button, { BlendMode } from "@/shared/components/button";
 import { useRouter } from "next/navigation";
-import FallBackLayout from "@/shared/layouts/error/fall-back-layout";
+import FallBackLayout from "@/shared/layouts/fall-back-layout";
 
 const Error = () => {
   const navigate = useRouter();

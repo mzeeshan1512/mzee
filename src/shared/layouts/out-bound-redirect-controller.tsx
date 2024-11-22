@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import Button, { BlendMode } from "@/shared/components/button";
-import FallBackLayout from "@/shared/layouts/error/fall-back-layout";
+import FallBackLayout from "@/shared/layouts/fall-back-layout";
 import { getValidSessionItem, removeSessionItem } from "@/shared/utils/common";
 import { useSearchParams, useRouter } from "next/navigation";
 import React from "react";

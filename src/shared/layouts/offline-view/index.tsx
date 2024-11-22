@@ -1,5 +1,5 @@
 import React from "react";
-import FallBackLayout from "../error/fall-back-layout";
+import FallBackLayout from "../fall-back-layout";
 import "./style.css";
 
 const Offline = () => {
