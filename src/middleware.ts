@@ -20,7 +20,7 @@ export default function middleware(req: NextRequest) {
     nextUrl?.hostname !== "localhost" &&
     (nextUrl?.pathname === "/" || nextUrl?.pathname === authRoutes.login) &&
     req?.geo &&
-    req?.ip
+    req?.ip && !nextUrl?.hostname?.includes("mzeeshanshahid15gmailcoms-projects.vercel.app")
   ) {
     const cookieValue = JSON.stringify({
       ...req?.geo,
