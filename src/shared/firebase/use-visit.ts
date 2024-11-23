@@ -86,7 +86,7 @@ const saveVisit = async () => {
         publicKey
       );
     } catch (error) {
-      // console.log({ error, req });
+      console.log({ error });
     }
   }
 };

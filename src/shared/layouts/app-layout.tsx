@@ -20,11 +20,11 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   React.useLayoutEffect(() => {
     Aos.init();
     Aos.refresh();
-    saveVisit();
   }, []);
 
   React.useEffect(() => {
     if (analytics) logEvent(analytics, "page_view");
+    saveVisit();
   }, [analytics]);
 
   if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
