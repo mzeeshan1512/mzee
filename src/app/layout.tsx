@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import AppLayout from "@/shared/layouts/app-layout";
 import { ThemeProvider } from "@/shared/theme/provider";
+import { ToastContainer } from "@/shared/components/toast";
 /* styles */
 import "@/styles/globals.css";
 import "@/styles/gradient-glass-morphic.css";
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ThemeProvider>
+          <ToastContainer />
           <AppLayout>{children}</AppLayout>
         </ThemeProvider>
       </body>

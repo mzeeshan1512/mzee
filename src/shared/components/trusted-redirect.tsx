@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import toast from "./toast";
 
 interface TrustedRedirectProps extends React.ComponentProps<"a"> {
   trustedDomains?: string[]; // e.g.  ["linkedin.com"]
@@ -27,6 +28,13 @@ const TrustedRedirect: React.FC<
   const handleCopyClick = async (url: string) => {
     try {
       await navigator.clipboard.writeText(url);
+      toast.dismiss();
+      toast.success("link copied", {
+        hideIcon: true,
+        hideCross: true,
+        hideProgress: true,
+        duration: 2000
+      });
     } catch (err) {}
   };
 
@@ -60,7 +68,8 @@ const TrustedRedirect: React.FC<
     e.preventDefault();
     handleCopyClick(href!);
     if (isTrusted) {
-      window?.open(href, target);
+      // window?.open(href, target);
+      return;
     }
     const validation = await validateURL(href!);
     if (validation?.valid) {

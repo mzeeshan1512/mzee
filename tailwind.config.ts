@@ -81,14 +81,24 @@ const config: Config = {
           }
         },
         float: {
-          '0%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-15px)' },
-          '100%': { transform: 'translateY(0px)' },
+          "0%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-15px)" },
+          "100%": { transform: "translateY(0px)" }
         },
+        'float-in': {
+          '0%': { transform: 'translateY(-20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' }
+        },
+        'float-out': {
+          '0%': { transform: 'translateY(0)', opacity: '1' },
+          '100%': { transform: 'translateY(-20px)', opacity: '0' }
+        }
       },
       animation: {
         spotlight: "spotlight 2s ease .75s 1 forwards",
-        float:"float 6s ease-in-out infinite"
+        float: "float 6s ease-in-out infinite",
+        'float-in': 'float-in 0.5s ease-out',
+        'float-out': 'float-out 0.5s ease-in'
       }
     },
     variants: {

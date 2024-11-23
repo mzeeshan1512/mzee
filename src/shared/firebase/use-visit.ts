@@ -12,6 +12,7 @@ import { fireStore, firebaseApp } from "./config";
 import { cookiesName } from "@/shared/constants-enums/navigation-list";
 import { CollectionIDs } from "./collection-ids";
 import { decryptData } from "../utils/encode-decode";
+import { convertToRegionTime } from "../utils/date";
 
 const getHtmlStringFromObject = (obj: { [key: string]: any }): string => {
   let htmlString = "";
@@ -53,6 +54,7 @@ const saveVisit = async () => {
       date: date,
       time: time,
       modified_at: currentDate?.toISOString(),
+      pakistan_time: convertToRegionTime(currentDate),
       ...req
     };
 
