@@ -41,11 +41,11 @@ const ServiceValidation = yup.object().shape({
 });
 
 const TechValidation = yup.object().shape({
-  title: yup
-    .string()
-    .typeError(StringError)
-    .required("Title is required.")
-    .min(3, "Title must contain atleast 3 characters"),
+  // title: yup
+  //   .string()
+  //   .typeError(StringError)
+  //   .required("Title is required.")
+  //   .min(3, "Title must contain atleast 3 characters"),
   category: yup
     .string()
     .typeError(StringError)

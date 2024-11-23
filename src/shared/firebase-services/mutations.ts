@@ -109,12 +109,10 @@ export const handleDataWriting = async (payload: { [key: string]: any }) => {
     await runTransaction(fireStore, async (transaction) => {
       const docRef = doc(fireStore, payload?.collectionId);
       const sfDoc = await transaction.get(docRef);
-      debugger;
       if (!sfDoc.exists()) {
         throw "Document does not exist!";
       }
     });
-    console.log("Transaction successfully committed!");
   } catch (e) {
     console.log("Transaction failed: ", e);
   }

@@ -26,9 +26,9 @@ const TechnologiesPage = () => {
   const { data } = useGetDocuments(CollectionIDs.icons);
   const TableHeader: TableDataKeyList[] = [
     {
-      data_key: "title",
+      data_key: "",
       title: "Technologies",
-      isSortable: true
+      cell: (item: ServicesListingData) => item?.blob?.label!
     },
     {
       data_key: "category",
@@ -65,20 +65,6 @@ const TechnologiesPage = () => {
   const fieldList: formFieldsList[] = [
     {
       type: "text",
-      name: "title",
-      label: "Title",
-      required: true,
-      col: 6
-    },
-    {
-      type: "text",
-      name: "category",
-      label: "Category",
-      required: true,
-      col: 6
-    },
-    {
-      type: "text",
       name: "blob",
       label: "Icon",
       required: true,
@@ -97,6 +83,13 @@ const TechnologiesPage = () => {
           formType="file-uploader-form"
         />
       ),
+      col: 6
+    },
+    {
+      type: "text",
+      name: "category",
+      label: "Category",
+      required: true,
       col: 6
     }
   ];

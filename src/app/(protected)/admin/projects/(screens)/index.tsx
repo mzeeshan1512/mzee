@@ -85,13 +85,12 @@ const ProjectViews = () => {
     {
       title: "Project",
       data_key: "basicInfo.title",
-      cell: (item: ProjectsData) => item.basicInfo.title,
+      cell: (item: ProjectsData) => item.basicInfo.title
     },
     {
       title: "Featured",
       data_key: "basicInfo.is_featured",
       cell: (item: ProjectsData) => {
-        console.log(item);
         return (
           <Toggler
             value={item.basicInfo.is_featured}
@@ -104,14 +103,14 @@ const ProjectViews = () => {
                   ...item,
                   basicInfo: {
                     ...item.basicInfo,
-                    is_featured: !item.basicInfo.is_featured,
-                  },
-                },
+                    is_featured: !item.basicInfo.is_featured
+                  }
+                }
               })
             }
           />
         );
-      },
+      }
     },
     {
       title: "Preview",
@@ -129,14 +128,14 @@ const ProjectViews = () => {
                   ...item,
                   basicInfo: {
                     ...item.basicInfo,
-                    web_preview: !item.basicInfo.web_preview,
-                  },
-                },
+                    web_preview: !item.basicInfo.web_preview
+                  }
+                }
               })
             }
           />
         );
-      },
+      }
     },
     {
       data_key: "actions",
@@ -155,7 +154,7 @@ const ProjectViews = () => {
                 mutate({
                   collectionId: CollectionIDs.projects,
                   dataId: item?.id,
-                  data: { ...item, is_archived: !item?.is_archived },
+                  data: { ...item, is_archived: !item?.is_archived }
                 });
               }}
             >
@@ -175,8 +174,8 @@ const ProjectViews = () => {
             </div>
           </div>
         );
-      },
-    },
+      }
+    }
   ];
 
   if (

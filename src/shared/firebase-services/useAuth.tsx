@@ -216,8 +216,6 @@ const useAuth = () => {
           });
           const path: any = getCookie(cookiesName.redirect);
           let redirectUrl: any = "/";
-          //console.log({path})
-          //debugger
           if (path && !["", " ", "undefined", "null"]?.includes(path!)) {
             redirectUrl = path;
           }

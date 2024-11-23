@@ -240,7 +240,6 @@ const FieldForms = ({
   const watchAllFields = watch();
 
   const onSubmit = async (data: any) => {
-    console.log({ data });
     if (!isSubmitting) {
       setISDisabled(true);
       if (fileList?.length > 0) {
