@@ -57,6 +57,9 @@ const Services = () => {
       id={sectionIds.services}
       title={sectionIds.services}
       quotation="Transforming ideas into reality with expert development, automation, and IT solutions"
+      className={
+        " !bg-grid-pattern-light dark:!bg-grid-pattern-dark !bg-grid-size relative"
+      }
       containerProps={{
         className: "pt-4 mt-4"
       }}

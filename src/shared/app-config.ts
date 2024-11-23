@@ -2,7 +2,7 @@ import AppLogo from "@/assets/logos/appLogo.png";
 import ChatLogo from "@/assets/logos/chat.png";
 import DefaultBg from "@/assets/bgs/home-dark.png";
 import ChatBG from "@/assets/bgs/whatsapp.jpg";
-import AboutPng from "@/assets/about.png"
+import AboutPng from "@/assets/content/about.png"
 
 const appName =  process.env.NEXT_PUBLIC_APP_Name || "";
 const baseUrl = "";

@@ -98,7 +98,7 @@ const config: Config = {
         spotlight: "spotlight 2s ease .75s 1 forwards",
         float: "float 6s ease-in-out infinite",
         'float-in': 'float-in 0.5s ease-out',
-        'float-out': 'float-out 0.5s ease-in'
+        'float-out': 'float-out 0.5s ease-in',
       }
     },
     variants: {

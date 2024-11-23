@@ -124,3 +124,12 @@ scrollbar-thumb {
     min-height: clamp(60vh, 20vh + 20vw, 100vh);
   }
 }
+
+/* @keyframes spin {
+   0% {
+        background-position: 0 200%;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+} */

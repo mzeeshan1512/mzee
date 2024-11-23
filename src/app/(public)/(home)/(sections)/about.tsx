@@ -1,45 +1,85 @@
 import React from "react";
-import SectionContainer from "./(components)/section-wrapper";
-import { sectionIds } from "@/shared/constants-enums/navigation-list";
-import Counter from "@/shared/components/counter";
-import { Globe as World } from "./(components)/time-zone-globe";
-import Button, { BlendMode } from "@/shared/components/button";
 import Image from "next/image";
-import About_2 from "@/assets/about.png";
+/* shared */
+import { Spotlights } from "@/shared/constants-enums/reused-tailwind-css";
+import ParticleAnimation from "@/shared/components/particles-animation";
+import { sectionIds } from "@/shared/constants-enums/navigation-list";
+import { Spotlight } from "@/shared/components/spot-light";
+import Counter from "@/shared/components/counter";
+import Button from "@/shared/components/button";
+/* images */
+import { aboutPng } from "@/shared/app-config";
+import Earth from "@/assets/content/earth.jpeg";
+/* section component */
+import SectionContainer from "./(components)/section-wrapper";
+import LetsConnect from "./(components)/lets-connect";
 
 const About = () => {
   return (
     <SectionContainer
       id={sectionIds.about}
-      title={"Who am I"}
-      quotation="Failure teaches me that I can actually do this!"
+      title={"Driven by Passion, Defined by Values"}
+      quotation="In the pursuit of greatness, passion ignites the fire, and values sustain it"
       className={
         " !bg-grid-pattern-light dark:!bg-grid-pattern-dark !bg-grid-size relative"
       }
       containerProps={{
         className: "mb-4 p-4"
       }}
-      showSpotLight
+      CallBackComponent={
+        <>
+          {Spotlights?.map((item, index) => (
+            <Spotlight
+              key={index}
+              className={item.className || ""}
+              fill={item.fill || ""}
+            />
+          ))}
+          <div className="absolute bottom-0 right-0 z-0 w-4/5 lg:w-2/4 h-[18rem] drop-shadow-[0_10px_15px_rgba(0,0,0)]">
+            <div
+              className="w-full h-full bg-cover"
+              style={{
+                backgroundImage: `url(${Earth?.src})`,
+                clipPath: `ellipse(80% 41% at 80% 99%)`,
+                animation: "spin 10s linear infinite"
+              }}
+            >
+              <ParticleAnimation color="white" />
+            </div>
+          </div>
+        </>
+      }
     >
       {/* time and overview */}
       <div className="relative grid grid-flow-row md:grid-cols-2 gap-8 items-center">
-        <Image
-          src={About_2}
-          className="animate-float drop-shadow-[-1px_2px_5px_var(--primary)]"
-          alt="Collaboration With People across the globe"
-          data-aos="zoom-in-left"
-          data-aos-duration="3000"
-          data-aos-easing="ease-in-out"
-        />
-        {/* <article
-          className="html-danger-text prose text-current"
-          data-aos="fade-right"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          dangerouslySetInnerHTML={{
-            __html: process.env.NEXT_PUBLIC_ABOUT_INFO!
-          }}
-        /> */}
+        <div className="relative flex w-full justify-center items-center">
+          <Image
+            src={aboutPng}
+            className="animate-float drop-shadow-[-1px_2px_5px_var(--primary)]"
+            alt="Collaboration With People across the globe"
+            data-aos="zoom-in-left"
+            data-aos-duration="3000"
+            data-aos-easing="ease-in-out"
+          />
+          <div className="absolute top-[95%] left-1/2 transform -translate-x-1/2 translate-y-[-10px] w-[50%] h-[20px] rounded-[50%] bg-gradient-to-b from-black/30 via-black/10 to-transparent opacity-50" />
+        </div>
+        <div className="flex flex-col gap-2">
+          <article
+            className="prose text-current !max-w-[100%]"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            dangerouslySetInnerHTML={{
+              __html: process.env.NEXT_PUBLIC_ABOUT_INFO!
+            }}
+          />
+          <div className="flex gap-5">
+            <Button className="bg-primary-gradient hover:bg-primary-hover-gradient p-3">
+              Explore more
+            </Button>
+            <LetsConnect />
+          </div>
+        </div>
         {/* <Button
           blendMode={BlendMode.GRADIENT}
           className="bg-primary-gradient hover:bg-primary-hover-gradient mt-4"

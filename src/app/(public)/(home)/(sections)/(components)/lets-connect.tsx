@@ -11,7 +11,7 @@ const LetsConnect = () => {
   return (
     <Button
       blendMode={BlendMode.GRADIENT}
-      className="bg-primary-gradient hover:bg-primary-hover-gradient p-2"
+      className="bg-primary-gradient hover:bg-primary-hover-gradient p-3"
       onClick={() => scrollIntoView()}
     >
       {"Let's Connect"}
