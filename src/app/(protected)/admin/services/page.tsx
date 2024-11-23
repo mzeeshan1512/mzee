@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useMemo } from "react";
 import Image from "next/image";
@@ -9,12 +10,12 @@ import CallBackForm from "@/shared/hook-forms/call-back-form";
 import { CollectionIDs } from "@/shared/constants/collection-ids";
 import {
   IconsValidation,
-  ServiceValidation,
+  ServiceValidation
 } from "@/shared/validation/content-schemas";
 import { useGetDocuments } from "@/shared/firebase-services/useCollections";
 import {
   OptionWithIcon,
-  SingleValueWithIcon,
+  SingleValueWithIcon
 } from "@/shared/components/central-fields-control-unit/select/components";
 const AdminContentController = dynamic(
   () => import("@/app/(protected)/admin/(components)/admin-content-controller"),
@@ -27,24 +28,21 @@ const ServicesPage = () => {
     {
       data_key: "title",
       title: "Services",
-      isSortable: true,
+      isSortable: true
     },
     {
       data_key: "description",
-      title: "Description",
+      title: "Description"
     },
     {
       data_key: "svg",
       title: "Svg",
       cell: (item: ServicesListingData) => {
         return (
-          <img
-            src={item?.blob?.value?.src?.url!}
-            alt={item?.blob?.label!}
-          />
+          <img src={item?.blob?.value?.src?.url!} alt={item?.blob?.label!} />
         );
-      },
-    },
+      }
+    }
   ];
 
   const options = useMemo(() => {
@@ -55,8 +53,8 @@ const ServicesPage = () => {
           value: {
             src: item?.blob?.src,
             svg: item?.blob?.svg || null,
-            id: item?.id,
-          },
+            id: item?.id
+          }
         };
       });
     }
@@ -69,7 +67,7 @@ const ServicesPage = () => {
       name: "title",
       label: "Title",
       required: true,
-      col: 6,
+      col: 6
     },
     {
       type: "text",
@@ -79,7 +77,7 @@ const ServicesPage = () => {
       options: options,
       customComponent: {
         Option: OptionWithIcon,
-        SingleValue: SingleValueWithIcon,
+        SingleValue: SingleValueWithIcon
       },
       CallBackComponent: (
         <CallBackForm
@@ -91,15 +89,15 @@ const ServicesPage = () => {
           formType="file-uploader-form"
         />
       ),
-      col: 6,
+      col: 6
     },
     {
       type: "textarea",
       name: "description",
       label: "Description",
       required: true,
-      col: 12,
-    },
+      col: 12
+    }
   ];
 
   return (
@@ -108,15 +106,15 @@ const ServicesPage = () => {
         breadCrumbs={{
           parent: {
             title: "Services",
-            link: adminRoutes.services,
+            link: adminRoutes.services
           },
-          childList: [],
+          childList: []
         }}
         tableDataKeyList={TableHeader}
         collectionId={CollectionIDs.services}
         fieldsList={fieldList}
         formValidationSchema={{
-          field: ServiceValidation,
+          field: ServiceValidation
         }}
       />
     </div>

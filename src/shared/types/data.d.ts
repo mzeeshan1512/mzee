@@ -50,14 +50,18 @@ interface contact_form extends commonData {
 }
 
 /* icons data types start */
+interface blobSrc {
+  url: string;
+  type: string;
+}
+interface blobSvg {
+  code?: string;
+  props?: GenericObject;
+}
 interface IconsListingData extends commonData {
   blob: {
-    src?: string;
-    base64?: string;
-    svg?: {
-      code?: string;
-      props?: GenericObject;
-    };
+    src?: blobSrc;
+    svg?: blobSvg;
   };
   directory?: string;
 }
@@ -68,13 +72,9 @@ interface ServicesListingData extends commonData {
   blob?: {
     label?: string;
     value?: {
-      base64?: string;
-      src?: {
-        type?:string,
-        url?:string
-      };
+      src?: blobSrc;
       id?: string;
-      svg?: any;
+      svg?: blobSvg;
     };
   };
   description?: string;
@@ -86,16 +86,16 @@ type DataObj = AboutData &
   contact_form &
   ServicesListingData;
 
-type blobObj ={
-  src:{
-    type:string,
-    url:string
-  },
-  directory?:string
-}  
+type blobObj = {
+  src: {
+    type: string;
+    url: string;
+  };
+  directory?: string;
+};
 
 /* projects */
-type ProjectsBasicInfo= {
+type ProjectsBasicInfo = {
   /* required */
   title: string;
   unique_identifier: string;
@@ -111,33 +111,33 @@ type ProjectsBasicInfo= {
   disable_demo?: boolean;
   content_ownership?: string;
   content_ownership_link?: string;
-}
-type ProjectImageGallery= {
-  banner_image:blobObj,
-  slider_images?:blobObj[]
-}
-
-type ProjectVideGallery= {
-  banner_video?:blobObj,
-  demo_video?:blobObj
-}
-
-interface ProjectsData extends commonData  {
-  basicInfo: ProjectsBasicInfo;
-  imageGallery:ProjectImageGallery;
-  videoGallery?:ProjectVideGallery,
-  detailedContent?:{content?:string}
+};
+type ProjectImageGallery = {
+  banner_image: blobObj;
+  slider_images?: blobObj[];
 };
 
-interface LogsInfo{
-  city?:string,
-  country?:string,
-  region?:string,
-  ip?:string,
-  latitude?:string,
-  longitude?:string,
-  hostname?:string
-  date?:string,
-  time?:string,
-  modified_at?:string
+type ProjectVideGallery = {
+  banner_video?: blobObj;
+  demo_video?: blobObj;
+};
+
+interface ProjectsData extends commonData {
+  basicInfo: ProjectsBasicInfo;
+  imageGallery: ProjectImageGallery;
+  videoGallery?: ProjectVideGallery;
+  detailedContent?: { content?: string };
+}
+
+interface LogsInfo {
+  city?: string;
+  country?: string;
+  region?: string;
+  ip?: string;
+  latitude?: string;
+  longitude?: string;
+  hostname?: string;
+  date?: string;
+  time?: string;
+  modified_at?: string;
 }

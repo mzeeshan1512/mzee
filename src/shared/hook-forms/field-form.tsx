@@ -111,12 +111,12 @@ const FieldForms = ({
     let formData: any = {};
     if (!onlyFormData) {
       formData = {
-        ...defaultValues,
+        ...defaultValues
       };
     }
     formData = {
       ...formData,
-      ...data,
+      ...data
     };
 
     let fileUploads: GenericObject = {};
@@ -127,14 +127,13 @@ const FieldForms = ({
     // Prepare an array to hold all the upload promises
     const promises: Promise<any>[] = [];
     let file_Urls: any = {};
-
     Object.keys(fileUploads).forEach((key: any, index: number) => {
       let item = fileUploads[key];
       if (Array.isArray(item)) {
         item?.forEach((subItem: any, subItemIndex: number) => {
           if (typeof subItem?.src?.url === "string") {
             file_Urls[key].push({
-              ...subItem,
+              ...subItem
             });
           } else {
             promises.push(
@@ -147,8 +146,8 @@ const FieldForms = ({
                     ...prev,
                     [key]: {
                       ...(prev[key] || {}),
-                      [subItemIndex]: progress,
-                    },
+                      [subItemIndex]: progress
+                    }
                   }));
                 },
                 (e: any) => {
@@ -160,9 +159,9 @@ const FieldForms = ({
                   file_Urls[key].push({
                     src: {
                       url: e?.src,
-                      type:subItem?.src?.type,
+                      type: subItem?.src?.type
                     },
-                    directory: e?.directoryPath,
+                    directory: e?.directoryPath
                   });
                 }
               )
@@ -171,29 +170,31 @@ const FieldForms = ({
         });
       } else {
         if (typeof item?.src?.url === "string") {
-          file_Urls[key] ={
-            ...item,
+          file_Urls[key] = {
+            ...item
           };
-        } else{
-        promises.push(
-          FileUploaderManger(
-            item,
-            key,
-            index,
-            (progress: any) => {
-              setFileProgress((prev: any) => ({ ...prev, [key]: progress }));
-            },
-            (e: any) => {
-              file_Urls[key] = {
-                src: {
-                  url: e?.src,
-                  type:item?.src?.type,
-                },
-                directory: e?.directoryPath,
-              };
-            }
-          )
-        );}
+        } else {
+          promises.push(
+            FileUploaderManger(
+              item,
+              key,
+              index,
+              (progress: any) => {
+                setFileProgress((prev: any) => ({ ...prev, [key]: progress }));
+              },
+              (e: any) => {
+                file_Urls[key] = {
+                  src: {
+                    url: e?.src,
+                    type: item?.src?.type
+                  },
+                  directory: e?.directoryPath,
+                  svg: item?.svg || null
+                };
+              }
+            )
+          );
+        }
       }
     });
 
@@ -207,7 +208,7 @@ const FieldForms = ({
       if (allFulfilled) {
         const data = {
           ...formData,
-          ...file_Urls,
+          ...file_Urls
         };
         handleMutation(data);
       } else {
@@ -231,7 +232,7 @@ const FieldForms = ({
       mutate({
         collectionId: collectionId,
         dataId: dataId,
-        data: data,
+        data: data
       });
     }
   };
@@ -239,7 +240,7 @@ const FieldForms = ({
   const watchAllFields = watch();
 
   const onSubmit = async (data: any) => {
-
+    console.log({ data });
     if (!isSubmitting) {
       setISDisabled(true);
       if (fileList?.length > 0) {

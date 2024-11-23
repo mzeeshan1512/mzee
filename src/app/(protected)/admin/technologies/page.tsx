@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useMemo } from "react";
 import Image from "next/image";
@@ -9,12 +10,12 @@ import CallBackForm from "@/shared/hook-forms/call-back-form";
 import { CollectionIDs } from "@/shared/constants/collection-ids";
 import {
   IconsValidation,
-  TechValidation,
+  TechValidation
 } from "@/shared/validation/content-schemas";
 import { useGetDocuments } from "@/shared/firebase-services/useCollections";
 import {
   OptionWithIcon,
-  SingleValueWithIcon,
+  SingleValueWithIcon
 } from "@/shared/components/central-fields-control-unit/select/components";
 const AdminContentController = dynamic(
   () => import("@/app/(protected)/admin/(components)/admin-content-controller"),
@@ -27,25 +28,22 @@ const TechnologiesPage = () => {
     {
       data_key: "title",
       title: "Technologies",
-      isSortable: true,
+      isSortable: true
     },
     {
       data_key: "category",
       title: "Category",
-      isSortable: true,
+      isSortable: true
     },
     {
       data_key: "svg",
       title: "Svg",
       cell: (item: ServicesListingData) => {
         return (
-          <img
-            src={item?.blob?.value?.src?.url!}
-            alt={item?.blob?.label!}
-          />
+          <img src={item?.blob?.value?.src?.url!} alt={item?.blob?.label!} />
         );
-      },
-    },
+      }
+    }
   ];
 
   const options = useMemo(() => {
@@ -54,11 +52,10 @@ const TechnologiesPage = () => {
         return {
           label: item.title,
           value: {
-            base64: item?.blob?.base64 || null,
             src: item?.blob?.src,
             svg: item?.blob?.svg || null,
-            id: item?.id,
-          },
+            id: item?.id
+          }
         };
       });
     }
@@ -71,14 +68,14 @@ const TechnologiesPage = () => {
       name: "title",
       label: "Title",
       required: true,
-      col: 6,
+      col: 6
     },
     {
       type: "text",
       name: "category",
       label: "Category",
       required: true,
-      col: 6,
+      col: 6
     },
     {
       type: "text",
@@ -88,7 +85,7 @@ const TechnologiesPage = () => {
       options: options,
       customComponent: {
         Option: OptionWithIcon,
-        SingleValue: SingleValueWithIcon,
+        SingleValue: SingleValueWithIcon
       },
       CallBackComponent: (
         <CallBackForm
@@ -100,8 +97,8 @@ const TechnologiesPage = () => {
           formType="file-uploader-form"
         />
       ),
-      col: 6,
-    },
+      col: 6
+    }
   ];
 
   return (
@@ -110,15 +107,15 @@ const TechnologiesPage = () => {
         breadCrumbs={{
           parent: {
             title: "Technologies",
-            link: adminRoutes.technology,
+            link: adminRoutes.technology
           },
-          childList: [],
+          childList: []
         }}
         tableDataKeyList={TableHeader}
         collectionId={CollectionIDs.technologies}
         fieldsList={fieldList}
         formValidationSchema={{
-          field: TechValidation,
+          field: TechValidation
         }}
       />
     </div>

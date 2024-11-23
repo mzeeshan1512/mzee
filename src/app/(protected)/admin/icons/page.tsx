@@ -1,4 +1,5 @@
-"use client"
+/* eslint-disable @next/next/no-img-element */
+"use client";
 import React from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -15,21 +16,15 @@ const page = () => {
   const contentList: TableDataKeyList[] = [
     {
       title: "Title",
-      data_key: "title",
+      data_key: "title"
     },
     {
       title: "Icon",
       data_key: "",
-      cell: (item: IconsListingData|any) => {
-        return (
-          <img
-            src={item?.blob?.src?.url}
-            alt={item?.title}
-          />
-        );
-      },
-    },
-   
+      cell: (item: IconsListingData) => {
+        return <img src={item?.blob?.src?.url} alt={item?.title} />;
+      }
+    }
   ];
 
   return (
@@ -38,15 +33,15 @@ const page = () => {
         breadCrumbs={{
           parent: {
             title: "Icons",
-            link: adminRoutes.icons,
+            link: adminRoutes.icons
           },
-          childList: [],
+          childList: []
         }}
         tableDataKeyList={contentList}
         collectionId={CollectionIDs.icons}
         fieldsList={IconsFields}
         formValidationSchema={{
-          field:IconsValidation
+          field: IconsValidation
         }}
         showEditButton={false}
         showEyeIcon={false}
