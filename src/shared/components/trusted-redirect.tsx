@@ -68,7 +68,7 @@ const TrustedRedirect: React.FC<
     e.preventDefault();
     handleCopyClick(href!);
     if (isTrusted) {
-      // window?.open(href, target);
+      window?.open(href, target);
       return;
     }
     const validation = await validateURL(href!);
