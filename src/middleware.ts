@@ -15,11 +15,6 @@ export default async function middleware(req: NextRequest) {
       ip: req?.ip,
       hostname: nextUrl?.hostname,
   })
-  console.log({encryptedData},{obj:{
- ...req?.geo,
-      ip: req?.ip,
-      hostname: nextUrl?.hostname,
-  }})
    return NextResponse.next({
       headers: {
         "Set-Cookie": `${cookiesName.info}=${encodeURIComponent(
