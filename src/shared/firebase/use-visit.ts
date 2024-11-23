@@ -41,6 +41,7 @@ const saveVisit = async () => {
   deleteCookie(cookiesName.info);
   if (req) {
     req = decryptData(req!);
+    console.log({req})
   }
   if (req && Object.keys(req)?.length > 0) {
     const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
@@ -86,7 +87,7 @@ const saveVisit = async () => {
         publicKey
       );
     } catch (error) {
-      // console.log({ error, req });
+      console.log({ error, req });
     }
   }
 };
