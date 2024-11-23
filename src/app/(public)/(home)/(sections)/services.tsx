@@ -51,11 +51,10 @@ const Services = () => {
   const mediumDeviceMedia1024 = useMediaQuery("(max-width: 1024px)", true, {
     getInitialValueInEffect: false
   });
-  // console.log(mediumDeviceMedia1024);
   return (
     <SectionContainer
       id={sectionIds.services}
-      title={sectionIds.services}
+      title={"Your Vision, Our Expertise"}
       quotation="Transforming ideas into reality with expert development, automation, and IT solutions"
       className={
         " !bg-grid-pattern-light dark:!bg-grid-pattern-dark !bg-grid-size relative"

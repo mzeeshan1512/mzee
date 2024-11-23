@@ -3,6 +3,7 @@ import ShowIf from "@/shared/components/show-if";
 import Main from "./(sections)/main";
 import About from "./(sections)/about";
 import Services from "./(sections)/services";
+import Techs from "./(sections)/techs";
 
 export type ContentProps = {
   hide?: boolean;
@@ -19,6 +20,10 @@ const componentLists = [
   },
   {
     component: <Services />,
+    show: true
+  },
+  {
+    component: <Techs />,
     show: true
   }
 ];

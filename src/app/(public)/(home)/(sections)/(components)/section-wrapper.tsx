@@ -3,7 +3,7 @@ import ShowIf from "@/shared/components/show-if";
 
 export type SectionContainerProps = {
   id: string;
-  title: string;
+  title?: string;
   quotation?: string;
   children: React.ReactNode;
   containerProps?: React.ComponentProps<"div">;
@@ -35,19 +35,21 @@ const SectionContainer = ({
       <ShowIf conditionalRenderKey={CallBackComponent}>
         {CallBackComponent}
       </ShowIf>
-      <h1
-        {...titleProps}
-        data-aos="flip-up"
-        className={`text-center m-0 !text-[clamp(30px, 5vw, 2vw+60px)] capitalize ${
-          titleProps?.className || ""
-        }`}
-        style={{
-          fontSize: "clamp(25px, 4vw, 2vw + 45px)",
-          ...titleProps?.style
-        }}
-      >
-        <b>{title}</b>
-      </h1>
+      <ShowIf conditionalRenderKey={title}>
+        <h1
+          {...titleProps}
+          data-aos="flip-up"
+          className={`text-center m-0 !text-[clamp(30px, 5vw, 2vw+60px)] capitalize ${
+            titleProps?.className || ""
+          }`}
+          style={{
+            fontSize: "clamp(25px, 4vw, 2vw + 45px)",
+            ...titleProps?.style
+          }}
+        >
+          <b>{title}</b>
+        </h1>
+      </ShowIf>
       <ShowIf conditionalRenderKey={quotation}>
         <h5
           {...quotationProps}

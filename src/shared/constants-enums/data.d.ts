@@ -64,7 +64,7 @@ interface IconsListingData extends commonData {
 /* icons data types end */
 
 /* service data types start */
-interface ServicesListingData extends commonData {
+interface ServicesListingData extends commonData, IconsListingData {
   blob?: {
     label?: string;
     value?: {
@@ -93,51 +93,3 @@ type blobObj ={
   },
   directory?:string
 }  
-
-/* projects */
-type ProjectsBasicInfo= {
-  /* required */
-  title: string;
-  unique_identifier: string;
-  tech_stack: string;
-  description: string;
-  /* good to have */
-  my_role?: string;
-  github_url?: string;
-  web_preview?: string;
-  is_featured?: boolean;
-  /* optional */
-  demo_link?: string;
-  disable_demo?: boolean;
-  content_ownership?: string;
-  content_ownership_link?: string;
-}
-type ProjectImageGallery= {
-  banner_image:blobObj,
-  slider_images?:blobObj[]
-}
-
-type ProjectVideGallery= {
-  banner_video?:blobObj,
-  demo_video?:blobObj
-}
-
-interface ProjectsData extends commonData  {
-  basicInfo: ProjectsBasicInfo;
-  imageGallery:ProjectImageGallery;
-  videoGallery?:ProjectVideGallery,
-  detailedContent?:{content?:string}
-};
-
-interface LogsInfo{
-  city?:string,
-  country?:string,
-  region?:string,
-  ip?:string,
-  latitude?:string,
-  longitude?:string,
-  hostname?:string
-  date?:string,
-  time?:string,
-  modified_at?:string
-}
