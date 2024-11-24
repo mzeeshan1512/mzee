@@ -10,7 +10,7 @@ type linearGradientProps = {
   };
 } | null;
 
-type PartialProps =
+type PartialSvgGradientProps =
   | {
       children: React.ReactNode;
       path?: never; // `path` should not be defined if `children` is provided
@@ -20,7 +20,13 @@ type PartialProps =
       children?: never; // `children` should not be defined if `path` is provided
     };
 
-type Props = PartialProps & linearGradientProps & React.ComponentProps<"svg">;
+type SvgGradientProps = PartialSvgGradientProps &
+  linearGradientProps &
+  React.ComponentProps<"svg">;
+
+const RenderSvgAsDangerouslySetInnerHTML = (
+  props: React.ComponentProps<"svg">
+) => <svg {...props} />;
 
 const SVGGradientBinder = ({
   path,
@@ -29,7 +35,7 @@ const SVGGradientBinder = ({
   linearGradientProps,
   stopProps,
   ...svgProps
-}: Props) => {
+}: SvgGradientProps) => {
   return (
     <svg {...svgProps}>
       <ShowIf conditionalRenderKey={showLinearGradient}>
@@ -70,3 +76,7 @@ const SVGGradientBinder = ({
 };
 
 export default SVGGradientBinder;
+
+export { RenderSvgAsDangerouslySetInnerHTML };
+
+export type { linearGradientProps, PartialSvgGradientProps, SvgGradientProps };

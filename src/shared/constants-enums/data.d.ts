@@ -50,46 +50,78 @@ interface contact_form extends commonData {
 }
 
 /* icons data types start */
+interface blobSrc {
+  url: string;
+  type: string;
+}
+interface blobSvg {
+  code?: string;
+  props?: GenericObject;
+}
 interface IconsListingData extends commonData {
   blob: {
-    src?: string;
-    base64?: string;
-    svg?: {
-      code?: string;
-      props?: Record<string,any>;
-    };
+    src?: blobSrc;
+    svg?: blobSvg;
   };
   directory?: string;
 }
 /* icons data types end */
 
-/* service data types start */
-interface ServicesListingData extends commonData, IconsListingData {
-  blob?: {
+/* blob options start*/
+interface blobOption {
     label?: string;
     value?: {
-      base64?: string;
-      src?: {
-        type?:string,
-        url?:string
-      };
+      src?: blobSrc;
       id?: string;
-      svg?: any;
+      svg?: blobSvg;
     };
-  };
+}
+/* blob options end */
+
+/* service data types start */
+interface Services_TechsTools extends commonData {
+  blob?:blobOption
   description?: string;
+  category?:string
 }
 /* service data types end */
 
 type DataObj = AboutData &
   IconsListingData &
   contact_form &
-  ServicesListingData;
+  Services_TechsTools;
 
-type blobObj ={
-  src:{
-    type:string,
-    url:string
-  },
-  directory?:string
-}  
+/* projects */
+type ProjectsBasicInfo = {
+  /* required */
+  title: string;
+  unique_identifier: string;
+  tech_stack: string;
+  description: string;
+  /* good to have */
+  my_role?: string;
+  github_url?: string;
+  web_preview?: string;
+  is_featured?: boolean;
+  /* optional */
+  demo_link?: string;
+  disable_demo?: boolean;
+  content_ownership?: string;
+  content_ownership_link?: string;
+};
+type ProjectImageGallery = {
+  banner_image: IconsListingData;
+  slider_images?: IconsListingData[];
+};
+
+type ProjectVideGallery = {
+  banner_video?: IconsListingData;
+  demo_video?: IconsListingData;
+};
+
+interface ProjectsData extends commonData {
+  basicInfo: ProjectsBasicInfo;
+  imageGallery: ProjectImageGallery;
+  videoGallery?: ProjectVideGallery;
+  detailedContent?: { content?: string };
+}

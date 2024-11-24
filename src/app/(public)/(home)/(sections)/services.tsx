@@ -8,12 +8,11 @@ import ShowIf from "@/shared/components/show-if";
 import Carousel from "@/shared/components/carousel";
 
 type Props = {
-  data?: ServicesListingData[] | null;
+  data?: Services_TechsTools | null;
   toggleGradient?: boolean;
-  slideId?: number;
 };
 
-const ServiceCard = ({ data, slideId, toggleGradient }: Props) => {
+const ServiceCard = ({ data, toggleGradient }: Props) => {
   return (
     <div className="group flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border lg:border-none p-4 lg:p-0 w-full">
       <div className="flex justify-center" style={{ width: "6.75rem" }}>
@@ -22,9 +21,9 @@ const ServiceCard = ({ data, slideId, toggleGradient }: Props) => {
           height="4em"
           viewBox="0 0 24 24"
           linearGradientProps={{
-            id: `${slideId}`
+            id: data?.id
           }}
-          fill={toggleGradient ? "currentColor" : `url(#${slideId})`}
+          fill={toggleGradient ? "currentColor" : `url(#${data?.id})`}
         >
           <path d="M21 17.9995V19.9995H3V17.9995H21ZM17.4038 3.90332L22 8.49951L17.4038 13.0957L15.9896 11.6815L19.1716 8.49951L15.9896 5.31753L17.4038 3.90332ZM12 10.9995V12.9995H3V10.9995H12ZM12 3.99951V5.99951H3V3.99951H12Z" />
         </SVGGradientBinder>
@@ -35,13 +34,9 @@ const ServiceCard = ({ data, slideId, toggleGradient }: Props) => {
             toggleGradient ? "text-gradient" : "!text-inherit"
           }`}
         >
-          Eiusmod officia nostrud {slideId}
+          {data?.title}
         </h2>
-        <p>
-          Commodo eu fugiat quis ad nostrud mollit dolore reprehenderit
-          consequat dolor. Laboris consequat labore exercitation velit Lorem qui
-          aliquip pariatur Lorem. Tempor ut voluptate eu exercitation sint non.
-        </p>
+        <p>{data?.description}</p>
       </div>
     </div>
   );
@@ -68,15 +63,12 @@ const Services = () => {
         elseComponent={
           <div className="hidden lg:grid grid-cols-1 gap-4 gap-y-12 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[1, 2, 3, 4, 5].map((item, index) => (
-              <ServiceCard key={index} slideId={index} />
+              <ServiceCard key={index} />
             ))}
           </div>
         }
       >
         <Carousel
-          sliderContainerProps={{
-            className: ""
-          }}
           responsive={{
             desktop: {
               breakpoint: { max: 3000, min: 1024 },
@@ -91,9 +83,11 @@ const Services = () => {
               items: 1
             }
           }}
+          autoPlay
+          infinite
         >
           {[1, 2, 3, 4, 5].map((item, index) => (
-            <ServiceCard key={index} slideId={index} />
+            <ServiceCard key={index} />
           ))}
         </Carousel>
       </ShowIf>

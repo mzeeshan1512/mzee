@@ -29,7 +29,7 @@ const CarouselButton = ({
 const Carousel = ({
   responsive,
   autoPlay,
-  autoPlaySpeed,
+  autoPlaySpeed = 3000,
   children,
   draggable = true,
   infinite,
@@ -49,6 +49,7 @@ const Carousel = ({
   const [visibleItems, setVisibleItems] = useState<number>(1);
   const [dragStart, setDragStart] = useState<number | null>(null);
   const [dragOffset, setDragOffset] = useState<number>(0);
+  const [hover, toggleHover] = useState<boolean>(false);
 
   const slidesElement = useMemo(() => {
     return slides ? slides : children ? React?.Children?.toArray(children) : [];
@@ -75,14 +76,14 @@ const Carousel = ({
   useWindowEvent("resize", handleResize);
 
   useEffect(() => {
-    if (autoPlay && !isAnimating && !dragStart) {
+    if (autoPlay && !isAnimating && !dragStart && !hover) {
       const timer = setInterval(() => {
         handleNext();
       }, autoPlaySpeed);
 
       return () => clearInterval(timer);
     }
-  }, [autoPlay, autoPlaySpeed, isAnimating, dragStart]);
+  }, [autoPlay, autoPlaySpeed, isAnimating, dragStart, hover]);
 
   const handlePrev = () => {
     if (!isAnimating) {
@@ -120,6 +121,7 @@ const Carousel = ({
   };
 
   const handleDragEnd = () => {
+    toggleHover(false);
     if (!draggable || dragStart === null) return;
 
     const threshold = window.innerWidth * 0.2;
@@ -169,6 +171,7 @@ const Carousel = ({
         onTouchStart={handleDragStart}
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
+        onMouseOver={() => toggleHover(true)}
       >
         {slidesElement?.map((slide, index) => (
           <li
