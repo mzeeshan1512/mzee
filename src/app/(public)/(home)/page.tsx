@@ -4,6 +4,8 @@ import Main from "./(sections)/main";
 import About from "./(sections)/about";
 import Services from "./(sections)/services";
 import Techs from "./(sections)/techs";
+import Projects from "./(sections)/projects";
+import { ProjectInfoCard } from "@/shared/components/project-card";
 
 export type ContentProps = {
   hide?: boolean;
@@ -24,6 +26,10 @@ const componentLists = [
   },
   {
     component: <Techs />,
+    show: true
+  },
+  {
+    component: <Projects />,
     show: true
   }
 ];

@@ -1,12 +1,6 @@
 interface commonData {
   id?: string;
-  userId?: string;
-  edited_by?: string;
-  created_by?: string;
   title?: string;
-  is_archived?: boolean;
-  created_at?: any;
-  modified_at?: any;
 }
 
 /* about data types start */

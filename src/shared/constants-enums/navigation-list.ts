@@ -31,6 +31,11 @@ const navLinks: HeaderMenuList[] = [
     title:"Services",
     isStatic:true,
   },
+   {
+    link:sectionIds.tech,
+    title:"Tech & Tools",
+    isStatic:true,
+  },
   {
     link:sectionIds.projects,
     title:"Projects"

@@ -77,22 +77,9 @@ const About = () => {
             <Button className="bg-primary-gradient hover:bg-primary-hover-gradient p-3">
               Explore more
             </Button>
-            <LetsConnect />
+            <LetsConnect label="Get in Touch" />
           </div>
         </div>
-        {/* <Button
-          blendMode={BlendMode.GRADIENT}
-          className="bg-primary-gradient hover:bg-primary-hover-gradient mt-4"
-        >
-          Find out more 
-        </Button> */}
-        {/* <World
-          canvasClass="top-1/2"
-          containerProps={{
-            className: "!h-[85%] overflow-hidden",
-            style: { boxShadow: "0 7px 4px -8px currentColor" }
-          }}
-        /> */}
       </div>
       {/* exp counts */}
       <div className="grid grid-flow-row-dense  md:grid-flow-col-dense  gap-8 mt-4 pt-4">
