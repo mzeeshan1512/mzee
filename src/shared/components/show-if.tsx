@@ -24,6 +24,9 @@ const ShowIf = <T,>({
   elseCallBackMessage
 }: ShowIfProps<T>) => {
   const getElseComponent = () => {
+    if (!conditionalRenderKey) {
+      return null;
+    }
     if (elseComponent || elseCallBackMessage) {
       return elseComponent || elseCallBackMessage;
     }

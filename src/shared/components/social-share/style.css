@@ -20,9 +20,19 @@
   width: var(--icon-size);
 }
 
-.social-icons .icon:hover {
+.social-icons :hover .icon {
   color: var(--hover-color, inherit) !important;
   /* border-color: var(--hover-bg, transparent) !important; */
   border: none;
   background: var(--hover-bg, transparent) !important;
+}
+
+.social-icons .link-title {
+  background-color: transparent;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.social-icons a:hover .link-title  {
+   color: var(--hover-bg, --primary) !important;
 }

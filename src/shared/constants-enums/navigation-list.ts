@@ -50,27 +50,29 @@ const navLinks: HeaderMenuList[] = [
 
 const socialContact:SocialShareContent[] = [
   {
-    title: "linkedin",
+    title: process.env.NEXT_PUBLIC_LINKEDIN,
     icon: LinkedIn,
-    link: process.env.NEXT_PUBLIC_LINKEDIN,
+    link: `https://www.linkedin.com/in/${process.env.NEXT_PUBLIC_LINKEDIN}`,
     color:"#0077b5"
   },
   {
-    title: "github",
+    title: process.env.NEXT_PUBLIC_GITHUB,
     icon: GitHub,
-    link: process.env.NEXT_PUBLIC_GITHUB,
-    color:"linear-gradient(to right, #ffbf00, #cc0c40)"
+    link: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB}`,
+    color:"linear-gradient(to right, #ffbf00, #cc0c40)",
+    isPrimaryColorTitle:true
   },
   {
-    title: "email",
+    title: process.env.NEXT_PUBLIC_EMAIL,
     icon: Email,
-    link: process.env.NEXT_PUBLIC_EMAIL,
-     color:"linear-gradient(to right, #ffbf00, #cc0c40)"
+    link: `mailto:${process.env.NEXT_PUBLIC_EMAIL}`,
+    color:"linear-gradient(to right, #ffbf00, #cc0c40)",
+    isPrimaryColorTitle:true
   },
   {
-    title: "whatsapp",
+    title: process.env.NEXT_PUBLIC_WHATSAPP,
     icon: WhatsApp,
-    link: process.env.NEXT_PUBLIC_WHATSAPP,
+    link: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP}`,
     color:"rgb(37, 211, 102)"
   },
 ]

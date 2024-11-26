@@ -10,6 +10,7 @@ interface SocialShareContent {
   label?: string;
   color?: string;
   isTrusted?: boolean;
+  isPrimaryColorTitle?: boolean;
 }
 
 interface SocialShareProps {
@@ -21,25 +22,20 @@ const SocialIcons = ({
   size = 15,
   socialContact = [],
   linkProps,
+  showTitle,
+  className,
   ...rest
 }: SocialShareProps &
   ComponentProps<"div"> & {
     linkProps?: TrustedRedirectProps;
+    showTitle?: boolean;
   }) => {
   return (
-    <div className="social-icons" {...rest}>
+    <div className={`social-icons ${className || ""}`} {...rest}>
       {socialContact?.map((data, index) => (
         <TrustedRedirect
           {...linkProps}
           href={`${data?.link}`}
-          className={`icon mx-1 ${linkProps?.className || ""}`}
-          style={
-            {
-              "--icon-size": "2em",
-              "--hover-bg": data.color,
-              ...linkProps?.style
-            } as React.CSSProperties
-          }
           data-aos="zoom-in"
           data-aos-easing="ease-in-out"
           key={index}
@@ -50,7 +46,32 @@ const SocialIcons = ({
             process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true"
           }
         >
-          {<data.icon width={size} height={size} />}
+          <div
+            className={`icon`}
+            style={
+              {
+                "--icon-size": "2em",
+                "--hover-bg": data.color
+              } as React.CSSProperties
+            }
+          >
+            {<data.icon width={size} height={size} />}
+          </div>
+          {showTitle && (
+            <span
+              className="link-title"
+              style={
+                {
+                  "--icon-size": "2em",
+                  "--hover-bg": data?.isPrimaryColorTitle
+                    ? "var(--primary)"
+                    : data?.color
+                } as React.CSSProperties
+              }
+            >
+              {data?.title}
+            </span>
+          )}
         </TrustedRedirect>
       ))}
     </div>

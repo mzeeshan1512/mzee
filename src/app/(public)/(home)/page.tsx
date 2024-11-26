@@ -5,7 +5,7 @@ import About from "./(sections)/about";
 import Services from "./(sections)/services";
 import Techs from "./(sections)/techs";
 import Projects from "./(sections)/projects";
-import { ProjectInfoCard } from "@/shared/components/project-card";
+import ContactUs from "./(sections)/contact-us";
 
 export type ContentProps = {
   hide?: boolean;
@@ -30,6 +30,10 @@ const componentLists = [
   },
   {
     component: <Projects />,
+    show: true
+  },
+  {
+    component: <ContactUs />,
     show: true
   }
 ];
