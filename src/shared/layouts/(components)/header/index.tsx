@@ -41,7 +41,6 @@ const Header = ({
 
   const classToggler = () => {
     const value = window?.scrollY;
-    const classesToAdd = ["glassomorhpic-effect", "fixed"];
     if (value > 0) {
       if (matchMedia && centeredMode && floatingMenu) {
         if (!hideNavOnScroll) {
@@ -52,10 +51,14 @@ const Header = ({
           }, 200);
         }
       } else {
-        document.querySelector(".header")?.classList.add(...classesToAdd);
+        document
+          .querySelector(".header")
+          ?.classList.add("glassomorhpic-effect");
       }
     } else {
-      document.querySelector(".header")?.classList.remove(...classesToAdd);
+      document
+        .querySelector(".header")
+        ?.classList.remove("glassomorhpic-effect");
     }
   };
 
@@ -96,7 +99,7 @@ const Header = ({
       <header
         {...restHeaderProps}
         id={restHeaderProps.id || "header"}
-        className={`header w-screen inset-x-0 top-0 z-50 h-20 transition-all duration-200 ease-in-out bg-transparent select-none ${
+        className={`header w-full sticky inset-x-0 top-0 z-50 h-20 transition-all duration-200 ease-in-out bg-transparent select-none ${
           menuProps?.verticalLayout ? "sticky" : ""
         }  ${restHeaderProps?.className || ""} ${
           centeredMode || floatingMenu
