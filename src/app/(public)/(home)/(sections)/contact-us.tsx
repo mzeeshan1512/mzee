@@ -5,7 +5,7 @@ import {
   socialContact
 } from "@/shared/constants-enums/navigation-list";
 import SocialIcons from "@/shared/components/social-share";
-import ContactForm from "./(components)/contact-form";
+import ContactForm from "../../../../shared/components/contact-form";
 
 const ContactUs = () => {
   return (

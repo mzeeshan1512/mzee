@@ -5,7 +5,7 @@ import { validateField, validationSchema } from "./error.utils";
 import Button from "@/shared/components/button";
 
 interface FormData {
-  [field: string]: string | null;
+  [field: string]: string | undefined;
   // name: string;
   // email: string;
   // contact: string;
@@ -56,11 +56,11 @@ const formField = [
 
 const ContactForm = () => {
   const [formState, setFormState] = useState<FormData>({
-    name: null,
-    email: null,
-    contact: null,
-    message: null,
-    subject: null
+    name: undefined,
+    email: undefined,
+    contact: undefined,
+    message: undefined,
+    subject: undefined
   });
   const [errors, setErrors] = useState<Errors>({});
 
@@ -101,7 +101,7 @@ const ContactForm = () => {
           inputProps={{
             ...item,
             onChange: handleChange,
-            value: formState[item?.name]!
+            value: formState[item?.name]! ?? ""
           }}
           label={item.label}
           className={item.className}

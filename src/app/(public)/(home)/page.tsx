@@ -14,27 +14,27 @@ export type ContentProps = {
 const componentLists = [
   {
     component: <Main />,
-    show: true
+    show: false
   },
   {
     component: <About />,
-    show: true
+    show: false
   },
   {
     component: <Services />,
-    show: true
+    show: false
   },
   {
     component: <Techs />,
-    show: true
+    show: false
   },
   {
     component: <Projects />,
-    show: true
+    show: false
   },
   {
     component: <ContactUs />,
-    show: true
+    show: false
   }
 ];
 

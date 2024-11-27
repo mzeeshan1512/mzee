@@ -41,6 +41,7 @@ const Header = ({
 
   const classToggler = () => {
     const value = window?.scrollY;
+    const classesToAdd = ["glassomorhpic-effect", "fixed"];
     if (value > 0) {
       if (matchMedia && centeredMode && floatingMenu) {
         if (!hideNavOnScroll) {
@@ -51,12 +52,10 @@ const Header = ({
           }, 200);
         }
       } else {
-        document.querySelector(".fixed")?.classList.add("glassomorhpic-effect");
+        document.querySelector(".header")?.classList.add(...classesToAdd);
       }
     } else {
-      document
-        .querySelector(".fixed")
-        ?.classList.remove("glassomorhpic-effect");
+      document.querySelector(".header")?.classList.remove(...classesToAdd);
     }
   };
 
@@ -97,7 +96,7 @@ const Header = ({
       <header
         {...restHeaderProps}
         id={restHeaderProps.id || "header"}
-        className={`header w-screen fixed inset-x-0 top-0 z-50 h-20 transition-all duration-200 ease-in-out bg-transparent select-none ${
+        className={`header w-screen inset-x-0 top-0 z-50 h-20 transition-all duration-200 ease-in-out bg-transparent select-none ${
           menuProps?.verticalLayout ? "sticky" : ""
         }  ${restHeaderProps?.className || ""} ${
           centeredMode || floatingMenu
@@ -193,10 +192,9 @@ const Header = ({
       <ShowIf
         conditionalRenderKey={
           mediumDeviceMedia &&
-          (!appIcon?.hideIcon ||
-            (!menuProps?.hideMenu &&
-              menuProps?.menuList &&
-              menuProps?.menuList?.length > 0))
+          !menuProps?.hideMenu &&
+          menuProps?.menuList &&
+          menuProps?.menuList?.length > 0
         }
       >
         <MobileMenu
