@@ -14,9 +14,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           }
         }}
       >
-        <div className="container mx-auto w-calc-10 p-4 min-h-[calc(100vh-160px)] border">
-          {children}
-        </div>
+        {children}
       </HorizontalLayout>
     </>
   );

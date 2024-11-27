@@ -124,7 +124,7 @@ const Tabs: React.FC<TabProps> = ({
   }
 
   return (
-    <div>
+    <>
       <nav
         {...navContainerProps}
         className={`flex justify-between items-center ${
@@ -150,6 +150,7 @@ const Tabs: React.FC<TabProps> = ({
               className={`
                 cursor-pointer 
                 ${getActiveTab?.tabId === tab.tabId ? activeTabClass : ""}
+                ${listItemProps?.className || ""}
                 ${tab.disabled ? "opacity-50 cursor-not-allowed" : ""}
               `}
               onClick={() => handleTabClick(tab, index)}
@@ -168,7 +169,7 @@ const Tabs: React.FC<TabProps> = ({
       >
         {getActiveTab?.tabContent}
       </ShowIf>
-    </div>
+    </>
   );
 };
 

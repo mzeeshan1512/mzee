@@ -15,35 +15,18 @@ interface ExperienceData extends CommonAbout {
   end_date?: string;
   currently?: boolean;
 }
-interface SkillsData {
-  category: {
-    value: string;
-    label: string;
-  };
-  skills: {
-    value: string;
-    label: string;
-  }[];
-}
+
 interface Courses_Certification {
   platform?: string;
   verificationId?: string;
   prefix?: string;
 }
+
 type AboutData = CommonAbout &
   ExperienceData &
   SkillsData &
   Courses_Certification;
-/* about data types end */
-interface contact_form extends commonData {
-  name: string;
-  email: string;
-  message: string;
-  contact_number: string;
-  subject: string;
-}
 
-/* icons data types start */
 interface blobSrc {
   url: string;
   type: string;
@@ -59,9 +42,7 @@ interface IconsListingData extends commonData {
   };
   directory?: string;
 }
-/* icons data types end */
 
-/* blob options start*/
 interface blobOption {
     label?: string;
     value?: {
@@ -70,20 +51,12 @@ interface blobOption {
       svg?: blobSvg;
     };
 }
-/* blob options end */
 
-/* service data types start */
 interface Services_TechsTools extends commonData {
   blob?:blobOption
   description?: string;
   category?:string
 }
-/* service data types end */
-
-type DataObj = AboutData &
-  IconsListingData &
-  contact_form &
-  Services_TechsTools;
 
 /* projects */
 type ProjectsBasicInfo = {

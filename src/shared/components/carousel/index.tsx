@@ -247,3 +247,5 @@ const Carousel = ({
 };
 
 export default Carousel;
+
+export { CarouselButton };
