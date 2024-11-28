@@ -6,6 +6,7 @@ const TabContentContainer = dynamic(
   () => import("./(components-sections)/tab-content-container")
 );
 const Overview = dynamic(() => import("./(components-sections)/overview"));
+const Experience = dynamic(() => import("./(components-sections)/experience"));
 
 enum TabList {
   Overview = "overview",
@@ -29,7 +30,7 @@ const tabList = [
     tabId: TabList.Experience,
     tabContent: (
       <TabContentContainer title={TabList.Experience}>
-        {TabList.Experience}
+        <Experience />
       </TabContentContainer>
     ),
     title: TabList.Experience
@@ -69,17 +70,17 @@ const page = () => {
       <Tabs
         tabsList={tabList}
         navContainerProps={{
-          className: "md:w-60 md:mt-10"
+          className: "sm:sticky sm:top-[95px] sm:z-10 md:w-60 md:mt-10"
         }}
         listContainerProps={{
           className:
-            "md:flex-col border border-b-none md:border-none sm:rounded"
+            "md:flex-col border border-b-none md:border-none sm:rounded !gap-2 md:!gap-4"
         }}
         listItemProps={{
           className:
-            "capitalize bg-[#F9FAFB] md:border-r-3 md:border-primary-500 dark:bg-[#1d1d1e] p-4 md:rounded shadow-[inset_0_-3px_0px_rgba(0,0,0,0.3)] md:shadow-[0px_5px_10px_rgba(0,0,0,0.2),inset_-3px_0px_0px_rgba(0,0,0,0.3)]"
+            "capitalize bg-[#F9FAFB] md:border-r-3 md:border-primary-500 dark:bg-[#1d1d1e] p-2 md:p-4 md:rounded shadow-[inset_0_-3px_0px_rgba(0,0,0,0.3)] md:shadow-[0px_5px_10px_rgba(0,0,0,0.2),inset_-3px_0px_0px_rgba(0,0,0,0.3)] hover:text-secondary-400 hover:!shadow-[inset_0_-3px_0px_var(--primary)] hover:md:!shadow-[inset_-3px_0px_0px_var(--primary)]"
         }}
-        activeTabClass="!bg-white md:!bg-[var(--section-odd-bg)] !text-primary-500 !border-none !shadow-[inset_0_-3px_0px_var(--primary)] md:!shadow-[inset_-3px_0px_0px_var(--primary)]"
+        activeTabClass="!bg-white md:!bg-[var(--section-odd-bg)] !text-secondary-500 !border-none !shadow-[inset_0_-3px_0px_var(--primary)] md:!shadow-[inset_-3px_0px_0px_var(--primary)]"
       />
     </div>
   );

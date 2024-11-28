@@ -1,24 +1,49 @@
-import { chatLogo } from "@/shared/app-config";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import { chatLogo } from "@/shared/app-config";
+import SocialIcons from "@/shared/components/social-share";
+import { socialContact } from "@/shared/constants-enums/navigation-list";
 
 const Overview = () => {
   return (
     <div className="grid grid-flow-row md:grid-cols-3 gap-8 relative min-h-[200px] me-1">
       <div className="order-1 md:order-2">
-        <div className="p-2 md:sticky md:top-0 overflow-hidden">
-          <Image
-            src={chatLogo}
-            alt={process.env.NEXT_PUBLIC_APP_Name || ""}
-            className="p-2 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 aspect-square transition-all ease-in-out hover:scale-110"
-          />
-          <h1 className="text-[clamp(15px,2vw,2vw+15px)] text-center">
-            {process.env.NEXT_PUBLIC_APP_Name}
-          </h1>
-          <p className="text-center text-gray-400">Software Engineer</p>
+        <div className="p-2 mx-auto md:sticky md:top-0 md:inset-x-0 overflow-hidden">
+          <div className="flex flex-col gap-3 justify-center w-full items-center">
+            <Image
+              src={chatLogo}
+              alt={process.env.NEXT_PUBLIC_APP_Name || ""}
+              className="w-3/4 h-3/4 p-2 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 aspect-square transition-all ease-in-out hover:scale-110"
+              data-aos="zoom-in"
+              data-aos-duration="1000"
+            />
+            <h1 className="text-[clamp(15px,2vw,2vw+15px)] text-center">
+              <b
+                className="text-gradient"
+                data-aos="zoom-in"
+                data-aos-duration="1000"
+              >
+                {process.env.NEXT_PUBLIC_APP_Name}
+              </b>
+            </h1>
+            <p
+              className="text-center !text-gray-400"
+              data-aos="zoom-in"
+              data-aos-duration="1000"
+            >
+              Software Engineer
+            </p>
+            <div data-aos="zoom-in" data-aos-duration="1000">
+              <SocialIcons socialContact={socialContact} />
+            </div>
+          </div>
         </div>
       </div>
-      <article className="order-2 md:order-1 col-span-2">
+      <article
+        className="order-2 md:order-1 md:col-span-2"
+        data-aos="zoom-in"
+        data-aos-duration="1000"
+      >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam volutpat
         lectus erat, in eleifend ipsum facilisis et. Aenean lacinia dignissim
         ante. Maecenas ac mauris odio. Vivamus volutpat mauris at justo sagittis

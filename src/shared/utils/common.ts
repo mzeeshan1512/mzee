@@ -2,7 +2,7 @@ const isNotNullValue = <T>(
   condition: boolean | string | number | T | T[]
 ): boolean => {
   if (Array.isArray(condition)) {
-    return condition.length > 0;
+    return condition?.length > 0;
   } else if (typeof condition === "object" && condition !== null) {
     return Object.keys(condition).length > 0;
   }

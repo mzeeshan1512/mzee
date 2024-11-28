@@ -23,11 +23,13 @@ const TabContentContainer = ({
       })
     : children;
   return (
-    <section className="relative flex-1 drop-shadow-md dark:shadow-white p-4 rounded">
+    <section className="relative flex-1 drop-shadow-md dark:shadow-white p-8 rounded">
       <ShowIf conditionalRenderKey={title}>
-        <h1 className="capitalize text-[clamp(15px,2vw,2vw+15px)] ">{title}</h1>
+        <h1 className="capitalize text-[clamp(15px,2vw,2vw+15px)] text-primary-500">
+          <b className="text-gradient">{title}</b>
+        </h1>
       </ShowIf>
-      <div className="h-[calc(100vh-265px)] overflow-auto ">
+      <div className="md:h-[calc(100vh-305px)] overflow-auto mt-2">
         {enhancedChildren}
       </div>
       <ShowIf conditionalRenderKey={hideNavIcons}>

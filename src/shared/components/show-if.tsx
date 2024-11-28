@@ -24,15 +24,14 @@ const ShowIf = <T,>({
   elseCallBackMessage
 }: ShowIfProps<T>) => {
   const getElseComponent = () => {
-    if (!conditionalRenderKey) {
-      return null;
-    }
     if (elseComponent || elseCallBackMessage) {
       return elseComponent || elseCallBackMessage;
     }
-    const type = getTypeOfItem(conditionalRenderKey);
-    if (["array", "object"]?.includes(type)) {
-      return "Current item is either empty or contains invalid entries";
+    if (conditionalRenderKey) {
+      const type = getTypeOfItem(conditionalRenderKey);
+      if (["array", "object"]?.includes(type)) {
+        return "Current item is either empty or contains invalid entries";
+      }
     }
     return null;
   };
