@@ -10,10 +10,17 @@ interface CommonAbout extends commonData {
   description?: string;
   organization?: string;
 }
+
+interface ExpTimelineFormat {
+  start_date?: string;
+  end_date?: string;
+  title?:string
+}
 interface ExperienceData extends CommonAbout {
   start_date?: string;
   end_date?: string;
   currently?: boolean;
+  timeLine?:ExpTimelineFormat[]
 }
 
 interface Courses_Certification {

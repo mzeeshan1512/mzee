@@ -1,5 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import { TabList as list } from "@/shared/components/tabs";
 // dynamic loading
 const Tabs = dynamic(() => import("@/shared/components/tabs"));
 const TabContentContainer = dynamic(
@@ -7,6 +8,9 @@ const TabContentContainer = dynamic(
 );
 const Overview = dynamic(() => import("./(components-sections)/overview"));
 const Experience = dynamic(() => import("./(components-sections)/experience"));
+const Certifications = dynamic(
+  () => import("./(components-sections)/certifications")
+);
 
 enum TabList {
   Overview = "overview",
@@ -16,7 +20,7 @@ enum TabList {
   Trainings = "trainings"
 }
 
-const tabList = [
+const tabList: list[] = [
   {
     tabId: TabList.Overview,
     tabContent: (
@@ -38,11 +42,12 @@ const tabList = [
   {
     tabId: TabList.Certifications,
     tabContent: (
-      <TabContentContainer title={TabList.Overview}>
-        {TabList.Certifications}
+      <TabContentContainer title={TabList.Certifications}>
+        <Certifications />
       </TabContentContainer>
     ),
-    title: TabList.Certifications
+    title: TabList.Certifications,
+    disabled: true
   },
   {
     tabId: TabList.Education,

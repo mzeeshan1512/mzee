@@ -6,13 +6,13 @@ import ParticleAnimation from "@/shared/components/particles-animation";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import { Spotlight } from "@/shared/components/spot-light";
 import Counter from "@/shared/components/counter";
-import Button from "@/shared/components/button";
 /* images */
 import { aboutPng } from "@/shared/app-config";
 import Earth from "@/assets/content/earth.jpeg";
 /* section component */
 import SectionContainer from "./(components)/section-wrapper";
 import LetsConnect from "./(components)/lets-connect";
+import Link from "next/link";
 
 const About = () => {
   return (
@@ -74,9 +74,12 @@ const About = () => {
             }}
           />
           <div className="flex gap-5">
-            <Button className="bg-primary-gradient hover:bg-primary-hover-gradient p-3">
+            <Link
+              href="/about"
+              className="bg-primary-gradient hover:bg-primary-hover-gradient p-3 rounded-lg text-white"
+            >
               Explore more
-            </Button>
+            </Link>
             <LetsConnect label="Get in Touch" />
           </div>
         </div>

@@ -6,7 +6,7 @@ import { socialContact } from "@/shared/constants-enums/navigation-list";
 
 const Overview = () => {
   return (
-    <div className="grid grid-flow-row md:grid-cols-3 gap-8 relative min-h-[200px] me-1">
+    <>
       <div className="order-1 md:order-2">
         <div className="p-2 mx-auto md:sticky md:top-0 md:inset-x-0 overflow-hidden">
           <div className="flex flex-col gap-3 justify-center w-full items-center">
@@ -84,7 +84,7 @@ const Overview = () => {
         Integer a sollicitudin libero. Pellentesque porta lobortis arcu eu
         tincidunt. Duis vel quam libero
       </article>
-    </div>
+    </>
   );
 };
 
