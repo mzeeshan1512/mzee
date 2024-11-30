@@ -1,15 +1,15 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { TabList as list } from "@/shared/components/tabs";
+import { CollectionIDs } from "@/shared/firebase/collection-ids";
 // dynamic loading
 const Tabs = dynamic(() => import("@/shared/components/tabs"));
 const TabContentContainer = dynamic(
   () => import("./(components-sections)/tab-content-container")
 );
 const Overview = dynamic(() => import("./(components-sections)/overview"));
-const Experience = dynamic(() => import("./(components-sections)/experience"));
-const Certifications = dynamic(
-  () => import("./(components-sections)/certifications")
+const TanContent = dynamic(
+  () => import("./(components-sections)/tabs-content")
 );
 
 enum TabList {
@@ -34,7 +34,7 @@ const tabList: list[] = [
     tabId: TabList.Experience,
     tabContent: (
       <TabContentContainer title={TabList.Experience}>
-        <Experience />
+        <TanContent id={CollectionIDs.experience} />
       </TabContentContainer>
     ),
     title: TabList.Experience
@@ -43,7 +43,7 @@ const tabList: list[] = [
     tabId: TabList.Certifications,
     tabContent: (
       <TabContentContainer title={TabList.Certifications}>
-        <Certifications />
+        <TanContent id={CollectionIDs.courses_certification} />
       </TabContentContainer>
     ),
     title: TabList.Certifications,
@@ -53,7 +53,7 @@ const tabList: list[] = [
     tabId: TabList.Education,
     tabContent: (
       <TabContentContainer title={TabList.Education}>
-        {TabList.Education}
+        <TanContent id={CollectionIDs.education} />
       </TabContentContainer>
     ),
     title: TabList.Education
@@ -62,7 +62,7 @@ const tabList: list[] = [
     tabId: TabList.Trainings,
     tabContent: (
       <TabContentContainer title={TabList.Trainings}>
-        {TabList.Trainings}
+        <TanContent id={CollectionIDs.training} />
       </TabContentContainer>
     ),
     title: TabList.Trainings

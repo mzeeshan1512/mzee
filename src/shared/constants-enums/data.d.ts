@@ -16,7 +16,7 @@ interface ExpTimelineFormat {
   end_date?: string;
   title?:string
 }
-interface ExperienceData extends CommonAbout {
+interface AboutContentDataProps extends CommonAbout {
   start_date?: string;
   end_date?: string;
   currently?: boolean;
@@ -30,7 +30,7 @@ interface Courses_Certification {
 }
 
 type AboutData = CommonAbout &
-  ExperienceData &
+  AboutContentDataProps &
   SkillsData &
   Courses_Certification;
 

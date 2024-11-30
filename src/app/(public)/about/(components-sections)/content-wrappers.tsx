@@ -1,5 +1,9 @@
 import Image from "next/image";
 import React from "react";
+import ShowIf from "@/shared/components/show-if";
+import TrustedRedirect from "@/shared/components/trusted-redirect";
+import { formatDate } from "@/shared/utils/date";
+import { getEndDate } from "./utils";
 
 type ListWrapperProps<T> = {
   listProps?: React.ComponentProps<"ul">;
@@ -86,7 +90,7 @@ const StickyImageWrapper = ({
             src={imgSrc}
             alt={imgAlt || process.env.NEXT_PUBLIC_APP_Name || ""}
             className={
-              "w-full p-2 rounded-full aspect-square drop-shadow-[-1px_2px_5px_var(--secondary)] dark:drop-shadow-[-1px_2px_5px_var(--primary)] " +
+              "w-full p-2 aspect-square drop-shadow-[-1px_2px_5px_var(--secondary)] dark:drop-shadow-[-1px_2px_5px_var(--primary)] " +
               (imageClassName || "")
             }
           />
@@ -96,6 +100,81 @@ const StickyImageWrapper = ({
   );
 };
 
-export { ListWrapper, StickyImageWrapper };
+const renderTimeLineFormat = (timeline: ExpTimelineFormat[]) => {
+  return (
+    <ul className="ps-5">
+      {timeline?.map((item, index) => (
+        <li key={index} className="text-[clamp(15px,1.1vw,1.1vw+15px)]">
+          <div className="flex flex-col ps-4 py-2 relative">
+            <div
+              className={`absolute h-3 w-3 rounded-full top-[14px] -left-1 ${
+                item?.end_date?.toLowerCase() === "present"
+                  ? "bg-primary-500"
+                  : "bg-slate-600"
+              }`}
+            />
+            <div className="absolute h-[95%] top-[14px] left-[0.1rem] border-s-2 border-spacing-2 border-slate-600" />
+            <h1>{item?.title}</h1>
+            <small className="text-sm text-slate-400">
+              <time>{formatDate(item?.start_date!, "MMM-YYYY")}</time>
+              <span className="mx-1">-</span>
+              <time>{getEndDate(item)}</time>
+            </small>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const renderTrustedDomain = (item: AboutContentDataProps) =>
+  item?.link ? (
+    <div className="hover-bottom-outline">
+      <TrustedRedirect
+        href={item?.link || undefined}
+        className={`!font-normal !text-red-500 hover:!text-transparent hover:!font-semibold`}
+      >
+        {item?.organization}
+      </TrustedRedirect>
+    </div>
+  ) : (
+    <span className="!text-red-500">{item?.organization}</span>
+  );
+
+const RenderListItemContent = (listItemContent: AboutContentDataProps) => {
+  return (
+    <>
+      <div className="flex justify-between items-center flex-wrap gap-2">
+        <ShowIf
+          conditionalRenderKey={listItemContent?.timeLine?.length! > 0}
+          elseComponent={<span>{listItemContent?.title}</span>}
+        >
+          <div className="text-current">
+            {renderTrustedDomain(listItemContent)}
+          </div>
+        </ShowIf>
+        <div className="text-slate-400">
+          <time>{formatDate(listItemContent?.start_date!, "MMM-YYYY")}</time>
+          <span className="mx-1">-</span>
+          <time>{getEndDate(listItemContent)}</time>
+        </div>
+      </div>
+      <ShowIf
+        conditionalRenderKey={listItemContent?.timeLine?.length! > 0}
+        elseComponent={renderTrustedDomain(listItemContent)}
+      >
+        {renderTimeLineFormat(listItemContent?.timeLine!)}
+      </ShowIf>
+    </>
+  );
+};
+
+export {
+  ListWrapper,
+  StickyImageWrapper,
+  renderTrustedDomain,
+  RenderListItemContent,
+  renderTimeLineFormat
+};
 
 export type { ListWrapperProps, StickyImageWrapperProps };
