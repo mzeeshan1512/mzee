@@ -58,7 +58,7 @@ type Header = React.ComponentProps<"header"> & showFloatingStickyNav & {
   hideNavOnScroll?:boolean
   appIcon?: AppIconProps;
   menuProps?: MenuProps;
-  callBackComponent?: React.ReactNode;
+  callBackComponent?: React.ReactNode | JSX.Element;
   
 }
 

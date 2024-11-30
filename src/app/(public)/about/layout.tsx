@@ -1,3 +1,4 @@
+import ContactModal from "@/shared/components/contact-form/contact-modal";
 import HorizontalLayout from "@/shared/layouts/horizontal-layout";
 import React from "react";
 
@@ -11,7 +12,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           },
           headerContainerProps: {
             className: "w-calc-10 p-4"
-          }
+          },
+          callBackComponent: <ContactModal />
         }}
       >
         {children}
