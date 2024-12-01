@@ -8,6 +8,7 @@ import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import { useMediaQuery } from "@/shared/hooks/use-media-query";
 import ShowIf from "@/shared/components/show-if";
 import Carousel from "@/shared/components/carousel";
+import Link from "next/link";
 
 const Projects = () => {
   const projects = [
@@ -79,7 +80,7 @@ const Projects = () => {
       title="Turning Ideas into Reality"
       quotation="From vision to fruition, we make it happen"
       containerProps={{
-        className: "pt-4 mt-4"
+        className: "pt-4 mt-4 mb-8"
       }}
     >
       <ShowIf
@@ -122,6 +123,12 @@ const Projects = () => {
           ))}
         </Carousel>
       </ShowIf>
+      <Link
+        href="/projects"
+        className="bg-primary-gradient hover:bg-primary-hover-gradient p-3 rounded-lg text-white"
+      >
+        Explore more
+      </Link>
     </SectionContainer>
   );
 };

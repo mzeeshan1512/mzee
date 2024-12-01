@@ -15,7 +15,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           },
           callBackComponent: (
             <div className="flex-1 grid grid-cols-2 items-center">
-              <h1 className="text-2xl text-right font-bold">About</h1>
+              <h1 className="text-2xl text-right font-bold">Projects</h1>
               <div className="flex justify-end">
                 <ContactModal />
               </div>
