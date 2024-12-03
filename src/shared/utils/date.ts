@@ -23,14 +23,15 @@ const getValidDateValue = (start: any, end: any) => {
   let e = end;
   if (start) {
     if (typeof start === "object" && start?.hasOwnProperty("date")) {
-      s = formatDate(start?.date, start?.format);
+      s = new Date(start?.date);
     } else {
       s = new Date(start);
     }
   }
   if (end) {
     if (typeof end === "object" && end?.hasOwnProperty("date")) {
-      e = formatDate(end?.date, end?.format);
+      e = new Date(end?.date)
+      ;
     } else e = new Date(e);
   }
   return {

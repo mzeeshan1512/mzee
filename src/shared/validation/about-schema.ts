@@ -4,86 +4,44 @@ import { StringError } from "@/shared/constants/regex";
 import { getValidDateValue } from "@/shared/utils/date";
 import { CollectionIDs } from "../constants/collection-ids";
 
-// const commonValidation = {
-//   currently: yup.boolean(),
-//   start_date: yup
-//     .mixed()
-//     .test(
-//       "startBeforeEnd",
-//       "Starting date/year must be before ending date/year",
-//       function (obj: any) {
-//         const { end_date, currently }: any = this.parent;
-//         const { s, e } = getValidDateValue(obj, end_date);
-//         if (!s) {
-//           return false;
-//         }
-//         if (s && e && !currently) {
-//           return s < e;
-//         }
-//         return true;
-//       }
-//     )
-//     .required("Start date/year is required"),
-//   end_date: yup
-//     .mixed()
-//     .test(
-//       "endAfterStart",
-//       "Ending date/year must be after starting date/year",
-//       function (obj: any) {
-//         const start = this.parent.start_date;
-//         const currentlyWorking = this.parent.currently;
-//         if (!currentlyWorking) {
-//           const { s, e } = getValidDateValue(start, obj);
-//           if (!e) {
-//             return false;
-//           }
-//           if (s) {
-//             return s < e;
-//           }
-//         }
-//         return true;
-//       }
-//     )
-//     .required("End date/year is required"),
-// };
-
 const commonValidation = {
   currently: yup.boolean(),
-
   start_date: yup
     .mixed()
     .test(
       "startBeforeEnd",
       "Starting date/year must be before ending date/year",
-      function (start_date: any) {
-        const { end_date, currently } = this.parent;
-
-        // Ensure dates are valid
-        const { s, e } = getValidDateValue(start_date, end_date);
-        if (!s) return false; // Start date must be valid
-        if (currently) return true; // Skip comparison if currently working
-        if (s && e) return s < e; // Start must be before end
-
-        return true; // Default pass
+      function (obj: any) {
+        const { end_date, currently }: any = this.parent;
+        const { s, e } = getValidDateValue(obj, end_date);
+        if (!s) {
+          return false;
+        }
+        if (s && e && !currently) {
+          return s < e;
+        }
+        return true;
       }
     )
     .required("Start date/year is required"),
-
   end_date: yup
     .mixed()
     .test(
       "endAfterStart",
       "Ending date/year must be after starting date/year",
-      function (end_date: any) {
-        const { start_date, currently } = this.parent;
-
-        // Ensure dates are valid
-        const { s, e } = getValidDateValue(start_date, end_date);
-        if (!e) return false; // End date must be valid
-        if (currently) return true; // Skip comparison if currently working
-        if (s && e) return s < e; // End must be after start
-
-        return true; // Default pass
+      function (obj: any) {
+        const start = this.parent.start_date;
+        const currentlyWorking = this.parent.currently;
+        if (!currentlyWorking) {
+          const { s, e } = getValidDateValue(start, obj);
+          if (!e) {
+            return false;
+          }
+          if (s) {
+            return s < e;
+          }
+        }
+        return true;
       }
     )
     .required("End date/year is required"),
