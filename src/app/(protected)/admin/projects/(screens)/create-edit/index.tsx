@@ -9,8 +9,7 @@ import {
 } from "@/shared/firebase-services/useCollections";
 import {
   MultiValueWithIcon,
-  OptionWithIcon,
-  SingleValueWithIcon
+  OptionWithIcon
 } from "@/shared/components/central-fields-control-unit/select/components";
 import TabContentLoader from "@/shared/components/loaders-spinners/tab-content-loader";
 import {
@@ -231,7 +230,7 @@ const CreateEdit = (props: Props) => {
     return (
       tech?.map((item: Services_TechsTools) => ({
         value: { ...item?.blob?.value },
-        label: item.title,
+        label: item.title || item.blob?.label,
         tech_id: item.id
       })) || []
     );
