@@ -97,31 +97,31 @@ const Bio = () => {
       if (value) {
         return {
           ...value,
-          bio: atob(value?.bio) || null,
+          bio: decodeURIComponent(escape(atob(value?.bio))) || null
         };
       }
     }
     return null;
   }, [data]);
- 
+
   return (
     <>
       <ContentHeader
         breadCrumbs={{
           parent: {
             title: "About",
-            link: "",
+            link: ""
           },
           childList: [
             {
               title: "Bio",
-              link: "/admin/about",
+              link: "/admin/about"
             },
             {
               title: editMode ? Mode?.edit : "View",
-              link: "",
-            },
-          ],
+              link: ""
+            }
+          ]
         }}
         buttonControl={{
           formId: editMode ? "bio-form" : null,
@@ -132,7 +132,7 @@ const Bio = () => {
             if (!editMode) {
               navigate.push(`${adminRoutes.about}?mode=${Mode.edit}`);
             }
-          },
+          }
         }}
         CallBackButtonComponent={
           <Button
@@ -140,7 +140,7 @@ const Bio = () => {
             onClick={() =>
               setConfirmationModal({
                 id: myInfo?.id,
-                open: true,
+                open: true
               })
             }
             disabled={!myInfo}
@@ -160,11 +160,14 @@ const Bio = () => {
           validationSchema={BioSchema}
           isInProcess={isProcessing || deletingInfo}
           defaultValues={myInfo}
-          onSaveCallBack={(payload:any) => {
+          onSaveCallBack={(payload: any) => {
             mutate({
-              data: { ...payload, bio: btoa(payload?.bio) },
+              data: {
+                ...payload,
+                bio: btoa(unescape(encodeURIComponent(payload?.bio)))
+              },
               collectionId: CollectionIDs.myInfo,
-              dataId: myInfo?.id,
+              dataId: myInfo?.id
             });
           }}
         />
@@ -177,7 +180,7 @@ const Bio = () => {
           onSuccess={() =>
             deleteInfo({
               collectionType: CollectionIDs.myInfo,
-              id: confirmationModal?.id!,
+              id: confirmationModal?.id!
             })
           }
         />

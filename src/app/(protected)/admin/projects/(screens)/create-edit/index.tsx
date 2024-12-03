@@ -8,8 +8,9 @@ import {
   useGetDocuments,
 } from "@/shared/firebase-services/useCollections";
 import {
+  MultiValueWithIcon,
   OptionWithIcon,
-  SingleValueWithIcon,
+  SingleValueWithIcon
 } from "@/shared/components/central-fields-control-unit/select/components";
 import TabContentLoader from "@/shared/components/loaders-spinners/tab-content-loader";
 import {
@@ -17,13 +18,13 @@ import {
   basicOptionalFields,
   imageGalleryFields,
   videoGalleryFields,
-  detailedContentFields,
+  detailedContentFields
 } from "./list";
 import ContentForm from "./form-content";
 import {
   basicInfoSchema,
   imageGallerySchema,
-  videoGallerySchema,
+  videoGallerySchema
 } from "./validations";
 import { tabIds } from "..";
 import { getValidObjectKeysLength } from "@/shared/utils/data-comparison";
@@ -46,7 +47,7 @@ const Content = ({
   navigate,
   techOptions,
   projectInfo,
-  projectProgress,
+  projectProgress
 }: Props) => {
   const basicRequiredFields: formFieldsList[] = useMemo(
     () => [
@@ -60,34 +61,36 @@ const Content = ({
           fieldKey: "title",
           replaceSpecialCharacter: {
             char: /[^a-zA-Z0-9]+/g,
-            replacedChar: "-",
-          },
-        },
+            replacedChar: "-"
+          }
+        }
       },
       {
         type: "text",
         name: "tech_stack",
         label: "Technology Stack",
         required: true,
+        isMulti: true,
         options: techOptions,
         customComponent: {
           Option: OptionWithIcon,
-          SingleValue: SingleValueWithIcon,
-        },
-        impactedKey: {
-          key: "unique_identifier",
-          fieldKey: "tech_stack",
-          mode: "append",
-          nestedFieldKey: "label",
-        },
+          MultiValue: MultiValueWithIcon
+        }
+        // impactedKey: {
+        //   key: "unique_identifier",
+        //   fieldKey: "tech_stack",
+        //   mode: "append",
+        //   nestedFieldKey: "label"
+        // }
       },
       {
         type: "text",
         name: "unique_identifier",
         label: "Unique Identifier",
+        value: new Date()?.getMilliseconds()?.toString(),
         required: true,
-        disabled: true,
-      },
+        disabled: true
+      }
     ],
     [techOptions]
   );
@@ -95,7 +98,7 @@ const Content = ({
   const basicInfoFieldList: formListObject = {
     "Required Fields": basicRequiredFields,
     "Prefilled Field/Good to have": basicPrefilledFields,
-    "Optional Field": basicOptionalFields,
+    "Optional Field": basicOptionalFields
   };
 
   const tabData: { fields: any; schema: any } = useMemo(() => {
@@ -130,24 +133,24 @@ const Content = ({
     {
       title: "Basic Info",
       id: tabIds.basicInfo,
-      asterisk: true,
+      asterisk: true
     },
     {
       title: "Images Gallery",
       id: tabIds.imageGallery,
       disabled: !docId,
-      asterisk: true,
+      asterisk: true
     },
     {
       title: "Video Gallery",
       id: tabIds.videoGallery,
-      disabled: !docId,
+      disabled: !docId
     },
     {
       title: "Details/Content",
       id: tabIds.detailedContent,
-      disabled: !docId,
-    },
+      disabled: !docId
+    }
   ];
 
   const getUrl = (tabId: any) => {
@@ -159,29 +162,31 @@ const Content = ({
   };
 
   const TabInfo = useMemo(() => {
-    let result:any = {}
+    let result: any = {};
     const tabs: any = Object?.values(tabIds);
     let currentTabIndex = tabs?.indexOf(tabId) + 1;
     if (currentTabIndex > 0 && currentTabIndex <= tabs?.length - 1) {
-      result.id= tabs[currentTabIndex];
+      result.id = tabs[currentTabIndex];
     } else {
-      result.id= tabs[0];
+      result.id = tabs[0];
     }
-    let progress = 0
-    let keyCount = tabData?.fields?.length
-    if(projectInfo && projectInfo?.hasOwnProperty(tabId)){
+    let progress = 0;
+    let keyCount = tabData?.fields?.length;
+    if (projectInfo && projectInfo?.hasOwnProperty(tabId)) {
       const { progressCount, keysCount } = getValidObjectKeysLength(
         projectInfo[tabId!]
       );
       progress = progressCount;
-      if(!keyCount){
-        keyCount = keysCount
+      if (!keyCount) {
+        keyCount = keysCount;
       }
     }
     const percentageProgress = (progress / keyCount) * 100;
-    result.progress = Math.min(Math.max(percentageProgress, 0), 100)?.toFixed(2);
-    return result
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    result.progress = Math.min(Math.max(percentageProgress, 0), 100)?.toFixed(
+      2
+    );
+    return result;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabId]);
 
   if (docId && !tabId) {
@@ -198,7 +203,12 @@ const Content = ({
         navigate.push(getUrl(tab?.id));
       }}
       headerCallBackComponent={
-        <CircularProgressBar width={50} height={50} borderWidth={5} progress={+projectProgress?.toFixed(1)!}/>
+        <CircularProgressBar
+          width={50}
+          height={50}
+          borderWidth={5}
+          progress={+projectProgress?.toFixed(1)!}
+        />
       }
     >
       <ContentForm
@@ -207,7 +217,7 @@ const Content = ({
         fieldsList={tabData?.fields}
         validationSchema={tabData?.schema}
         formRowClassName="mb-1"
-        nextTab={docId ?getUrl(TabInfo.id):`${adminRoutes.projects}`}
+        nextTab={docId ? getUrl(TabInfo.id) : `${adminRoutes.projects}`}
         progress={TabInfo.progress}
         defaultValues={projectInfo}
       />
@@ -219,10 +229,10 @@ const CreateEdit = (props: Props) => {
   const { isLoading, data: tech } = useGetDocuments(CollectionIDs.technologies);
   const techOptions = useMemo(() => {
     return (
-      tech?.map((item: ServicesListingData) => ({
+      tech?.map((item: Services_TechsTools) => ({
         value: { ...item?.blob?.value },
         label: item.title,
-        tech_id: item.id,
+        tech_id: item.id
       })) || []
     );
   }, [tech]);
@@ -237,8 +247,8 @@ const CreateEdit = (props: Props) => {
     let totalKeys = Object.keys(tabIds).length;
     if (projectInfo) {
       Object.keys(projectInfo)?.forEach((key: any) => {
-        if(tabIds?.hasOwnProperty(key)){
-          totalKeys -=1
+        if (tabIds?.hasOwnProperty(key)) {
+          totalKeys -= 1;
         }
         let { progressCount, keysCount } = getValidObjectKeysLength(
           projectInfo[key]
@@ -249,13 +259,13 @@ const CreateEdit = (props: Props) => {
     }
     const percentageProgress = (progress / totalKeys) * 100;
     return Math.min(Math.max(percentageProgress, 0), 100)?.toFixed(2);
-     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectInfo]);
 
   if (projectLoading || isLoading) {
     return <TabContentLoader />;
   }
-  
+
   return (
     <Content
       {...props}

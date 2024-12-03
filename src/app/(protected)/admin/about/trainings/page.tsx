@@ -16,28 +16,26 @@ const page = () => {
     {
       data_key: "title",
       title: "Course",
-      isSortable: true,
+      isSortable: true
     },
     {
       data_key: "organization",
       title: "Institute",
-      isSortable: true,
+      isSortable: true
     },
     {
       data_key: "end_date",
       title: "Timeline",
-      cell: (item: ExperienceData) => {
+      cell: (item: AboutContentDataProps) => {
         return (
           <span>
             {dateToParsed(item?.start_date!)} -{" "}
-            {item?.currently
-              ? "Present"
-              : dateToParsed(item?.end_date!)}
+            {item?.currently ? "Present" : dateToParsed(item?.end_date!)}
           </span>
         );
       },
-      isSortable: true,
-    },
+      isSortable: true
+    }
   ];
 
   return (

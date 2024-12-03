@@ -1,8 +1,9 @@
 import {
   MenuProps,
+  MultiValueProps,
   OptionProps,
   SingleValueProps,
-  components,
+  components
 } from "react-select";
 
 const CustomMenu = (props: MenuProps<any>) => {
@@ -43,4 +44,21 @@ const SingleValueWithIcon = (props: SingleValueProps<any>) => {
   );
 };
 
-export { OptionWithIcon, CustomMenu, SingleValueWithIcon };
+const MultiValueWithIcon = (props: MultiValueProps<any>) => {
+  const { data } = props;
+  return (
+    <components.MultiValue {...props}>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={data?.value?.base64 || data?.value?.src?.url || data?.value?.src}
+          alt={data?.label}
+          style={{ marginRight: 10, width: 20, height: 20 }}
+        />
+        {data?.label}
+      </div>
+    </components.MultiValue>
+  );
+};
+
+export { OptionWithIcon, CustomMenu, SingleValueWithIcon, MultiValueWithIcon };

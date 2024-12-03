@@ -32,7 +32,8 @@ const Input = React.forwardRef((props: FormProps, ref) => {
     "email",
     "number",
     "numeric",
-    "tel",
+    "date",
+    "tel"
   ];
 
   const type: inputType | undefined = props?.type;

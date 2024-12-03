@@ -20,12 +20,12 @@ const page = () => {
     {
       data_key: "title",
       title: "Title",
-      isSortable: true,
+      isSortable: true
     },
     {
       data_key: "organization",
       title: "Organization",
-      cell: (item: ExperienceData) => {
+      cell: (item: AboutContentDataProps) => {
         return (
           <Link
             className="general-hover-cursor"
@@ -35,16 +35,16 @@ const page = () => {
             {item?.organization}
           </Link>
         );
-      },
+      }
     },
     {
       data_key: "description",
-      title: "Description",
+      title: "Description"
     },
     {
       data_key: "start_date",
       title: "Timeline",
-      cell: (item: ExperienceData) => {
+      cell: (item: AboutContentDataProps) => {
         return (
           <span>
             {dateToParsed(item?.start_date!)} -{" "}
@@ -52,8 +52,8 @@ const page = () => {
           </span>
         );
       },
-      isSortable: true,
-    },
+      isSortable: true
+    }
   ];
 
   return (

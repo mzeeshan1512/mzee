@@ -80,10 +80,10 @@ const AdminAboutNavList: HeaderMenuList[] = [
     title: "Experience",
     link: adminAboutPageRoutes.experience,
   },
-  {
-    title: "Skills",
-    link: adminAboutPageRoutes.skills,
-  },
+  // {
+  //   title: "Skills",
+  //   link: adminAboutPageRoutes.skills,
+  // },
   {
     title: "Courses & Certifications",
     link: adminAboutPageRoutes.courses_certification,

@@ -226,15 +226,16 @@ const FieldForms = ({
 
   const handleMutation = async (data: any) => {
     setISDisabled(false);
-    if (onSaveCallBack) {
-      onSaveCallBack(data);
-    } else {
-      mutate({
-        collectionId: collectionId,
-        dataId: dataId,
-        data: data
-      });
-    }
+    console.log({ data });
+    // if (onSaveCallBack) {
+    //   onSaveCallBack(data);
+    // } else {
+    //   mutate({
+    //     collectionId: collectionId,
+    //     dataId: dataId,
+    //     data: data
+    //   });
+    // }
   };
 
   const watchAllFields = watch();

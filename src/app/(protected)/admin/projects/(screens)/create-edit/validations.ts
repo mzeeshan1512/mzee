@@ -5,7 +5,7 @@ import { StringError } from "@/shared/constants/regex";
 const basicInfoSchema = yup.object().shape({
   /* required */
   title: yup.string().typeError(StringError).required("Title is required"),
-  tech_stack: yup.object().required("Tech stack is required"),
+  tech_stack: yup.array().required("Tech stack is required"),
   unique_identifier: yup
     .string()
     .typeError(StringError)

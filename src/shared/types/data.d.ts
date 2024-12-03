@@ -16,20 +16,10 @@ interface CommonAbout extends commonData {
   description?: string;
   organization?: string;
 }
-interface ExperienceData extends CommonAbout {
+interface AboutContentDataProps extends CommonAbout {
   start_date?: string;
   end_date?: string;
   currently?: boolean;
-}
-interface SkillsData {
-  category: {
-    value: string;
-    label: string;
-  };
-  skills: {
-    value: string;
-    label: string;
-  }[];
 }
 interface Courses_Certification {
   platform?: string;
@@ -37,9 +27,9 @@ interface Courses_Certification {
   prefix?: string;
 }
 type AboutData = CommonAbout &
-  ExperienceData &
-  SkillsData &
+  AboutContentDataProps &
   Courses_Certification;
+
 /* about data types end */
 interface contact_form extends commonData {
   name: string;
@@ -65,26 +55,29 @@ interface IconsListingData extends commonData {
   };
   directory?: string;
 }
-/* icons data types end */
 
-/* service data types start */
-interface ServicesListingData extends commonData {
-  blob?: {
+interface blobOption {
     label?: string;
     value?: {
       src?: blobSrc;
       id?: string;
       svg?: blobSvg;
     };
-  };
+}
+/* icons data types end */
+
+/* service data types start */
+interface Services_TechsTools extends commonData {
+  blob?: blobOption;
   description?: string;
+  category?:string
 }
 /* service data types end */
 
 type DataObj = AboutData &
   IconsListingData &
   contact_form &
-  ServicesListingData;
+  Services_TechsTools;
 
 type blobObj = {
   src: {

@@ -37,7 +37,7 @@ const ServicesPage = () => {
     {
       data_key: "svg",
       title: "Svg",
-      cell: (item: ServicesListingData) => {
+      cell: (item: Services_TechsTools) => {
         return (
           <img src={item?.blob?.value?.src?.url!} alt={item?.blob?.label!} />
         );

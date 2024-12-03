@@ -1,4 +1,19 @@
 import { format } from "date-fns";
+
+const getDateIndependentOfTimeZone = (dateInput?: string | Date): string => {
+  // If dateInput is provided, use it; otherwise, default to the current date
+  const date = dateInput 
+    ? typeof dateInput === "string" 
+      ? new Date(dateInput) 
+      : dateInput
+    : new Date();
+
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const day = String(date.getUTCDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}T00:00:00Z`;
+};
 const formatDate = (date: any, dateFormat: string) => {
   return format(date, dateFormat);
 };
@@ -102,5 +117,6 @@ export {
     getDateFromMilliseconds, 
     getDateTimeString, 
     getValidDateValue,
-    getGreetingAndDateTime
+    getGreetingAndDateTime,
+    getDateIndependentOfTimeZone
 }
