@@ -56,8 +56,8 @@ const getDataKeyObjectFromArray = (
   }
   array?.map((item: any) => {
     if (item.options) {
-      if (item.isMulti) obj[item[key]] = item?.value || [];
-      else obj[item[key]] = item?.value || null;
+      /* if (item.isMulti) obj[item[key]] = item?.value || null;
+      else */ obj[item[key]] = item?.value || null;
     } else if (item?.type === "switch" || item?.type === "check"  || item?.type === "radio") {
       obj[item[key]] = item?.checked || false;
     } else obj[item[key]] = item?.value || "";

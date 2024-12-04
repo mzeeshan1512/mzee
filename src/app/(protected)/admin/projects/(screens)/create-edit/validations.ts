@@ -14,6 +14,7 @@ const basicInfoSchema = yup.object().shape({
     .string()
     .typeError(StringError)
     .required("Unique identifier is required"),
+  project_category:yup.object().required("Project Category is required"),  
   /* prefilled */
   my_role: yup.string().nullable(),
   github_url: yup.string().url().nullable(),

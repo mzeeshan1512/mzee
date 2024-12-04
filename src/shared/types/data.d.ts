@@ -98,7 +98,8 @@ type ProjectsBasicInfo = {
   my_role?: string;
   github_url?: string;
   web_preview?: string;
-  is_featured?: boolean;
+  // is_featured?: boolean;
+  project_category?:selectObject,
   /* optional */
   demo_link?: string;
   disable_demo?: boolean;

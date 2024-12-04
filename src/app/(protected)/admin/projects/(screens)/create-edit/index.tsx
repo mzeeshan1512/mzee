@@ -17,7 +17,8 @@ import {
   basicOptionalFields,
   imageGalleryFields,
   videoGalleryFields,
-  detailedContentFields
+  detailedContentFields,
+  optionsProjectCategoryList
 } from "./list";
 import ContentForm from "./form-content";
 import {
@@ -71,6 +72,9 @@ const Content = ({
         required: true,
         isMulti: true,
         options: techOptions,
+        defaultValue: null,
+        value: null,
+        isClearable: true,
         customComponent: {
           Option: OptionWithIcon,
           MultiValue: MultiValueWithIcon
@@ -83,12 +87,25 @@ const Content = ({
         // }
       },
       {
+        name: "project_category",
+        label: "Project Category",
+        required: true,
+        options: optionsProjectCategoryList,
+        defaultValue: optionsProjectCategoryList[1],
+        value: optionsProjectCategoryList[1],
+        isClearable: true
+      } as any,
+      {
         type: "text",
         name: "unique_identifier",
         label: "Unique Identifier",
-        value: new Date()?.getMilliseconds()?.toString(),
+        value: new Date()
+          .toLocaleDateString()
+          ?.replaceAll(",", "")
+          .replaceAll(" ", "-"),
         required: true,
-        disabled: true
+        disabled: true,
+        colClassName: "d-none"
       }
     ],
     [techOptions]

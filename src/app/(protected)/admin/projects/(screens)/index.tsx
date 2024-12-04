@@ -14,20 +14,24 @@ import { EditIcon, Eye, EyeSlash, Trash } from "@/shared/icons/common";
 import InfoModal from "@/shared/components/modal/info";
 import ScreenLoader from "@/shared/components/loaders-spinners/screen-loader";
 import { useDeleteDocument } from "@/shared/firebase-services/useCollections";
+import {
+  optionsProjectCategoryList,
+  ProjectCategoryList
+} from "./create-edit/list";
 const DataList = dynamic(
   () => import("@/shared/components/data-table/data-list"),
   { ssr: true }
 );
 const CreateEdit = dynamic(() => import("./create-edit"), {
   ssr: false,
-  loading: () => <TabContentLoader />,
+  loading: () => <TabContentLoader />
 });
 
 export const tabIds = {
   basicInfo: "basicInfo",
   imageGallery: "imageGallery",
   videoGallery: "videoGallery",
-  detailedContent: "detailedContent",
+  detailedContent: "detailedContent"
 };
 
 const ProjectViews = () => {
@@ -76,7 +80,7 @@ const ProjectViews = () => {
       open: true,
       id: item?.id!,
       title: item?.title!,
-      directory: paths,
+      directory: paths
     });
   };
 
@@ -89,11 +93,14 @@ const ProjectViews = () => {
     },
     {
       title: "Featured",
-      data_key: "basicInfo.is_featured",
+      data_key: "basicInfo.project_category.value",
       cell: (item: ProjectsData) => {
         return (
           <Toggler
-            value={item.basicInfo.is_featured}
+            value={
+              item.basicInfo.project_category.value ===
+              ProjectCategoryList.featured
+            }
             name={item.id + "is_featured"}
             onChange={() =>
               mutate({
@@ -103,7 +110,11 @@ const ProjectViews = () => {
                   ...item,
                   basicInfo: {
                     ...item.basicInfo,
-                    is_featured: !item.basicInfo.is_featured
+                    project_category:
+                      item.basicInfo.project_category.value ===
+                      ProjectCategoryList.featured
+                        ? optionsProjectCategoryList?.[1]
+                        : optionsProjectCategoryList?.[0]
                   }
                 }
               })
@@ -206,13 +217,13 @@ const ProjectViews = () => {
             breadCrumbs={{
               parent: {
                 title: "Projects",
-                link: "",
+                link: ""
               },
               childList: [
                 {
-                  title: "List",
-                },
-              ],
+                  title: "List"
+                }
+              ]
             }}
             buttonControl={{
               onClick: () => {
@@ -221,7 +232,7 @@ const ProjectViews = () => {
                 );
               },
               content: "Add",
-              icon: "add",
+              icon: "add"
             }}
           />
           <DataList
@@ -241,7 +252,7 @@ const ProjectViews = () => {
             deleteDoc({
               collectionType: CollectionIDs.projects,
               id: confirmationModal?.id!,
-              directory: confirmationModal?.directory!,
+              directory: confirmationModal?.directory!
             })
           }
         />
