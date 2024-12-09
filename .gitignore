@@ -1,5 +1,5 @@
 
-# dependencies
+# dependencies test build
 /node_modules
 /.pnp
 .pnp.js
@@ -36,3 +36,4 @@ package-lock.json*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
