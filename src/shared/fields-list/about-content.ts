@@ -22,24 +22,24 @@ const ExperienceFieldsList: formFieldsList[] = [
     name: "link",
     placeholder: "Company Link",
     label: "Company Link",
-    required: true,
+    // required: true,
     col: 12
   },
   {
     type: "date-time",
     name: "start_date",
-    placeholder: "MM-YYYY",
+    placeholder: "MMM-YYYY",
     label: "Start Date",
     col: 6,
-    dateFormat: "MM-YYYY"
+    dateFormat: "MMM-YYYY"
   },
   {
     type: "date-time",
     name: "end_date",
-    placeholder: "MM-YYYY",
+    placeholder: "MMM-YYYY",
     label: "End Date",
     col: 6,
-    dateFormat: "MM-YYYY",
+    dateFormat: "MMM-YYYY",
     watchedKey: "currently"
   },
   {
@@ -153,33 +153,33 @@ const CoursesAndCertifications: formFieldsList[] = [
     type: "text",
     name: "verificationId",
     label: "Verification Code",
-    required: true,
+    // required: true,
     col: 6
   },
   {
     type: "text",
     name: "link",
     label: "Verification Link",
-    required: true,
+    // required: true,
     col: 6
   },
   {
     type: "date-time",
     name: "start_date",
-    placeholder: "MM-YYYY",
+    placeholder: "MMM-YYYY",
     label: "Start Date",
     col: 6,
-    dateFormat: "MM-YYYY",
-    required: true
+    dateFormat: "MMM-YYYY"
+    // required: true
   },
   {
     type: "date-time",
     name: "end_date",
-    placeholder: "MM-YYYY",
+    placeholder: "MMM-YYYY",
     label: "End Date",
     col: 6,
-    dateFormat: "MM-YYYY",
-    required: true
+    dateFormat: "MMM-YYYY"
+    // required: true
   }
 ];
 
@@ -202,26 +202,26 @@ const TrainingsField: formFieldsList[] = [
     type: "text",
     name: "link",
     label: "Verification Link",
-    required: true,
+    // required: true,
     col: 6
   },
   {
     type: "date-time",
     name: "start_date",
-    placeholder: "MM-YYYY",
+    placeholder: "MMM-YYYY",
     label: "Start Date",
     col: 6,
-    dateFormat: "MM-YYYY",
-    required: true
+    dateFormat: "MMM-YYYY"
+    // required: true
   },
   {
     type: "date-time",
     name: "end_date",
-    placeholder: "MM-YYYY",
+    placeholder: "MMM-YYYY",
     label: "End Date",
     col: 6,
-    dateFormat: "MM-YYYY",
-    required: true
+    dateFormat: "MMM-YYYY"
+    // required: true
   }
 ];
 

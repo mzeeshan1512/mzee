@@ -11,18 +11,9 @@ const AdminContentController = dynamic(
 );
 
 const page = () => {
-  const TableHeader: TableDataKeyList[] = [
-    {
-      data_key: "title",
-      title: "Course",
-      isSortable: true,
-    },
-    {
-      data_key: "organization",
-      title: "Institute",
-      isSortable:true
-    },
-  ];
+  const TableHeader: TableDataKeyList[] = [{ data_key: "title", title: "Course" }, { data_key: "organization", title: "Institute" }];
+      // isSortable: true,
+      // isSortable:true
 
   return (
     <AdminContentController

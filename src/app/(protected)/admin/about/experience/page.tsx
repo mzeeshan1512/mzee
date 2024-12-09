@@ -20,7 +20,7 @@ const page = () => {
     {
       data_key: "title",
       title: "Title",
-      isSortable: true
+      // isSortable: true
     },
     {
       data_key: "organization",

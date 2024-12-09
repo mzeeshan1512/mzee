@@ -15,7 +15,7 @@ const commonValidation = {
         if (currently) {
           return true;
         }
-        return start_date < end_date;
+        return start_date <= end_date;
       }
     ),
   end_date: yup
@@ -28,7 +28,7 @@ const commonValidation = {
         if (currently) {
           return true;
         }
-        return start_date < end_date;
+        return start_date <= end_date;
       }
     )
 };
@@ -44,12 +44,9 @@ const ExperienceValidation = yup.object().shape({
     .typeError(StringError)
     .required("Organization name is required.")
     .min(3, "Organization name  must contain atleast 3 characters"),
-  link: yup
-    .string()
-    .url()
-    .typeError(StringError)
-    .required("Organization web-link is required."),
-  ...commonValidation,
+  link: yup.string().url().typeError(StringError),
+  // .required("Organization web-link is required."),
+  ...commonValidation
 });
 
 // main skills

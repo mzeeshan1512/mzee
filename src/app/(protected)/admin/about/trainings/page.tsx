@@ -16,12 +16,12 @@ const page = () => {
     {
       data_key: "title",
       title: "Course",
-      isSortable: true
+      // isSortable: true
     },
     {
       data_key: "organization",
       title: "Institute",
-      isSortable: true
+      // isSortable: true
     },
     {
       data_key: "end_date",
@@ -34,7 +34,7 @@ const page = () => {
           </span>
         );
       },
-      isSortable: true
+      // isSortable: true
     }
   ];
 
