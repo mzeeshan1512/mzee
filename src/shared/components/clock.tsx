@@ -18,7 +18,7 @@ const GreetingClock = () => {
       <div
         className="d-flex align-items-center flex-wrap justify-content-center"
         style={{
-          gap: "4px 8px",
+          gap: "4px 8px"
         }}
       >
         <h5
@@ -27,15 +27,18 @@ const GreetingClock = () => {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             margin: 0,
-            lineHeight: 1.3,
+            lineHeight: 1.3
           }}
         >
           {dateTime.greeting},
         </h5>
         <h6
-          className="text-gradient-effect m-0"
+          className="m-0"
           style={{
-            lineHeight: 1.3,
+            background: dateTime.color,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            lineHeight: 1.3
           }}
         >
           {dateTime.date}

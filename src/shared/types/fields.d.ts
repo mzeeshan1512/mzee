@@ -1,5 +1,4 @@
 import { ComponentProps } from "react";
-import { DatePickerProps } from "react-datepicker";
 
 type FunctionsProps = {
   onChange?: (...args: any) => void;
@@ -10,6 +9,35 @@ type FunctionsProps = {
   clearErrors?: (...args: any) => void;
   getValues?: (...args: any) => void;
 };
+
+type DateFormat =
+  | 'YYYY'
+  | 'MM'
+  | 'MMM'
+  | 'DD'
+  | 'DD-MM'
+  | 'MM-YYYY'
+  | 'MMM-YYYY'
+  | 'YYYY-MM'
+  | 'YYYY-MMM'
+  | 'YYYY-MM-DD'
+  | 'YYYY-MMM-DD'
+  | 'DD/MM/YYYY'
+  | 'DD/MMM/YYYY'
+  | 'MM-DD-YYYY'
+  | 'MMM-DD-YYYY'
+  | 'YYYY/MM/DD'
+  | 'YYYY/MMM/DD'
+  | 'YYYY-MM-DD HH:mm'
+  | 'YYYY-MMM-DD HH:mm'
+  | 'YYYY-MM-DD hh:mm A'
+  | 'YYYY-MMM-DD hh:mm A'
+  | 'YYYY-MM-DD HH:mm:ss'
+  | 'YYYY-MMM-DD HH:mm:ss'
+  | 'DD/MM/YYYY HH:mm'
+  | 'DD/MMM/YYYY HH:mm'
+  | 'MM-DD-YYYY hh:mm A'
+  | 'MMM-DD-YYYY hh:mm A';
 
 type inputType =
   | "text"
@@ -25,9 +53,9 @@ type inputType =
   | "password"
   | "checkbox"
   | "file"
-  | "date"
   | "drop-zone-file"
-  | "rich-text";
+  | "rich-text"
+  | "date-time";
 
 interface CommonFieldProps extends FunctionsProps {
   required?: boolean;
@@ -42,6 +70,7 @@ interface CommonFieldProps extends FunctionsProps {
   type?: inputType;
   defaultValue?: any;
   value?: any;
+  dateFormat?:DateFormat | []
 }
 
 type InputProps = ComponentProps<"input"> &
@@ -175,7 +204,6 @@ type formFieldsList = {
   colClassName?: string;
 } & CommonFieldProps &
   SelectProps &
-  DatePickerProps &
   RichTextProps &
   InputProps &
   filePickerProps &
@@ -221,5 +249,4 @@ type FormProps = { progress?: number } & CommonInputProps &
   ErrorProps &
   errorObj &
   SelectProps &
-  DatePickerProps &
   filePickerProps;

@@ -6,7 +6,7 @@ import { CollectionIDs } from "@/shared/constants/collection-ids";
 import { adminAboutPageRoutes, adminRoutes } from "@/routes";
 import { ExperienceFieldsList } from "@/shared/fields-list/about-content";
 import { ExperienceValidation } from "@/shared/validation/about-schema";
-import { dateToParsed } from "@/shared/utils/date";
+import {  } from "@/shared/utils/date";
 const AdminContentController = dynamic(
   () =>
     import(
@@ -47,8 +47,8 @@ const page = () => {
       cell: (item: AboutContentDataProps) => {
         return (
           <span>
-            {dateToParsed(item?.start_date!)} -{" "}
-            {item.currently ? "Present" : dateToParsed(item?.end_date!)}
+            {(item?.start_date!)} -{" "}
+            {item.currently ? "Present" : (item?.end_date!)}
           </span>
         );
       },

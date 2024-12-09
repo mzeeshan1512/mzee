@@ -49,13 +49,13 @@ const registrationForm: formFieldsList[] = [
     required: true,
     col: 6,
   },
-  {
-    type: "date",
-    name: "dob",
-    placeholder: "DD/MM/YYY",
-    label: "Date of Birth",
-    col: 6,
-  },
+  // {
+  //   type: "text",
+  //   name: "dob",
+  //   placeholder: "DD/MM/YYY",
+  //   label: "Date of Birth",
+  //   col: 6,
+  // },
 ];
 
 const loginForm: formFieldsList[] = [

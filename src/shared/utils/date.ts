@@ -1,72 +1,3 @@
-import { format } from "date-fns";
-
-const getDateIndependentOfTimeZone = (dateInput?: string | Date): string => {
-  // If dateInput is provided, use it; otherwise, default to the current date
-  const date = dateInput 
-    ? typeof dateInput === "string" 
-      ? new Date(dateInput) 
-      : dateInput
-    : new Date();
-
-  const year = date.getUTCFullYear();
-  const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-based
-  const day = String(date.getUTCDate()).padStart(2, '0');
-
-  return `${year}-${month}-${day}T00:00:00Z`;
-};
-const formatDate = (date: any, dateFormat: string) => {
-  return format(date, dateFormat);
-};
-
-const getValidDateValue = (start: any, end: any) => {
-  let s = start;
-  let e = end;
-  if (start) {
-    if (typeof start === "object" && start?.hasOwnProperty("date")) {
-      s = new Date(start?.date);
-    } else {
-      s = new Date(start);
-    }
-  }
-  if (end) {
-    if (typeof end === "object" && end?.hasOwnProperty("date")) {
-      e = new Date(end?.date)
-      ;
-    } else e = new Date(e);
-  }
-  return {
-    s,
-    e,
-  };
-};
-
-const dateToParsed = (
-  dateToBeParsed:
-    | string
-    | {
-        date: string;
-        format: string;
-      }
-) => {
-  if (typeof dateToBeParsed === "object") {
-    if (dateToBeParsed?.date === "") {
-      return "Present";
-    }
-    return formatDate(dateToBeParsed?.date, dateToBeParsed?.format);
-  }
-  if (dateToBeParsed === "") {
-    return "Present";
-  }
-  return new Date(dateToBeParsed)?.toDateString();
-};
-
-const getDateFromMilliseconds = (timestamp?: any) => {
-  const milliseconds =
-    timestamp?.seconds * 1000 + Math.floor(timestamp?.nanoseconds / 1e6);
-  const newDate = new Date(milliseconds);
-  return `${newDate.toDateString()}, ${newDate.toLocaleTimeString()}`;
-};
-
 const getDateTimeString = (dateTime: any) => {
   const date = new Date(dateTime);
   return `${date?.toDateString()} - ${date?.toTimeString()}`;
@@ -113,11 +44,6 @@ const getGreetingAndDateTime=(showSeconds?:boolean)=> {
 }
 
 export {
-    dateToParsed,
-    formatDate, 
-    getDateFromMilliseconds, 
     getDateTimeString, 
-    getValidDateValue,
-    getGreetingAndDateTime,
-    getDateIndependentOfTimeZone
+    getGreetingAndDateTime
 }

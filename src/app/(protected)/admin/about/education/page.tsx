@@ -5,7 +5,6 @@ import { adminAboutPageRoutes, adminRoutes } from "@/routes";
 import { CollectionIDs } from "@/shared/constants/collection-ids";
 import { EducationFieldsList } from  "@/shared/fields-list/about-content";;
 import { EducationValidation, EducationArrayValidation } from "@/shared/validation/about-schema";
-import { dateToParsed } from "@/shared/utils/date";
 const AdminContentController = dynamic(
   () => import("@/app/(protected)/admin/(components)/admin-content-controller"),
   { ssr: false }
@@ -29,8 +28,8 @@ const page = () => {
       cell: (item: AboutContentDataProps) => {
         return (
           <span>
-            {dateToParsed(item?.start_date!)} -{" "}
-            {item?.currently ? "Present" : dateToParsed(item?.end_date!)}
+            { (item?.start_date!)} -{" "}
+            {item?.currently ? "Present" :  (item?.end_date!)}
           </span>
         );
       },
