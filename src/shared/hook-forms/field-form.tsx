@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -78,7 +79,6 @@ const FieldForms = ({
 
   useEffect(() => {
       reset({...getDefaultValues()});
-    // eslint-disable-next-line @next/next/no-img-element 
   }, [defaultValues]);
 
   const FileUploaderManger = async (
@@ -226,16 +226,15 @@ const FieldForms = ({
 
   const handleMutation = async (data: any) => {
     setISDisabled(false);
-    console.log({ data });
-    // if (onSaveCallBack) {
-    //   onSaveCallBack(data);
-    // } else {
-    //   mutate({
-    //     collectionId: collectionId,
-    //     dataId: dataId,
-    //     data: data
-    //   });
-    // }
+    if (onSaveCallBack) {
+      onSaveCallBack(data);
+    } else {
+      mutate({
+        collectionId: collectionId,
+        dataId: dataId,
+        data: data
+      });
+    }
   };
 
   const watchAllFields = watch();

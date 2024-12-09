@@ -1,5 +1,5 @@
 import React from "react";
-import { errorObj, ErrorProps, inputType } from "@/shared/types/fields";
+import { DateFormat, errorObj, ErrorProps, inputType } from "@/shared/types/fields";
 import ConditionalRenderer from "../conditional-renderer";
 
 const ErrorMessage = ({
@@ -30,12 +30,16 @@ const FieldError = (
     errorObj & {
       name?: string;
       type?:inputType
+      dateFormat?:DateFormat
     }
 ) => {
   const getErrorMessage=()=>{
     if(props?.error && Object?.keys( props?.error )?.length > 0){
       if(props?.isArray && props?.error?.message){
        return props?.error?.message?.split(".")[1] || props?.error?.message
+      }
+       if(props?.dateFormat){
+        return props?.error?.manualDateError?.[props?.name!]?.message ?? props?.error[props?.name!]?.message 
       }
       if(props?.name! && props?.error[props?.name!] ){
         return props?.error[props?.name!]?.message

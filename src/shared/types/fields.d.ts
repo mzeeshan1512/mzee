@@ -11,33 +11,21 @@ type FunctionsProps = {
 };
 
 type DateFormat =
-  | 'YYYY'
-  | 'MM'
-  | 'MMM'
-  | 'DD'
-  | 'DD-MM'
-  | 'MM-YYYY'
-  | 'MMM-YYYY'
-  | 'YYYY-MM'
-  | 'YYYY-MMM'
-  | 'YYYY-MM-DD'
-  | 'YYYY-MMM-DD'
-  | 'DD/MM/YYYY'
-  | 'DD/MMM/YYYY'
-  | 'MM-DD-YYYY'
-  | 'MMM-DD-YYYY'
-  | 'YYYY/MM/DD'
-  | 'YYYY/MMM/DD'
-  | 'YYYY-MM-DD HH:mm'
-  | 'YYYY-MMM-DD HH:mm'
-  | 'YYYY-MM-DD hh:mm A'
-  | 'YYYY-MMM-DD hh:mm A'
-  | 'YYYY-MM-DD HH:mm:ss'
-  | 'YYYY-MMM-DD HH:mm:ss'
-  | 'DD/MM/YYYY HH:mm'
-  | 'DD/MMM/YYYY HH:mm'
-  | 'MM-DD-YYYY hh:mm A'
-  | 'MMM-DD-YYYY hh:mm A';
+  | "YYYY"
+  | "MM-YYYY"
+  | "MMM-YYYY"
+  | "YYYY-MM"
+  | "YYYY-MMM"
+  | "YYYY-MM-DD"
+  | "YYYY-MMM-DD"
+  | "DD/MM/YYYY"
+  | "DD/MMM/YYYY"
+  | "MM-DD-YYYY"
+  | "MMM-DD-YYYY"
+  | "YYYY/MM"
+  | "YYYY/MMM"
+  | "MM/YYYY"
+  | "MMM/YYYY";
 
 type inputType =
   | "text"

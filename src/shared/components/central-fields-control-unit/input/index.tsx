@@ -21,7 +21,7 @@ const RadioCheckToggler = dynamic(() => import("./toggler-check-radio"), {
   loading: () => <FormSkeleton />,
 });
 
-const Input = React.forwardRef((props: FormProps, ref) => {
+const Input = React.forwardRef(({dateFormat,...props}: FormProps, ref) => {
   const includedTypes: inputType[] = [
     "text",
     "email",
@@ -60,7 +60,7 @@ const Input = React.forwardRef((props: FormProps, ref) => {
         }`}
         floatingLabels={isFloatingLabel}
       />
-      <FieldError {...props} />
+      <FieldError {...props} dateFormat={dateFormat} />
     </div>
   );
 });

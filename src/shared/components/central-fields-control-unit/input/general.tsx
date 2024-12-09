@@ -48,7 +48,8 @@ const GeneralInput = ({
         type={type}
         required={false}
         styles={props.inputStyles}
-        className={getInputCssClass({ ...props, inputCssClass })}
+        className={getInputCssClass({ ...props,isValid,
+  inValid, inputCssClass })}
         placeholder={
           floatingLabels ? label || placeholder : placeholder || label
         }

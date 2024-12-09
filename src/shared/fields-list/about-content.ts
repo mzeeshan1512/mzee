@@ -7,7 +7,7 @@ const ExperienceFieldsList: formFieldsList[] = [
     placeholder: "Title",
     label: "Title",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "text",
@@ -15,7 +15,7 @@ const ExperienceFieldsList: formFieldsList[] = [
     placeholder: "Company",
     label: "Company",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "text",
@@ -23,26 +23,24 @@ const ExperienceFieldsList: formFieldsList[] = [
     placeholder: "Company Link",
     label: "Company Link",
     required: true,
-    col: 12,
+    col: 12
   },
   {
-    type: "date",
+    type: "date-time",
     name: "start_date",
-    placeholder: "MM/DD/YYYY",
+    placeholder: "MM-YYYY",
     label: "Start Date",
     col: 6,
-    // showMonthYearPicker: true,
-    dateFormat: "MM/yyyy",
+    dateFormat: "MM-YYYY"
   },
   {
-    type: "date",
+    type: "date-time",
     name: "end_date",
-    placeholder: "MM/DD/YYYY",
+    placeholder: "MM-YYYY",
     label: "End Date",
     col: 6,
-    // showMonthYearPicker: true,
-    dateFormat: "MM/yyyy",
-    watchedKey: "currently",
+    dateFormat: "MM-YYYY",
+    watchedKey: "currently"
   },
   {
     type: "switch",
@@ -51,16 +49,16 @@ const ExperienceFieldsList: formFieldsList[] = [
     col: 6,
     impactedKey: {
       key: "end_date",
-      isDisabled: true,
-    },
+      isDisabled: true
+    }
   },
   {
     type: "textarea",
     name: "description",
     placeholder: "Description",
     label: "Description",
-    col: 12,
-  },
+    col: 12
+  }
 ];
 
 const EducationFieldsList: formFieldsList[] = [
@@ -70,7 +68,7 @@ const EducationFieldsList: formFieldsList[] = [
     placeholder: "Degree",
     label: "Degree",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "text",
@@ -78,28 +76,26 @@ const EducationFieldsList: formFieldsList[] = [
     placeholder: "Institute",
     label: "Institute",
     required: true,
-    col: 6,
+    col: 6
   },
   {
-    type: "date",
+    type: "date-time",
     name: "start_date",
     placeholder: "YYYY",
     label: "Starting Year",
     col: 6,
-    showYearPicker: true,
     required: true,
-    dateFormat: "yyyy",
+    dateFormat: "YYYY"
   },
   {
-    type: "date",
+    type: "date-time",
     name: "end_date",
     placeholder: "YYYY",
     label: "Ending Year",
     col: 6,
-    showYearPicker: true,
     required: true,
-    dateFormat: "yyyy",
-    watchedKey: "currently",
+    dateFormat: "YYYY",
+    watchedKey: "currently"
   },
   {
     type: "switch",
@@ -107,9 +103,9 @@ const EducationFieldsList: formFieldsList[] = [
     label: "Currently attending",
     impactedKey: {
       key: "end_date",
-      isDisabled: true,
-    },
-  },
+      isDisabled: true
+    }
+  }
 ];
 
 const CoursesAndCertifications: formFieldsList[] = [
@@ -118,14 +114,14 @@ const CoursesAndCertifications: formFieldsList[] = [
     name: "title",
     label: "Course Title",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "text",
     name: "organization",
     label: "Institute",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "text",
@@ -133,14 +129,14 @@ const CoursesAndCertifications: formFieldsList[] = [
     label: "Course Prefix",
     required: true,
     col: 6,
-    watchedKey: "same_as",
+    watchedKey: "same_as"
   },
   {
     type: "text",
     name: "platform",
     label: "Platform",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "switch",
@@ -150,43 +146,41 @@ const CoursesAndCertifications: formFieldsList[] = [
     impactedKey: {
       key: "prefix",
       fieldKey: "title",
-      isDisabled: true,
-    },
+      isDisabled: true
+    }
   },
   {
     type: "text",
     name: "verificationId",
     label: "Verification Code",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "text",
     name: "link",
     label: "Verification Link",
     required: true,
-    col: 6,
+    col: 6
   },
   {
-    type: "date",
+    type: "date-time",
     name: "start_date",
-    placeholder: "MM/YYYY",
+    placeholder: "MM-YYYY",
     label: "Start Date",
     col: 6,
-    showMonthYearPicker: true,
-    dateFormat: "MM/yyyy",
-    required: true,
+    dateFormat: "MM-YYYY",
+    required: true
   },
   {
-    type: "date",
+    type: "date-time",
     name: "end_date",
-    placeholder: "MM/YYYY",
+    placeholder: "MM-YYYY",
     label: "End Date",
     col: 6,
-    showMonthYearPicker: true,
-    dateFormat: "MM/yyyy",
-    required: true,
-  },
+    dateFormat: "MM-YYYY",
+    required: true
+  }
 ];
 
 const TrainingsField: formFieldsList[] = [
@@ -195,47 +189,45 @@ const TrainingsField: formFieldsList[] = [
     name: "title",
     label: "Course Title",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "text",
     name: "organization",
     label: "Institute",
     required: true,
-    col: 6,
+    col: 6
   },
   {
     type: "text",
     name: "link",
     label: "Verification Link",
     required: true,
-    col: 6,
+    col: 6
   },
   {
-    type: "date",
+    type: "date-time",
     name: "start_date",
-    placeholder: "MM/YYYY",
+    placeholder: "MM-YYYY",
     label: "Start Date",
     col: 6,
-    showMonthYearPicker: true,
-    dateFormat: "MM/yyyy",
-    required: true,
+    dateFormat: "MM-YYYY",
+    required: true
   },
   {
-    type: "date",
+    type: "date-time",
     name: "end_date",
-    placeholder: "MM/YYYY",
+    placeholder: "MM-YYYY",
     label: "End Date",
     col: 6,
-    showMonthYearPicker: true,
-    dateFormat: "MM/yyyy",
-    required: true,
-  },
+    dateFormat: "MM-YYYY",
+    required: true
+  }
 ];
 
 export {
   ExperienceFieldsList,
   EducationFieldsList,
   CoursesAndCertifications,
-  TrainingsField,
+  TrainingsField
 };

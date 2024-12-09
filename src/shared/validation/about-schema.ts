@@ -1,7 +1,6 @@
 "use client"
 import * as yup from "yup";
 import { StringError } from "@/shared/constants/regex";
-import { getValidDateValue } from "@/shared/utils/date";
 import { CollectionIDs } from "../constants/collection-ids";
 
 const commonValidation = {
@@ -11,40 +10,27 @@ const commonValidation = {
     .test(
       "startBeforeEnd",
       "Starting date/year must be before ending date/year",
-      function (obj: any) {
+      function(start_date: any) {
         const { end_date, currently }: any = this.parent;
-        const { s, e } = getValidDateValue(obj, end_date);
-        if (!s) {
-          return false;
+        if (currently) {
+          return true;
         }
-        if (s && e && !currently) {
-          return s < e;
-        }
-        return true;
+        return start_date < end_date;
       }
-    )
-    .required("Start date/year is required"),
+    ),
   end_date: yup
     .mixed()
     .test(
       "endAfterStart",
       "Ending date/year must be after starting date/year",
-      function (obj: any) {
-        const start = this.parent.start_date;
-        const currentlyWorking = this.parent.currently;
-        if (!currentlyWorking) {
-          const { s, e } = getValidDateValue(start, obj);
-          if (!e) {
-            return false;
-          }
-          if (s) {
-            return s < e;
-          }
+      function(end_date: any) {
+        const { start_date, currently }: any = this.parent;
+        if (currently) {
+          return true;
         }
-        return true;
+        return start_date < end_date;
       }
     )
-    .required("End date/year is required"),
 };
 
 const ExperienceValidation = yup.object().shape({
