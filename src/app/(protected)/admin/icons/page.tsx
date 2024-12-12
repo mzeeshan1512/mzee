@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React from "react";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import { adminRoutes } from "@/routes";
 import { IconsFields } from "@/shared/fields-list/list";
@@ -22,7 +21,7 @@ const page = () => {
       title: "Icon",
       data_key: "",
       cell: (item: IconsListingData) => {
-        return <img src={item?.blob?.src?.url} alt={item?.title} />;
+        return <img src={item?.blob?.src?.url} alt={item?.title} width={50} />;
       }
     }
   ];
