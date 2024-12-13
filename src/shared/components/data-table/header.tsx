@@ -27,9 +27,9 @@ const TableHeader = ({
   return (
     <thead
       className={`${
-        isSticky ? "position-sticky top-0 w-100 left-0 shadow" : ""
+        isSticky ? "position-sticky top-0 w-100 left-0 shadow " : ""
       } ${headerCssClass}`}
-      style={style}
+      style={{...style, zIndex:1}}
     >
       <tr>
         <ConditionalRenderer condition={showSerialNumbers}>
