@@ -1,11 +1,13 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import ShowIf from "@/shared/components/show-if";
-import Main from "./(sections)/main";
-import About from "./(sections)/about";
-import Services from "./(sections)/services";
-import Techs from "./(sections)/techs";
-import Projects from "./(sections)/projects";
-import ContactUs from "./(sections)/contact-us";
+
+const Main = dynamic(() => import("./(sections)/main"));
+const About = dynamic(() => import("./(sections)/about"));
+const Services = dynamic(() => import("./(sections)/services"));
+const Techs = dynamic(() => import("./(sections)/techs"));
+const Projects = dynamic(() => import("./(sections)/projects"));
+const ContactUs = dynamic(() => import("./(sections)/contact-us"));
 
 export type ContentProps = {
   hide?: boolean;

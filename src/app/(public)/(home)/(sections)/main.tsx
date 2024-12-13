@@ -1,15 +1,17 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import {
   sectionIds,
   socialContact
 } from "@/shared/constants-enums/navigation-list";
 import { DefaultBg } from "@/shared/app-config";
-import ParticleAnimation from "@/shared/components/particles-animation";
-import JumbledTextAnimation from "@/shared/components/text-loop/jumbled-text-animation";
-import SocialIcons from "@/shared/components/social-share";
 import LetsConnect from "./(components)/lets-connect";
 
-const Main = () => {
+const ParticleAnimation =dynamic(()=>import( "@/shared/components/particles-animation"),{ssr:false});
+const JumbledTextAnimation =dynamic(()=>import("@/shared/components/text-loop/jumbled-text-animation"),{ssr:false});
+const SocialIcons =dynamic(()=>import("@/shared/components/social-share"),{ssr:false});
+
+const Main = async () => {
   return (
     <section
       id={sectionIds.home}

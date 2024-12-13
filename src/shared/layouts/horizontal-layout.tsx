@@ -1,8 +1,9 @@
 import React from "react";
 import { FooterProps, HeaderProps } from "./(components)/types";
-import Header from "./(components)/header";
-import Footer from "./(components)/footer";
-import Settings from "./(components)/settings";
+import dynamic from "next/dynamic";
+const Header = dynamic(()=>import("./(components)/header"),{ssr:false});
+const Footer = dynamic(()=>import("./(components)/footer"),{ssr:true});
+const Settings = dynamic(()=>import("./(components)/settings"),{ssr:true});
 import ShowIf from "../components/show-if";
 
 type LayoutProps = {
