@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useMemo } from "react";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import { adminRoutes } from "@/routes";
 import { formFieldsList } from "@/shared/types/fields";
@@ -22,6 +21,8 @@ const AdminContentController = dynamic(
   { ssr: false }
 );
 
+const category = ["UI/UX","Development","Libraries","Framework","Web Development","Mobile Development","Software Development", "Others"]
+
 const TechnologiesPage = () => {
   const { data } = useGetDocuments(CollectionIDs.icons);
   const TableHeader: TableDataKeyList[] = [
@@ -33,14 +34,17 @@ const TechnologiesPage = () => {
     {
       data_key: "category",
       title: "Category",
-      isSortable: true
+       cell: (item: Services_TechsTools) => item?.category?.map(item=>item.label).join(", ") ?? null
     },
     {
       data_key: "svg",
       title: "Svg",
       cell: (item: Services_TechsTools) => {
         return (
-          <img src={item?.blob?.value?.src?.url!} alt={item?.blob?.label!} />
+          <img src={item?.blob?.value?.src?.url!} alt={item?.blob?.label!} width={50} height={50} style={{
+            objectFit: "contain",
+            aspectRatio:"1/1"
+          }} />
         );
       }
     }
@@ -90,6 +94,8 @@ const TechnologiesPage = () => {
       name: "category",
       label: "Category",
       required: true,
+      isMulti:true,
+      options:category?.map((item)=>({label:item,value:item})),
       col: 6
     }
   ];

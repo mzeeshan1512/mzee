@@ -120,10 +120,6 @@ interface selectComponentTypes {
   SingleValue?: any;
   ValueContainer?: any;
 }
-type selectObject = {
-  value: string;
-  label: string;
-};
 
 type SelectProps = CommonFieldProps & {
   isMulti?: boolean;

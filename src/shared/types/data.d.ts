@@ -70,7 +70,7 @@ interface blobOption {
 interface Services_TechsTools extends commonData {
   blob?: blobOption;
   description?: string;
-  category?:string
+  category?: selectObject[]
 }
 /* service data types end */
 

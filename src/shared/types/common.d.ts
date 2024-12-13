@@ -79,3 +79,8 @@ interface ContentControllerProps {
   hideExport?:boolean
   isLoading?:boolean
 }
+
+type selectObject = {
+  value: string;
+  label: string;
+};

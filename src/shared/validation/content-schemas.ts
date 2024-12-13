@@ -46,11 +46,15 @@ const TechValidation = yup.object().shape({
   //   .typeError(StringError)
   //   .required("Title is required.")
   //   .min(3, "Title must contain atleast 3 characters"),
-  category: yup
-    .string()
+  // category: yup
+  //   .string()
+  //   .typeError(StringError)
+  //   .required("Category is required.")
+  //   .min(3, "Category must contain atleast 3 characters"),
+    category: yup
+    .mixed()
     .typeError(StringError)
-    .required("Category is required.")
-    .min(3, "Category must contain atleast 3 characters"),
+    .required("Category is required."),
   blob: yup.mixed().required("Icon is required."),
 });
 
