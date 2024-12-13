@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useMemo } from "react";
+import React, { CSSProperties, useMemo } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { adminRoutes } from "@/routes";
@@ -17,6 +17,7 @@ import {
   OptionWithIcon,
   SingleValueWithIcon
 } from "@/shared/components/central-fields-control-unit/select/components";
+import ToolTip from "@/shared/components/tool-tip";
 const AdminContentController = dynamic(
   () => import("@/app/(protected)/admin/(components)/admin-content-controller"),
   { ssr: false }
@@ -32,7 +33,22 @@ const ServicesPage = () => {
     },
     {
       data_key: "description",
-      title: "Description"
+      title: "Description",
+      cell: (item: Services_TechsTools) => {
+        return (
+          <ToolTip toolTipText={item.description!} toolTipPosition={"top"} mode="body"
+          
+          >
+          <span style={{
+             textOverflow:"ellipsis",
+             whiteSpace:"nowrap",
+             width:"15rem",
+             display:"inline-block",
+             overflow:"hidden",
+                       } as CSSProperties} >{item.description}</span>
+                       </ToolTip>
+        );
+      }
     },
     {
       data_key: "svg",

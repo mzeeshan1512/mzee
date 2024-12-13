@@ -2,8 +2,7 @@
   position: relative;
   display: inline-block;
   cursor: pointer;
-
-  .tooltip {
+.tooltip {
     visibility: hidden;
     width: 120px;
     background-color: $primary;
@@ -24,7 +23,6 @@
       border-style: solid;
     }
   }
-
   &:hover .tooltip {
     visibility: visible;
     opacity: 1;

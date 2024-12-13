@@ -37,7 +37,7 @@ const ServiceValidation = yup.object().shape({
     .typeError(StringError)
     .required("Description is required.")
     .min(10, "Description must contain atleast 10 characters")
-    .max(100, "Description must not exceed 100 characters"),
+    .max(400, "Description must not exceed 400 characters"),
 });
 
 const TechValidation = yup.object().shape({
