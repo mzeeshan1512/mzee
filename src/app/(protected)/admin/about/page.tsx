@@ -16,7 +16,7 @@ import FormSkeletonLoader from "@/shared/components/loaders-spinners/form-skelet
 import Button from "@/shared/components/button";
 import { Trash } from "@/shared/icons/common";
 import InfoModal from "@/shared/components/modal/info";
-import { formFieldsList, selectObject } from "@/shared/types/fields";
+import { formFieldsList } from "@/shared/types/fields";
 
 const ContentHeader = dynamic(
   () => import("@/shared/components/header/content-header"),

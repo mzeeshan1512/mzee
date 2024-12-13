@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 import { Controller } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
-import { FormProps, selectObject } from "@/shared/types/fields";
+import { FormProps } from "@/shared/types/fields";
 import {
   commonTheme,
   commonStyles,

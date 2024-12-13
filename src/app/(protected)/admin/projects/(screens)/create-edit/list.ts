@@ -44,19 +44,14 @@ const basicPrefilledFields: formFieldsList[] = [
     colClassName: "align-self-center",
     checked: true
   },
-  // {
-  //   type: "switch",
-  //   name: "is_featured",
-  //   label: "Is Featured",
-  //   radioCheckLabelPlacement: "left",
-  //   colClassName: "align-self-center",
-  //   checked: true,
-  //   impactedKey: {
-  //         key: "is_worthy",
-  //         isDisabled: true,
-  //         fieldKey:"is_featured"
-  //       },
-  // },
+  {
+    type: "switch",
+    name: "is_featured",
+    label: "Is Featured",
+    radioCheckLabelPlacement: "left",
+    colClassName: "align-self-center",
+    checked: true
+  }
   // {
   //   type: "switch",
   // }
