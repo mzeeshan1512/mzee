@@ -1,4 +1,4 @@
-# Muhammad Zeeshan Project
+# Muhammad Zeeshan Portfolio
 
 ## Overview
 
@@ -13,8 +13,8 @@ Ensure that your system has the following versions:
 
 ## Dependencies
 
-- **Next.js**: `15`
-- **React**: `19-RC`
+- **Next.js**: `^14.2.4`
+- **React**: `^18`
 - **TailwindCSS**: for styling and utility classes
 
 ## Installation
@@ -76,4 +76,4 @@ To deploy this application, follow the instructions provided by your deployment 
 ## Additional Notes
 
 - Ensure compatibility by adhering to the required Node.js and npm versions.
-- This project is actively maintained with Next.js and React RC versions, ensuring a modern development experience.
+- This project is actively maintained with Next.js and React versions, ensuring a modern development experience.
