@@ -15,7 +15,7 @@ type Props = {
 
 const ServiceCard = ({ data, toggleGradient }: Props) => {  
   return (
-    <div className="group flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border lg:border-none p-4 lg:p-0 w-full">
+    <div className="group flex flex-col h-full lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border lg:border-none p-4 lg:p-0 w-full">
       <div className="flex justify-center" style={{ width: "6.75rem" }}>
         <SVGGradientBinder
           className="lex-grow inline transform transition-transform duration-500 ease-in-out group-hover:rotate-[360deg]"
@@ -60,7 +60,7 @@ const Services = async() => {
         " !bg-grid-pattern-light dark:!bg-grid-pattern-dark !bg-grid-size relative"
       }
       containerProps={{
-        className: "pt-4 mt-4"
+        className: "py-4 my-4"
       }}
     >
       <ResponsiveRenderer
@@ -73,7 +73,7 @@ const Services = async() => {
       }
       >
          <Carousel
-          autoPlay
+          // autoPlay
           infinite
         >
           {(serverAction.data)?.map((item:Services_TechsTools, index:number) => (

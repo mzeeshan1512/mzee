@@ -9,7 +9,7 @@ enum CollectionIDs {
   // skills= "about-skills",
   // projects= "projects",
   services = "services",
-  // technologies= "technologies",
+  technologies= "technologies",
   // contact= "contact-form",
   webInfo = "web-info"
 }
