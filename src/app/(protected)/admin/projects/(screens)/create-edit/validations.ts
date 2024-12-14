@@ -42,12 +42,12 @@ const basicInfoSchema = yup.object().shape({
   disable_demo: yup.boolean(),
 });
 
-const fileType = (value: any, type = "image") => {
+export const fileType = (value: any, type = "image") => {
   if (!value) return false; // Accept if no file is provided
   return value && value?.src && value?.src?.type?.includes(type);
 };
 
-const sizeValidation = (value: any) => {
+export const sizeValidation = (value: any) => {
   if (!value) return false; // Reject if no file is provided
   if (value?.src?.url) {
     return true;

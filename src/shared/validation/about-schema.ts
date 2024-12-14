@@ -2,6 +2,10 @@
 import * as yup from "yup";
 import { StringError } from "@/shared/constants/regex";
 import { CollectionIDs } from "../constants/collection-ids";
+import {
+  fileType,
+  sizeValidation
+} from "@/app/(protected)/admin/projects/(screens)/create-edit/validations";
 
 const commonValidation = {
   currently: yup.boolean(),
@@ -57,19 +61,19 @@ const mainSkillsField = {
     .required("Title is required.")
     .min(3, "Title must contain atleast 3 characters"),
   category: yup.object().required("Category is required"),
-  skills: yup.array().nullable(),
+  skills: yup.array().nullable()
 };
 
 const MainSkillsArrayValidation = yup.object().shape({
   [`${CollectionIDs.skills}`]: yup.array().of(
     yup.object().shape({
-      ...mainSkillsField,
+      ...mainSkillsField
     })
-  ),
+  )
 });
 
 const MainSkillsValidation = yup.object().shape({
-  ...mainSkillsField,
+  ...mainSkillsField
 });
 
 // education
@@ -84,18 +88,18 @@ const eductionField = {
     .typeError(StringError)
     .required("Institution name is required.")
     .min(3, "Institution name  must contain atleast 3 characters"),
-  ...commonValidation,
+  ...commonValidation
 };
 const EducationValidation = yup.object().shape({
-  ...eductionField,
+  ...eductionField
 });
 
 const EducationArrayValidation = yup.object().shape({
   [`${CollectionIDs.education}`]: yup.array().of(
     yup.object().shape({
-      ...eductionField,
+      ...eductionField
     })
-  ),
+  )
 });
 
 // course
@@ -130,7 +134,7 @@ const CoursesAndCertificationsValidation = yup.object().shape({
     .typeError(StringError)
     .required("Verification code is required.")
     .min(3, "Verification code must contain atleast 3 characters"),
-  ...commonValidation,
+  ...commonValidation
 });
 
 //training
@@ -150,18 +154,18 @@ const trainingField = {
     .url()
     .typeError(StringError)
     .required("Verification link is required."),
-  ...commonValidation,
+  ...commonValidation
 };
 const TrainingsValidation = yup.object().shape({
-  ...trainingField,
+  ...trainingField
 });
 
 const TrainingsArrayValidation = yup.object().shape({
   [`${CollectionIDs.training}`]: yup.array().of(
     yup.object().shape({
-      ...trainingField,
+      ...trainingField
     })
-  ),
+  )
 });
 
 const BioSchema = yup.object().shape({
@@ -176,7 +180,16 @@ const BioSchema = yup.object().shape({
     .required("Based-in is required.")
     .min(3, "Based-in  must contain atleast 3 characters"),
   bio: yup.string().typeError(StringError).required("Bio Detail is required."),
-  skills_loop: yup.array().nullable(),
+  user_avatar: yup
+    .mixed()
+    .required("Banner image is required.")
+    .test(
+      "fileType",
+      "Invalid file type. Only png,jpg,jpeg,gif,svgs are allowed.",
+      value => fileType(value)
+    )
+    .test("fileSize", "File size exceeds 5MB limit.", sizeValidation),
+  skills_loop: yup.array().nullable()
 });
 
 export {

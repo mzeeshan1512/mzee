@@ -77,6 +77,14 @@ const Bio = () => {
       col: 12,
     },
     {
+      name: "user_avatar",
+      type:"file",
+      label: "Profile Image",
+      required: true,
+      disabled: !editMode,
+      col: 6,
+    },
+    {
       name: "skills_loop",
       label: "Skills",
       isClearable: true,
