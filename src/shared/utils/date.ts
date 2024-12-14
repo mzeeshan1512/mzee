@@ -38,27 +38,8 @@ type DateFormat =
   | 'YYYY-MMM'
   | 'YYYY-MM-DD'
   | 'YYYY-MMM-DD'
-  | 'DD/MM/YYYY'
-  | 'DD/MMM/YYYY'
   | 'MM-DD-YYYY'
-  | 'MMM-DD-YYYY'
-  | 'YYYY/MM/DD'
-  | 'YYYY/MMM/DD'
-  | 'YYYY-MM-DD HH:mm'
-  | 'YYYY-MMM-DD HH:mm'
-  | 'YYYY-MM-DD hh:mm A'
-  | 'YYYY-MMM-DD hh:mm A'
-  | 'YYYY-MM-DD HH:mm:ss'
-  | 'YYYY-MMM-DD HH:mm:ss'
-  | 'DD/MM/YYYY HH:mm'
-  | 'DD/MMM/YYYY HH:mm'
-  | 'MM-DD-YYYY hh:mm A'
-  | 'MMM-DD-YYYY hh:mm A';
-
-type DateFormatOptions = {
-  use24HourClock?: boolean;
-  includeSeconds?: boolean;
-};
+  | 'MMM-DD-YYYY';
 
 const MONTHS_SHORT = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -67,29 +48,17 @@ const MONTHS_SHORT = [
 
 const formatDate =(
   date: Date | string | number,
-  format: DateFormat = "MMM-DD-YYYY hh:mm A",
-  options: DateFormatOptions = {}
+  format: DateFormat = "MMM-DD-YYYY",
 ): string =>{
-  const timeFormatPattern = /HH|hh|mm|ss|A/;
-  const containsTimeFormat = timeFormatPattern.test(format);
-  const { use24HourClock = true, includeSeconds = false } = options;
-
   const d =
     typeof date === 'string' || typeof date === 'number'
       ? new Date(date)
       : date;
-  if (isNaN(d?.getTime())) {
-    throw new Error('Invalid date provided');
-  }
 
   const year = d?.getFullYear();
   const month = String(d?.getMonth() + 1)?.padStart(2, '0');
   const monthShort = MONTHS_SHORT[d?.getMonth()];
   const day = String(d?.getDate())?.padStart(2, '0');
-  const hours = use24HourClock ? d?.getHours() : d?.getHours() % 12 || 12;
-  const minutes = String(d?.getMinutes())?.padStart(2, '0');
-  const seconds = includeSeconds ? String(d?.getSeconds())?.padStart(2, '0') : '';
-  const amPm = use24HourClock ? '' : d?.getHours() >= 12 ? 'PM' : 'AM';
   let formattedDate:string  = format;
 
   if (formattedDate?.includes('MMM')) {
@@ -102,31 +71,37 @@ const formatDate =(
     ?.replace('YYYY', String(year))
     ?.replace('DD', day);
 
-  if (containsTimeFormat) {
-    formattedDate = formattedDate
-      ?.replace('HH', String(hours)?.padStart(2, '0'))
-      ?.replace('hh', String(hours)?.padStart(2, '0'))
-      ?.replace('mm', minutes)
-      ?.replace('ss', seconds)
-      ?.replace('A', amPm);
-   } 
-  //else {
-  //   formattedDate = formattedDate
-  //     ?.replace(/HH|hh|mm|ss|A/g, '')
-  //     ?.replace(/ +/g, ' ')
-  //     ?.trim();
-  // }
   return formattedDate;
 }
+
+const convertToDate = (dateString: string): Date => {
+  const months: { [key: string]: number } = {
+    Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+    Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+  };
+
+  const [monthPart, yearStr] = dateString.split('-');
+  const month = !isNaN(Number(monthPart))
+    ? parseInt(monthPart, 10) - 1
+    : months[monthPart];
+  const year = parseInt(yearStr, 10);
+
+  if (month === undefined || isNaN(year) || month < 0 || month > 11) {
+    throw new Error('Invalid date string format. Expected format: "Jan-2023" or "01-2023"');
+  }
+
+  return new Date(year, month, 1);
+};
+
 
 export {
   currentRegionDate,
   convertToRegionTime,
   formatDate,
+  convertToDate,
   MONTHS_SHORT
 };
 
 export type {
   DateFormat,
-  DateFormatOptions
 }

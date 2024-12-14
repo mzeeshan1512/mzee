@@ -9,21 +9,26 @@ import {
   query,
   limit
 } from "firebase/firestore";
-import { CollectionIDs } from "./collection-ids";
+import { AboutPageColllectionIds, CollectionIDs } from "./collection-ids";
 import { fireStore as fireStoreDB } from "./config";
-import toast from "../components/toast";
+export type orderByField = { field: string; direction?: "asc" | "desc" }
 
 export type firebaseCondition = {
   filters?: { field: string; operator: WhereFilterOp; value: any }[];
-  orderByFields?: { field: string; direction?: "asc" | "desc" }[];
+  orderByFields?: orderByField;
   limit?: number;
   excludeFields?: string[];
 };
 
 export type arguments = {
-  collectionId: CollectionIDs;
+  collectionId: CollectionIDs | AboutPageColllectionIds;
   conditions?: firebaseCondition;
   documentId?: string;
+  isSingleRecord?: boolean;
+  groupedData?: {
+    groupByField:string,
+    groupedCallBackFn:(data:any)=>any
+  } | null;
 };
 
 /**
@@ -39,7 +44,7 @@ export const buildFirestoreQuery = (
   conditions: firebaseCondition
 ): Query => {
   const queryConstraints: any[] = [];
-
+  const orderByConditions:orderByField = conditions?.orderByFields ??  {field:"modified_at", direction:"desc"}
   // Apply filters
   if (conditions?.filters) {
     conditions?.filters?.forEach((filter) => {
@@ -50,10 +55,8 @@ export const buildFirestoreQuery = (
   }
 
   // Apply ordering
-  if (conditions?.orderByFields) {
-    conditions?.orderByFields?.forEach((order) => {
-      queryConstraints?.push(orderBy(order?.field, order?.direction));
-    });
+  if (orderByConditions) {
+      queryConstraints?.push(orderBy(orderByConditions?.field, orderByConditions?.direction));
   }
 
   // Apply limit
@@ -68,7 +71,16 @@ const getCleanData = (obj: Record<string, any>, excludedFields?: string[]) => {
   const cleanData = { ...obj };
   const keysToExclude = [
     ...(excludedFields ?? []),
-    ...["edited_by", "modified_at", "is_archived", "created_by", "created_at:"]
+    ...[
+      "edited_by",
+      "modified_at",
+      "is_archived",
+      "created_by",
+      "created_at",
+      "userID",
+      "user_id",
+      "userId" 
+    ]
   ];
   keysToExclude.forEach((key) => {
     if (key in cleanData) {
@@ -84,24 +96,47 @@ export const fetchRecordsOnServer = () => {
   let data: any;
   let totalRecrods: number = 5;
   return {
-    getDocumentById: async (args: arguments) => {},
+    // getDocumentById: async (args: arguments) => {},
     getDocuments: async (args: arguments) => {
-      loading = true;
-      const collectionRef = collection(fireStoreDB, args.collectionId);
-      const queryString = buildFirestoreQuery(collectionRef, args?.conditions!);
-      const snapshot = await getDocs(queryString);
-      if (snapshot && !snapshot.empty) {
-        data = [];
-        totalRecrods = snapshot.size;
-        snapshot.forEach((doc) => {
-          data.push({ ...getCleanData(doc?.data()), id: doc?.id });
-        });
-      } else {
-        error = "No Data found";
-        toast.dismiss();
-        toast.error("No Data Found");
+      try {
+        loading = true;
+        const collectionRef = collection(fireStoreDB, args.collectionId);
+        const queryString = buildFirestoreQuery(
+          collectionRef,
+          args?.conditions!
+        );
+        const snapshot = await getDocs(queryString);
+        if (snapshot && !snapshot.empty) {
+          data = [];
+          totalRecrods = snapshot.size;
+          const groupedData: Record<string, any> = {};
+          snapshot.forEach((doc) => {
+            const cleanData:Record<string, any> = {...getCleanData(doc?.data()), id: doc?.id };
+            if (args?.groupedData) {
+              const key = cleanData[args?.groupedData?.groupByField]
+              if (!groupedData[`${key}`]) {
+                groupedData[`${key}`] = [];
+              }
+               groupedData[`${key}`].push(cleanData)
+            } 
+            else  data.push(cleanData);
+          });
+          if(args?.groupedData){
+            data = args.groupedData?.groupedCallBackFn(groupedData)
+          }
+          if (args.isSingleRecord) {
+            data = data?.[0];
+          }
+        } else {
+          throw new Error("No Data Found");
+        }
+      } catch (err) {
+        error = err;
+        // toast.dismiss();
+        // toast.error(error.message ?? "No Data Found");
+      } finally {
+        loading = false;
       }
-      loading = false;
     },
     get loading() {
       return loading;

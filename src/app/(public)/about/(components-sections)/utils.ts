@@ -1,76 +1,97 @@
-import { formatDate } from "@/shared/utils/date";
-import { exp_data } from "./json_data_test";
+import { convertToDate, DateFormat, formatDate } from "@/shared/utils/date";
 
- const timeLineFormatData = (input: AboutContentDataProps[]) => {
-    const mappedData = input.reduce((result, item) => {
-      if (item.organization && item.link) {
-        result.organization = item.organization;
-        result.link = item.link;
-        if (!result.timeLine) {
-          result.timeLine = [];
-        }
-        if (item.title && item.start_date && item.end_date) {
-          result.timeLine.push({
-            title: item.title,
-            start_date: item.start_date,
-            end_date:item.end_date,
-          });
-        }
-        if (!result.start_date || new Date(item.start_date!) < new Date(result.start_date)) {
-          result.start_date = item.start_date;
-        }
-        if (
-          item?.end_date === "Present" ||
-          !result.end_date ||
-          new Date(item.end_date!) >= new Date(result.end_date)
-        ) {
-          result.end_date = item.end_date;
-        }
+const timeLineFormatData = (
+  input: AboutContentDataProps[]
+): ExpTimelineFormat => {
+  const mappedData = input.reduce((result, item) => {
+    if (item.organization && item.link) {
+      result.organization = item.organization;
+      result.link = item.link;
+      const itemStartDate =
+        typeof item?.start_date! === "string"
+          ? convertToDate(item?.start_date!)
+          : item?.start_date;
+      const itemEndDate =
+        typeof item?.end_date! === "string" && !item.currently 
+          ? convertToDate(item?.end_date!)
+          : item.currently ? "Present":item?.end_date;
+      const resultStart =
+        typeof result?.start_date! === "string"
+          ? convertToDate(result?.start_date!)
+          : result?.start_date;
+      const resultEnd =
+        typeof result?.end_date! === "string" && !result.currently 
+          ? convertToDate(result?.end_date!)
+          : result.currently ? "Present":result?.end_date;
+      if (!result.timeLine) {
+        result.timeLine = [];
       }
-      return result;
-    }, {});
-    return mappedData;
-  };
-const groupDataByOrganization = () => {
-    const organizationGroups: any | null | undefined = {};
-    exp_data?.forEach((item) => {
-      const timeLine = item.organization!;
-      if (!organizationGroups[timeLine]) {
-        organizationGroups[timeLine] = [];
+      if (item.title && item.start_date && item.end_date) {
+        result.timeLine.push({
+          title: item.title,
+          start_date: itemStartDate,
+          end_date: itemEndDate,
+          currently:item.currently,
+        });
       }
-      organizationGroups[timeLine].push(item);
-    });
+      if (!result.start_date || itemStartDate! < resultStart!) {
+        result.start_date = itemStartDate;
+      }
+      if (
+        item?.end_date === "" || item.currently||
+        !result.end_date ||
+        itemEndDate! >= resultEnd!
+      ) {
+        result.end_date = item.currently ? "Present" : itemEndDate;
+      }
+    }
+    return result;
+  }, {});
+  return mappedData;
+};
+const groupDataByTimeLineMappedFormat = (groupedData: Record<string, any>) => {
+  const mappedData = Object?.keys?.(groupedData)
+    .map((item: any) => {
+      if (groupedData[item]?.length > 1) {
+        const temp: Record<string, any> = timeLineFormatData(groupedData[item]);
+        return { ...temp };
+      } else {
+        const objInHand = groupedData[item][0];
+        const itemStartDate =
+          typeof objInHand?.start_date! === "string"
+            ? convertToDate(objInHand?.start_date!)
+            : objInHand?.start_date;
+        const itemEndDate =
+          typeof objInHand?.end_date! === "string" && !objInHand.currently
+            ? convertToDate(objInHand?.end_date!)
+            : objInHand.currently ? "Present":objInHand?.end_date;
 
-    const mappedData = Object?.keys?.(organizationGroups)
-      .map((item: any) => {
-        if (organizationGroups[item]?.length > 1) {
-          const temp: any = timeLineFormatData(organizationGroups[item]);
-          return { ...temp };
-        } else {
-          return { ...organizationGroups[item][0] };
-        }
-      })
-      .sort((a, b) => {
-        const startDateA: any = new Date(a?.start);
-        const startDateB: any = new Date(b?.start);
-        return startDateB - startDateA;
-      });
-    return mappedData;
-  };
-
-
-
-const getEndDate = (experience: AboutContentDataProps) => {
-  if (experience?.currently || experience?.end_date?.toString() === "Present") {
-    return process.env.NEXT_PUBLIC_TOGGLE_PRESENT_DATE === "true"
-      ? formatDate(new Date(), "MMM-YYYY")
-      : "Present";
-  }
-  return formatDate(experience.end_date!, "MMM-YYYY");
+        return {
+          ...objInHand,
+          start_date: itemStartDate,
+          end_date: itemEndDate
+        };
+      }
+    })
+    // .sort((a, b) => {
+    //   const startDateA: any = new Date(a?.start_date);
+    //   const startDateB: any = new Date(b?.start_date);
+    //   return startDateA - startDateB;
+    // });
+  return mappedData;
 };
 
-export {
-  getEndDate,
-  groupDataByOrganization, 
-  timeLineFormatData
-}
+const getEndDate = (experience: AboutContentDataProps, format:DateFormat) => {
+  if (experience?.currently || experience?.end_date?.toString() === "Present") {
+    return process.env.NEXT_PUBLIC_TOGGLE_PRESENT_DATE === "true"
+      ? formatDate(new Date(), format)
+      : "Present";
+  }
+  if(typeof experience?.end_date === "string"){
+    return experience.end_date
+  }
+  return formatDate(experience.end_date!, format);
+  // return experience.end_date
+};
+
+export { getEndDate, groupDataByTimeLineMappedFormat, timeLineFormatData };

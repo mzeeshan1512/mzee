@@ -39,16 +39,16 @@ const tabList: list[] = [
     ),
     title: TabList.Experience
   },
-  {
-    tabId: TabList.Certifications,
-    tabContent: (
-      <TabContentContainer title={TabList.Certifications}>
-        <TanContent id={AboutPageColllectionIds.courses_certification} />
-      </TabContentContainer>
-    ),
-    title: TabList.Certifications,
-    disabled: true
-  },
+  // {
+  //   tabId: TabList.Certifications,
+  //   tabContent: (
+  //     <TabContentContainer title={TabList.Certifications}>
+  //       <TanContent id={AboutPageColllectionIds.courses_certification} />
+  //     </TabContentContainer>
+  //   ),
+  //   title: TabList.Certifications,
+  //   disabled: true
+  // },
   {
     tabId: TabList.Education,
     tabContent: (

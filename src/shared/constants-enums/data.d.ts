@@ -12,13 +12,14 @@ interface CommonAbout extends commonData {
 }
 
 interface ExpTimelineFormat {
-  start_date?: string;
-  end_date?: string;
+  start_date?: string | Date;
+  end_date?: string | Date;
   title?:string
+  currently?:boolean
 }
 interface AboutContentDataProps extends CommonAbout {
-  start_date?: string;
-  end_date?: string;
+  start_date?: string | Date;
+  end_date?: string | Date;
   currently?: boolean;
   timeLine?:ExpTimelineFormat[]
 }
