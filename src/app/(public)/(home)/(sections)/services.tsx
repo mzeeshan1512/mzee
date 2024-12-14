@@ -8,25 +8,29 @@ import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
 
 type Props = {
-  data?: Services_TechsTools | null;
+  service?: Services_TechsTools | null;
   toggleGradient?: boolean;
-  loading?:boolean
+  loading?: boolean;
 };
 
-const ServiceCard = ({ data, toggleGradient }: Props) => {  
+const ServiceCard = ({ service, toggleGradient }: Props) => {
   return (
     <div className="group flex flex-col h-full lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border lg:border-none p-4 lg:p-0 w-full">
       <div className="flex justify-center" style={{ width: "6.75rem" }}>
         <SVGGradientBinder
-          className="lex-grow inline transform transition-transform duration-500 ease-in-out group-hover:rotate-[360deg]"
-          height="4em"
-          viewBox="0 0 24 24"
+          className="flex-grow inline transform transition-transform duration-500 ease-in-out group-hover:rotate-[360deg]"
+          {...service?.blob?.value?.svg?.props}
           linearGradientProps={{
-            id: data?.id
+            id: service?.id
           }}
-          fill={toggleGradient ? "currentColor" : `url(#${data?.id})`}
+          fill={toggleGradient ? "currentColor" : `url(#${service?.id})`}
         >
-          <path d="M21 17.9995V19.9995H3V17.9995H21ZM17.4038 3.90332L22 8.49951L17.4038 13.0957L15.9896 11.6815L19.1716 8.49951L15.9896 5.31753L17.4038 3.90332ZM12 10.9995V12.9995H3V10.9995H12ZM12 3.99951V5.99951H3V3.99951H12Z" />
+          <g
+            dangerouslySetInnerHTML={{
+              __html: service?.blob?.value?.svg?.code!
+            }}
+          />
+          {/* <path d="M21 17.9995V19.9995H3V17.9995H21ZM17.4038 3.90332L22 8.49951L17.4038 13.0957L15.9896 11.6815L19.1716 8.49951L15.9896 5.31753L17.4038 3.90332ZM12 10.9995V12.9995H3V10.9995H12ZM12 3.99951V5.99951H3V3.99951H12Z" /> */}
         </SVGGradientBinder>
       </div>
       <div className="flex flex-col gap-4 prose !text-inherit">
@@ -35,21 +39,23 @@ const ServiceCard = ({ data, toggleGradient }: Props) => {
             toggleGradient ? "text-gradient" : "!text-inherit"
           }`}
         >
-          {data?.title}
+          {service?.title}
         </h2>
-        <p>{data?.description}</p>
+        <p>{service?.description}</p>
       </div>
     </div>
   );
 };
 
-const Services = async() => {
-  const serverAction = fetchRecordsOnServer()
+const Services = async () => {
+  const serverAction = fetchRecordsOnServer();
   await serverAction.getDocuments({
-    collectionId:CollectionIDs.services
-  })
-  if(serverAction.error){
-    return <span className="text-red-400 text-center">{serverAction.error}</span>
+    collectionId: CollectionIDs.services
+  });
+  if (serverAction.error) {
+    return (
+      <span className="text-red-400 text-center">{serverAction.error}</span>
+    );
   }
   return (
     <SectionContainer
@@ -64,21 +70,25 @@ const Services = async() => {
       }}
     >
       <ResponsiveRenderer
-      elseChildren={
-         <div className="hidden lg:grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {(serverAction.data)?.map((item:Services_TechsTools, index:number) => (
-              <ServiceCard key={index} data={item}/>
-            ))}
+        elseChildren={
+          <div className="hidden lg:grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {serverAction.data?.map(
+              (service: Services_TechsTools, index: number) => (
+                <ServiceCard key={index} service={service} />
+              )
+            )}
           </div>
-      }
+        }
       >
-         <Carousel
+        <Carousel
           // autoPlay
           infinite
         >
-          {(serverAction.data)?.map((item:Services_TechsTools, index:number) => (
-              <ServiceCard key={index} data={item}/>
-            ))}
+          {serverAction.data?.map(
+            (service: Services_TechsTools, index: number) => (
+              <ServiceCard key={index} service={service} />
+            )
+          )}
         </Carousel>
       </ResponsiveRenderer>
     </SectionContainer>
