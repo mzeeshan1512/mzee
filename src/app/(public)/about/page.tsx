@@ -1,15 +1,15 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { TabList as list } from "@/shared/components/tabs";
-import { CollectionIDs } from "@/shared/firebase/collection-ids";
+import { AboutPageColllectionIds } from "@/shared/firebase/collection-ids";
 // dynamic loading
 const Tabs = dynamic(() => import("@/shared/components/tabs"));
-const TabContentContainer = dynamic(
-  () => import("./(components-sections)/tab-content-container")
+const TabContentContainer = dynamic(() =>
+  import("./(components-sections)/tab-content-container")
 );
 const Overview = dynamic(() => import("./(components-sections)/overview"));
-const TanContent = dynamic(
-  () => import("./(components-sections)/tabs-content")
+const TanContent = dynamic(() =>
+  import("./(components-sections)/tabs-content")
 );
 
 enum TabList {
@@ -34,7 +34,7 @@ const tabList: list[] = [
     tabId: TabList.Experience,
     tabContent: (
       <TabContentContainer title={TabList.Experience}>
-        <TanContent id={CollectionIDs.experience} />
+        <TanContent id={AboutPageColllectionIds.experience} />
       </TabContentContainer>
     ),
     title: TabList.Experience
@@ -43,7 +43,7 @@ const tabList: list[] = [
     tabId: TabList.Certifications,
     tabContent: (
       <TabContentContainer title={TabList.Certifications}>
-        <TanContent id={CollectionIDs.courses_certification} />
+        <TanContent id={AboutPageColllectionIds.courses_certification} />
       </TabContentContainer>
     ),
     title: TabList.Certifications,
@@ -53,7 +53,7 @@ const tabList: list[] = [
     tabId: TabList.Education,
     tabContent: (
       <TabContentContainer title={TabList.Education}>
-        <TanContent id={CollectionIDs.education} />
+        <TanContent id={AboutPageColllectionIds.education} />
       </TabContentContainer>
     ),
     title: TabList.Education
@@ -62,7 +62,7 @@ const tabList: list[] = [
     tabId: TabList.Trainings,
     tabContent: (
       <TabContentContainer title={TabList.Trainings}>
-        <TanContent id={CollectionIDs.training} />
+        <TanContent id={AboutPageColllectionIds.training} />
       </TabContentContainer>
     ),
     title: TabList.Trainings

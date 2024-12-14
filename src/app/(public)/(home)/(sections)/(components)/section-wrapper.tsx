@@ -28,7 +28,7 @@ const SectionContainer = ({
     <section
       id={id}
       className={
-        "p-4 min-responsive-height w-full overflow-hidden " + className
+        "p-4 h-full w-full overflow-hidden " + className
       }
       {...rest}
     >

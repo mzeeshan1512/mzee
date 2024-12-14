@@ -9,7 +9,7 @@ import { groupDataByOrganization } from "./utils";
 import ExpImg from "@/assets/content/experience.png";
 import EduImg from "@/assets/content/education.png";
 import CertImg from "@/assets/content/certificate.png";
-import { CollectionIDs } from "@/shared/firebase/collection-ids";
+import { AboutPageColllectionIds } from "@/shared/firebase/collection-ids";
 
 type Content<T> = {
   data: T[];
@@ -17,27 +17,27 @@ type Content<T> = {
   imgSrc: any;
 };
 const ContentList = {
-  [CollectionIDs.experience]: {
+  [AboutPageColllectionIds.experience]: {
     data: groupDataByOrganization(),
     imageClassName: "!rounded-full",
     imgSrc: ExpImg
   },
-  [CollectionIDs.education]: {
+  [AboutPageColllectionIds.education]: {
     data: formattedEducationData,
     imgSrc: EduImg
   },
-  [CollectionIDs.courses_certification]: {
+  [AboutPageColllectionIds.courses_certification]: {
     data: formattedEducationData,
     imgSrc: CertImg
   },
-  [CollectionIDs.training]: {
+  [AboutPageColllectionIds.training]: {
     data: formattedEducationData,
     imgSrc: CertImg
   }
 };
 
-const TanContent = ({ id }: { id: CollectionIDs }) => {
-  const tabContent: Content<any> = ContentList[id];
+const TanContent = ({ id }: { id: AboutPageColllectionIds }) => {
+  const tabContent: Content<unknown> = ContentList[id];
   return (
     <>
       <ListWrapper list={tabContent.data}>

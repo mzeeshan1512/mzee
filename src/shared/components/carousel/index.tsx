@@ -26,6 +26,21 @@ const CarouselButton = ({
   );
 };
 
+const defaultResponsive=  {
+            desktop: {
+              breakpoint: { max: 3000, min: 1024 },
+              items: 3
+            },
+            tablet: {
+              breakpoint: { max: 1024, min: 464 },
+              items: 2
+            },
+            mobile: {
+              breakpoint: { max: 464, min: 0 },
+              items: 1
+            }
+          }
+
 const Carousel = ({
   responsive,
   autoPlay,
@@ -58,9 +73,10 @@ const Carousel = ({
   const handleResize = () => {
     const windowWidth = window.innerWidth;
     let items = 1;
+    const respConfig = {...defaultResponsive,...responsive}
 
-    if (responsive) {
-      Object?.entries(responsive)?.forEach(([_, config]) => {
+    if (respConfig) {
+      Object?.entries(respConfig)?.forEach(([_, config]) => {
         if (
           windowWidth >= config?.breakpoint?.min &&
           windowWidth <= config?.breakpoint?.max

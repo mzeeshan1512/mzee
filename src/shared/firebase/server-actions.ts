@@ -7,8 +7,7 @@ import {
   getDocs,
   WhereFilterOp,
   query,
-  limit,
-  
+  limit
 } from "firebase/firestore";
 import { CollectionIDs } from "./collection-ids";
 import { fireStore as fireStoreDB } from "./config";
@@ -18,7 +17,7 @@ export type firebaseCondition = {
   filters?: { field: string; operator: WhereFilterOp; value: any }[];
   orderByFields?: { field: string; direction?: "asc" | "desc" }[];
   limit?: number;
-  excludeFields?:string[]
+  excludeFields?: string[];
 };
 
 export type arguments = {
@@ -44,7 +43,9 @@ export const buildFirestoreQuery = (
   // Apply filters
   if (conditions?.filters) {
     conditions?.filters?.forEach((filter) => {
-      queryConstraints.push(where(filter?.field, filter?.operator, filter?.value));
+      queryConstraints.push(
+        where(filter?.field, filter?.operator, filter?.value)
+      );
     });
   }
 
@@ -63,21 +64,25 @@ export const buildFirestoreQuery = (
   return query(collectionRef, ...queryConstraints);
 };
 
-const getCleanData = (obj:Record<string,any>, excludedFields?:string[])=>{
-    const cleanData = {...obj};
-    const keysToExclude =[...(excludedFields??[]), ...["edited_by","modified_at","is_archived","created_by","created_at:"]]
-    keysToExclude.forEach(key=>{
-        if(key in cleanData){
-            delete cleanData[key];
-        }
-    })
-    return cleanData
-}
+const getCleanData = (obj: Record<string, any>, excludedFields?: string[]) => {
+  const cleanData = { ...obj };
+  const keysToExclude = [
+    ...(excludedFields ?? []),
+    ...["edited_by", "modified_at", "is_archived", "created_by", "created_at:"]
+  ];
+  keysToExclude.forEach((key) => {
+    if (key in cleanData) {
+      delete cleanData[key];
+    }
+  });
+  return cleanData;
+};
 
 export const fetchRecordsOnServer = () => {
   let loading = false;
   let error: any = null;
   let data: any;
+  let totalRecrods: number = 5;
   return {
     getDocumentById: async (args: arguments) => {},
     getDocuments: async (args: arguments) => {
@@ -85,15 +90,16 @@ export const fetchRecordsOnServer = () => {
       const collectionRef = collection(fireStoreDB, args.collectionId);
       const queryString = buildFirestoreQuery(collectionRef, args?.conditions!);
       const snapshot = await getDocs(queryString);
-      if(snapshot && !snapshot.empty){
-        data = []
-      snapshot.forEach((doc) => {
-        data.push({ ...getCleanData(doc?.data()), id: doc?.id })
-      })}
-      else{
-        error = "No Data found"
-        toast.dismiss()
-        toast.error("No Data Found")
+      if (snapshot && !snapshot.empty) {
+        data = [];
+        totalRecrods = snapshot.size;
+        snapshot.forEach((doc) => {
+          data.push({ ...getCleanData(doc?.data()), id: doc?.id });
+        });
+      } else {
+        error = "No Data found";
+        toast.dismiss();
+        toast.error("No Data Found");
       }
       loading = false;
     },
@@ -105,6 +111,9 @@ export const fetchRecordsOnServer = () => {
     },
     get data() {
       return data;
+    },
+    get totalRecrods() {
+      return totalRecrods;
     }
   };
 };

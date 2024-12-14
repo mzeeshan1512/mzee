@@ -1,19 +1,17 @@
-enum  CollectionIDs  {
+enum AboutPageColllectionIds {
+  experience = "about-experience",
+  education = "about-education",
+  training = "about-trainings",
+  courses_certification = "about-courses-certifications"
+  // myInfo= "about-my-info",
+}
+enum CollectionIDs {
   // skills= "about-skills",
-  experience= "about-experience",
-  education= "about-education",
-  courses_certification= "about-courses-certifications",
-  training= "about-trainings",
   // projects= "projects",
-  // services= "services",
+  services = "services",
   // technologies= "technologies",
   // contact= "contact-form",
-  // webInfo= "web-info",
-  // loginLogs= "login-logs",
-  // logs= "logs",
-  // _2fa= "2fa",
-  // myInfo= "about-my-info",
-  // icons= "icons",
-};
+  webInfo = "web-info"
+}
 
-export { CollectionIDs };
+export { CollectionIDs, AboutPageColllectionIds };

@@ -1,18 +1,19 @@
-"use client";
 import React from "react";
 import SectionContainer from "./(components)/section-wrapper";
 import SVGGradientBinder from "@/shared/components/svg-gradient-binder";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
-import { useMediaQuery } from "@/shared/hooks/use-media-query";
-import ShowIf from "@/shared/components/show-if";
 import Carousel from "@/shared/components/carousel";
+import ResponsiveRenderer from "./(components)/responsive-renderer";
+import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
+import { CollectionIDs } from "@/shared/firebase/collection-ids";
 
 type Props = {
   data?: Services_TechsTools | null;
   toggleGradient?: boolean;
+  loading?:boolean
 };
 
-const ServiceCard = ({ data, toggleGradient }: Props) => {
+const ServiceCard = ({ data, toggleGradient }: Props) => {  
   return (
     <div className="group flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border lg:border-none p-4 lg:p-0 w-full">
       <div className="flex justify-center" style={{ width: "6.75rem" }}>
@@ -42,10 +43,14 @@ const ServiceCard = ({ data, toggleGradient }: Props) => {
   );
 };
 
-const Services = () => {
-  const mediumDeviceMedia1024 = useMediaQuery("(max-width: 1024px)", true, {
-    getInitialValueInEffect: false
-  });
+const Services = async() => {
+  const serverAction = fetchRecordsOnServer()
+  await serverAction.getDocuments({
+    collectionId:CollectionIDs.services
+  })
+  if(serverAction.error){
+    return <span className="text-red-400 text-center">{serverAction.error}</span>
+  }
   return (
     <SectionContainer
       id={sectionIds.services}
@@ -58,39 +63,24 @@ const Services = () => {
         className: "pt-4 mt-4"
       }}
     >
-      <ShowIf
-        conditionalRenderKey={mediumDeviceMedia1024}
-        elseComponent={
-          <div className="hidden lg:grid grid-cols-1 gap-4 gap-y-12 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {[1, 2, 3, 4, 5].map((item, index) => (
-              <ServiceCard key={index} />
+      <ResponsiveRenderer
+      elseChildren={
+         <div className="hidden lg:grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {(serverAction.data)?.map((item:Services_TechsTools, index:number) => (
+              <ServiceCard key={index} data={item}/>
             ))}
           </div>
-        }
+      }
       >
-        <Carousel
-          responsive={{
-            desktop: {
-              breakpoint: { max: 3000, min: 1024 },
-              items: 3
-            },
-            tablet: {
-              breakpoint: { max: 1024, min: 464 },
-              items: 2
-            },
-            mobile: {
-              breakpoint: { max: 464, min: 0 },
-              items: 1
-            }
-          }}
+         <Carousel
           autoPlay
           infinite
         >
-          {[1, 2, 3, 4, 5].map((item, index) => (
-            <ServiceCard key={index} />
-          ))}
+          {(serverAction.data)?.map((item:Services_TechsTools, index:number) => (
+              <ServiceCard key={index} data={item}/>
+            ))}
         </Carousel>
-      </ShowIf>
+      </ResponsiveRenderer>
     </SectionContainer>
   );
 };
