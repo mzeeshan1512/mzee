@@ -7,6 +7,7 @@ interface TrustedRedirectProps extends React.ComponentProps<"a"> {
   autoInvoke?: boolean;
   redirectUrl?: string;
   isTrusted?: boolean;
+  symbol?:boolean
 }
 
 const TrustedRedirect: React.FC<
@@ -20,6 +21,7 @@ const TrustedRedirect: React.FC<
   target,
   autoInvoke = false,
   isTrusted = false,
+  symbol,
   redirectUrl = "/out-bound-redirect/",
   ...rest
 }) => {
@@ -95,7 +97,7 @@ const TrustedRedirect: React.FC<
   }
   return (
     <a {...rest} href={href} onClick={performRedirect}>
-      {children}
+      {children} {symbol &&  <span>🔗</span>}
     </a>
   );
 };

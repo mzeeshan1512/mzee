@@ -100,9 +100,7 @@ const StickyImageWrapper = ({
   );
 };
 
-/* */
-
-const renderTimeLineFormat = (timeline: ExpTimelineFormat[] ) => {
+const renderTimeLineFormat = (timeline: ExpTimelineFormat[]) => {
   return (
     <ul className="ps-5">
       {timeline?.map((item, index) => (
@@ -124,7 +122,7 @@ const renderTimeLineFormat = (timeline: ExpTimelineFormat[] ) => {
             <small className="text-sm text-slate-400">
               <time>{formatDate(item?.start_date!, "MMM-YYYY")}</time>
               <span className="mx-1">-</span>
-              <time>{getEndDate(item,"MMM-YYYY" )}</time>
+              <time>{getEndDate(item, "MMM-YYYY")}</time>
             </small>
           </div>
         </li>
@@ -138,17 +136,18 @@ const renderTrustedDomain = (item: AboutContentDataProps) =>
     <div className="hover-bottom-outline">
       <TrustedRedirect
         href={item?.link || undefined}
-        className={`!font-normal !text-red-500 hover:!text-transparent hover:!font-semibold`}
+        symbol
+        className={`!font-normal !text-primary-500 hover:!text-transparent hover:!font-semibold`}
       >
         {item?.organization}
       </TrustedRedirect>
     </div>
   ) : (
-    <span className="!text-red-500">{item?.organization}</span>
+    <span className="!text-primary-500">{item?.organization}</span>
   );
 
 const RenderListItemContent = ({
-  format="MMM-YYYY",
+  format = "MMM-YYYY",
   ...listItemContent
 }: AboutContentDataProps & { format?: DateFormat }) => {
   return (
@@ -162,23 +161,19 @@ const RenderListItemContent = ({
             {renderTrustedDomain(listItemContent)}
           </div>
         </ShowIf>
-        <ShowIf
-          conditionalRenderKey={
-            listItemContent?.start_date && listItemContent?.end_date
-          }
-        >
+        {listItemContent?.start_date && listItemContent?.end_date && (
           <div className="text-slate-400">
-            <ShowIf conditionalRenderKey={listItemContent.start_date}>
-              <time>
-                {formatDate(listItemContent?.start_date!, format)}
-              </time>
-              <span className="mx-1">-</span>
-            </ShowIf>
-            <ShowIf conditionalRenderKey={listItemContent?.end_date}>
+            {listItemContent.start_date && (
+              <>
+                <time>{formatDate(listItemContent?.start_date!, format)}</time>
+                <span className="mx-1">-</span>
+              </>
+            )}
+            {listItemContent?.end_date && (
               <time>{getEndDate(listItemContent, format!)}</time>
-            </ShowIf>
+            )}
           </div>
-        </ShowIf>
+        )}
       </div>
       <ShowIf
         conditionalRenderKey={listItemContent?.timeLine?.length! > 0}
@@ -190,12 +185,42 @@ const RenderListItemContent = ({
   );
 };
 
+const RenderCoursesList = (listContent: GroupedCoursesCertification) => {
+  return (
+    <>
+      <div className="flex justify-between items-center flex-wrap gap-2 w-full text-current">
+        <strong className="text-primary-500">{listContent?.prefix}</strong>
+        <span className="text-slate-500">
+          {listContent?.institute} - {listContent?.platform}
+        </span>
+      </div>
+      <ul className="list-[circle] ps-5 marker:text-primary-500">
+        {listContent?.courses!.map((course) => (
+          <li key={course.id}>
+            <div className="hover-bottom-outline">
+              <TrustedRedirect
+                href={course?.link || undefined}
+                symbol
+                className={`!font-normal hover:!text-transparent hover:!font-semibold`}
+              >
+                {course?.title}
+              </TrustedRedirect>
+            </div>
+            <span className="text-slate-500">{course.verificationId}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
+
 export {
   ListWrapper,
   StickyImageWrapper,
   renderTrustedDomain,
   RenderListItemContent,
-  renderTimeLineFormat
+  renderTimeLineFormat,
+  RenderCoursesList
 };
 
 export type { ListWrapperProps, StickyImageWrapperProps };

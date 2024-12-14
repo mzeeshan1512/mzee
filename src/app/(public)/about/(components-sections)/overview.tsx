@@ -66,7 +66,7 @@ const Overview = async () => {
             </p>
             <div data-aos="zoom-in" data-aos-duration="1000">
               <SocialIcons
-                className="flex-wrap gap-y-4"
+                className="flex-wrap !gap-2"
                 socialContact={socialContact}
               />
             </div>

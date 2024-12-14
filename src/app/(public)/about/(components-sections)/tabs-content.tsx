@@ -1,5 +1,6 @@
 import {
   ListWrapper,
+  RenderCoursesList,
   RenderListItemContent,
   StickyImageWrapper
 } from "./content-wrappers";
@@ -14,6 +15,7 @@ import {
 } from "@/shared/firebase/server-actions";
 import { groupDataByTimeLineMappedFormat } from "./utils";
 import { DateFormat } from "@/shared/utils/date";
+import { json } from "stream/consumers";
 
 type Content<T> = {
   formatDataFn?: (data: T) => any;
@@ -34,16 +36,33 @@ const ContentList: Record<AboutPageColllectionIds, Content<unknown>> = {
     imgSrc: EduImg,
     format: "YYYY",
     conditions: {
-      orderByFields: 
-        {
-          field: "start_date",
-          direction: "desc"
-        }
-      
+      orderByFields: {
+        field: "start_date",
+        direction: "desc"
+      }
     }
   },
   [AboutPageColllectionIds.courses_certification]: {
-    imgSrc: CertImg
+    imgSrc: CertImg,
+    formatDataFn: (data: any): GroupedCoursesCertification[] => {
+      return Object?.keys?.(data)?.map((key) => {
+        const objectInHand: Courses_Certification = data[key][0];
+        return {
+          prefix: key,
+          institute: objectInHand.organization!,
+          platform: objectInHand.platform!,
+          courses: data[key]
+        };
+      });
+    },
+    groupByField: "prefix",
+    conditions: {
+      excludeFields: ["start_date", "end_date", "same_as"],
+      orderByFields: {
+        field: "created_at",
+        direction: "asc"
+      }
+    }
   },
   [AboutPageColllectionIds.training]: {
     imgSrc: CertImg
@@ -66,7 +85,11 @@ const TanContent = async ({ id }: { id: AboutPageColllectionIds }) => {
   return (
     <>
       <ListWrapper list={serverAction.data}>
-        <RenderListItemContent format={tabContent?.format} />
+        {id === AboutPageColllectionIds.courses_certification ? (
+          <RenderCoursesList />
+        ) : (
+          <RenderListItemContent format={tabContent?.format} />
+        )}
       </ListWrapper>
       <StickyImageWrapper
         imgAlt={id}

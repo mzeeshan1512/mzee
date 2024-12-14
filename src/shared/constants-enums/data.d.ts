@@ -24,10 +24,17 @@ interface AboutContentDataProps extends CommonAbout {
   timeLine?:ExpTimelineFormat[]
 }
 
-interface Courses_Certification {
+interface Courses_Certification extends CommonAbout {
   platform?: string;
   verificationId?: string;
   prefix?: string;
+}
+
+interface GroupedCoursesCertification{
+  platform?:string,
+  prefix?:string,
+  institute?:string,
+  courses?:Courses_Certification[]
 }
 
 type AboutData = CommonAbout &

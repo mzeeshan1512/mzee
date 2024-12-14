@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import ReactDOM from "react-dom";
 import { useDocumentEvent } from "../hooks/use-window-event";
 import { Cross } from "../icon/common";
 import ShowIf from "./show-if";
@@ -82,8 +83,8 @@ const Modal = ({
     return null;
   }
 
-  return (
-    <div className="fixed inset-0 z-30 h-screen w-screen overflow-hidden flex justify-center items-center">
+  const modalContent = (
+    <div className="fixed inset-0 z-[1000] h-screen w-screen overflow-hidden flex justify-center items-center">
       <div
         {...backDropProps}
         className={
@@ -133,6 +134,7 @@ const Modal = ({
       </div>
     </div>
   );
+   return ReactDOM.createPortal(modalContent, document.body);
 };
 
 export default React.memo(Modal);

@@ -111,7 +111,7 @@ export const fetchRecordsOnServer = () => {
           totalRecrods = snapshot.size;
           const groupedData: Record<string, any> = {};
           snapshot.forEach((doc) => {
-            const cleanData:Record<string, any> = {...getCleanData(doc?.data()), id: doc?.id };
+            const cleanData:Record<string, any> = {...getCleanData(doc?.data(), args.conditions?.excludeFields), id: doc?.id };
             if (args?.groupedData) {
               const key = cleanData[args?.groupedData?.groupByField]
               if (!groupedData[`${key}`]) {

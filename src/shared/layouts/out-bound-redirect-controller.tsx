@@ -12,6 +12,7 @@ const OutBoundRedirectController = () => {
   const navigate = useRouter();
 
   const handleOpenInNewTab = () => {
+    navigate.back();
     return window?.open(url!, "_blank");
   };
   const errorMessage = React.useMemo(() => {
