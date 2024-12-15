@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { Fragment } from "react";
 import ShowIf from "@/shared/components/show-if";
 import TrustedRedirect from "@/shared/components/trusted-redirect";
 import { DateFormat, formatDate } from "@/shared/utils/date";
@@ -22,11 +22,9 @@ const ListWrapper = <T,>({
     <ul
       {...listProps}
       className={
-        "order-2 md:order-1 list-[square] ps-5 marker:text-primary-500 md:col-span-2 " +
+        "order-2 md:order-1 list-[square] ps-5 marker:text-primary-500 md:col-span-2 me-3" +
         (listProps?.className || "")
       }
-      data-aos="zoom-in-right"
-      data-aos-duration="1000"
     >
       {list?.map((item: any, index: number) => (
         <li
@@ -36,8 +34,6 @@ const ListWrapper = <T,>({
             (listItem?.className || "")
           }
           key={index}
-          // data-aos="zoom-in-right"
-          // data-aos-duration="1000"
         >
           {React.isValidElement(children)
             ? React.cloneElement(children as React.ReactElement, {
@@ -92,7 +88,7 @@ const StickyImageWrapper = ({
             src={imgSrc}
             alt={imgAlt || process.env.NEXT_PUBLIC_APP_Name || ""}
             className={
-              "w-full p-2 aspect-square drop-shadow-[-1px_2px_5px_var(--secondary)] dark:drop-shadow-[-1px_2px_5px_var(--primary)] " +
+              "w-1/2 md:w-full p-2 aspect-square drop-shadow-[-1px_2px_5px_var(--secondary)] dark:drop-shadow-[-1px_2px_5px_var(--primary)] " +
               (imageClassName || "")
             }
           />
@@ -153,7 +149,7 @@ const RenderListItemContent = ({
   ...listItemContent
 }: AboutContentDataProps & { format?: DateFormat }) => {
   return (
-    <>
+    <Fragment data-aos="zoom-in-right" data-aos-duration="1000">
       <div className="flex justify-between items-center flex-wrap gap-2">
         <ShowIf
           conditionalRenderKey={listItemContent?.timeLine?.length! > 0}
@@ -183,13 +179,13 @@ const RenderListItemContent = ({
       >
         {renderTimeLineFormat(listItemContent?.timeLine!)}
       </ShowIf>
-    </>
+    </Fragment>
   );
 };
 
 const RenderCoursesList = (listContent: GroupedCoursesCertification) => {
   return (
-    <>
+    <Fragment data-aos="zoom-in-right" data-aos-duration="1000">
       <div className="flex justify-between items-center flex-wrap gap-2 w-full text-current">
         <strong className="text-primary-500">{listContent?.prefix}</strong>
         <span className="text-slate-500">
@@ -212,7 +208,7 @@ const RenderCoursesList = (listContent: GroupedCoursesCertification) => {
           </li>
         ))}
       </ul>
-    </>
+    </Fragment>
   );
 };
 

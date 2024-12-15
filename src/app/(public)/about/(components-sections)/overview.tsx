@@ -32,14 +32,14 @@ const Overview = async () => {
   return (
     <>
       <div className="order-1 md:order-1">
-        <div className="p-2 mx-auto md:sticky md:top-0 md:inset-x-0 overflow-hidden">
+        <div className="p-2 mx-auto md:sticky md:top-0 md:inset-x-0 md:overflow-hidden">
           <div className="flex flex-col gap-3 justify-center w-full items-center">
             <Image
               src={record.user_avatar.src?.url!}
               alt={process.env.NEXT_PUBLIC_APP_Name || ""}
               width={100}
               height={100}
-              className="w-3/4 h-3/4 p-2 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 drop-shadow-[-1px_2px_5px_var(--secondary)] dark:drop-shadow-[-1px_2px_5px_var(--primary)] aspect-square transition-all ease-in-out hover:scale-110"
+              className="w-1/2 md:w-3/4 md:h-3/4 p-2 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 drop-shadow-[-1px_2px_5px_var(--secondary)] dark:drop-shadow-[-1px_2px_5px_var(--primary)] aspect-square transition-all ease-in-out hover:scale-110"
               data-aos="zoom-in"
               data-aos-duration="1000"
             />
@@ -68,10 +68,12 @@ const Overview = async () => {
           </div>
         </div>
       </div>
-      <div className="order-2 md:order-2 md:col-span-2 w-[95%] flex flex-col gap-4 ">
+      <div
+        data-aos="zoom-in"
+        // data-aos-duration="1000"
+        className="order-2 md:order-2 md:col-span-2 w-[95%] flex flex-col gap-4 "
+      >
         <article
-          data-aos="zoom-in"
-          data-aos-duration="1000"
           dangerouslySetInnerHTML={{
             __html: decodeURIComponent(escape(atob(record?.bio)))
           }}

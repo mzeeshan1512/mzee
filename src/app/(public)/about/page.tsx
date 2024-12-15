@@ -38,35 +38,35 @@ const tabList: list[] = [
       </TabContentContainer>
     ),
     title: TabList.Experience
+  },
+  {
+    tabId: TabList.Certifications,
+    tabContent: (
+      <TabContentContainer title={TabList.Certifications}>
+        <TanContent id={AboutPageColllectionIds.courses_certification} />
+      </TabContentContainer>
+    ),
+    title: TabList.Certifications
+    // disabled: true
+  },
+  {
+    tabId: TabList.Education,
+    tabContent: (
+      <TabContentContainer title={TabList.Education}>
+        <TanContent id={AboutPageColllectionIds.education} />
+      </TabContentContainer>
+    ),
+    title: TabList.Education
+  },
+  {
+    tabId: TabList.Trainings,
+    tabContent: (
+      <TabContentContainer title={TabList.Trainings}>
+        <TanContent id={AboutPageColllectionIds.training} />
+      </TabContentContainer>
+    ),
+    title: TabList.Trainings
   }
-  // {
-  //   tabId: TabList.Certifications,
-  //   tabContent: (
-  //     <TabContentContainer title={TabList.Certifications}>
-  //       <TanContent id={AboutPageColllectionIds.courses_certification} />
-  //     </TabContentContainer>
-  //   ),
-  //   title: TabList.Certifications
-  //   // disabled: true
-  // },
-  // {
-  //   tabId: TabList.Education,
-  //   tabContent: (
-  //     <TabContentContainer title={TabList.Education}>
-  //       <TanContent id={AboutPageColllectionIds.education} />
-  //     </TabContentContainer>
-  //   ),
-  //   title: TabList.Education
-  // },
-  // {
-  //   tabId: TabList.Trainings,
-  //   tabContent: (
-  //     <TabContentContainer title={TabList.Trainings}>
-  //       <TanContent id={AboutPageColllectionIds.training} />
-  //     </TabContentContainer>
-  //   ),
-  //   title: TabList.Trainings
-  // }
 ];
 
 const page = () => {

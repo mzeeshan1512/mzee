@@ -7,12 +7,14 @@ type TabContentContainerProps = {
   title?: string;
   children: React.ReactNode;
   hideNavIcons?: boolean;
+  contentClass?: string;
 };
 
 const TabContentContainer = ({
   children,
   title,
-  hideNavIcons
+  hideNavIcons,
+  contentClass = ""
 }: TabContentContainerProps) => {
   const [slicedCount, setSlicedCount] = React.useState<number>(0);
   const recordsPerView = 5;
@@ -29,7 +31,14 @@ const TabContentContainer = ({
           <b className="text-gradient">{title}</b>
         </h1>
       </ShowIf>
-      <div className="max-h-[calc(100vh-310px)] overflow-auto mt-2 grid grid-flow-row md:grid-cols-3 gap-8 relative md:me-4">
+      <div
+        className={
+          "max-h-[calc(100vh-310px)] overflow-auto mt-2 grid grid-flow-row md:grid-cols-3 gap-8 relative md:pe-4 " +
+          contentClass
+        }
+        data-aos="zoom-in"
+        data-aos-duration="1000"
+      >
         {enhancedChildren}
       </div>
       <ShowIf conditionalRenderKey={hideNavIcons}>
