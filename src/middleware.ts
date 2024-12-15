@@ -6,6 +6,7 @@ import { cookiesName } from "./shared/constants-enums/navigation-list";
 export default async function middleware(req: NextRequest) {
   const { nextUrl } = req;
   if(
+    nextUrl.hostname !==" localhost" &&
     nextUrl?.pathname === "/" &&
     req?.geo &&
     req?.ip

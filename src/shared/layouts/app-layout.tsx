@@ -27,11 +27,15 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
     saveVisit();
   }, [analytics]);
 
-  if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
-    return online ? <MaintenanceMode /> : <Offline />;
+  if (!online) {
+    return <Offline />;
   }
 
-  return <ErrorBoundary>{online ? children : <Offline />}</ErrorBoundary>;
+  if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
+    return <MaintenanceMode />;
+  }
+
+  return <ErrorBoundary>{children}</ErrorBoundary>;
 };
 
 export default AppLayout;

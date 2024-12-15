@@ -52,11 +52,6 @@ const Services = async () => {
   await serverAction.getDocuments({
     collectionId: CollectionIDs.services
   });
-  if (serverAction.error) {
-    return (
-      <span className="text-red-400 text-center">{serverAction.error}</span>
-    );
-  }
   return (
     <SectionContainer
       id={sectionIds.services}

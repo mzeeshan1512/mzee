@@ -34,11 +34,8 @@ const Tech = ({ tech, displayLabel }: { tech: Services_TechsTools, displayLabel?
 const TechStack = async() => {
    const serverAction = fetchRecordsOnServer()
   await serverAction.getDocuments({
-    collectionId:CollectionIDs.technologies
-  })
-  if(serverAction.error){
-    return <span className="text-red-400 text-center">{serverAction.error}</span>
-  }
+    collectionId: CollectionIDs.technologies
+  });
   return (
     <SectionContainer
       id={sectionIds.tech}

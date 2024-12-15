@@ -29,11 +29,6 @@ const Overview = async () => {
     isSingleRecord: true
   });
   const record: myInfo = serverAction.data;
-  if (serverAction.error) {
-    return (
-      <span className="text-red-400 text-center">{serverAction.error}</span>
-    );
-  }
   return (
     <>
       <div className="order-1 md:order-1">
