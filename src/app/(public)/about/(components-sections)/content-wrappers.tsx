@@ -33,6 +33,8 @@ const ListWrapper = <T,>({
             "text-[clamp(15px,1.1vw,1.1vw+15px)] py-2 " +
             (listItem?.className || "")
           }
+          data-aos="zoom-in-right"
+          data-aos-duration="1000"
           key={index}
         >
           {React.isValidElement(children)

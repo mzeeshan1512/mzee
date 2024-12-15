@@ -71,11 +71,12 @@ const tabList: list[] = [
 
 const page = () => {
   return (
-    <div className="container mx-auto my-4 w-calc-10 block md:flex rounded items-start">
+    <div className="container mx-auto mb-4 md:my-4 w-calc-10 block md:flex rounded items-start">
       <Tabs
         tabsList={tabList}
         navContainerProps={{
-          className: "sm:sticky sm:top-[95px] sm:z-10 md:w-60 md:mt-10"
+          className:
+            "sm:sticky sm:top-[78px] sm:z-10 md:w-60 md:mt-10 bg-white dark:bg-black"
         }}
         listContainerProps={{
           className:
