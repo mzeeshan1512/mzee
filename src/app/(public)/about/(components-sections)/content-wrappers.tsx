@@ -25,6 +25,8 @@ const ListWrapper = <T,>({
         "order-2 md:order-1 list-[square] ps-5 marker:text-primary-500 md:col-span-2 " +
         (listProps?.className || "")
       }
+      data-aos="zoom-in-right"
+      data-aos-duration="1000"
     >
       {list?.map((item: any, index: number) => (
         <li
@@ -34,8 +36,8 @@ const ListWrapper = <T,>({
             (listItem?.className || "")
           }
           key={index}
-          data-aos="zoom-in-right"
-          data-aos-duration="1000"
+          // data-aos="zoom-in-right"
+          // data-aos-duration="1000"
         >
           {React.isValidElement(children)
             ? React.cloneElement(children as React.ReactElement, {

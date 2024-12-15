@@ -29,7 +29,7 @@ const TabContentContainer = ({
           <b className="text-gradient">{title}</b>
         </h1>
       </ShowIf>
-      <div className="md:h-[calc(100vh-305px)] overflow-auto mt-2 grid grid-flow-row md:grid-cols-3 gap-8 relative min-h-[200px] md:me-4">
+      <div className="max-h-[calc(100vh-310px)] overflow-auto mt-2 grid grid-flow-row md:grid-cols-3 gap-8 relative md:me-4">
         {enhancedChildren}
       </div>
       <ShowIf conditionalRenderKey={hideNavIcons}>
