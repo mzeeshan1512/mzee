@@ -106,6 +106,13 @@ const Content = ({
         required: true,
         disabled: true,
         colClassName: "d-none"
+      },
+      {
+        type: "textarea",
+        name: "description",
+        label: "Description",
+        required: true,
+        col: 12
       }
     ],
     [techOptions]

@@ -5,16 +5,26 @@ import { StringError } from "@/shared/constants/regex";
 const basicInfoSchema = yup.object().shape({
   /* required */
   title: yup.string().typeError(StringError).required("Title is required"),
-  tech_stack: yup.array().of(
-     yup.object().shape({
-    label: yup.string().required('Label is required'),
-    value: yup.mixed().required('Value is required'),
-  })).required("Tech stack is required"),
+  tech_stack: yup
+    .array()
+    .of(
+      yup.object().shape({
+        label: yup.string().required("Label is required"),
+        value: yup.mixed().required("Value is required")
+      })
+    )
+    .required("Tech stack is required"),
   unique_identifier: yup
     .string()
     .typeError(StringError)
     .required("Unique identifier is required"),
-  project_category:yup.object().required("Project Category is required"),  
+  project_category: yup.object().required("Project Category is required"),
+  description: yup
+    .string()
+    .typeError(StringError)
+    .required("Project Description is required")
+    .min(50, "Description must contain atleast 50 characters")
+    .max(400, "Description must not exceed 400 characters"),
   /* prefilled */
   my_role: yup.string().nullable(),
   github_url: yup.string().url().nullable(),
@@ -39,7 +49,7 @@ const basicInfoSchema = yup.object().shape({
     .url()
     .nullable(),
   demo_link: yup.string().url().nullable(),
-  disable_demo: yup.boolean(),
+  disable_demo: yup.boolean()
 });
 
 export const fileType = (value: any, type = "image") => {
@@ -82,10 +92,11 @@ const imageGallerySchema = yup.object().shape({
           if (!value) return true;
           return sizeValidation(value);
         })
-    ).nullable()
+    )
+    .nullable()
     //.required("Slider image(s) is required.")
     //.min(1, "At least one slider image is required.")
-    .max(10, "You can upload up to 10 slider images."),
+    .max(10, "You can upload up to 10 slider images.")
 });
 
 const videoGallerySchema = yup.object().shape({
@@ -102,24 +113,23 @@ const videoGallerySchema = yup.object().shape({
     .test("fileSize", "Banner video size exceeds 5MB limit.", (value: any) => {
       if (!value) return true;
       return sizeValidation(value);
-    }).nullable(),
-    demo_video: 
-      yup
-        .mixed()
-        .test(
-          "fileType",
-          "Invalid file type. Only mp4, avi, mkv, mov are allowed.",
-          (value: any) => {
-            if (!value) return true;
-            return fileType(value, "video");
-          }
-        )
-        .test("fileSize", "Demo video size exceeds 5MB limit.", (value: any) => {
-          if (!value) return true;
-          return sizeValidation(value);
-        })
+    })
+    .nullable(),
+  demo_video: yup
+    .mixed()
+    .test(
+      "fileType",
+      "Invalid file type. Only mp4, avi, mkv, mov are allowed.",
+      (value: any) => {
+        if (!value) return true;
+        return fileType(value, "video");
+      }
+    )
+    .test("fileSize", "Demo video size exceeds 5MB limit.", (value: any) => {
+      if (!value) return true;
+      return sizeValidation(value);
+    })
     .nullable()
-   
 });
 
-export { basicInfoSchema, imageGallerySchema,videoGallerySchema };
+export { basicInfoSchema, imageGallerySchema, videoGallerySchema };

@@ -99,7 +99,7 @@ const ProjectViews = () => {
           <Toggler
             value={
               item.basicInfo?.project_category?.value! ===
-              ProjectCategoryList.featured
+                ProjectCategoryList.featured || item.basicInfo?.is_featured
             }
             name={item.id + "is_featured"}
             onChange={() =>
@@ -110,7 +110,7 @@ const ProjectViews = () => {
                   ...item,
                   basicInfo: {
                     ...item.basicInfo,
-                    is_featured:!item.basicInfo.is_featured,
+                    is_featured: !item.basicInfo.is_featured,
                     project_category:
                       item.basicInfo?.project_category?.value ===
                       ProjectCategoryList.featured

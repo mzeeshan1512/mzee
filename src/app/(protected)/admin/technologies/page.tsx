@@ -27,24 +27,31 @@ const TechnologiesPage = () => {
   const { data } = useGetDocuments(CollectionIDs.icons);
   const TableHeader: TableDataKeyList[] = [
     {
-      data_key: "",
+      data_key: "blob",
       title: "Technologies",
       cell: (item: Services_TechsTools) => item?.blob?.label!
     },
     {
       data_key: "category",
       title: "Category",
-       cell: (item: Services_TechsTools) => item?.category?.map(item=>item.label).join(", ") ?? null
+      cell: (item: Services_TechsTools) =>
+        item?.category?.map((item) => item.label).join(", ") ?? null
     },
     {
       data_key: "svg",
       title: "Svg",
       cell: (item: Services_TechsTools) => {
         return (
-          <img src={item?.blob?.value?.src?.url!} alt={item?.blob?.label!} width={50} height={50} style={{
-            objectFit: "contain",
-            aspectRatio:"1/1"
-          }} />
+          <img
+            src={item?.blob?.value?.src?.url!}
+            alt={item?.blob?.label!}
+            width={50}
+            height={50}
+            style={{
+              objectFit: "contain",
+              aspectRatio: "1/1"
+            }}
+          />
         );
       }
     }
