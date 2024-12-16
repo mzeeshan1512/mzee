@@ -133,6 +133,7 @@ const renderTimeLineFormat = (timeline: ExpTimelineFormat[]) => {
               <span className="mx-1">-</span>
               <time>{getEndDate(item, "MMM-YYYY")}</time>
             </small>
+            <small className="text-slate-300">{item.description}</small>
           </div>
         </li>
       ))}
@@ -152,7 +153,7 @@ const renderTrustedDomain = (item: AboutContentDataProps) =>
       </TrustedRedirect>
     </div>
   ) : (
-    <span className="!text-primary-500">{item?.organization}</span>
+    <div className="!text-primary-500">{item?.organization}</div>
   );
 
 const RenderListItemContent = ({
@@ -189,6 +190,9 @@ const RenderListItemContent = ({
         elseComponent={renderTrustedDomain(listItemContent)}
       >
         {renderTimeLineFormat(listItemContent?.timeLine!)}
+      </ShowIf>
+      <ShowIf conditionalRenderKey={listItemContent?.description}>
+        <small className="text-slate-300">{listItemContent.description}</small>
       </ShowIf>
     </>
   );

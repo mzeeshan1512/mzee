@@ -25,7 +25,7 @@ const tabList: list[] = [
   {
     tabId: TabList.Overview,
     tabContent: (
-      <TabContentContainer title={TabList.Overview}>
+      <TabContentContainer title={TabList.Overview} contentClass="hide-scroll">
         <Overview />
       </TabContentContainer>
     ),

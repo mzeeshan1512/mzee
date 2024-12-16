@@ -16,6 +16,7 @@ interface ExpTimelineFormat {
   end_date?: string | Date;
   title?:string
   currently?:boolean
+  description?:string
 }
 interface AboutContentDataProps extends CommonAbout {
   start_date?: string | Date;

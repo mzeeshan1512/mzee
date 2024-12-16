@@ -32,6 +32,7 @@ const timeLineFormatData = (
           start_date: itemStartDate,
           end_date: itemEndDate,
           currently:item.currently,
+          description:item.description
         });
       }
       if (!result.start_date || itemStartDate! < resultStart!) {
