@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { Fragment } from "react";
+import React from "react";
 import ShowIf from "@/shared/components/show-if";
 import TrustedRedirect from "@/shared/components/trusted-redirect";
 import { DateFormat, formatDate } from "@/shared/utils/date";
@@ -10,19 +10,23 @@ type ListWrapperProps<T> = {
   listItem?: React.ComponentProps<"li">;
   list: T[];
   children: React.ReactNode;
+  order?: 1 | 2;
 };
 
 const ListWrapper = <T,>({
   list,
   listItem,
   listProps,
-  children
+  children,
+  order = 1
 }: ListWrapperProps<T>) => {
   return (
     <ul
       {...listProps}
       className={
-        "order-2 md:order-1 list-[square] ps-5 marker:text-primary-500 md:col-span-2 me-3" +
+        `order-2 ${
+          order === 1 ? "md:order-1" : "md:order-2"
+        } list-[square] ps-5 marker:text-primary-500 md:col-span-2 me-3 ` +
         (listProps?.className || "")
       }
     >
@@ -33,8 +37,8 @@ const ListWrapper = <T,>({
             "text-[clamp(15px,1.1vw,1.1vw+15px)] py-2 " +
             (listItem?.className || "")
           }
-          data-aos="zoom-in-right"
-          data-aos-duration="1000"
+          // data-aos="zoom-in-right"
+          // data-aos-duration="1000"
           key={index}
         >
           {React.isValidElement(children)
@@ -55,6 +59,7 @@ type StickyImageWrapperProps = {
   imageClassName?: string;
   imgSrc: any;
   imgAlt: string;
+  order?: 1 | 2;
 };
 
 const StickyImageWrapper = ({
@@ -63,12 +68,16 @@ const StickyImageWrapper = ({
   containerProps,
   imageClassName,
   wrapperProps,
-  mainWrapperProps
+  mainWrapperProps,
+  order = 1
 }: StickyImageWrapperProps) => {
   return (
     <div
       {...mainWrapperProps}
-      className={"order-1 md:order-2 " + (mainWrapperProps?.className || "")}
+      className={
+        `order-1 ${order === 1 ? "md:order-2" : "md:order-1"}` +
+        (mainWrapperProps?.className || "")
+      }
     >
       <div
         {...containerProps}
@@ -151,7 +160,7 @@ const RenderListItemContent = ({
   ...listItemContent
 }: AboutContentDataProps & { format?: DateFormat }) => {
   return (
-    <Fragment data-aos="zoom-in-right" data-aos-duration="1000">
+    <>
       <div className="flex justify-between items-center flex-wrap gap-2">
         <ShowIf
           conditionalRenderKey={listItemContent?.timeLine?.length! > 0}
@@ -181,13 +190,13 @@ const RenderListItemContent = ({
       >
         {renderTimeLineFormat(listItemContent?.timeLine!)}
       </ShowIf>
-    </Fragment>
+    </>
   );
 };
 
 const RenderCoursesList = (listContent: GroupedCoursesCertification) => {
   return (
-    <Fragment data-aos="zoom-in-right" data-aos-duration="1000">
+    <>
       <div className="flex justify-between items-center flex-wrap gap-2 w-full text-current">
         <strong className="text-primary-500">{listContent?.prefix}</strong>
         <span className="text-slate-500">
@@ -210,7 +219,7 @@ const RenderCoursesList = (listContent: GroupedCoursesCertification) => {
           </li>
         ))}
       </ul>
-    </Fragment>
+    </>
   );
 };
 

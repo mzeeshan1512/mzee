@@ -17,7 +17,8 @@ enum TabList {
   Experience = "experience",
   Education = "education",
   Certifications = "certifications",
-  Trainings = "trainings"
+  Trainings = "trainings",
+  Skills = "skills"
 }
 
 const tabList: list[] = [
@@ -38,6 +39,16 @@ const tabList: list[] = [
       </TabContentContainer>
     ),
     title: TabList.Experience
+  },
+  {
+    tabId: TabList.Skills,
+    tabContent: (
+      <TabContentContainer title={TabList.Skills}>
+        <TanContent id={AboutPageColllectionIds.skills} />
+      </TabContentContainer>
+    ),
+    title: TabList.Skills,
+    disabled: true
   },
   {
     tabId: TabList.Certifications,
@@ -71,12 +82,12 @@ const tabList: list[] = [
 
 const page = () => {
   return (
-    <div className="container mx-auto mb-4 md:my-4 w-calc-10 block md:flex rounded items-start">
+    <main className="container mx-auto mb-4 md:my-4 w-calc-10 block md:flex rounded items-start">
       <Tabs
         tabsList={tabList}
         navContainerProps={{
           className:
-            "sm:sticky sm:top-[78px] sm:z-10 md:w-60 md:mt-10 bg-white dark:bg-black"
+            "sm:sticky sm:top-[78px] sm:z-10 md:w-60 md:mt-10 bg-white dark:bg-black md:!bg-transparent"
         }}
         listContainerProps={{
           className:
@@ -88,7 +99,7 @@ const page = () => {
         }}
         activeTabClass="!bg-white md:!bg-[var(--section-odd-bg)] !text-secondary-500 !border-none !shadow-[inset_0_-3px_0px_var(--primary)] md:!shadow-[inset_-3px_0px_0px_var(--primary)]"
       />
-    </div>
+    </main>
   );
 };
 

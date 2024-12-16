@@ -2,7 +2,8 @@ enum AboutPageColllectionIds {
   experience = "about-experience",
   education = "about-education",
   training = "about-trainings",
-  courses_certification = "about-courses-certifications"
+  courses_certification = "about-courses-certifications",
+  skills ="about-skills",
 }
 enum CollectionIDs {
    myInfo= "about-my-info",

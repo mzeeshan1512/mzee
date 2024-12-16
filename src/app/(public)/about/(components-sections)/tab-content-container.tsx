@@ -33,7 +33,7 @@ const TabContentContainer = ({
       </ShowIf>
       <div
         className={
-          "md:max-h-[calc(100vh-310px)] md:overflow-auto mt-2 grid grid-flow-row md:grid-cols-3 gap-8 relative md:pe-4 " +
+          "md:h-[calc(100vh-310px)] md:overflow-auto mt-2 grid grid-flow-row md:grid-cols-3 gap-8 relative md:pe-4 " +
           contentClass
         }
         data-aos="zoom-in"
