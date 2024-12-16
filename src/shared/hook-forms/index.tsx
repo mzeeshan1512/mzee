@@ -4,7 +4,6 @@ import { HookFormProps } from "../types/fields";
 
 // const FileUploaderForm = dynamic(() => import("./field-form"));
 const FieldArrayForm = dynamic(() => import("./field-array-form"));
-const AllInOneForm = dynamic(() => import("./all-in-one-form"));
 const FieldForm = dynamic(() => import("./field-form"));
 
 const Form = (
@@ -25,8 +24,6 @@ const Form = (
     FormComponent = FieldArrayForm;
   } else if (props?.formType === "file-uploader-form" || isAnyFileField()) {
     FormComponent = FieldForm;
-  } else if (props?.formType === "tabular-form" || props?.isDynamicForm) {
-    FormComponent = AllInOneForm;
   }
 
   return <FormComponent {...props} />;

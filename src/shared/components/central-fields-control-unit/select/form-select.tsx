@@ -63,7 +63,7 @@ const FormSelect = (props: FormProps) => {
                 if (props?.isMulti) {
                   temp = e.map((item: selectObject) => ({
                     value: item.value,
-                    label: item?.label,
+                    label: item?.label
                   }));
                 } else {
                   temp = { value: e.value, label: e?.label };
@@ -72,7 +72,7 @@ const FormSelect = (props: FormProps) => {
                   if (props.isMulti) {
                     props.callBack((prev: selectObject[]) => [
                       ...prev,
-                      ...temp,
+                      ...temp
                     ]);
                   } else {
                     props.callBack((prev: selectObject[]) => [...prev, temp]);
@@ -82,6 +82,7 @@ const FormSelect = (props: FormProps) => {
               }}
               isDisabled={props?.disabled}
               components={{ ...props?.customComponent }}
+              menuPortalTarget={document.body}
             />
           ) : (
             <Select
@@ -116,6 +117,7 @@ const FormSelect = (props: FormProps) => {
               }}
               isDisabled={props?.disabled}
               components={{ ...props?.customComponent }}
+              menuPortalTarget={document.body}
             />
           );
         }}

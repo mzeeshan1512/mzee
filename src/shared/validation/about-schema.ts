@@ -55,11 +55,11 @@ const ExperienceValidation = yup.object().shape({
 
 // main skills
 const mainSkillsField = {
-  title: yup
-    .string()
-    .typeError(StringError)
-    .required("Title is required.")
-    .min(3, "Title must contain atleast 3 characters"),
+  // title: yup
+  //   .string()
+  //   .typeError(StringError)
+  //   .required("Title is required.")
+  //   .min(3, "Title must contain atleast 3 characters"),
   category: yup.object().required("Category is required"),
   skills: yup.array().nullable()
 };

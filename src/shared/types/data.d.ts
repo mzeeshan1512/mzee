@@ -16,6 +16,10 @@ interface CommonAbout extends commonData {
   description?: string;
   organization?: string;
 }
+interface skills extends commonData{
+  category?:selectObject
+  skills?:blobOption[]
+}
 interface AboutContentDataProps extends CommonAbout {
   start_date?: string;
   end_date?: string;
