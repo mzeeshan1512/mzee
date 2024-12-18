@@ -71,6 +71,9 @@ const StickyImageWrapper = ({
   mainWrapperProps,
   order = 1
 }: StickyImageWrapperProps) => {
+  if (!imgSrc) {
+    return null;
+  }
   return (
     <div
       {...mainWrapperProps}
@@ -96,7 +99,7 @@ const StickyImageWrapper = ({
           data-aos-duration="1000"
         >
           <Image
-            src={imgSrc}
+            src={imgSrc!}
             alt={imgAlt || process.env.NEXT_PUBLIC_APP_Name || ""}
             className={
               "w-1/2 md:w-full p-2 aspect-square drop-shadow-[-1px_2px_5px_var(--secondary)] dark:drop-shadow-[-1px_2px_5px_var(--primary)] " +

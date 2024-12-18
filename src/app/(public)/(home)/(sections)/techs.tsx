@@ -6,8 +6,15 @@ import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import Carousel from "@/shared/components/carousel";
 import SectionContainer from "./(components)/section-wrapper";
 import ResponsiveRenderer from "./(components)/responsive-renderer";
+import ShowIf from "@/shared/components/show-if";
 
-const Tech = ({ tech, displayLabel }: { tech: Services_TechsTools, displayLabel?:boolean }) => {
+const Tech = ({
+  tech,
+  displayLabel
+}: {
+  tech: Services_TechsTools;
+  displayLabel?: boolean;
+}) => {
   return (
     <div
       className="bg-transparent cursor-default p-5 flex justify-center gap-2 items-center text-4xl border rounded-xl lg:border-none drop-shadow hover:scale-125 hover:border-none"
@@ -26,15 +33,23 @@ const Tech = ({ tech, displayLabel }: { tech: Services_TechsTools, displayLabel?
           __html: tech?.blob?.value?.svg?.code
         }}
       />
-      {displayLabel && <small className="capitalize">{tech?.blob?.label}</small>}
+      {displayLabel && (
+        <small className="capitalize">{tech?.blob?.label}</small>
+      )}
     </div>
   );
 };
 
-const TechStack = async() => {
-   const serverAction = fetchRecordsOnServer()
+const TechStack = async () => {
+  const serverAction = fetchRecordsOnServer();
   await serverAction.getDocuments({
-    collectionId: CollectionIDs.technologies
+    collectionId: CollectionIDs.technologies,
+    conditions: {
+      orderByFields: {
+        field: "blob.label",
+        direction: "asc"
+      }
+    }
   });
   return (
     <SectionContainer
@@ -45,28 +60,39 @@ const TechStack = async() => {
         className: "py-4 my-4"
       }}
     >
-      <ResponsiveRenderer
-        elseChildren={
-          /* hidden lg:grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 */
-          <div className="flex gap-4 justify-evenly items-center flex-wrap">
-            {serverAction.data?.map((tech:Services_TechsTools, index:number) => (
-              <Tech key={index} tech={tech} />
-            ))}
-          </div>
+      <ShowIf
+        conditionalRenderKey={
+          serverAction?.data && serverAction?.data?.length > 0
         }
       >
-        <Carousel showArrows={false}
-        autoPlay
-        infinite
-        slidesProps={{
-          className:"p-2"
-        }} 
+        <ResponsiveRenderer
+          elseChildren={
+            /* hidden lg:grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 */
+            <div className="flex gap-4 justify-evenly items-center flex-wrap">
+              {serverAction.data?.map(
+                (tech: Services_TechsTools, index: number) => (
+                  <Tech key={index} tech={tech} />
+                )
+              )}
+            </div>
+          }
         >
-          {serverAction.data?.map((tech:Services_TechsTools, index:number) => (
-            <Tech key={index} tech={tech} displayLabel/>
-          ))}
-        </Carousel>
-      </ResponsiveRenderer>
+          <Carousel
+            showArrows={false}
+            autoPlay
+            infinite
+            slidesProps={{
+              className: "p-2"
+            }}
+          >
+            {serverAction.data?.map(
+              (tech: Services_TechsTools, index: number) => (
+                <Tech key={index} tech={tech} displayLabel />
+              )
+            )}
+          </Carousel>
+        </ResponsiveRenderer>
+      </ShowIf>
     </SectionContainer>
   );
 };

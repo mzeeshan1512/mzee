@@ -5,6 +5,7 @@ import { socialContact } from "@/shared/constants-enums/navigation-list";
 import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import ContactModal from "@/shared/components/contact-form/contact-modal";
+import { chatLogo } from "@/shared/app-config";
 
 type myInfo = {
   skills_loop: {
@@ -29,13 +30,16 @@ const Overview = async () => {
     isSingleRecord: true
   });
   const record: myInfo = serverAction.data;
+  if (!record || Object.keys(record)?.length < 1) {
+    return null;
+  }
   return (
     <>
       <div className="order-1 md:order-1">
         <div className="p-2 mx-auto md:sticky md:top-0 md:inset-x-0 md:overflow-hidden">
           <div className="flex flex-col gap-3 justify-center w-full items-center">
             <Image
-              src={record.user_avatar.src?.url!}
+              src={record.user_avatar.src?.url ?? chatLogo}
               alt={process.env.NEXT_PUBLIC_APP_Name || ""}
               width={100}
               height={100}

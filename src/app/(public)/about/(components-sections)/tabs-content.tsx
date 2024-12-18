@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   ListWrapper,
   RenderCoursesList,
@@ -9,6 +10,7 @@ import ExpImg from "@/assets/content/experience.png";
 import EduImg from "@/assets/content/education.png";
 import CertImg from "@/assets/content/certificate.png";
 import SkillsImg from "@/assets/content/skills.png";
+import NoDataImg from "@/assets/content/not_found.png";
 /* shared */
 import { AboutPageColllectionIds } from "@/shared/firebase/collection-ids";
 import {
@@ -17,7 +19,6 @@ import {
 } from "@/shared/firebase/server-actions";
 import { DateFormat } from "@/shared/utils/date";
 import { groupDataByTimeLineMappedFormat } from "./utils";
-import Image from "next/image";
 
 type Content<T> = {
   order?: 1 | 2;
@@ -96,7 +97,7 @@ const TanContent = async ({ id }: { id: AboutPageColllectionIds }) => {
   ) {
     return (
       <div className="flex justify-center items-center h-full w-full text-slate-600 md:col-span-3">
-        <Image src={require("@/assets/content/not_found.png")} alt="" />
+        <Image src={NoDataImg} alt="" />
       </div>
     );
   }

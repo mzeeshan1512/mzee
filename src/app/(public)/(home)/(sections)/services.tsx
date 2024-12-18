@@ -50,7 +50,13 @@ const ServiceCard = ({ service, toggleGradient }: Props) => {
 const Services = async () => {
   const serverAction = fetchRecordsOnServer();
   await serverAction.getDocuments({
-    collectionId: CollectionIDs.services
+    collectionId: CollectionIDs.services,
+    conditions: {
+      orderByFields: {
+        field: "modified_at",
+        direction: "asc"
+      }
+    }
   });
   return (
     <SectionContainer

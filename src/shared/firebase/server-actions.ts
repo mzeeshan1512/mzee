@@ -7,15 +7,25 @@ import {
   getDocs,
   WhereFilterOp,
   query,
-  limit
+  limit,
+  or,
+  and
 } from "firebase/firestore";
 import { AboutPageColllectionIds, CollectionIDs } from "./collection-ids";
 import { fireStore as fireStoreDB } from "./config";
-export type orderByField = { field: string; direction?: "asc" | "desc" }
+
+export type orderByField = { field: string; direction?: "asc" | "desc" };
+export type filtersParams = {
+  field: string;
+  operator: WhereFilterOp;
+  value: any;
+  functionConjection?: "and" | "or";
+};
 
 export type firebaseCondition = {
-  filters?: { field: string; operator: WhereFilterOp; value: any }[];
-  orderByFields?: orderByField;
+  filters?: filtersParams[];
+  filterConjuctions?: "and" | "or";
+  orderByFields?: orderByField | orderByField[];
   limit?: number;
   excludeFields?: string[];
 };
@@ -26,8 +36,8 @@ export type arguments = {
   documentId?: string;
   isSingleRecord?: boolean;
   groupedData?: {
-    groupByField:string,
-    groupedCallBackFn:(data:any)=>any
+    groupByField: string;
+    groupedCallBackFn: (data: any) => any;
   } | null;
 };
 
@@ -44,26 +54,48 @@ export const buildFirestoreQuery = (
   conditions: firebaseCondition
 ): Query => {
   const queryConstraints: any[] = [];
-  const orderByConditions:orderByField = conditions?.orderByFields ??  {field:"modified_at", direction:"desc"}
+  // let filterConstraints:any[] =[];
+  const orderByConditions: orderByField | orderByField[] =
+    conditions?.orderByFields ?? {
+      field: "modified_at",
+      direction: "desc"
+    };
+
+  // const conjuction =conditions.filterConjuctions?  conditions.filterConjuctions === "and" ? and : or : null;
+  const filters: filtersParams[] = [
+    { field: "is_archived", operator: "==", value: false },
+    ...(conditions?.filters ?? [])
+  ];
   // Apply filters
-  if (conditions?.filters) {
-    conditions?.filters?.forEach((filter) => {
-      queryConstraints.push(
-        where(filter?.field, filter?.operator, filter?.value)
-      );
+  if (filters) {
+    filters?.forEach((filter) => {
+      let value: any = where(filter?.field, filter?.operator, filter?.value);
+      if (filter.functionConjection) {
+        const conjuction = filter.functionConjection === "and" ? and : or;
+        value = conjuction(value);
+      }
+      queryConstraints.push(value);
     });
   }
 
   // Apply ordering
   if (orderByConditions) {
-      queryConstraints?.push(orderBy(orderByConditions?.field, orderByConditions?.direction));
+    if (Array.isArray(orderByConditions)) {
+      orderByConditions?.forEach((orderByConditions) =>
+        queryConstraints?.push(
+          orderBy(orderByConditions?.field, orderByConditions?.direction)
+        )
+      );
+    } else
+      queryConstraints?.push(
+        orderBy(orderByConditions?.field, orderByConditions?.direction)
+      );
   }
 
   // Apply limit
   if (conditions?.limit) {
     queryConstraints?.push(limit(conditions?.limit));
   }
-
   return query(collectionRef, ...queryConstraints);
 };
 
@@ -79,7 +111,7 @@ const getCleanData = (obj: Record<string, any>, excludedFields?: string[]) => {
       "created_at",
       "userID",
       "user_id",
-      "userId" 
+      "userId"
     ]
   ];
   keysToExclude.forEach((key) => {
@@ -93,7 +125,7 @@ const getCleanData = (obj: Record<string, any>, excludedFields?: string[]) => {
 export const fetchRecordsOnServer = () => {
   let loading = false;
   let error: any = null;
-  let data: any;
+  let data: any = [];
   let totalRecrods: number = 5;
   return {
     // getDocumentById: async (args: arguments) => {},
@@ -111,18 +143,20 @@ export const fetchRecordsOnServer = () => {
           totalRecrods = snapshot.size;
           const groupedData: Record<string, any> = {};
           snapshot.forEach((doc) => {
-            const cleanData:Record<string, any> = {...getCleanData(doc?.data(), args.conditions?.excludeFields), id: doc?.id };
+            const cleanData: Record<string, any> = {
+              ...getCleanData(doc?.data(), args.conditions?.excludeFields),
+              id: doc?.id
+            };
             if (args?.groupedData) {
-              const key = cleanData[args?.groupedData?.groupByField]
+              const key = cleanData[args?.groupedData?.groupByField];
               if (!groupedData[`${key}`]) {
                 groupedData[`${key}`] = [];
               }
-               groupedData[`${key}`].push(cleanData)
-            } 
-            else  data.push(cleanData);
+              groupedData[`${key}`].push(cleanData);
+            } else data.push(cleanData);
           });
-          if(args?.groupedData){
-            data = args.groupedData?.groupedCallBackFn(groupedData)
+          if (args?.groupedData) {
+            data = args.groupedData?.groupedCallBackFn(groupedData);
           }
           if (args.isSingleRecord) {
             data = data?.[0];
@@ -132,6 +166,7 @@ export const fetchRecordsOnServer = () => {
         }
       } catch (err) {
         error = err;
+        console.error({ err });
         // toast.dismiss();
         // toast.error(error.message ?? "No Data Found");
       } finally {
