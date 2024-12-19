@@ -32,8 +32,7 @@ const ContactForm = () => {
     },
     {
       title: "Submitted Date",
-      data_key: "created_at",
-      cell: (item: contact_form) => getDateTimeString(item?.created_at)
+      data_key: "created_at"
     }
   ];
   return (
