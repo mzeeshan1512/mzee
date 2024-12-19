@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* colors */
+  /* primary */
+  --primary: theme(colors.primary.500);
+  --primary-25: theme(colors.primary.300);
+  --primary-35: theme(colors.primary.100);
+  /* backgrounds */
+  --primary-gradient: theme(backgroundImage.primary-gradient);
+  --primary-hover-gradient: theme(backgroundImage.primary-hover-gradient);
+  --primary-gradient-left: theme(backgroundImage.primary-gradient-left);
+}
+
+html {
+  background-color: theme("colors.light.background");
+  color: theme("colors.light.text");
+}
+
+html.dark {
+  background-color: theme("colors.dark.background");
+  color: theme("colors.dark.text");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+/* scroll-styles */
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Webkit Browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 5px !important;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px !important;
+}
+
+/* Firefox */
+scrollbar {
+  width: 5px;
+  height: 2px;
+}
+
+scrollbar-track {
+  background: transparent;
+}
+
+scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+/* For Internet Explorer and older Edge versions */
+::-ms-scrollbar {
+  width: 5px;
+  height: 2px;
+}
+
+/* Track */
+::-ms-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-ms-scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}

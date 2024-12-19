@@ -1,0 +1,28 @@
+/* Text Gradient */
+.text-gradient {
+  background: var(--primary-gradient);
+  filter: drop-shadow();
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent;
+}
+
+/* Text Gradient */
+.text-gradient-left {
+  background: var(--primary-gradient-left);
+  filter: drop-shadow();
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent;
+}
+
+.hovered-text-gradient:hover {
+  background: var(--primary-gradient);
+  filter: drop-shadow();
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent;
+}

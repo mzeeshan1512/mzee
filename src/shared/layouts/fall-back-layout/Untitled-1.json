@@ -1,0 +1,53 @@
+{
+  "user": {
+    "uid": "6Jl8OvfQsyMf2pfItt8jFKfl9ZC2",
+    "email": "rockstorreto@gmail.com",
+    "emailVerified": true,
+    "displayName": "Rocks Torreto",
+    "isAnonymous": false,
+    "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocKbh0fcg7AyK9KYFXClNry8-i6ye2mZQcjmR7rfzdDRekzGwg=s96-c",
+    "providerData": [
+      {
+        "providerId": "google.com",
+        "uid": "112941713691740352465",
+        "displayName": "Rocks Torreto",
+        "email": "rockstorreto@gmail.com",
+        "phoneNumber": null,
+        "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocKbh0fcg7AyK9KYFXClNry8-i6ye2mZQcjmR7rfzdDRekzGwg=s96-c"
+      }
+    ],
+    "stsTokenManager": {
+      "refreshToken": "AMf-vBzu4Ye25PleEAlv6W9Wylq2SMSa38IQ4HHG14UZUfr-e5Dwr8JAZQ5__-HixB67rLUaLR5O2EmLLLqiIcO1CoXvmM3FWEFZhWwmCzLH645Yf11Khqw8kL2kH6EB3tMo773GqamWULh3kQNFZAzKcgqoU1ptMCJdunsCbUg98oI4-q34gxIjoy7wFsoczVuCfQg9pCHk8WTwJSpByVN8rkPWb1_7c419ryZZDy8o4YB0T5SqThH25-cab7Pv52LPVYKqEfWP6BH9ym5QDa8YtffhaaitG5rT5XxA-_WPo52jryh3k84_ED5XGhMUBFbfsv-aIwva5V2E3Vou2bySWGUARAtmnJPXjWCOLv9FujijW0Uwf5yOw3ziN7lGbkutu97teZ1phrM0z6GDLD5PfhXjjHOBEfXvYI0nKdBKKXEjInOAhYE",
+      "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFhYWMyNzEwOTkwNDljMGRmYzA1OGUwNjEyZjA4ZDA2YzMwYTA0MTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiUm9ja3MgVG9ycmV0byIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLYmgwZmNnN0F5SzlLWUZYQ2xOcnk4LWk2eWUybVpRY2ptUjdyZnpkRFJla3pHd2c9czk2LWMiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbXplZS0yZjlkYSIsImF1ZCI6Im16ZWUtMmY5ZGEiLCJhdXRoX3RpbWUiOjE3MzQ2MTIxMDksInVzZXJfaWQiOiI2Smw4T3ZmUXN5TWYycGZJdHQ4akZLZmw5WkMyIiwic3ViIjoiNkpsOE92ZlFzeU1mMnBmSXR0OGpGS2ZsOVpDMiIsImlhdCI6MTczNDYxMjEwOSwiZXhwIjoxNzM0NjE1NzA5LCJlbWFpbCI6InJvY2tzdG9ycmV0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMjk0MTcxMzY5MTc0MDM1MjQ2NSJdLCJlbWFpbCI6WyJyb2Nrc3RvcnJldG9AZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.LZu6YfvW7cinAyG5rnFEmwL5LZAxyaHomWzanhPAxOYMRqkIdz9-0bBwNrgcCpC6Rp1_1XbRp-DEYjLF1lbKXtVIplMoVH6IL2neX4EXVGdc3mlnilUYSHky-T0v8g5dmuYhWRnupfcbvyIm8yvNr4Tq7xDSn9PZXjLoEdnq9aoxLGrjaa9SG9kjWDmgaMz-Vxo6RtkOn1LzVQ0FWXL44dyglmV9rAmbhSFo-I8rukojsuBhehMgFBDsLUkchzk9bj6QnCufLRXUo5SFggIdCM-WvLa7WatTOhtCis5vvs5wVTjEptxJRzwX9KTxgVDvrAiXwAOpeQXcBrkwrDLQGA",
+      "expirationTime": 1734615709752
+    },
+    "createdAt": "1734612108948",
+    "lastLoginAt": "1734612108949",
+    "apiKey": "AIzaSyBRLz8GLKwPwETa6WhxbfGUed-0qytktMQ",
+    "appName": "[DEFAULT]"
+  },
+  "providerId": "google.com",
+  "_tokenResponse": {
+    "federatedId": "https://accounts.google.com/112941713691740352465",
+    "providerId": "google.com",
+    "email": "rockstorreto@gmail.com",
+    "emailVerified": true,
+    "firstName": "Rocks",
+    "fullName": "Rocks Torreto",
+    "lastName": "Torreto",
+    "photoUrl": "https://lh3.googleusercontent.com/a/ACg8ocKbh0fcg7AyK9KYFXClNry8-i6ye2mZQcjmR7rfzdDRekzGwg=s96-c",
+    "localId": "6Jl8OvfQsyMf2pfItt8jFKfl9ZC2",
+    "displayName": "Rocks Torreto",
+    "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFhYWMyNzEwOTkwNDljMGRmYzA1OGUwNjEyZjA4ZDA2YzMwYTA0MTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiUm9ja3MgVG9ycmV0byIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLYmgwZmNnN0F5SzlLWUZYQ2xOcnk4LWk2eWUybVpRY2ptUjdyZnpkRFJla3pHd2c9czk2LWMiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbXplZS0yZjlkYSIsImF1ZCI6Im16ZWUtMmY5ZGEiLCJhdXRoX3RpbWUiOjE3MzQ2MTIxMDksInVzZXJfaWQiOiI2Smw4T3ZmUXN5TWYycGZJdHQ4akZLZmw5WkMyIiwic3ViIjoiNkpsOE92ZlFzeU1mMnBmSXR0OGpGS2ZsOVpDMiIsImlhdCI6MTczNDYxMjEwOSwiZXhwIjoxNzM0NjE1NzA5LCJlbWFpbCI6InJvY2tzdG9ycmV0b0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMjk0MTcxMzY5MTc0MDM1MjQ2NSJdLCJlbWFpbCI6WyJyb2Nrc3RvcnJldG9AZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.LZu6YfvW7cinAyG5rnFEmwL5LZAxyaHomWzanhPAxOYMRqkIdz9-0bBwNrgcCpC6Rp1_1XbRp-DEYjLF1lbKXtVIplMoVH6IL2neX4EXVGdc3mlnilUYSHky-T0v8g5dmuYhWRnupfcbvyIm8yvNr4Tq7xDSn9PZXjLoEdnq9aoxLGrjaa9SG9kjWDmgaMz-Vxo6RtkOn1LzVQ0FWXL44dyglmV9rAmbhSFo-I8rukojsuBhehMgFBDsLUkchzk9bj6QnCufLRXUo5SFggIdCM-WvLa7WatTOhtCis5vvs5wVTjEptxJRzwX9KTxgVDvrAiXwAOpeQXcBrkwrDLQGA",
+    "context": "",
+    "oauthAccessToken": "ya29.a0ARW5m752MAdSXPwwQWiGKjco0GlEpuTU-ETAgUuW_cqNGuBGSZBKiYMpAm_did4ofX1a_jReM1NMp5sIJKf2P8EBzQw9ZmyrOQYrojNzLPmLBu83dANdUV57x24s5i5ayPx92FxvmQIPoxqGyFGTIU_32RNBc6lDiAYq35ADaCgYKAXoSARESFQHGX2MiboTQCLym7eWaAw8e9pgnRQ0175",
+    "oauthExpireIn": 3599,
+    "refreshToken": "AMf-vBzu4Ye25PleEAlv6W9Wylq2SMSa38IQ4HHG14UZUfr-e5Dwr8JAZQ5__-HixB67rLUaLR5O2EmLLLqiIcO1CoXvmM3FWEFZhWwmCzLH645Yf11Khqw8kL2kH6EB3tMo773GqamWULh3kQNFZAzKcgqoU1ptMCJdunsCbUg98oI4-q34gxIjoy7wFsoczVuCfQg9pCHk8WTwJSpByVN8rkPWb1_7c419ryZZDy8o4YB0T5SqThH25-cab7Pv52LPVYKqEfWP6BH9ym5QDa8YtffhaaitG5rT5XxA-_WPo52jryh3k84_ED5XGhMUBFbfsv-aIwva5V2E3Vou2bySWGUARAtmnJPXjWCOLv9FujijW0Uwf5yOw3ziN7lGbkutu97teZ1phrM0z6GDLD5PfhXjjHOBEfXvYI0nKdBKKXEjInOAhYE",
+    "expiresIn": "3600",
+    "oauthIdToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjU2NGZlYWNlYzNlYmRmYWE3MzExYjlkOGU3M2M0MjgxOGYyOTEyNjQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMTcxNjQ4ODcxMzQ3LWEzYTNybnFldThmbGQ4ZTJjMTd2aHVnYTV2cDNkZnA1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMTcxNjQ4ODcxMzQ3LWEzYTNybnFldThmbGQ4ZTJjMTd2aHVnYTV2cDNkZnA1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyOTQxNzEzNjkxNzQwMzUyNDY1IiwiZW1haWwiOiJyb2Nrc3RvcnJldG9AZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJ3VkQweElTdnpJMWxPR2o4UUgxMThRIiwiaWF0IjoxNzM0NjEyMTA4LCJleHAiOjE3MzQ2MTU3MDh9.ebMyvPOCMF68KfOGw_uF3-WpwBRpJXboQZept9d_kmGi3JA04eZz0NL2wON1uFC7McUHg-Jmm4GgMdh_lbtFQ-RKUiTPJQzEVXMEHLbLFso6AIUkWXQeUsDDcktY832LwBlTHlGaOyv4HAy0Tddd5116tZyEGy3EMeH7OoiG86DHxsZFm_JMRaXS4TFjhGJbqDG4tPx5NZT3d8e8tAnC-Q0jTcMnLt37sLMWgv4KGw7SrzByAHeOAqF1w60-59X29mk3qzXVzcd51hZL0EMjtwY_Z3nvDfwSl4ombaB2C72KA8NAKnyIm8_DqtYFEYox3cuM5qrgxuE4dFbu_1knyw",
+    "rawUserInfo": "{\"name\":\"Rocks Torreto\",\"granted_scopes\":\"openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile\",\"id\":\"112941713691740352465\",\"verified_email\":true,\"given_name\":\"Rocks\",\"family_name\":\"Torreto\",\"email\":\"rockstorreto@gmail.com\",\"picture\":\"https://lh3.googleusercontent.com/a/ACg8ocKbh0fcg7AyK9KYFXClNry8-i6ye2mZQcjmR7rfzdDRekzGwg=s96-c\"}",
+    "isNewUser": true,
+    "kind": "identitytoolkit#VerifyAssertionResponse"
+  },
+  "operationType": "signIn"
+}

@@ -1,0 +1,38 @@
+.social-icons {
+  display: flex;
+  justify-content: space-between;
+  gap: 2px;
+}
+
+.social-icons a {
+  color: inherit;
+}
+
+.social-icons .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50% !important;
+  border: 2px solid;
+  background-color: transparent;
+  transition: background-color 0.3s;
+  height: var(--icon-size);
+  width: var(--icon-size);
+}
+
+.social-icons :hover .icon {
+  color: var(--hover-color, inherit) !important;
+  /* border-color: var(--hover-bg, transparent) !important; */
+  border: none;
+  background: var(--hover-bg, transparent) !important;
+}
+
+.social-icons .link-title {
+  background-color: transparent;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.social-icons a:hover .link-title  {
+   color: var(--hover-bg, --primary) !important;
+}
