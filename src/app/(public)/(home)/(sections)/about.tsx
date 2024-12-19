@@ -40,8 +40,7 @@ const About = () => {
               className="w-full h-full bg-cover"
               style={{
                 backgroundImage: `url(${Earth?.src})`,
-                clipPath: `ellipse(80% 41% at 80% 99%)`,
-                animation: "spin 10s linear infinite"
+                clipPath: `ellipse(80% 41% at 80% 99%)`
               }}
             >
               <ParticleAnimation color="white" />
