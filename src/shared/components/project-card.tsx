@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { DefaultBg } from "../app-config";
-import { RenderSvgAsDangerouslySetInnerHTML } from "./svg-gradient-binder";
+import SVGGradientBinder, {
+  RenderSvgAsDangerouslySetInnerHTML
+} from "./svg-gradient-binder";
 import ShowIf from "./show-if";
 import TrustedRedirect from "./trusted-redirect";
 import { GitHub } from "../icon/social";
@@ -23,11 +25,11 @@ const LinkRenderer = ({
           </TrustedRedirect>
         </li>
       )}
-      {web_preview && (
+      {/* {web_preview && (
         <li className="hover:scale-125 drop-shadow-md cursor-pointer">
           <InternalPreview />
         </li>
-      )}
+      )} */}
       {demo_link && (
         <li className="hover:scale-125 drop-shadow-md">
           <TrustedRedirect
@@ -83,7 +85,11 @@ const ProjectInfoCard = ({
       }}
     >
       {basicInfo?.is_featured && (
-        <div className="absolute top-0 right-0">Featured</div>
+        <div className="absolute top-[-2px] right-[-2px] w-[150px] h-[150px] overflow-hidden z-10">
+          <div className="absolute left-[45px] top-4 w-full bg-primary-gradient text-white shadow-lg transform rotate-45 capitalize text-center tracking-wide">
+            <small>Featured</small>
+          </div>
+        </div>
       )}
       <div className="absolute top-3/4 left-0 w-full h-full bg-slate-400 bg-opacity-10 transition-all duration-1000 ease-in-out group-hover:top-[58%] group-hover:bg-opacity-50">
         <div className="p-4">
