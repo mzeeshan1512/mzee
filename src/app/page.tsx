@@ -8,7 +8,7 @@ import { addDoc, collection } from "firebase/firestore";
 import React from "react";
 import emailjs from "emailjs-com";
 import { auth, firebaseStorage, fireStore } from "@/shared/firebase/config";
-import { convertToRegionTime, currentRegionDate } from "@/shared/utils/date";
+import { convertToRegionTime } from "@/shared/utils/date";
 import {
   decryptData,
   getHtmlStringFromObject
@@ -163,7 +163,7 @@ const HomePage = () => {
         {
           message: getHtmlStringFromObject(emailData),
           text: "Some one gives you a feedback, Details are as follows:",
-          subject: `${formData?.name}, submits the review/feedback form`
+          subject: `${formData?.name}, submits the review or feedback form`
         },
         publicKey
       );
