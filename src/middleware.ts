@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { encryptData } from "./shared/utils/encode-decode";
 
 export default async function middleware(req: NextRequest) {
-  console.log("test");
   const { nextUrl } = req;
   const token: any = req.cookies.get("access_token");
   if (token) {
@@ -20,7 +19,7 @@ export default async function middleware(req: NextRequest) {
       });
       return NextResponse.next({
         headers: {
-          "Set-Cookie": `${"web-info"}=${encodeURIComponent(
+          "Set-Cookie": `${"gtmth"}=${encodeURIComponent(
             encryptedData
           )}; Max-Age=86400`
         }

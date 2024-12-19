@@ -40,12 +40,13 @@ const validationSchema: ValidationSchema = {
   review: [
     (value) => (!value ? "Review is required" : null),
     (value) =>
-      value.length < 50 ? "Review must be at least 10 characters" : null,
+      value.length < 50 ? "Review must be at least 50 characters" : null,
     (value) =>
       value.length > 400
         ? "Review must be at exceed more than 400 characters"
         : null
-  ]
+  ],
+  policyAgreed: [(value) => (!value ? "Please agree to the policy" : null)]
 };
 
 export { validateField, validationSchema };

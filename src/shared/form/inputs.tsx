@@ -8,6 +8,7 @@ interface FloatingInputProps extends React.ComponentProps<"div"> {
   inputProps?: React.ComponentProps<"input">;
   textAreaProps?: React.ComponentProps<"textarea">;
   isTextBox?: boolean;
+  helper?: string;
 }
 
 const FloatingOutlinedInput = ({
@@ -19,6 +20,7 @@ const FloatingOutlinedInput = ({
   inputProps,
   textAreaProps,
   isTextBox,
+  helper,
   ...rest
 }: FloatingInputProps) => {
   const validationClass = React.useMemo(() => {
@@ -68,16 +70,24 @@ const FloatingOutlinedInput = ({
             }
           />
         )}
-        <label
-          htmlFor={id}
-          className={
-            "capitalize absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-secondary-500 " +
-              validationClass?.label || ""
-          }
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            htmlFor={id}
+            className={
+              "capitalize absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-secondary-500 " +
+                validationClass?.label || ""
+            }
+          >
+            {label}
+          </label>
+        )}
       </div>
+      {/* {inputProps?.type === "file" && inputProps.value && (
+        <iframe className="w-10 h-10 rounded-full" src={inputProps.value} />
+      )} */}
+      {helper && (
+        <small className="text-amber-400 text-sm me-1">e.g. {helper}</small>
+      )}
       {error && <small className="text-red-400 text-sm">{error}</small>}
     </div>
   );
