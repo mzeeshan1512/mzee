@@ -1,9 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { DefaultBg } from "../app-config";
-import SVGGradientBinder, {
-  RenderSvgAsDangerouslySetInnerHTML
-} from "./svg-gradient-binder";
+import { RenderSvgAsDangerouslySetInnerHTML } from "./svg-gradient-binder";
 import ShowIf from "./show-if";
 import TrustedRedirect from "./trusted-redirect";
 import { GitHub } from "../icon/social";
