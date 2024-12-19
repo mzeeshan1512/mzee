@@ -1,8 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import emailjs from "emailjs-com";
+import Button from "@/shared/components/button";
+import toast from "@/shared/components/toast";
 import { FloatingOutlinedInput } from "./inputs";
 import { validateField, validationSchema } from "./error.utils";
-import Button from "@/shared/components/button";
+import { addDoc, collection } from "firebase/firestore";
+import { fireStore } from "@/shared/firebase/config";
+import { CollectionIDs } from "@/shared/firebase/collection-ids";
 
 interface FormData {
   [field: string]: string | undefined;
@@ -63,6 +68,28 @@ const ContactForm = () => {
     subject: undefined
   });
   const [errors, setErrors] = useState<Errors>({});
+  const [isPending, startTransition] = useTransition();
+  const saveData = async () => {
+    try {
+      const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
+      const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE;
+      const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
+      const projectData = { ...formState, date: new Date() };
+      await addDoc(collection(fireStore, CollectionIDs.contact), projectData);
+      await emailjs.send(serviceId, emailTemplate, projectData, publicKey);
+      toast.success("Your Response Has Been Recorded Successfully");
+      setFormState({
+        name: undefined,
+        email: undefined,
+        contact: undefined,
+        message: undefined,
+        subject: undefined
+      });
+    } catch (err: any) {
+      toast.dismiss();
+      toast.error(err);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -75,10 +102,8 @@ const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     const newErrors: Errors = {};
     let isValid = true;
-
     for (const [field, validations] of Object.entries(validationSchema)) {
       const error = validateField(formState[field] as any, validations);
       if (error) {
@@ -86,8 +111,11 @@ const ContactForm = () => {
         newErrors[field] = error;
       }
     }
-
     setErrors(newErrors);
+    if (Object.keys(newErrors)?.length > 0) {
+      return;
+    }
+    startTransition(() => saveData());
   };
 
   return (
@@ -101,7 +129,14 @@ const ContactForm = () => {
           inputProps={{
             ...item,
             onChange: handleChange,
-            value: formState[item?.name]! ?? ""
+            value: formState[item?.name]! ?? "",
+            disabled: isPending
+          }}
+          textAreaProps={{
+            ...item,
+            onChange: handleChange as any,
+            value: formState[item?.name]! ?? "",
+            disabled: isPending
           }}
           label={item.label}
           className={item.className}
@@ -114,6 +149,8 @@ const ContactForm = () => {
       <Button
         type="submit"
         className="bg-primary-gradient hover:bg-primary-hover-gradient p-3"
+        disabled={isPending}
+        isLoading={isPending}
       >
         Submit Quotation
       </Button>

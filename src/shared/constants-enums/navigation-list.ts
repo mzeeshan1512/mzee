@@ -48,33 +48,37 @@ const navLinks: HeaderMenuList[] = [
   },
 ];
 
-const socialContact:SocialShareContent[] = [
+const socialContact: SocialShareContent[] = [
   {
     title: process.env.NEXT_PUBLIC_LINKEDIN,
     icon: LinkedIn,
     link: `https://www.linkedin.com/in/${process.env.NEXT_PUBLIC_LINKEDIN}`,
-    color:"#0077b5"
+    color: "#0077b5",
+    isTrusted: true
   },
   {
     title: process.env.NEXT_PUBLIC_GITHUB,
     icon: GitHub,
     link: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB}`,
-    color:"linear-gradient(to right, #ffbf00, #cc0c40)",
-    isPrimaryColorTitle:true
+    color: "linear-gradient(to right, #ffbf00, #cc0c40)",
+    isPrimaryColorTitle: true,
+    isTrusted: true
   },
   {
     title: process.env.NEXT_PUBLIC_EMAIL,
     icon: Email,
     link: `mailto:${process.env.NEXT_PUBLIC_EMAIL}`,
-    color:"linear-gradient(to right, #ffbf00, #cc0c40)",
-    isPrimaryColorTitle:true
+    color: "linear-gradient(to right, #ffbf00, #cc0c40)",
+    isPrimaryColorTitle: true,
+    isTrusted: true
   },
   {
     title: process.env.NEXT_PUBLIC_WHATSAPP,
     icon: WhatsApp,
     link: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP}`,
-    color:"rgb(37, 211, 102)"
-  },
-]
+    color: "rgb(37, 211, 102)",
+    isTrusted: true
+  }
+];
 
 export { navLinks, sectionIds, socialContact,cookiesName };
