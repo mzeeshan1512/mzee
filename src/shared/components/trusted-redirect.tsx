@@ -13,6 +13,7 @@ interface TrustedRedirectProps extends React.ComponentProps<"a"> {
 const TrustedRedirect: React.FC<
   TrustedRedirectProps & {
     children: React.ReactNode;
+    disable?: boolean;
   }
 > = ({
   trustedDomains = [],
@@ -22,6 +23,7 @@ const TrustedRedirect: React.FC<
   autoInvoke = false,
   isTrusted = false,
   symbol,
+  disable,
   redirectUrl = "/out-bound-redirect/",
   ...rest
 }) => {
@@ -68,6 +70,7 @@ const TrustedRedirect: React.FC<
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
+    if (disable) return;
     handleCopyClick(href!);
     if (isTrusted) {
       window?.open(href, target);
@@ -97,7 +100,7 @@ const TrustedRedirect: React.FC<
   }
   return (
     <a {...rest} href={href} onClick={performRedirect}>
-      {children} {symbol &&  <span>🔗</span>}
+      {children} {symbol && <span>🔗</span>}
     </a>
   );
 };

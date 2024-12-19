@@ -51,8 +51,8 @@
   color: transparent;
 }
 
-.hovered-text-gradient {
-  background: var(--primary-hover-gradient);
+.hovered-text-gradient:hover {
+  background: var(--primary-gradient);
   filter: drop-shadow();
   -webkit-background-clip: text !important;
   background-clip: text !important;

@@ -4,9 +4,9 @@ import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import Carousel from "@/shared/components/carousel";
+import ShowIf from "@/shared/components/show-if";
 import SectionContainer from "./(components)/section-wrapper";
 import ResponsiveRenderer from "./(components)/responsive-renderer";
-import ShowIf from "@/shared/components/show-if";
 
 const Tech = ({
   tech,
@@ -62,7 +62,9 @@ const TechStack = async () => {
     >
       <ShowIf
         conditionalRenderKey={
-          serverAction?.data && serverAction?.data?.length > 0
+          serverAction?.data &&
+          Array.isArray(serverAction?.data) &&
+          serverAction?.data?.length > 0
         }
       >
         <ResponsiveRenderer

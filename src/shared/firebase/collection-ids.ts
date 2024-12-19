@@ -8,7 +8,7 @@ enum AboutPageColllectionIds {
 enum CollectionIDs {
    myInfo= "about-my-info",
   // skills= "about-skills",
-  // projects= "projects",
+  projects= "projects",
   services = "services",
   technologies= "technologies",
   // contact= "contact-form",

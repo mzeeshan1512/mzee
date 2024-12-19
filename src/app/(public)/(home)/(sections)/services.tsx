@@ -6,6 +6,7 @@ import Carousel from "@/shared/components/carousel";
 import ResponsiveRenderer from "./(components)/responsive-renderer";
 import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
+import ShowIf from "@/shared/components/show-if";
 
 type Props = {
   service?: Services_TechsTools | null;
@@ -70,28 +71,33 @@ const Services = async () => {
         className: "py-4 my-4"
       }}
     >
-      <ResponsiveRenderer
-        elseChildren={
-          <div className="hidden lg:grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <ShowIf
+        conditionalRenderKey={
+          serverAction?.data &&
+          Array.isArray(serverAction?.data) &&
+          serverAction?.data?.length > 0
+        }
+      >
+        <ResponsiveRenderer
+          elseChildren={
+            <div className="hidden lg:grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {serverAction.data?.map(
+                (service: Services_TechsTools, index: number) => (
+                  <ServiceCard key={index} service={service} />
+                )
+              )}
+            </div>
+          }
+        >
+          <Carousel autoPlay infinite>
             {serverAction.data?.map(
               (service: Services_TechsTools, index: number) => (
                 <ServiceCard key={index} service={service} />
               )
             )}
-          </div>
-        }
-      >
-        <Carousel
-          // autoPlay
-          infinite
-        >
-          {serverAction.data?.map(
-            (service: Services_TechsTools, index: number) => (
-              <ServiceCard key={index} service={service} />
-            )
-          )}
-        </Carousel>
-      </ResponsiveRenderer>
+          </Carousel>
+        </ResponsiveRenderer>
+      </ShowIf>
     </SectionContainer>
   );
 };

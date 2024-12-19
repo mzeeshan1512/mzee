@@ -79,8 +79,12 @@ type ProjectsBasicInfo = {
   /* required */
   title: string;
   unique_identifier: string;
-  tech_stack: string;
+  tech_stack: blobOption[];
   description: string;
+  catrgory: {
+    value: string;
+    label: string;
+  };
   /* good to have */
   my_role?: string;
   github_url?: string;
@@ -93,8 +97,14 @@ type ProjectsBasicInfo = {
   content_ownership_link?: string;
 };
 type ProjectImageGallery = {
-  banner_image: IconsListingData;
-  slider_images?: IconsListingData[];
+  banner_image: {
+    src?: blobSrc;
+    svg?: blobSvg;
+  };
+  slider_images?: {
+    src?: blobSrc;
+    svg?: blobSvg;
+  }[];
 };
 
 type ProjectVideGallery = {

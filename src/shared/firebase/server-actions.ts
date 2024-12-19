@@ -9,7 +9,8 @@ import {
   query,
   limit,
   or,
-  and
+  and,
+  getCountFromServer
 } from "firebase/firestore";
 import { AboutPageColllectionIds, CollectionIDs } from "./collection-ids";
 import { fireStore as fireStoreDB } from "./config";
@@ -55,17 +56,17 @@ export const buildFirestoreQuery = (
 ): Query => {
   const queryConstraints: any[] = [];
   // let filterConstraints:any[] =[];
-  const orderByConditions: orderByField | orderByField[] =
-    conditions?.orderByFields ?? {
-      field: "modified_at",
-      direction: "desc"
-    };
 
   // const conjuction =conditions.filterConjuctions?  conditions.filterConjuctions === "and" ? and : or : null;
   const filters: filtersParams[] = [
     { field: "is_archived", operator: "==", value: false },
     ...(conditions?.filters ?? [])
   ];
+  const orderByConditions: orderByField | orderByField[] =
+    conditions?.orderByFields ?? {
+      field: "modified_at",
+      direction: "desc"
+    };
   // Apply filters
   if (filters) {
     filters?.forEach((filter) => {
@@ -96,6 +97,7 @@ export const buildFirestoreQuery = (
   if (conditions?.limit) {
     queryConstraints?.push(limit(conditions?.limit));
   }
+  // console.log({ q: JSON.stringify(queryConstraints) });
   return query(collectionRef, ...queryConstraints);
 };
 
@@ -129,6 +131,21 @@ export const fetchRecordsOnServer = () => {
   let totalRecrods: number = 5;
   return {
     // getDocumentById: async (args: arguments) => {},
+    getDocsCount: async (
+      collectionId: CollectionIDs | AboutPageColllectionIds
+    ) => {
+      try {
+        loading = true;
+        const collectionRef = collection(fireStoreDB, collectionId);
+        const snapshot = await getCountFromServer(collectionRef);
+        totalRecrods = snapshot.data().count;
+      } catch (err) {
+        error = err;
+        console.error({ countError: err });
+      } finally {
+        loading = false;
+      }
+    },
     getDocuments: async (args: arguments) => {
       try {
         loading = true;
@@ -166,11 +183,12 @@ export const fetchRecordsOnServer = () => {
         }
       } catch (err) {
         error = err;
-        console.error({ err });
+        console.error({ recordsError: err });
         // toast.dismiss();
         // toast.error(error.message ?? "No Data Found");
       } finally {
         loading = false;
+        // console.log({ data });
       }
     },
     get loading() {
