@@ -46,7 +46,9 @@ const validationSchema: ValidationSchema = {
         ? "Review must be at exceed more than 400 characters"
         : null
   ],
-  policyAgreed: [(value) => (!value ? "Please agree to the policy" : null)]
+  policyAgreed: [
+    (value) => (!value ? "Please acknowledge and agree to the policy" : null)
+  ]
 };
 
 export { validateField, validationSchema };
