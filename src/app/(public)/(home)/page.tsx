@@ -1,6 +1,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import ShowIf from "@/shared/components/show-if";
+import Reviews from "./(sections)/reviews";
 
 const Main = dynamic(() => import("./(sections)/main"));
 const About = dynamic(() => import("./(sections)/about"));
@@ -32,6 +33,10 @@ const componentLists = [
   },
   {
     component: <Projects />,
+    show: true
+  },
+  {
+    component: <Reviews />,
     show: true
   },
   {

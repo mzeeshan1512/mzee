@@ -12,7 +12,8 @@ enum CollectionIDs {
   services = "services",
   technologies = "technologies",
   contact = "contact-form",
-  webInfo = "web-info"
+  webInfo = "web-info",
+  reviews = "reviews-feedbacks"
 }
 
 export { CollectionIDs, AboutPageColllectionIds };

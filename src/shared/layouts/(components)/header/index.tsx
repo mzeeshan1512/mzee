@@ -40,7 +40,7 @@ const Header = ({
   });
 
   const classToggler = () => {
-    const value = window?.scrollY;
+    const value = typeof window !== "undefined" ? window?.scrollY : 0;
     if (value > 0) {
       if (matchMedia && centeredMode && floatingMenu) {
         if (!hideNavOnScroll) {

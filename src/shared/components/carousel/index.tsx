@@ -26,20 +26,20 @@ const CarouselButton = ({
   );
 };
 
-const defaultResponsive=  {
-            desktop: {
-              breakpoint: { max: 3000, min: 1024 },
-              items: 3
-            },
-            tablet: {
-              breakpoint: { max: 1024, min: 464 },
-              items: 2
-            },
-            mobile: {
-              breakpoint: { max: 464, min: 0 },
-              items: 1
-            }
-          }
+const defaultResponsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 const Carousel = ({
   responsive,
@@ -71,9 +71,10 @@ const Carousel = ({
   }, [children, slides]);
 
   const handleResize = () => {
-    const windowWidth = window.innerWidth;
+    const windowWidth =
+      typeof window !== "undefined" ? window?.innerWidth : 100;
     let items = 1;
-    const respConfig = {...defaultResponsive,...responsive}
+    const respConfig = { ...defaultResponsive, ...responsive };
 
     if (respConfig) {
       Object?.entries(respConfig)?.forEach(([_, config]) => {
@@ -140,7 +141,8 @@ const Carousel = ({
     toggleHover(false);
     if (!draggable || dragStart === null) return;
 
-    const threshold = window.innerWidth * 0.2;
+    const threshold =
+      (typeof window !== "undefined" ? window?.innerWidth : 100) * 0.2;
     if (Math.abs(dragOffset) > threshold) {
       if (dragOffset > 0) {
         handlePrev();
@@ -158,7 +160,12 @@ const Carousel = ({
     const totalTranslate = activeIndex * slideWidth;
     const dragTranslate = Math.max(
       0,
-      Math.min((dragOffset / window.innerWidth) * 100, slideWidth)
+      Math.min(
+        (dragOffset /
+          (typeof window !== "undefined" ? window?.innerWidth : 100)) *
+          100,
+        slideWidth
+      )
     );
     return -(totalTranslate + dragTranslate);
   };
