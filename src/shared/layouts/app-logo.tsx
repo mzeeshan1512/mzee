@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import appIcon from "@/assets/logos/appLogo.png";
 
-const AppIcon = ({ className }: { className?: string }) => {
+const AppIcon = ({ className = "" }: { className?: string }) => {
   return (
     <Image
       src={appIcon!}
@@ -11,7 +11,7 @@ const AppIcon = ({ className }: { className?: string }) => {
       height={100}
       className={
         "transition-all duration-500 ease-in-out delay-100 drop-shadow-lg " +
-          className || ""
+        className
       }
     />
   );
