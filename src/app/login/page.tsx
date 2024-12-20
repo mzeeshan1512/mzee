@@ -13,11 +13,12 @@ const LoginPage = () => {
   const [isPending, startTransition] = useTransition();
   const handleLogin = async () => {
     toast.dismiss();
+    debugger;
     try {
       const resp: any = await signInWithGoogle();
       const token = resp.user.accessToken;
       if (token) {
-        setCookie("access_token", resp.user.accessToken, {
+        setCookie("access_token", token, {
           maxAge: 60 * 60 * 24
         });
         toast.success("Successfully Login");
