@@ -51,7 +51,7 @@ const FloatingOutlinedInput = ({
             id={id}
             placeholder={/* textAreaProps?.placeholder || label || */ ""}
             className={
-              "block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-inherit border-0 border-b-2 border-gray-100  dark:border-gray-600 appearance-none dark:text-white dark:focus:border-secondary-500 focus:outline-none focus:ring-0 focus:border-secondary-600 peer " +
+              "block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm bg-transparent border-0 border-b-2 border-gray-600 appearance-none text-white focus:border-secondary-500 focus:outline-none focus:ring-0 focus:border-secondary-600 peer " +
               validationClass?.input +
               " " +
               textAreaProps?.className
@@ -63,7 +63,7 @@ const FloatingOutlinedInput = ({
             id={id}
             placeholder={/* inputProps?.placeholder || label || */ ""}
             className={
-              "rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-inherit border-0 border-b-2 border-gray-100  dark:border-gray-600 appearance-none dark:text-white dark:focus:border-secondary-500 focus:outline-none focus:ring-0 focus:border-secondary-600 peer " +
+              "rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:border-secondary-500 focus:outline-none focus:ring-0 focus:border-secondary-600 peer " +
                 validationClass?.input ||
               "" + " " + inputProps?.className ||
               ""
