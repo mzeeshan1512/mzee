@@ -13,7 +13,6 @@ const LoginPage = () => {
   const [isPending, startTransition] = useTransition();
   const handleLogin = async () => {
     toast.dismiss();
-    debugger;
     try {
       const resp: any = await signInWithGoogle();
       const token = resp.user.accessToken;
@@ -25,8 +24,7 @@ const LoginPage = () => {
         router.replace("/");
       }
     } catch (error: any) {
-      console.log({ error });
-      // toast.error(error);
+      toast.error(error?.message ?? error?.code ?? "Something went wrong");
     }
   };
   return (
