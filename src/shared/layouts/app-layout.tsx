@@ -4,7 +4,6 @@ import React from "react";
 import ErrorBoundary from "./error-boundary";
 import { analytics, logEvent } from "../firebase/config";
 import FallBackLayout from "./fall-back-layout";
-import Settings from "./settings";
 import ParticleAnimation from "../components/particles-animation";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
@@ -22,7 +21,6 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </main>
       </FallBackLayout>
-      <Settings />
     </ErrorBoundary>
   );
 };

@@ -205,9 +205,9 @@ const HomePage = () => {
       <div className="md:col-span-2 flex justify-center w-full">
         <AppIcon />
       </div>
-      {formField.map((field) => (
+      {formField.map((field, index) => (
         <FloatingOutlinedInput
-          key={field.id}
+          key={field.id + index}
           inputProps={{
             ...field,
             onChange: handleChange,

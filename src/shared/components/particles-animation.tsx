@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { themeMode, useTheme } from "../theme/provider";
 
 interface Particle {
   x: number;
@@ -19,7 +18,6 @@ const ParticleAnimation = ({
   lineCount = 30,
   color
 }: ParticleAnimationProps) => {
-  const { theme } = useTheme();
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const ctxRef: any = React.useRef<CanvasRenderingContext2D | null>(null);
   const particles: Particle[] = [];
@@ -59,11 +57,11 @@ const ParticleAnimation = ({
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        ctx.fillStyle = color || theme === themeMode.Dark ? "white" : "black";
+        ctx.fillStyle = color ?? "white";
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
         ctx.fill();
-        ctx.fillStyle = color || theme === themeMode.Dark ? "white" : "black";
+        ctx.fillStyle = color ?? "white";
         ctx.stroke();
       }
 
@@ -80,7 +78,7 @@ const ParticleAnimation = ({
         }
       }
       ctx.lineWidth = 0.05;
-      ctx.strokeStyle = color || theme === themeMode.Dark ? "white" : "black";
+      ctx.strokeStyle = color ?? "white";
       ctx.stroke();
     };
 
@@ -122,7 +120,7 @@ const ParticleAnimation = ({
       canvas.removeEventListener("mousemove", () => {});
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lineCount, theme]);
+  }, [lineCount]);
   return (
     <canvas
       ref={canvasRef}

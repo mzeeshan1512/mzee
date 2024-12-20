@@ -1,38 +1,20 @@
 import React from "react";
-import Image, { ImageProps } from "next/image";
-import { appIcon, chatLogo, appName } from "@/shared/app-config";
+import Image from "next/image";
+import appIcon from "@/assets/logos/appLogo.png";
 
-type AppIconProps = {
-  icon?: JSX.Element | null;
-  isCollapsed?: boolean;
-  imgProps?: ImageProps | React.ComponentProps<"img">;
-  hideIcon?: boolean;
-};
-
-const AppIcon = ({
-  isCollapsed = false,
-  icon = null,
-  imgProps,
-  hideIcon
-}: AppIconProps) => {
-  if (hideIcon) {
-    return null;
-  }
+const AppIcon = ({ className }: { className: string }) => {
   return (
     <Image
-      {...imgProps}
-      src={imgProps?.src || icon || isCollapsed ? chatLogo! : appIcon!}
-      alt={imgProps?.alt || appName || ""}
-      width={imgProps?.width ? +imgProps?.width : isCollapsed ? 50 : 250}
-      height={imgProps?.height ? +imgProps?.height : 100}
+      src={appIcon!}
+      alt={process.env.NEXT_PUBLIC_APP_Name ?? ""}
+      width={250}
+      height={100}
       className={
         "transition-all duration-500 ease-in-out delay-100 drop-shadow-lg " +
-          imgProps?.className || ""
+          className || ""
       }
     />
   );
 };
 
 export { AppIcon };
-
-export type { AppIconProps };

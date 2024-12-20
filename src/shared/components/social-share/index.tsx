@@ -68,11 +68,11 @@ const SocialIcons = ({
     <div className={`social-icons !gap-x-4 ${className || ""}`} {...rest}>
       {socialContact?.map((data, index) => (
         <Link
+          key={index}
           {...linkProps}
           href={`${data?.link}`}
           data-aos="zoom-in"
           data-aos-easing="ease-in-out"
-          key={index}
           target={"_blank"}
           title={data?.title}
         >

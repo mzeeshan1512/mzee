@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultBg } from "@/shared/app-config";
+import DefaultBg from "@/assets/bgs/home-dark.png";
 import "./styles.css";
 
 type FallBackErrorLayoutProps = {
