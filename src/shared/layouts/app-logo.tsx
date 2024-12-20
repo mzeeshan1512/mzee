@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import appIcon from "@/assets/logos/appLogo.png";
 
-const AppIcon = ({ className }: { className: string }) => {
+const AppIcon = ({ className }: { className?: string }) => {
   return (
     <Image
       src={appIcon!}
