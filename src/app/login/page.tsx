@@ -38,7 +38,7 @@ const LoginPage = () => {
             ? "!bg-[#8D8D8D] !border-none !cursor-progress !text-[#000000]"
             : ""
         }`}
-        onClick={() => startTransition(handleLogin)}
+        onClick={() => startTransition(() => handleLogin())}
         disabled={isPending}
       >
         {isPending ? (
