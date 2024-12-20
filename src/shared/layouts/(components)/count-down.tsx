@@ -16,12 +16,13 @@ const DisplayFormat = ({ text, label }: { text: string; label: string }) => {
 };
 
 const Countdown = ({ targetDate }: { targetDate: string }) => {
+  let clear = () => {};
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
     let timeLeft = {};
 
-    if (difference < 1) {
-      stop();
+    if (difference < 1 && clear) {
+      clear();
     }
     if (difference > 0) {
       timeLeft = {
@@ -40,6 +41,10 @@ const Countdown = ({ targetDate }: { targetDate: string }) => {
   const { stop } = useInterval(() => setTimeLeft(calculateTimeLeft()), 1000, {
     autoInvoke: true
   });
+
+  if (stop) {
+    clear = stop;
+  }
 
   return (
     <div className="flex flex-row flex-wrap gap-2 items-center">
