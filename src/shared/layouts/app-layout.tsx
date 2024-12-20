@@ -11,13 +11,13 @@ import { saveVisit } from "../firebase/use-visit";
 
 const Offline = dynamic(() => import("./offline-view"), { ssr: true });
 const MaintenanceMode = dynamic(() => import("./maintenance-mode"), {
-  ssr: true
+  ssr: false
 });
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { online } = useNetwork();
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     Aos.init();
     Aos.refresh();
   }, []);
@@ -28,10 +28,14 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   }, [analytics]);
 
   if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
-    return online ? <MaintenanceMode /> : <Offline />;
+    return <MaintenanceMode />;
   }
 
-  return <ErrorBoundary>{online ? children : <Offline />}</ErrorBoundary>;
+  if (!online) {
+    return <Offline />;
+  }
+
+  return <ErrorBoundary>{children}</ErrorBoundary>;
 };
 
 export default AppLayout;
