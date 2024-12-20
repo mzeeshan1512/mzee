@@ -188,7 +188,7 @@ const ToastContainer = ({
       {toasts?.map((toast) => (
         <div
           key={toast?.id}
-          className={`max-w-40 md:max-w-80 rounded bg-slate-300 dark:bg-slate-800 text-black dark:text-white shadow ${
+          className={`max-w-40 md:max-w-80 rounded bg-slate-800 text-white shadow ${
             toast?.isVisible ? "animate-float-in" : "animate-float-out"
           }`}
           // style={{
