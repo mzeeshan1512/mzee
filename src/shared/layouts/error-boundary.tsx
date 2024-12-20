@@ -37,7 +37,7 @@ class ErrorBoundary extends React.Component<
       // You can render any custom fallback UI
       return (
         <FallBackError
-          message={this.state.errorMessage || "Oops, there is an error!"}
+          message={this?.state?.errorMessage || "Oops, there is an error!"}
           code="OOPS"
         >
           <div className="flex justify-center">

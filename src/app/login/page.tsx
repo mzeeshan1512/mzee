@@ -25,7 +25,8 @@ const LoginPage = () => {
         router.replace("/");
       }
     } catch (error: any) {
-      toast.error(error);
+      console.log({ error });
+      // toast.error(error);
     }
   };
   return (
