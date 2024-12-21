@@ -11,13 +11,13 @@ import { saveVisit } from "../firebase/use-visit";
 
 const Offline = dynamic(() => import("./offline-view"), { ssr: true });
 const MaintenanceMode = dynamic(() => import("./maintenance-mode"), {
-  ssr: true
+  ssr: false
 });
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { online } = useNetwork();
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     Aos.init();
     Aos.refresh();
   }, []);

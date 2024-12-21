@@ -9,9 +9,6 @@ const baseUrl = "";
 const appIcon = AppLogo || process.env.NEXT_PUBLIC_APP_LOGO;
 const chatLogo = ChatLogo || process.env.NEXT_PUBLIC_APP_CHAT_LOGO;
 const layoutType: "horizontal" | "vertical" = "horizontal";
-const aboutPng =  process.env.NEXT_PUBLIC_ABOUT_PNG || AboutPng;
-// const DefaultBg = {
-//     src:""
-// }
+const aboutPng = process.env.NEXT_PUBLIC_ABOUT_PNG || AboutPng;
 
 export { appIcon, appName, baseUrl, layoutType, chatLogo, DefaultBg, ChatBG, aboutPng };

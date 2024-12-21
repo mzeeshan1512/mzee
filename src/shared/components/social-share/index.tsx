@@ -31,7 +31,7 @@ const SocialIcons = ({
     showTitle?: boolean;
   }) => {
   return (
-    <div className={`social-icons ${className || ""}`} {...rest}>
+    <div className={`social-icons !gap-2 ${className || ""}`} {...rest}>
       {socialContact?.map((data, index) => (
         <TrustedRedirect
           {...linkProps}
