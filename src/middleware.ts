@@ -20,47 +20,42 @@ export default function middleware(req: NextRequest) {
     nextUrl?.hostname !== "localhost" &&
     (nextUrl?.pathname === "/" || nextUrl?.pathname === authRoutes.login) &&
     req?.geo &&
-    req?.ip && !nextUrl?.hostname?.includes("mzeeshanshahid15gmailcoms-projects.vercel.app")
+    req?.ip
   ) {
     const cookieValue = JSON.stringify({
       ...req?.geo,
       ip: req?.ip,
-      hostname: nextUrl?.hostname,
+      hostname: nextUrl?.hostname
     });
 
     return NextResponse.next({
       headers: {
         "Set-Cookie": `${cookiesName.info}=${encodeURIComponent(
           cookieValue
-        )}; Max-Age=86400`,
-      },
+        )}; Max-Age=86400`
+      }
     });
   }
   if (isProtected) {
-    if (token) {
+    if (userInfo && userInfo?.firebase?.sign_in_provider === "password") {
       if (userInfo?.email_verified) {
         return NextResponse.next();
       }
       return NextResponse.redirect(new URL(authProtect.verifyEmail, req?.url));
     } else {
       const loginUrl = new URL(authRoutes.login, req?.url);
+      const deleteCookieHeader = `${cookiesName.accessToken}=; Max-Age=0; Path=/; HttpOnly; Secure`;
       loginUrl.searchParams.set(cookiesName.redirect, req?.nextUrl?.pathname);
-      return NextResponse.redirect(loginUrl);
+      return NextResponse.redirect(loginUrl, {
+        headers: {
+          "Set-Cookie": deleteCookieHeader
+        }
+      });
     }
-  } else return NextResponse.next();
+  }
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
-  // matcher: [
-  //   /*
-  //    * Match all request paths except for the ones starting with:
-  //    * - api (API routes)
-  //    * - _next/static (static files)
-  //    * - _next/image (image optimization files)
-  //    * - favicon.ico (favicon file)
-  //    * - login
-  //    */
-  //   "/((?!api|_next/static|_next/image|favicon.ico).*)",
-  // ],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"]
 };

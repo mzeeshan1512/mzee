@@ -40,14 +40,16 @@ const Password = ({
       <div className="d-flex justify-content-between align-items-center position-relative">
         <input
           id={id}
-          type={type === "password" && show ? "text" : type}
+          type={
+            disabled ? "password" : type === "password" && show ? "text" : type
+          }
           name={name}
           className={getInputCssClass({
             inValid,
             disabled,
             isValid,
             type,
-            inputCssClass,
+            inputCssClass
           })}
           placeholder={placeholder}
           disabled={disabled}

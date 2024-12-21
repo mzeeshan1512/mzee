@@ -12,7 +12,7 @@ import {
   sendPasswordResetEmail,
   confirmPasswordReset,
   verifyPasswordResetCode,
-  signOut,
+  signOut
 } from "firebase/auth";
 import {
   addDoc,
@@ -21,7 +21,7 @@ import {
   getDocs,
   query,
   setDoc,
-  where,
+  where
 } from "firebase/firestore";
 import emailjs from "emailjs-com";
 //utils
@@ -64,19 +64,18 @@ const useAuth = () => {
       if (isVerified) {
         await delete_Doc({
           collectionType: CollectionIDs._2fa,
-          id: isVerified?.id || "1",
+          id: isVerified?.id || "1"
         });
       }
       const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
-      const emailTemplate: any =
-        process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_WEB_VISIT;
+      const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE;
       const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
       const auth2FACode: any = Math.floor(
         100000 + Math.random() * 900000
       ).toString();
       await addDoc(collection(fireStore, CollectionIDs._2fa), {
         ...payload,
-        auth2FACode: auth2FACode,
+        auth2FACode: auth2FACode
       });
       await emailjs.send(
         serviceId,
@@ -86,13 +85,15 @@ const useAuth = () => {
           text:
             "We have detected a login attempt from your account. Please enter the following code to verify your identity: " +
             auth2FACode,
-          subject: "2FA Verification (mzee.vercel.app)",
+          subject: "2FA Verification (mzee.vercel.app)"
         },
         publicKey
       );
       showSuccess("Verification Token sent Successfully");
     } catch (error) {
       showError(error);
+      handleSignOut();
+      throw new Error();
     }
   };
   // register
@@ -112,7 +113,7 @@ const useAuth = () => {
       if (response?.user?.uid) {
         await updateProfile(response.user, {
           displayName: `${first_name} ${last_name}`,
-          photoURL: process.env.NEXT_PUBLIC_APP_CHAT_LOGO || chatLogo?.src,
+          photoURL: process.env.NEXT_PUBLIC_APP_CHAT_LOGO || chatLogo?.src
         });
         const userDocRef = doc(fireStore, "users", response?.user?.uid);
         await setDoc(userDocRef, {
@@ -123,17 +124,17 @@ const useAuth = () => {
           dob: dob ? dob! : null,
           role: role ? "admin" : "user",
           profile_pic: process.env.NEXT_PUBLIC_APP_CHAT_LOGO,
-          userId: response?.user?.uid,
+          userId: response?.user?.uid
         });
         await sendEmailVerification(response?.user);
         showSuccess("User Created Successfully, Verify your email");
         SaveUser(response?.user);
         setCookie("accessToken", response?.user?.accessToken, {
-          maxAge: 60 * 60 * 24,
+          maxAge: 60 * 60 * 24
         });
         sessionStorage.setItem("user", JSON.stringify(response?.user));
         setCookie("emailVerified", response?.user?.emailVerified, {
-          maxAge: 60 * 60 * 24,
+          maxAge: 60 * 60 * 24
         });
         reset({});
         navigate.push(authProtect.verifyEmail);
@@ -162,13 +163,14 @@ const useAuth = () => {
         setUser(response?.user);
         await create2FA({
           Email: payload?.email,
-          Date: new Date()?.toDateString(),
+          Date: new Date()?.toDateString()
         });
         toggle(true);
       } else throw Error("User not found");
     } catch (errors: any) {
       showError(errors);
       toggle(false);
+      handleSignOut();
     } finally {
       setProcessing(false);
     }
@@ -208,23 +210,30 @@ const useAuth = () => {
         : getCookie(cookiesName?.accessToken);
       if (accessToken) {
         const userInfo = jwtDecode(accessToken);
-
-        if (userInfo && Object.keys(userInfo)?.length > 1) {
+        console.log({ userInfo });
+        if (
+          userInfo &&
+          Object.keys(userInfo)?.length > 1 &&
+          userInfo?.firebase?.sign_in_provider === "password"
+        ) {
           SaveUser({ ...userInfo });
           setCookie(cookiesName?.accessToken, accessToken, {
-            maxAge: 60 * 60 * 24, // 1 day
+            maxAge: 60 * 60 * 24 // 1 day
           });
           const path: any = getCookie(cookiesName.redirect);
           let redirectUrl: any = "/";
           if (path && !["", " ", "undefined", "null"]?.includes(path!)) {
             redirectUrl = path;
           }
-         /*  navigate.replace("/"); */
-         typeof window!=="undefined" && window.location?.replace(redirectUrl)
-        }
+          /*  navigate.replace("/"); */
+          typeof window !== "undefined" &&
+            window.location?.replace(redirectUrl);
+        } else throw new Error("User not found or have insufficient access");
       }
     } catch (error) {
+      showError(error);
       console.error("Error decoding JWT:", error);
+      handleSignOut();
     } finally {
       setProcessing(false);
     }
@@ -261,17 +270,17 @@ const useAuth = () => {
       setProcessing(false);
     }
   };
-  
+
   // sign-out
   const handleSignOut = async () => {
     try {
       setProcessing(true);
       await signOut(auth);
       await getUserLogOut();
-      typeof window!=="undefined" && window.location?.replace("/")
+      typeof window !== "undefined" && window.location?.replace("/");
     } catch (error) {
-      showError(error)
-    }finally{
+      showError(error);
+    } finally {
       setProcessing(false);
     }
   };
@@ -287,7 +296,7 @@ const useAuth = () => {
     saveCookie,
     verifyEmail,
     resetPassword,
-    handleSignOut,
+    handleSignOut
   };
 };
 

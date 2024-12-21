@@ -2,7 +2,7 @@
 const path = require("path");
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: process?.env?.NODE_ENV === "production" ? false : true,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
@@ -18,6 +18,11 @@ const nextConfig = {
       "lh3.googleusercontent.com"
     ],
     minimumCacheTTL: 60
+  },
+  productionBrowserSourceMaps:
+    process?.env?.NODE_ENV === "production" ? false : true,
+  compiler: {
+    removeConsole: process?.env?.NODE_ENV === "production"
   },
   async redirects() {
     return [
