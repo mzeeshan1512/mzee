@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import AppLayout from "@/shared/layouts/app-layout";
-import { ToastContainer } from "@/shared/components/toast";
 /* styles */
 import "@/styles/globals.css";
 
@@ -17,7 +16,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative">
-        <ToastContainer />
         <AppLayout>{children}</AppLayout>
       </body>
     </html>

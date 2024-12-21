@@ -5,6 +5,7 @@ import ErrorBoundary from "./error-boundary";
 import { analytics, logEvent } from "../firebase/config";
 import FallBackLayout from "./fall-back-layout";
 import ParticleAnimation from "../components/particles-animation";
+import { ToastContainer } from "../components/toast";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   React.useEffect(() => {
@@ -13,6 +14,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ErrorBoundary>
+      <ToastContainer />
       <FallBackLayout customContent>
         <main className="relative h-full w-full inset-0 flex justify-center items-center">
           <div className="absolute inset-0 z-0">
