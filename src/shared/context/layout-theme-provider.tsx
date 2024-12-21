@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useContext, useEffect, useReducer, useState } from "react";
 import { Toaster } from "react-hot-toast";
@@ -33,11 +34,11 @@ const layoutReducer = (state: LayoutState, action: LayoutAction) => {
 };
 
 const initialState: ThemeState = {
-  mode: "dark",
+  mode: "dark"
 };
 
 const initialLayoutState: LayoutState = {
-  layout: layoutType,
+  layout: layoutType
 };
 
 const LayoutTheme = ({ children }: { children: React.ReactNode }) => {
@@ -55,7 +56,7 @@ const LayoutTheme = ({ children }: { children: React.ReactNode }) => {
         layout,
         dispatchLayout,
         disabled,
-        setISDisabled,
+        setISDisabled
       }}
     >
       <AuthProvider>{children}</AuthProvider>
@@ -64,7 +65,7 @@ const LayoutTheme = ({ children }: { children: React.ReactNode }) => {
 };
 
 const DarkLightThemeAndLayout = ({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) => {
@@ -72,16 +73,16 @@ const DarkLightThemeAndLayout = ({
   const { online } = useNetwork();
 
   useEffect(() => {
-    if (analytics)
-      logEvent(analytics, "page_view");
+    if (analytics) logEvent(analytics, "page_view");
   }, [analytics]);
 
   return (
     <body
-      className={`${layoutThemeContext?.themeState?.mode === "dark"
+      className={`${
+        layoutThemeContext?.themeState?.mode === "dark"
           ? "darkTheme"
           : "lightTheme"
-        } my-bg-theme`}
+      } my-bg-theme`}
     >
       <Toaster position="top-right" containerClassName="z-index" />
       {online ? children : <Offline />}
