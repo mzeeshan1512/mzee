@@ -8,6 +8,7 @@ import ErrorBoundary from "./error-boundary";
 import { useNetwork } from "../hooks/use-network";
 import { analytics, logEvent } from "../firebase/config";
 import { saveVisit } from "../firebase/use-visit";
+import { ToastContainer } from "../components/toast";
 
 const Offline = dynamic(() => import("./offline-view"), { ssr: true });
 const MaintenanceMode = dynamic(() => import("./maintenance-mode"), {
@@ -27,15 +28,20 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
     saveVisit();
   }, [analytics]);
 
-  if (!online) {
-    return <Offline />;
-  }
-
-  if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
-    return <MaintenanceMode />;
-  }
-
-  return <ErrorBoundary>{children}</ErrorBoundary>;
+  return (
+    <ErrorBoundary>
+      <ToastContainer />
+      {online ? (
+        process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true" ? (
+          <MaintenanceMode />
+        ) : (
+          children
+        )
+      ) : (
+        <Offline />
+      )}
+    </ErrorBoundary>
+  );
 };
 
 export default AppLayout;
