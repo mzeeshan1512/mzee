@@ -1,6 +1,5 @@
 import React from "react";
 import ShowIf from "./show-if";
-
 type linearGradientProps = {
   showLinearGradient?: boolean;
   linearGradientProps?: React.ComponentProps<"linearGradient">;
@@ -24,9 +23,33 @@ type SvgGradientProps = PartialSvgGradientProps &
   linearGradientProps &
   React.ComponentProps<"svg">;
 
+const excludeList: string[] = ["xlmns", "xmlns:xlink", "enable-background"];
+
+const convertToCamelCase = (inputString: string): string =>
+  inputString
+    .split("-")
+    .map((word, index) =>
+      index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+    )
+    .join("");
+
+const getCleanData = (obj: Record<string, any>, excludedFields: string[]) => {
+  const cleanData = { ...obj };
+  const keysToExclude = excludedFields;
+  keysToExclude.forEach((key) => {
+    if (key in cleanData) {
+      delete cleanData[key];
+    }
+    if (key?.includes("-")) {
+      cleanData[convertToCamelCase(key)] = cleanData[key];
+    }
+  });
+  return cleanData;
+};
+
 const RenderSvgAsDangerouslySetInnerHTML = (
   props: React.ComponentProps<"svg">
-) => <svg {...props} />;
+) => <svg {...getCleanData(props, excludeList)} />;
 
 const SVGGradientBinder = ({
   path,
@@ -37,7 +60,7 @@ const SVGGradientBinder = ({
   ...svgProps
 }: SvgGradientProps) => {
   return (
-    <svg {...svgProps}>
+    <svg {...getCleanData(svgProps, excludeList)}>
       <ShowIf conditionalRenderKey={showLinearGradient}>
         <defs>
           <linearGradient

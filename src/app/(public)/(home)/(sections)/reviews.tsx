@@ -11,10 +11,13 @@ import Image from "next/image";
 const Reviews = async () => {
   const serverAction = fetchRecordsOnServer();
   await serverAction.getDocuments({
-    collectionId: CollectionIDs.reviews
-    // conditions: {
-
-    // }
+    collectionId: CollectionIDs.services,
+    conditions: {
+      orderByFields: {
+        field: "modified_at",
+        direction: "desc"
+      }
+    }
   });
   return (
     <SectionContainer

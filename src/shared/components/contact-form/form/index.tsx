@@ -144,27 +144,29 @@ const ContactForm = () => {
       className="grid grid-flow-row md:grid-cols-2 gap-4 items-start"
       onSubmit={handleSubmit}
     >
-      {formField?.map((item) => (
+      {formField?.map(({ id, label, isTextBox, ...field }) => (
         <FloatingOutlinedInput
-          key={item.id}
+          key={id}
           inputProps={{
-            ...item,
+            ...field,
             onChange: handleChange,
-            value: formState[item?.name]! ?? "",
+            value: formState[field?.name]! ?? "",
             disabled: isPending
           }}
           textAreaProps={{
-            ...item,
+            ...field,
             onChange: handleChange as any,
-            value: formState[item?.name]! ?? "",
+            value: formState[field?.name]! ?? "",
             disabled: isPending
           }}
-          label={item.label}
-          className={item.className}
-          error={errors[item?.name]}
-          isInvalid={errors[item?.name] ? true : false}
-          isValid={!errors[item?.name] && formState[item?.name] ? true : false}
-          isTextBox={item?.isTextBox}
+          label={label}
+          className={field.className}
+          error={errors[field?.name]}
+          isInvalid={errors[field?.name] ? true : false}
+          isValid={
+            !errors[field?.name] && formState[field?.name] ? true : false
+          }
+          isTextBox={isTextBox}
         />
       ))}
       <Button
