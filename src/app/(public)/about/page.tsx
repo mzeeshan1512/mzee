@@ -40,16 +40,16 @@ const tabList: list[] = [
     ),
     title: TabList.Experience
   },
-  {
-    tabId: TabList.Skills,
-    tabContent: (
-      <TabContentContainer title={TabList.Skills}>
-        <TanContent id={AboutPageColllectionIds.skills} />
-      </TabContentContainer>
-    ),
-    title: TabList.Skills,
-    disabled: true
-  },
+  // {
+  //   tabId: TabList.Skills,
+  //   tabContent: (
+  //     <TabContentContainer title={TabList.Skills}>
+  //       <TanContent id={AboutPageColllectionIds.skills} />
+  //     </TabContentContainer>
+  //   ),
+  //   title: TabList.Skills,
+  //   disabled: true
+  // },
   {
     tabId: TabList.Certifications,
     tabContent: (

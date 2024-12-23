@@ -118,3 +118,16 @@ interface ProjectsData extends commonData {
   videoGallery?: ProjectVideGallery;
   detailedContent?: { content?: string };
 }
+
+interface ReviewFeedback {
+  gmailName: string;
+  xCollab: string;
+  organization: string;
+  review: string;
+  fireBase_Image: string;
+  designation: string;
+  email: string;
+  avatar?: any;
+  name: string;
+  id: string;
+}

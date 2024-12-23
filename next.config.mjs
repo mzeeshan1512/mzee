@@ -4,7 +4,18 @@ const nextConfig = {
     process?.env?.NODE_ENV === "production" ? false : true,
   reactStrictMode: process?.env?.NODE_ENV === "production" ? false : true,
   images: {
-    domains: ["unsplash.com", "firebasestorage.googleapis.com"],
+    domains: [
+      "unsplash.com",
+      "firebasestorage.googleapis.com",
+      "googleusercontent.com",
+      "*.com"
+    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**"
+      }
+    ],
     minimumCacheTTL: 60
   },
   compiler: {

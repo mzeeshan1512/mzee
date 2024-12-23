@@ -50,7 +50,7 @@ const About = () => {
       }
     >
       {/* time and overview */}
-      <div className="relative grid grid-flow-row md:grid-cols-2 gap-8 items-center">
+      <div className="relative grid grid-flow-row lg:grid-cols-2 gap-8 items-center">
         <div className="relative flex w-full justify-center items-center">
           <Image
             src={aboutPng}

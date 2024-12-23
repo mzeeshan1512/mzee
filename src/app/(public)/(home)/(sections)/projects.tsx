@@ -16,14 +16,7 @@ const Projects = async () => {
           field: "basicInfo.is_featured",
           operator: "==",
           value: true
-          // functionConjection: "or"
         }
-        // {
-        //   field: "catgeory.label",
-        //   operator: "==",
-        //   value: "featured",
-        //   functionConjection: "or"
-        // }
       ],
       orderByFields: {
         field: "modified_at",
