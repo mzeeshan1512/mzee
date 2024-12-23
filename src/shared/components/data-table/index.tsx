@@ -137,7 +137,12 @@ const DataTable = (props: DataTableProps) => {
                         </td>
                       </ConditionalRenderer>
                       {props?.headerList?.map((headerItem, headerIndex) => (
-                        <td key={headerIndex} className="px-3">
+                        <td
+                          key={headerIndex}
+                          className={`px-3 ${
+                            item.is_archived ? "strike-through" : ""
+                          }`}
+                        >
                           {headerItem?.cell
                             ? headerItem?.cell(item)
                             : item[headerItem?.data_key!]}

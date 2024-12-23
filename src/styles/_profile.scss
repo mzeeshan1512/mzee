@@ -6,14 +6,7 @@
   .profile-container {
     display: flex;
     align-items: center;
-    .avatar {
-      vertical-align: middle;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      border: 1px solid $primary;
-      padding: 5px;
-    }
+   
   }
   .drop-down {
     display: none;
@@ -76,3 +69,12 @@
   color: red;
   z-index: 10;
 }
+
+ .avatar {
+      vertical-align: middle;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: 1px solid $primary;
+      padding: 5px;
+    }

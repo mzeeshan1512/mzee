@@ -14,6 +14,7 @@ const CollectionIDs = {
   _2fa: "2fa",
   myInfo: "about-my-info",
   icons: "icons",
+  reviews: "reviews-feedbacks"
 };
 
 export { CollectionIDs };

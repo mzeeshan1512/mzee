@@ -61,7 +61,7 @@ p {
 }
 
 .z-index{
-  z-index: 2000 !important;
+  z-index: 10000 !important;
 }
 .z-50 {
   z-index: 50 !important;
@@ -282,4 +282,11 @@ p {
 
 .max-w-cal{
   width: calc(100vw - 650px) !important;
+}
+
+.strike-through{
+  text-decoration: line-through;
+  &:hover{
+    text-decoration: none;
+  }
 }

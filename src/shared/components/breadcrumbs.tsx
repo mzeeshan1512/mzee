@@ -11,11 +11,17 @@ const Breadcrumbs = ({
 }) => {
   return (
     <nav className="bread--crumbs">
-      <div className="title">
+      <div
+        className="title"
+        style={{
+          border: childList?.length < 1 ? "none" : ""
+        }}
+      >
         <LinkScrollSpy data={parent} />
       </div>
-      <span className="horizontal-line" />
+
       <ConditionalRenderer condition={childList?.length > 0}>
+        <span className="horizontal-line" />
         <ul>
           {childList?.map((child: BreadCrumbsProps, index: number) => (
             <li key={index}>
@@ -23,7 +29,6 @@ const Breadcrumbs = ({
               <ConditionalRenderer condition={index < childList?.length - 1}>
                 <div className="chevron-icon right" />
               </ConditionalRenderer>
-              
             </li>
           ))}
         </ul>

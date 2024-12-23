@@ -25,8 +25,7 @@ const getRecord = async (colId: any, ip: any) => {
   return documents;
 };
 
-const saveVisit = async (req: any, mode: mode = "weblogs" ) => {
-  debugger;
+const saveVisit = async (req: any, mode: mode = "weblogs") => {
   const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
   const emailTemplate: any =
     process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_WEB_VISIT;
@@ -38,11 +37,11 @@ const saveVisit = async (req: any, mode: mode = "weblogs" ) => {
     date: date,
     time: time,
     modified_at: currentDate?.toISOString(),
-    ...req,
+    ...req
   };
   try {
     let docs = await getRecord(
-      mode==="login" ? CollectionIDs.loginLogs : CollectionIDs.webInfo,
+      mode === "login" ? CollectionIDs.loginLogs : CollectionIDs.webInfo,
       payload.ip
     );
     let isAlready = false;
@@ -57,7 +56,10 @@ const saveVisit = async (req: any, mode: mode = "weblogs" ) => {
     if (isAlready) return;
     const db = getFirestore(firebaseApp);
     await addDoc(
-      collection(db,  mode==="login" ? CollectionIDs.loginLogs : CollectionIDs.webInfo),
+      collection(
+        db,
+        mode === "login" ? CollectionIDs.loginLogs : CollectionIDs.webInfo
+      ),
       payload
     );
 
@@ -66,17 +68,18 @@ const saveVisit = async (req: any, mode: mode = "weblogs" ) => {
       emailTemplate,
       {
         message: getHtmlStringFromObject(payload),
-        text:  mode==="login"
-          ? "Some tries to Access Admin Panel"
-          : "Some one Visit your website",
-        subject: ( mode==="login"
-          ? `Login Attempt`
-          : "New Web Visit") + ` (${payload.hostname})`,
+        text:
+          mode === "login"
+            ? "Some tries to Access Admin Panel"
+            : "Some one Visit your website",
+        subject:
+          (mode === "login" ? `Login Attempt` : "New Web Visit") +
+          ` (${payload.hostname})`
       },
       publicKey
     );
   } catch (e) {
-   // console.log({e})
+    // console.log({e})
   } finally {
     deleteCookie(cookiesName.info);
   }

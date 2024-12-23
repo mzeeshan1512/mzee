@@ -10,10 +10,11 @@ interface Props {
   preventClose?: boolean;
   noDefaultClass?: boolean;
   ContentClass?: string;
+  headerClass?: string;
   title?: string;
   subtitle?: string;
   close?: () => void;
-  variant?: ModalVariant
+  variant?: ModalVariant;
   children?: React.ReactNode;
 }
 
@@ -23,12 +24,13 @@ const Modal = ({
   showClose = true,
   preventClose = false,
   noDefaultClass = false,
-  ContentClass ="",
+  ContentClass = "",
+  headerClass = "",
   variant = "medium",
   title,
   subtitle,
   close = () => {},
-  children,
+  children
 }: Props) => {
   const modalRef = useRef<any>(null);
 
@@ -71,26 +73,41 @@ const Modal = ({
         className={
           noDefaultClass
             ? ContentClass
-            : `theme-bg shadow custom-modal-content-container ${variant} ${ContentClass}`
+            : `theme-bg shadow custom-modal-content-container scrol-top-margin ${variant} ${ContentClass}`
         }
         id="modal"
       >
         <ConditionalRenderer
-          condition={!preventClose && (showClose || staticBackDrop)}
+          condition={
+            (!preventClose && (showClose || staticBackDrop)) ||
+            title ||
+            subtitle
+          }
         >
-          <div className="close">
-            <Cross className="general-hover-cursor" onClick={() => close()} />
-          </div>
-        </ConditionalRenderer>
-        <ConditionalRenderer condition={title || subtitle}>
-          <div className="d-flex flex-column">
-            <ConditionalRenderer condition={title}>
-              <h4 className="m-0">{title}</h4>
+          <header className="stickyHeader glassomorhpic-effect">
+            {/* header title */}
+            <ConditionalRenderer condition={title || subtitle}>
+              <div className={`d-flex flex-column ${headerClass ?? ""}`}>
+                <ConditionalRenderer condition={title}>
+                  <h4 className="m-0">{title}</h4>
+                </ConditionalRenderer>
+                <ConditionalRenderer condition={subtitle}>
+                  <p>{subtitle}</p>
+                </ConditionalRenderer>
+              </div>
             </ConditionalRenderer>
-            <ConditionalRenderer condition={subtitle}>
-              <p>{subtitle}</p>
+            {/* close */}
+            <ConditionalRenderer
+              condition={!preventClose && (showClose || staticBackDrop)}
+            >
+              <div className="d-flex justify-content-end me-2">
+                <Cross
+                  className="general-hover-cursor"
+                  onClick={() => close()}
+                />
+              </div>
             </ConditionalRenderer>
-          </div>
+          </header>
         </ConditionalRenderer>
         <ConditionalRenderer condition={children}>
           {children}

@@ -139,3 +139,31 @@ interface LogsInfo {
   time?: string;
   modified_at?: string;
 }
+
+interface ReviewFeedback {
+  gmailName: string;
+  created_at: string;
+  latitude: string;
+  xCollab: string;
+  organization: string;
+  pak_time: string;
+  review: string;
+  hostname: string;
+  is_approved: boolean;
+  is_archived: boolean;
+  date: Date;
+  fireBase_Image: string;
+  designation: string;
+  longitude: string;
+  email: string;
+  modified_at: string;
+  policyAgreed: string;
+  avatar?: any;
+  ip: string;
+  name: string;
+  id: string;
+}
+interface Date {
+  seconds: number;
+  nanoseconds: number;
+}

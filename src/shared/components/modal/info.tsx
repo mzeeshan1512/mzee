@@ -13,7 +13,7 @@ interface Props {
 }
 
 const InfoModal = ({
-    modalData,
+  modalData,
   variant = "small",
   type = "info",
   message,
@@ -25,15 +25,25 @@ const InfoModal = ({
       <div className="d-flex flex-column justify-content-center align-items-center w-full h-full gap-3">
         <Warning
           fill={
-            type === "info" ? "#87ceeb" : 
-            type === "error" ? "#eb000" : 
-            type === "warning" ? "#eb000" : "#00eb00"
+            type === "info"
+              ? "#87ceeb"
+              : type === "error"
+              ? "#eb000"
+              : type === "warning"
+              ? "#eb000"
+              : "#00eb00"
           }
         />
-        <span className="fs-4 text-center">{message} <span className="text-danger">{modalData?.title}</span></span>
+        <span className="fs-4 text-center">
+          {message} <span className="text-danger">{modalData?.title}</span>
+        </span>
         <div className="d-flex gap-2">
-            <Button variant="danger" onClick={close} >Cancel</Button>
-            <Button variant="success" onClick={onSuccess} >Confirm</Button>
+          <Button variant="danger" onClick={close}>
+            Cancel
+          </Button>
+          <Button variant="success" onClick={onSuccess}>
+            Confirm
+          </Button>
         </div>
       </div>
     </Modal>

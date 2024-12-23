@@ -25,7 +25,7 @@ export const saveDataToFirebase = async (payload: { [key: string]: any }) => {
       created_by: payload?.data?.created_by || user?.user_id,
       is_archived: payload?.data?.is_archived || false,
       created_at: payload?.data?.created_at || new Date()?.toISOString(),
-      modified_at: new Date()?.toISOString(),
+      modified_at: new Date()?.toISOString()
     };
     let callBackDocRef: any = "";
     if (payload?.dataId) {
@@ -47,12 +47,11 @@ export const saveDataToFirebase = async (payload: { [key: string]: any }) => {
         const data: any = docSnapshot.data();
         return {
           ...data,
-          id: docSnapshot.id,
+          id: docSnapshot.id
         };
       }
     }
   } catch (error: any) {
-    debugger;
     showError(error);
     throw new Error(error!);
   }
@@ -66,7 +65,7 @@ export const handlePostData = async (payload: { [key: string]: any }) => {
           saveDataToFirebase({
             data: item,
             collectionId: payload?.collectionId,
-            userInfo: payload?.userInfo,
+            userInfo: payload?.userInfo
           })
       );
       if (promises) {
@@ -76,7 +75,6 @@ export const handlePostData = async (payload: { [key: string]: any }) => {
       return await saveDataToFirebase(payload);
     }
   } catch (error: any) {
-    debugger;
     showError(error);
     throw new Error(error!);
   }

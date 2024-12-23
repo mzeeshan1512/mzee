@@ -48,10 +48,23 @@ const getBase64=(file: File)=> {
   })
 }
 
+const parseObjectValues = (obj: any): GenericObject => {
+  const parsedObject: GenericObject = {};
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) {
+      parsedObject[key] = obj[key] === undefined ? null : obj[key];
+    }
+  }
+  console.log({ parsedObject });
+  debugger;
+  return parsedObject;
+};
+
 export {
   getHtmlStringFromObject,
   getSafeArrayValue,
   getUserInfo,
   getBase64,
-  getUserLogOut
+  getUserLogOut,
+  parseObjectValues
 };

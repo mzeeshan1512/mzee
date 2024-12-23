@@ -17,11 +17,11 @@ const adminRoutes = {
   about: adminRoutePrefix + "/about",
   services: adminRoutePrefix + "/services",
   contact: adminRoutePrefix + "/contact",
-  blog: adminRoutePrefix + "/blog",
+  reviews: adminRoutePrefix + "/reviews-feedbacks",
   logs: adminRoutePrefix + "/logs",
   projects: adminRoutePrefix + "/projects",
   technology: adminRoutePrefix + "/technologies",
-  icons: adminRoutePrefix + "/icons",
+  icons: adminRoutePrefix + "/icons"
 };
 
 const adminAboutPageRoutes = {

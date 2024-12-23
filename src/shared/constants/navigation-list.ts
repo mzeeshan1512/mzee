@@ -33,41 +33,41 @@ const navLinks: HeaderMenuList[] = [
 ];
 
 const AdminNavList: HeaderMenuList[] = [
- {
+  {
     title: "Dashboard",
-    link: adminRoutes.dashboard,
+    link: adminRoutes.dashboard
   },
   {
     title: "About",
-    link: adminRoutes.about,
+    link: adminRoutes.about
   },
   {
     title: "Icons",
-    link: adminRoutes.icons,
-  }, 
+    link: adminRoutes.icons
+  },
   {
     title: "Projects",
-    link: adminRoutes.projects,
+    link: adminRoutes.projects
   },
-{
+  {
     title: "Services",
-    link: adminRoutes.services,
+    link: adminRoutes.services
   },
   {
     title: "Technologies",
-    link: adminRoutes.technology,
+    link: adminRoutes.technology
   },
   {
-    title: "Blogs",
-    link: adminRoutes.blog,
+    title: "Reviews/Feedbacks",
+    link: adminRoutes.reviews
   },
   {
     title: "Contact",
-    link: adminRoutes.contact,
+    link: adminRoutes.contact
   },
   {
     title: "Logs",
-    link: adminRoutes.logs,
+    link: adminRoutes.logs
   }
 ];
 

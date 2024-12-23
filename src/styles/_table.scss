@@ -23,3 +23,11 @@
       margin: 10px !important;
     }
   }  
+
+  .scrol-top-margin{
+     &::-webkit-scrollbar-track {
+      background: transparent !important;
+      opacity: 0 !important;
+      margin: 10px !important;
+    }
+  }
