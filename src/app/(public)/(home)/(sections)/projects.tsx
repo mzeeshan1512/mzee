@@ -45,7 +45,9 @@ const Projects = async () => {
       >
         <ProjectCardRenderer projects={serverAction?.data} />
       </ShowIf>
-      <ShowIf conditionalRenderKey={serverAction?.totalRecrods > 4}>
+      <ShowIf conditionalRenderKey={serverAction?.totalRecrods}>
+        <br className="block lg:hidden" />
+        <br className="block lg:hidden" />
         <Link
           href="/projects"
           className="bg-primary-gradient hover:bg-primary-hover-gradient p-3 rounded-lg text-white"

@@ -74,7 +74,7 @@ const ProjectInfoCard = ({
 }) => {
   return (
     <div
-      className="relative group rounded-lg shadow-xl m-2 h-64 overflow-hidden transition-all ease-in-out duration-75 hover:scale-110 cursor-pointer"
+      className="relative group rounded-lg shadow-md shadow-secondary-100 dark:shadow-primary-100 h-64 overflow-hidden transition-all ease-in-out duration-75 hover:scale-110 cursor-pointer"
       style={{
         backgroundImage: `url(${imageGallery.banner_image.src?.url!})`,
         backgroundSize: "cover",

@@ -51,7 +51,7 @@ const Main = async () => {
         <div
           data-aos="fade-up"
           data-aos-duration="2000"
-          className="flex items-center gap-2 mt-2 pt-2"
+          className="flex items-center gap-2 mt-2 pt-2 flex-wrap"
         >
           <LetsConnect />
           <SocialIcons
