@@ -178,7 +178,8 @@ type formFieldsList = {
     value?: any;
     fieldKey?: string;
     isDisabled?: boolean;
-    mode?: "append" | "changed";
+    currentFieldValue?: string;
+    mode?: "append" | "changed" | "equateWithFieldValue";
     nestedFieldKey?: string;
     replaceSpecialCharacter?: {
       char: string | RegExp;

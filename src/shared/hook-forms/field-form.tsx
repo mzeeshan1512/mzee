@@ -265,9 +265,7 @@ const FieldForms = ({
             <Col
               lg={col}
               key={item?.name! + +index}
-              className={
-                (colClassName ? colClassName : "") + " my-1"
-              }
+              className={(colClassName ? colClassName : "") + " my-1"}
             >
               <Field
                 {...item}
@@ -283,31 +281,39 @@ const FieldForms = ({
                   fileProgress.hasOwnProperty(item.name!) &&
                   fileProgress[item?.name!]
                 }
-                callBack={(...args: any) => {
+                callBack={(callBackvalue: any) => {
                   if (impactedKey) {
                     clearErrors(impactedKey?.key!);
-                    let fieldValue = impactedKey?.value || impactedKey?.fieldKey!
-                      ? getValues(impactedKey?.fieldKey!)
-                      : "";
+                    let fieldValue = "";
+                    if (impactedKey?.value) {
+                      fieldValue = impactedKey?.value;
+                    }
+                    if (impactedKey?.fieldKey) {
+                      fieldValue = getValues(impactedKey?.fieldKey!);
+                    }
+                    if (impactedKey?.currentFieldValue) {
+                      fieldValue = callBackvalue;
+                    }
                     if (
                       typeof fieldValue === "object" &&
                       !Array.isArray(fieldValue)
                     ) {
-                      const t =
-                        fieldValue?.[impactedKey?.nestedFieldKey!];
+                      const t = fieldValue?.[impactedKey?.nestedFieldKey!];
                       fieldValue = t;
                     }
                     const value = impactedKey?.value || fieldValue;
-                    let modifiedValue =
-                      impactedKey?.mode === "append"
-                        ? value + "-" + getValues(impactedKey?.key!)
-                        : value;
+                    let modifiedValue = value;
+                    if (impactedKey?.mode === "append")
+                      value + "-" + getValues(impactedKey?.key!);
+                    if (impactedKey?.mode === "equateWithFieldValue") {
+                      console.log({ value }, { fieldValue });
+                      modifiedValue = value === fieldValue;
+                    }
                     if (impactedKey?.replaceSpecialCharacter) {
                       modifiedValue = modifiedValue
                         ?.replace(
                           impactedKey?.replaceSpecialCharacter?.char,
-                          impactedKey?.replaceSpecialCharacter
-                            ?.replacedChar
+                          impactedKey?.replaceSpecialCharacter?.replacedChar
                         )
                         .replace(/^-+|-+$/g, "");
                     }

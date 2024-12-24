@@ -69,14 +69,8 @@ const FormSelect = (props: FormProps) => {
                   temp = { value: e.value, label: e?.label };
                 }
                 if (props.callBack && temp) {
-                  if (props.isMulti) {
-                    props.callBack((prev: selectObject[]) => [
-                      ...prev,
-                      ...temp
-                    ]);
-                  } else {
-                    props.callBack((prev: selectObject[]) => [...prev, temp]);
-                  }
+                 
+                    props.callBack(temp);
                 }
                 field.onChange(temp);
               }}
@@ -110,8 +104,8 @@ const FormSelect = (props: FormProps) => {
               }
               placeholder={props.placeholder}
               onChange={(e) => {
-                if (props.callBack && e && Object?.keys(e)?.length > 0) {
-                  props.callBack((prev: selectObject[]) => [...prev, e]);
+                if (props.callBack && e) {
+                  props.callBack(e);
                 }
                 field.onChange(e);
               }}

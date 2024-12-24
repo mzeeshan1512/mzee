@@ -60,7 +60,8 @@ const basicPrefilledFields: formFieldsList[] = [
     label: "Is Featured",
     radioCheckLabelPlacement: "left",
     colClassName: "align-self-center",
-    checked: true
+    checked: true,
+    watchedKey: "project_category"
   }
   // {
   //   type: "switch",
