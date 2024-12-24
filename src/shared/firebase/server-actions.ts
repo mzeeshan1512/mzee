@@ -36,10 +36,18 @@ export type arguments = {
   conditions?: firebaseCondition;
   documentId?: string;
   isSingleRecord?: boolean;
-  groupedData?: {
-    groupByField: string;
-    groupedCallBackFn: (data: any) => any;
-  } | null;
+  groupedData?:
+    | {
+        customGroupedCallBack: (
+          obj: Record<string, any>,
+          item: Record<string, any>
+        ) => any;
+      }
+    | {
+        groupByField: string;
+        groupedCallBackFn: (data: any) => any;
+      }
+    | null;
 };
 
 /**
@@ -156,24 +164,30 @@ export const fetchRecordsOnServer = () => {
         );
         const snapshot = await getDocs(queryString);
         if (snapshot && !snapshot.empty) {
-          data = [];
+          data = args?.groupedData!
+            ? "groupByField" in args?.groupedData ||
+              "customGroupedCallBack" in args.groupedData
+              ? {}
+              : []
+            : [];
           totalRecrods = snapshot.size;
-          const groupedData: Record<string, any> = {};
           snapshot.forEach((doc) => {
             const cleanData: Record<string, any> = {
               ...getCleanData(doc?.data(), args.conditions?.excludeFields),
               id: doc?.id
             };
-            if (args?.groupedData) {
-              const key = cleanData[args?.groupedData?.groupByField];
-              if (!groupedData[`${key}`]) {
-                groupedData[`${key}`] = [];
+            if ("customGroupedCallBack" in args.groupedData!) {
+              data = args.groupedData?.customGroupedCallBack(data, cleanData);
+            } else if (args?.groupedData?.groupByField) {
+              const key = cleanData[args?.groupedData?.groupByField!];
+              if (!data[`${key}`]) {
+                data[`${key}`] = [];
               }
-              groupedData[`${key}`].push(cleanData);
+              data[`${key}`].push(cleanData);
             } else data.push(cleanData);
           });
-          if (args?.groupedData) {
-            data = args.groupedData?.groupedCallBackFn(groupedData);
+          if ("groupedCallBackFn" in args?.groupedData!) {
+            data = args.groupedData?.groupedCallBackFn(data);
           }
           if (args.isSingleRecord) {
             data = data?.[0];

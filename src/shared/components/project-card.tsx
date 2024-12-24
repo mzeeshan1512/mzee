@@ -68,13 +68,17 @@ const TechRenderer = ({
 const ProjectInfoCard = ({
   basicInfo,
   imageGallery,
+  disableHoverScale,
   i
 }: ProjectsData & {
   i: number;
+  disableHoverScale?: boolean;
 }) => {
   return (
     <div
-      className="relative group rounded-lg shadow-md shadow-secondary-100 dark:shadow-primary-100 h-64 overflow-hidden transition-all ease-in-out duration-75 hover:scale-110 cursor-pointer"
+      className={`relative group rounded-lg shadow-md shadow-secondary-100 dark:shadow-primary-100 h-64 overflow-hidden transition-all ease-in-out duration-75 ${
+        disableHoverScale ? "" : "hover:scale-110"
+      } cursor-pointer`}
       style={{
         backgroundImage: `url(${imageGallery.banner_image.src?.url!})`,
         backgroundSize: "cover",

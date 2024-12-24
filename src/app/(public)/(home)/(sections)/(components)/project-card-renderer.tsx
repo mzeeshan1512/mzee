@@ -25,8 +25,19 @@ const ProjectCardRenderer = ({
       ? ProjectInfoCard
       : ProjectDetailedInfoCard;
 
-  const RenderProjectComponent = ({ project, index }: any) => {
-    return <Component key={index} i={index} {...project} />;
+  const RenderProjectComponent = ({
+    project,
+    index,
+    disableHoverScale
+  }: any) => {
+    return (
+      <Component
+        key={index}
+        i={index}
+        {...project}
+        disableHoverScale={disableHoverScale}
+      />
+    );
   };
 
   const LoopProjects = () => {
@@ -50,7 +61,12 @@ const ProjectCardRenderer = ({
     >
       <Carousel autoPlay infinite>
         {projects.map((project, index) => (
-          <RenderProjectComponent key={index} index={index} project={project} />
+          <RenderProjectComponent
+            key={index}
+            index={index}
+            project={project}
+            disableHoverScale
+          />
         ))}
       </Carousel>
     </ShowIf>
