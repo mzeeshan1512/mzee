@@ -306,7 +306,6 @@ const FieldForms = ({
                     if (impactedKey?.mode === "append")
                       value + "-" + getValues(impactedKey?.key!);
                     if (impactedKey?.mode === "equateWithFieldValue") {
-                      console.log({ value }, { fieldValue });
                       modifiedValue = value === fieldValue;
                     }
                     if (impactedKey?.replaceSpecialCharacter) {

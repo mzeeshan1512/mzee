@@ -55,8 +55,6 @@ const parseObjectValues = (obj: any): GenericObject => {
       parsedObject[key] = obj[key] === undefined ? null : obj[key];
     }
   }
-  console.log({ parsedObject });
-  debugger;
   return parsedObject;
 };
 
