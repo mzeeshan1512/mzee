@@ -12,6 +12,13 @@ const Reviews = async () => {
   await serverAction.getDocuments({
     collectionId: CollectionIDs.reviews,
     conditions: {
+      filters: [
+        {
+          field: "is_approved",
+          operator: "==",
+          value: true
+        }
+      ],
       orderByFields: {
         field: "modified_at",
         direction: "desc"

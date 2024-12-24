@@ -42,10 +42,13 @@ export type arguments = {
           obj: Record<string, any>,
           item: Record<string, any>
         ) => any;
+        groupByField?: never;
+        groupedCallBackFn?: never;
       }
     | {
         groupByField: string;
         groupedCallBackFn: (data: any) => any;
+        customGroupedCallBack?: never;
       }
     | null;
 };
@@ -165,8 +168,8 @@ export const fetchRecordsOnServer = () => {
         const snapshot = await getDocs(queryString);
         if (snapshot && !snapshot.empty) {
           data = args?.groupedData!
-            ? "groupByField" in args?.groupedData ||
-              "customGroupedCallBack" in args.groupedData
+            ? args.groupedData.groupedCallBackFn! ||
+              args.groupedData.customGroupedCallBack!
               ? {}
               : []
             : [];
@@ -176,8 +179,8 @@ export const fetchRecordsOnServer = () => {
               ...getCleanData(doc?.data(), args.conditions?.excludeFields),
               id: doc?.id
             };
-            if ("customGroupedCallBack" in args.groupedData!) {
-              data = args.groupedData?.customGroupedCallBack(data, cleanData);
+            if (args.groupedData?.customGroupedCallBack) {
+              data = args.groupedData?.customGroupedCallBack?.(data, cleanData);
             } else if (args?.groupedData?.groupByField) {
               const key = cleanData[args?.groupedData?.groupByField!];
               if (!data[`${key}`]) {
@@ -186,8 +189,8 @@ export const fetchRecordsOnServer = () => {
               data[`${key}`].push(cleanData);
             } else data.push(cleanData);
           });
-          if ("groupedCallBackFn" in args?.groupedData!) {
-            data = args.groupedData?.groupedCallBackFn(data);
+          if (args.groupedData?.groupedCallBackFn) {
+            data = args.groupedData?.groupedCallBackFn?.(data);
           }
           if (args.isSingleRecord) {
             data = data?.[0];
