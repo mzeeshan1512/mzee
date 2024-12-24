@@ -55,7 +55,6 @@ const ReviewsFeedBacks = () => {
       title: "Avatar",
       data_key: "",
       cell: (item: ReviewFeedback) => (
-
         <Image
           src={item?.avatar ?? item.fireBase_Image}
           alt={item.name ?? item.gmailName}
@@ -82,7 +81,6 @@ const ReviewsFeedBacks = () => {
       title: "Actions",
       headerCellCssClass: "justify-content-center",
       cell: (item: ReviewFeedback) => {
-        console.log({ item });
         return (
           <div className="d-flex gap-3 justify-content-center align-items-center">
             <EditIcon
@@ -103,7 +101,7 @@ const ReviewsFeedBacks = () => {
                   data: {
                     ...item,
                     is_approved: !item?.is_approved,
-                    is_archived: !!item?.is_approved
+                    is_archived: !item?.is_approved ? false : true
                   }
                 });
               }}
