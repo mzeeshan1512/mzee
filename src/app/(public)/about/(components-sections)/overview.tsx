@@ -6,6 +6,7 @@ import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import ContactModal from "@/shared/components/contact-form/contact-modal";
 import { chatLogo } from "@/shared/app-config";
+import DownloadResume from "@/shared/components/download-resume";
 
 type myInfo = {
   skills_loop: {
@@ -82,8 +83,9 @@ const Overview = async () => {
             __html: decodeURIComponent(escape(atob(record?.bio)))
           }}
         />
-        <div>
+        <div className="flex gap-4">
           <ContactModal />
+          <DownloadResume />
         </div>
       </div>
     </>

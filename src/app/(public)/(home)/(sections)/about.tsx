@@ -13,6 +13,7 @@ import Earth from "@/assets/content/earth.jpeg";
 import SectionContainer from "./(components)/section-wrapper";
 import LetsConnect from "./(components)/lets-connect";
 import Link from "next/link";
+import DownloadResume from "@/shared/components/download-resume";
 
 const About = () => {
   return (
@@ -72,7 +73,7 @@ const About = () => {
               __html: process.env.NEXT_PUBLIC_ABOUT_INFO!
             }}
           />
-          <div className="flex gap-5">
+          <div className="flex gap-4">
             <Link
               href="/about"
               className="bg-primary-gradient hover:bg-primary-hover-gradient p-3 rounded-lg text-white"
@@ -80,6 +81,7 @@ const About = () => {
               Explore more
             </Link>
             <LetsConnect label="Get in Touch" />
+            <DownloadResume />
           </div>
         </div>
       </div>
