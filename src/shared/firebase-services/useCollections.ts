@@ -99,7 +99,6 @@ export const deleteFilesFromFirebaseStorage = async (directory: string) => {
 };
 
 export const delete_Doc = async (props: DeleteProps) => {
-  console.log({ props });
   try {
     const docRef = await doc(fireStore, props?.collectionType, props?.id);
     await deleteDoc(docRef);

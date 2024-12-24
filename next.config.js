@@ -15,7 +15,14 @@ const nextConfig = {
     domains: [
       "unsplash.com",
       "firebasestorage.googleapis.com",
-      "lh3.googleusercontent.com"
+      "googleusercontent.com",
+      "*.com"
+    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**"
+      }
     ],
     minimumCacheTTL: 60
   },

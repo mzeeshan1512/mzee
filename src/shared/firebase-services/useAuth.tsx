@@ -57,7 +57,7 @@ const useAuth = () => {
     }
   };
   // create3FA
-  const create2FA = async (payload: any) => {
+  const create2FA = async (payload: any, toggle = (e: any) => {}) => {
     try {
       const result = await verify2FA(payload);
       let isVerified = result?.length > 0 ? result[0] : false;
@@ -90,10 +90,10 @@ const useAuth = () => {
         publicKey
       );
       showSuccess("Verification Token sent Successfully");
-    } catch (error) {
+    } catch (error: any) {
       showError(error);
       handleSignOut();
-      throw new Error();
+      throw new Error(error);
     }
   };
   // register
