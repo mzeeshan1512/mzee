@@ -74,6 +74,9 @@ const Reviews = async () => {
               items: 1
             }
           }}
+          sliderContainerProps={{
+            className: serverAction?.data > 1 ? "overflow-visible" : ""
+          }}
         >
           {serverAction?.data.map((review: ReviewFeedback, index: number) => (
             <figure

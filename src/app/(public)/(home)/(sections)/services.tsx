@@ -89,7 +89,7 @@ const Services = async () => {
             </div>
           }
         >
-          <Carousel autoPlay infinite>
+          <Carousel autoPlay infinite showDots={false}>
             {serverAction.data?.map(
               (service: Services_TechsTools, index: number) => (
                 <ServiceCard key={index} service={service} />

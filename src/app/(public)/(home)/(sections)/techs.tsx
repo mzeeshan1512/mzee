@@ -86,6 +86,7 @@ const TechStack = async () => {
             slidesProps={{
               className: "p-2"
             }}
+            showDots={false}
           >
             {serverAction.data?.map(
               (tech: Services_TechsTools, index: number) => (

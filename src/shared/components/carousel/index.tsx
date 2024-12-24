@@ -245,8 +245,8 @@ const Carousel = ({
           }
         >
           {slidesElement?.map((_, index) => (
-            <Button
-              {...dotsProps}
+            <button
+              // {...dotsProps}
               key={index}
               onClick={() => {
                 if (!isAnimating) {

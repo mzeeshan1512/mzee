@@ -45,7 +45,7 @@ const Projects = async () => {
       >
         <ProjectCardRenderer projects={serverAction?.data} />
       </ShowIf>
-      <ShowIf conditionalRenderKey={serverAction?.totalRecrods}>
+      <ShowIf conditionalRenderKey={serverAction?.totalRecrods > 4}>
         <br className="block lg:hidden" />
         <br className="block lg:hidden" />
         <Link
