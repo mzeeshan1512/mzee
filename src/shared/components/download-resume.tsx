@@ -7,7 +7,7 @@ const DownloadResume = () => {
       href={process.env.Next_PUBLIC_ABOUT_RESUME_LINK ?? ""}
       target="_blank"
     >
-      Download Reeume
+      Download Resume
     </Link>
   );
 };
