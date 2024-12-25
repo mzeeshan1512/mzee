@@ -5,6 +5,7 @@ import ShowIf from "./show-if";
 import TrustedRedirect from "./trusted-redirect";
 import { GitHub } from "../icon/social";
 import { InternalPreview, WebPreview } from "../icon/common";
+import Carousel from "./carousel";
 
 const LinkRenderer = ({
   github_url,
@@ -116,20 +117,51 @@ const ProjectDetailedInfoCard = ({
 }: ProjectsData & {
   i: number;
 }) => {
+  const images = [
+    imageGallery?.banner_image,
+    ...(imageGallery?.slider_images! ?? [])
+  ];
   return (
     <div
       key={i}
       className={`mb-20 relative p-4 shadow shadow-primary-50 grid grid-cols-2 items-center`}
     >
-      <img
-        src={imageGallery?.banner_image?.src?.url!}
-        alt={basicInfo.title}
-        className={`object-contain w-full h-full  ${
-          i % 2 === 0 ? "order-1" : "order-2"
-        }`}
-        data-aos={i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"}
-        data-aos-duration="1000"
-      />
+      <Carousel
+        autoPlay
+        infinite
+        showArrows={false}
+        showDots={false}
+        responsive={{
+          desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 1
+          },
+          tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 1
+          },
+          mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+          }
+        }}
+      >
+        {images?.map((item) => {
+          return (
+            <img
+              key={item.src?.url}
+              src={item.src?.url}
+              alt={basicInfo.title}
+              className={`object-contain w-full h-full  ${
+                i % 2 === 0 ? "order-1" : "order-2"
+              }`}
+              data-aos={i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"}
+              data-aos-duration="1000"
+            />
+          );
+        })}
+      </Carousel>
+
       <div
         className={`relative h-full flex flex-col gap-4 ${
           i % 2 === 0 ? "order-2 text-right" : "order-1 text-left"
