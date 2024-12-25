@@ -42,6 +42,19 @@ const Projects = async () => {
           Array.isArray(serverAction?.data) &&
           serverAction?.data?.length > 0
         }
+        elseComponent={
+          <div className="flex justify-center w-full">
+            <span>
+              No Feature Projects,{" "}
+              <Link
+                href="/projects"
+                className="bg-primary-gradient hover:bg-primary-hover-gradient p-3 rounded-lg text-white"
+              >
+                View All Projects
+              </Link>
+            </span>
+          </div>
+        }
       >
         <ProjectCardRenderer projects={serverAction?.data} />
       </ShowIf>

@@ -4,6 +4,8 @@ import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import ShowIf from "@/shared/components/show-if";
 import Carousel from "@/shared/components/carousel";
 import { ProjectInfoCard } from "@/shared/components/project-card";
+import Image from "next/image";
+import NoDataImg from "@/assets/content/not_found.png";
 
 const groupedByCategory = (
   data: Record<string, any>,
@@ -72,6 +74,13 @@ const Projects = async () => {
           </ShowIf>
         );
       })}
+      <ShowIf
+        conditionalRenderKey={Object.keys(serverAction?.data)?.length < 1}
+      >
+        <div className="flex justify-center items-center h-[70vh] w-full text-slate-600 md:col-span-3">
+          <Image src={NoDataImg} alt="" />
+        </div>
+      </ShowIf>
     </main>
   );
 };

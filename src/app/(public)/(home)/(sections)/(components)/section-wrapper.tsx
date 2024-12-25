@@ -81,4 +81,8 @@ const SectionContainer = ({
   );
 };
 
+export const RenderErrorMessage = ({ message }: { message: string }) => {
+  return <span className="text-center text-slate-300 w-full">{message}</span>;
+};
+
 export default SectionContainer;

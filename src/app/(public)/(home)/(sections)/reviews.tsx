@@ -1,5 +1,7 @@
 import React from "react";
-import SectionContainer from "./(components)/section-wrapper";
+import SectionContainer, {
+  RenderErrorMessage
+} from "./(components)/section-wrapper";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
@@ -55,6 +57,9 @@ const Reviews = async () => {
           serverAction?.data &&
           Array.isArray(serverAction?.data) &&
           serverAction?.data?.length > 0
+        }
+        elseComponent={
+          <RenderErrorMessage message="No Review/Feedback Found" />
         }
       >
         <Carousel

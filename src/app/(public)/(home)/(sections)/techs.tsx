@@ -5,7 +5,9 @@ import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import Carousel from "@/shared/components/carousel";
 import ShowIf from "@/shared/components/show-if";
-import SectionContainer from "./(components)/section-wrapper";
+import SectionContainer, {
+  RenderErrorMessage
+} from "./(components)/section-wrapper";
 import ResponsiveRenderer from "./(components)/responsive-renderer";
 
 const Tech = ({
@@ -66,6 +68,7 @@ const TechStack = async () => {
           Array.isArray(serverAction?.data) &&
           serverAction?.data?.length > 0
         }
+        elseComponent={<RenderErrorMessage message="No Tech/Tool Found" />}
       >
         <ResponsiveRenderer
           elseChildren={

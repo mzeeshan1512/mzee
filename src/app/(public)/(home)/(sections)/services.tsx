@@ -1,5 +1,7 @@
 import React from "react";
-import SectionContainer from "./(components)/section-wrapper";
+import SectionContainer, {
+  RenderErrorMessage
+} from "./(components)/section-wrapper";
 import SVGGradientBinder from "@/shared/components/svg-gradient-binder";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import Carousel from "@/shared/components/carousel";
@@ -77,6 +79,7 @@ const Services = async () => {
           Array.isArray(serverAction?.data) &&
           serverAction?.data?.length > 0
         }
+        elseComponent={<RenderErrorMessage message="No Service Found" />}
       >
         <ResponsiveRenderer
           elseChildren={
