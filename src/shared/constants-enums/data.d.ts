@@ -81,7 +81,7 @@ type ProjectsBasicInfo = {
   unique_identifier: string;
   tech_stack: blobOption[];
   description: string;
-  catrgory: {
+  project_category: {
     value: string;
     label: string;
   };

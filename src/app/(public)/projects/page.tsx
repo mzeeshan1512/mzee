@@ -12,16 +12,15 @@ const groupedByCategory = (
   project: ProjectsData
 ): Record<string, any> => {
   const groupedData: Record<string, any> = data;
-  const category = project?.basicInfo.catrgory?.label;
+  const category = project?.basicInfo.project_category?.label ?? "Others";
   if (project?.basicInfo?.is_featured) {
     if (!("Featured" in groupedData)) {
       groupedData["Featured"] = [];
     }
     groupedData["Featured"].push(project);
   } else {
-    if (category && !groupedData[`${category}`])
-      groupedData[`${category}`] = [];
-    groupedData[category].push(project);
+    if (!groupedData[`${category}`]) groupedData[`${category}`] = [];
+    groupedData[category]?.push(project);
   }
   return groupedData;
 };
@@ -31,7 +30,8 @@ enum ProjectCategoryList {
   worthy = "Worthy",
   notWorthy = "Not Worthy",
   youtubeCloned = "Youtube Cloned",
-  cloned = "Cloned"
+  cloned = "Cloned",
+  others = "Others"
 }
 
 const Projects = async () => {
