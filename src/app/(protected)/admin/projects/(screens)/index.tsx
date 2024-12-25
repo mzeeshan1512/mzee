@@ -97,10 +97,7 @@ const ProjectViews = () => {
       cell: (item: ProjectsData) => {
         return (
           <Toggler
-            value={
-              item.basicInfo?.project_category?.value! ===
-                ProjectCategoryList.featured || item.basicInfo?.is_featured
-            }
+            value={item.basicInfo?.is_featured}
             name={item.id + "is_featured"}
             onChange={() =>
               mutate({
@@ -110,12 +107,7 @@ const ProjectViews = () => {
                   ...item,
                   basicInfo: {
                     ...item.basicInfo,
-                    is_featured: !item.basicInfo.is_featured,
-                    project_category:
-                      item.basicInfo?.project_category?.value ===
-                      ProjectCategoryList.featured
-                        ? optionsProjectCategoryList?.[1]
-                        : optionsProjectCategoryList?.[0]
+                    is_featured: !item.basicInfo.is_featured
                   }
                 }
               })
