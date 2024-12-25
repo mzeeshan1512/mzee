@@ -140,7 +140,10 @@ const DataTable = (props: DataTableProps) => {
                         <td
                           key={headerIndex}
                           className={`px-3 ${
-                            item.is_archived ? "strike-through" : ""
+                            typeof item.is_archived === "undefined" ||
+                            item.is_archived
+                              ? "strike-through"
+                              : ""
                           }`}
                         >
                           {headerItem?.cell
