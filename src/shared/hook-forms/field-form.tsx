@@ -86,11 +86,20 @@ const FieldForms = ({
     key: string,
     index: any,
     setProgress: any,
-    setUrls: any
+    setUrls: any,
+    type: "slider" | "banner" = "banner"
   ) => {
-    const directoryPath = `${item?.src?.type}/${
+    let directoryPath = `${item?.src?.type}/${type}/${
       item?.src?.name
     }-${new Date()?.toISOString()}`;
+    if (
+      item?.src?.type?.includes("svg") ||
+      item?.src?.type?.includes("video")
+    ) {
+      directoryPath = `${item?.src?.type}/${
+        item?.src?.name
+      }-${new Date()?.toISOString()}`;
+    }
     return await HandleFileUpload(
       item?.src,
       directoryPath,
@@ -163,7 +172,8 @@ const FieldForms = ({
                     },
                     directory: e?.directoryPath
                   });
-                }
+                },
+                "slider"
               )
             );
           }
@@ -191,7 +201,8 @@ const FieldForms = ({
                   directory: e?.directoryPath,
                   svg: item?.svg || null
                 };
-              }
+              },
+              "banner"
             )
           );
         }

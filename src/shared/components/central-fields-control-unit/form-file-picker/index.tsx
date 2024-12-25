@@ -85,6 +85,10 @@ const FormFilePicker = (props: FormProps) => {
             component={
               <iframe
                 src={base64 || (src && typeof src === "string" ? src : "")}
+                style={{
+                  width: "100%",
+                  height: "auto"
+                }}
               />
             }
           >
@@ -94,13 +98,11 @@ const FormFilePicker = (props: FormProps) => {
               className="w-full"
               sizes="100vw"
               style={{
-                opacity: progress ? progress + "%" : "100%",
                 width: "100%",
-                height: "auto",
+                height: "auto"
               }}
               width={500}
               height={250}
-              
             />
           </ConditionalRenderer>
           <ErrorMessage message={error?.message!} />
@@ -185,6 +187,7 @@ const FormFilePicker = (props: FormProps) => {
                   error={isInValid()}
                   directory={propsContent?.directory}
                   disabled={props?.disabled}
+                  progress={props?.progress}
                 />
               )}
             </ConditionalRenderer>
