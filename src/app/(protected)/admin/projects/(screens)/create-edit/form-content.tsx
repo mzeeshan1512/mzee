@@ -95,17 +95,16 @@ const ContentForm = (
           defaultValues={defaultValues}
           formClassName="max-tab-h-scroll p-2"
           onSaveCallBack={(payload) => {
-            const hasValues = Object?.values(payload)?.some((value) => value);
-            if (hasValues && !deepDataComparison(defaultValues, payload)) {
+            if (!deepDataComparison(defaultValues, payload)) {
               mutate({
                 collectionId: CollectionIDs.projects,
                 dataId: docId,
                 data: {
                   ...props?.defaultValues,
-                  [tabId!]: payload,
-                },
+                  [tabId!]: payload
+                }
               });
-            }else handleCallBack()
+            } else handleCallBack();
           }}
         />
       </div>

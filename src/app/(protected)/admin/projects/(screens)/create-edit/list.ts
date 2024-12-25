@@ -120,15 +120,15 @@ const imageGalleryFields: formFieldsList[] = [
 const videoGalleryFields: formFieldsList[] = [
   {
     type: "file",
-    name: "banner_video",
-    label: "Banner Video",
+    name: "demo_video",
+    label: "Demo video",
     colClassName: "mb-2",
     accept: "video/*"
   },
   {
     type: "file",
-    name: "demo_video",
-    label: "Demo video",
+    name: "banner_video",
+    label: "Banner Video",
     colClassName: "mb-2",
     accept: "video/*"
   }

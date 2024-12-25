@@ -41,7 +41,7 @@ const FormFilePicker = (props: FormProps) => {
       }
     } else {
       if (props.setValue) {
-        props.setValue(props.name, null, { shouldValidate: true });
+        props.setValue(props.name, "", { shouldValidate: true });
       }
     }
   };
