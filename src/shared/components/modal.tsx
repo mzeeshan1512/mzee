@@ -112,7 +112,7 @@ const Modal = ({
         data-aos-duration="1000"
       >
         <ShowIf conditionalRenderKey={title || showClose}>
-          <div className="sticky top-0 inset-x-0 z-10 border p-4 shadow bg-[var(--section-even-bg)] flex justify-between items-center">
+          <div className="sticky top-0 inset-x-0 z-10 p-4 shadow bg-[var(--section-even-bg)] flex justify-between items-center">
             <h1
               {...titleProps}
               className={

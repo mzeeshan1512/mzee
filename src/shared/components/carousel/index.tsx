@@ -200,7 +200,7 @@ const Carousel = ({
           <li
             key={index}
             {...slidesProps}
-            className={`w-[calc(100%-1rem)] flex-shrink-0 px-2 ${
+            className={`w-[calc(100%-1rem)] flex-shrink-0 ${
               slidesProps?.className || ""
             }`}
             style={{

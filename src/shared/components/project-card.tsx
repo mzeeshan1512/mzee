@@ -6,14 +6,18 @@ import TrustedRedirect from "./trusted-redirect";
 import { GitHub } from "../icon/social";
 import { InternalPreview, WebPreview } from "../icon/common";
 import Carousel from "./carousel";
+import ProjectDemoVdeo from "./project-demo-video";
 
 const LinkRenderer = ({
   github_url,
   demo_link,
   disable_demo,
+  src,
+  title,
   web_preview,
   i
-}: ProjectsBasicInfo & { i?: number }) => {
+}: ProjectsBasicInfo & { i?: number } & videoUploadType) => {
+  console.log({ src });
   return (
     <ul className={`flex list-none gap-2 ${i! % 2 === 0 ? "justify-end" : ""}`}>
       {github_url && (
@@ -28,6 +32,11 @@ const LinkRenderer = ({
           <InternalPreview />
         </li>
       )} */}
+      {src && (
+        <li className="hover:scale-125 drop-shadow-md cursor-pointer">
+          <ProjectDemoVdeo {...src} title={title} />
+        </li>
+      )}
       {demo_link && (
         <li className="hover:scale-125 drop-shadow-md">
           <TrustedRedirect
@@ -66,10 +75,59 @@ const TechRenderer = ({
   );
 };
 
+const ImageRenderer = ({
+  i,
+  banner_image,
+  slider_images,
+  title
+}: ProjectImageGallery & { i?: string; title: string; imgClass?: string }) => {
+  const images = [banner_image, ...(slider_images! ?? [])];
+  return images?.length > 0 ? (
+    <Carousel
+      autoPlay
+      infinite
+      showArrows={false}
+      showDots={false}
+      responsive={{
+        desktop: {
+          breakpoint: { max: 3000, min: 1024 },
+          items: 1
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 1
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1
+        }
+      }}
+    >
+      {images?.map((item) => {
+        return (
+          <img
+            key={item.src?.url}
+            src={item.src?.url}
+            alt={title}
+            className={`object-contain w-full h-full rounded-lg  ${
+              i ? (+i % 2 === 0 ? "order-1" : "order-2") : ""
+            }`}
+            data-aos={
+              i ? (+i! % 2 === 0 ? "zoom-in-right" : "zoom-in-left") : ""
+            }
+            data-aos-duration="1000"
+          />
+        );
+      })}
+    </Carousel>
+  ) : null;
+};
+
 const ProjectInfoCard = ({
   basicInfo,
   imageGallery,
   disableHoverScale,
+  videoGallery,
   i
 }: ProjectsData & {
   i: number;
@@ -80,12 +138,13 @@ const ProjectInfoCard = ({
       className={`relative group rounded-lg shadow-md shadow-secondary-100 dark:shadow-primary-100 h-64 overflow-hidden transition-all ease-in-out duration-75 ${
         disableHoverScale ? "" : "hover:scale-110"
       } cursor-pointer`}
-      style={{
-        backgroundImage: `url(${imageGallery.banner_image.src?.url!})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center"
-      }}
+      // style={{
+      //   backgroundImage: `url(${imageGallery.banner_image.src?.url!})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center"
+      // }}
     >
+      <ImageRenderer {...imageGallery} title={basicInfo.title} />
       {basicInfo?.is_featured && (
         <div className="absolute top-[-2px] right-[-2px] w-[150px] h-[150px] overflow-hidden z-10">
           <div className="absolute left-[45px] top-4 w-full bg-primary-gradient text-white shadow-lg transform rotate-45 capitalize text-center tracking-wide">
@@ -93,7 +152,7 @@ const ProjectInfoCard = ({
           </div>
         </div>
       )}
-      <div className="absolute top-3/4 left-0 w-full h-full bg-slate-400 bg-opacity-10 transition-all duration-1000 ease-in-out group-hover:top-[58%] group-hover:bg-opacity-50">
+      <div className="absolute top-3/4 left-0 rounded-e-lg w-full h-full bg-slate-400 bg-opacity-10 transition-all duration-1000 ease-in-out group-hover:top-[58%] group-hover:bg-opacity-50">
         <div className="p-4">
           <div className="flex justify-between">
             <h1 className="text-gradient">
@@ -102,7 +161,7 @@ const ProjectInfoCard = ({
             <TechRenderer {...basicInfo} />
           </div>
           <div className="hidden transition-all ease-in-out duration-1000 group-hover:block mt-4">
-            <LinkRenderer {...basicInfo} />
+            <LinkRenderer {...basicInfo} {...videoGallery?.demo_video} />
           </div>
         </div>
       </div>
@@ -113,55 +172,21 @@ const ProjectInfoCard = ({
 const ProjectDetailedInfoCard = ({
   basicInfo,
   imageGallery,
+  videoGallery,
   i
 }: ProjectsData & {
   i: number;
 }) => {
-  const images = [
-    imageGallery?.banner_image,
-    ...(imageGallery?.slider_images! ?? [])
-  ];
   return (
     <div
       key={i}
       className={`mb-20 relative p-4 shadow shadow-primary-50 grid grid-cols-2 items-center`}
     >
-      <Carousel
-        autoPlay
-        infinite
-        showArrows={false}
-        showDots={false}
-        responsive={{
-          desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 1
-          },
-          tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 1
-          },
-          mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
-          }
-        }}
-      >
-        {images?.map((item) => {
-          return (
-            <img
-              key={item.src?.url}
-              src={item.src?.url}
-              alt={basicInfo.title}
-              className={`object-contain w-full h-full  ${
-                i % 2 === 0 ? "order-1" : "order-2"
-              }`}
-              data-aos={i % 2 === 0 ? "zoom-in-right" : "zoom-in-left"}
-              data-aos-duration="1000"
-            />
-          );
-        })}
-      </Carousel>
-
+      <ImageRenderer
+        i={i.toString()}
+        {...imageGallery}
+        title={basicInfo.title}
+      />
       <div
         className={`relative h-full flex flex-col gap-4 ${
           i % 2 === 0 ? "order-2 text-right" : "order-1 text-left"
@@ -207,7 +232,7 @@ const ProjectDetailedInfoCard = ({
         {/* tech */}
         <TechRenderer {...basicInfo} i={i} />
         {/* links */}
-        <LinkRenderer {...basicInfo} i={i} />
+        <LinkRenderer {...basicInfo} i={i} {...videoGallery?.demo_video} />
       </div>
     </div>
   );

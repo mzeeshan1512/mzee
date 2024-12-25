@@ -107,9 +107,14 @@ type ProjectImageGallery = {
   }[];
 };
 
+type videoUploadType = {
+  directory?: string;
+  src?: blobSrc;
+};
+
 type ProjectVideGallery = {
-  banner_video?: IconsListingData;
-  demo_video?: IconsListingData;
+  banner_video?: videoUploadType;
+  demo_video?: videoUploadType;
 };
 
 interface ProjectsData extends commonData {
