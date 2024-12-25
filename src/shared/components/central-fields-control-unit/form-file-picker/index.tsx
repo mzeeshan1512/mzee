@@ -27,14 +27,15 @@ const FormFilePicker = (props: FormProps) => {
     return false;
   };
 
-  const handleImageRemove = async (index?: number, directory?: any) => {
+  const handleImageRemove = async (index?: string, directory?: any) => {
     const filesArray = props.control._formValues[props.name!];
     if (directory) {
       await deleteFilesFromFirebaseStorage(directory);
     }
     if (props.multiple && Array.isArray(filesArray) && index) {
       // Create a new array excluding the item at the specified index
-      const updatedFilesArray = filesArray.filter((_, i) => i !== index);
+      const updatedFilesArray = filesArray.filter((_, i) => i !== +index);
+      console.log({ updatedFilesArray });
       if (props.setValue) {
         props.setValue(props.name, updatedFilesArray, { shouldValidate: true });
       }
@@ -59,7 +60,7 @@ const FormFilePicker = (props: FormProps) => {
     index,
     disabled,
     isImage,
-    className = "",
+    className = ""
   }: GenericObject) => {
     return (
       <ConditionalRenderer
@@ -74,7 +75,7 @@ const FormFilePicker = (props: FormProps) => {
           <ConditionalRenderer condition={!disabled}>
             <div
               className="image-delete-remove general-hover-cursor"
-              onClick={() => handleImageRemove(index, directory)}
+              onClick={() => handleImageRemove(index?.toString(), directory)}
             >
               <Trash />
             </div>
