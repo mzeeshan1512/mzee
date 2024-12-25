@@ -7,13 +7,25 @@ import { ProjectInfoCard } from "@/shared/components/project-card";
 import Image from "next/image";
 import NoDataImg from "@/assets/content/not_found.png";
 
+enum ProjectCategoryList {
+  featured = "Featured",
+  worthy = "Worthy",
+  notWorthy = "Not Worthy",
+  youtubeCloned = "Youtube Cloned",
+  cloned = "Cloned",
+  others = "Others"
+}
+
 const groupedByCategory = (
   data: Record<string, any>,
   project: ProjectsData
 ): Record<string, any> => {
   const groupedData: Record<string, any> = data;
   const category = project?.basicInfo.project_category?.label ?? "Others";
-  if (project?.basicInfo?.is_featured) {
+  if (
+    project?.basicInfo?.is_featured ||
+    category === ProjectCategoryList.featured
+  ) {
     if (!("Featured" in groupedData)) {
       groupedData["Featured"] = [];
     }
@@ -25,14 +37,6 @@ const groupedByCategory = (
   return groupedData;
 };
 
-enum ProjectCategoryList {
-  featured = "Featured",
-  worthy = "Worthy",
-  notWorthy = "Not Worthy",
-  youtubeCloned = "Youtube Cloned",
-  cloned = "Cloned",
-  others = "Others"
-}
 
 const Projects = async () => {
   const serverAction = fetchRecordsOnServer();
