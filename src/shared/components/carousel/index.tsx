@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useLayoutEffect } from "react";
 import { ButtonProps, CarouselProps } from "./types";
 import Button from "../button";
 import { settingContentTailwindClass } from "@/shared/constants-enums/reused-tailwind-css";
@@ -57,11 +57,14 @@ const Carousel = ({
   leftArrowProps,
   sliderContainerProps,
   sliderProps,
-  slidesProps
+  slidesProps,
+  defaultItems = 1
 }: CarouselProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
-  const [visibleItems, setVisibleItems] = useState<number>(1);
+  const [visibleItems, setVisibleItems] = useState<number>(
+    Math.floor(defaultItems)
+  );
   const [dragStart, setDragStart] = useState<number | null>(null);
   const [dragOffset, setDragOffset] = useState<number>(0);
   const [hover, toggleHover] = useState<boolean>(false);
@@ -73,7 +76,7 @@ const Carousel = ({
   const handleResize = () => {
     const windowWidth =
       typeof window !== "undefined" ? window?.innerWidth : 100;
-    let items = 1;
+    let items = defaultItems;
     const respConfig = { ...defaultResponsive, ...responsive };
 
     if (respConfig) {
@@ -89,7 +92,6 @@ const Carousel = ({
 
     setVisibleItems(items);
   };
-
   useWindowEvent("resize", handleResize);
 
   useEffect(() => {
@@ -101,6 +103,10 @@ const Carousel = ({
       return () => clearInterval(timer);
     }
   }, [autoPlay, autoPlaySpeed, isAnimating, dragStart, hover]);
+
+  useLayoutEffect(() => {
+    handleResize();
+  }, []);
 
   const handlePrev = () => {
     if (!isAnimating) {

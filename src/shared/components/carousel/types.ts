@@ -36,16 +36,18 @@ type TagProps = {
     dotsProps?:ButtonProps
 }    
 
-type CarouselProps = ChildOrSlide & TagProps & {
-  responsive?: ResponsiveObject;
-  autoPlaySpeed?: number;
-  autoPlay?: boolean;
-  showDots?: boolean;
-  showArrows?: boolean;
-  infinite?:boolean;
-  draggable?:boolean;
-  centeredMode?:boolean
-};
+type CarouselProps = ChildOrSlide &
+  TagProps & {
+    responsive?: ResponsiveObject;
+    autoPlaySpeed?: number;
+    autoPlay?: boolean;
+    showDots?: boolean;
+    showArrows?: boolean;
+    infinite?: boolean;
+    draggable?: boolean;
+    centeredMode?: boolean;
+    defaultItems?: number;
+  };
 
 
 export type {

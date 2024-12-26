@@ -2,10 +2,14 @@ import React from "react";
 import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import ShowIf from "@/shared/components/show-if";
-import Carousel from "@/shared/components/carousel";
 import { ProjectInfoCard } from "@/shared/components/project-card";
 import Image from "next/image";
 import NoDataImg from "@/assets/content/not_found.png";
+import dynamic from "next/dynamic";
+
+const Carousel = dynamic(() => import("@/shared/components/carousel"), {
+  ssr: false
+});
 
 enum ProjectCategoryList {
   featured = "Featured",
@@ -37,7 +41,6 @@ const groupedByCategory = (
   return groupedData;
 };
 
-
 const Projects = async () => {
   const serverAction = fetchRecordsOnServer();
   await serverAction.getDocuments({
@@ -62,7 +65,14 @@ const Projects = async () => {
               <h1 className="text-lg">
                 <i>{category}</i>
               </h1>
-              <Carousel autoPlay infinite>
+              <Carousel
+                autoPlay
+                infinite
+                defaultItems={serverAction?.data[category]?.length / 2}
+                slidesProps={{
+                  className: "p-2"
+                }}
+              >
                 {serverAction?.data[category]?.map(
                   (project: ProjectsData, index: number) => (
                     <ProjectInfoCard
