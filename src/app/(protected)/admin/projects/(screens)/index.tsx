@@ -14,10 +14,7 @@ import { EditIcon, Eye, EyeSlash, Trash } from "@/shared/icons/common";
 import InfoModal from "@/shared/components/modal/info";
 import ScreenLoader from "@/shared/components/loaders-spinners/screen-loader";
 import { useDeleteDocument } from "@/shared/firebase-services/useCollections";
-import {
-  optionsProjectCategoryList,
-  ProjectCategoryList
-} from "./create-edit/list";
+
 const DataList = dynamic(
   () => import("@/shared/components/data-table/data-list"),
   { ssr: true }

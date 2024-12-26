@@ -57,12 +57,15 @@ export const fileType = (value: any, type = "image") => {
   return value && value?.src && value?.src?.type?.includes(type);
 };
 
-export const sizeValidation = (value: any) => {
+export const sizeValidation = (
+  value: any,
+  size: number = 5 /* 5MB limit */
+) => {
   if (!value) return false; // Reject if no file is provided
   if (value?.src?.url) {
     return true;
   }
-  return value && value?.src && value?.src?.size <= 5 * 1024 * 1024; // 5MB limit
+  return value && value?.src && value?.src?.size <= size * 1024 * 1024;
 };
 
 const imageGallerySchema = yup.object().shape({
@@ -74,7 +77,9 @@ const imageGallerySchema = yup.object().shape({
       "Invalid file type. Only png,jpg,jpeg,gif,svgs are allowed.",
       (value) => fileType(value)
     )
-    .test("fileSize", "File size exceeds 5MB limit.", sizeValidation),
+    .test("fileSize", "File size exceeds 5MB limit.", (value) =>
+      sizeValidation(value)
+    ),
   slider_images: yup
     .array()
     .of(
@@ -112,7 +117,7 @@ const videoGallerySchema = yup.object().shape({
     )
     .test("fileSize", "Banner video size exceeds 5MB limit.", (value: any) => {
       if (!value) return true;
-      return sizeValidation(value);
+      return sizeValidation(value, 10);
     })
     .nullable(),
   demo_video: yup
@@ -127,7 +132,7 @@ const videoGallerySchema = yup.object().shape({
     )
     .test("fileSize", "Demo video size exceeds 5MB limit.", (value: any) => {
       if (!value) return true;
-      return sizeValidation(value);
+      return sizeValidation(value, 10);
     })
     .nullable()
 });
