@@ -43,7 +43,7 @@ const basicPrefilledFields: formFieldsList[] = [
     type: "text",
     name: "github_url",
     label: "Github Url",
-    value: process.env.NEXT_PUBLIC_GITHUB,
+    value: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB}`,
     colClassName: "mb-2"
   },
   {

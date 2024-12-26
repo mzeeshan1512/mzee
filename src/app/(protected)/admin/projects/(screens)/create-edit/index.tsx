@@ -256,19 +256,19 @@ const Content = ({
 };
 
 const CreateEdit = (props: Props) => {
-  console.log({ mode: process?.env?.NODE_ENV });
   const { isLoading, data: tech } = useGetDocuments(CollectionIDs.technologies);
   const techOptions = useMemo(() => {
-    return (
-      tech?.map((item: Services_TechsTools) => {
-        if (item.is_archived) return;
-        return {
+    const options: any = [];
+    tech?.forEach((item: Services_TechsTools) => {
+      if (!item.is_archived) {
+        options.push({
           value: { ...item?.blob?.value },
           label: item.title || item.blob?.label,
           tech_id: item.id
-        };
-      }) || []
-    );
+        });
+      }
+    });
+    return options;
   }, [tech]);
 
   const { isLoading: projectLoading, data: projectInfo } = useGetDocument(
