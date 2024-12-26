@@ -20,11 +20,13 @@ export const HandleFileUpload = async (
   const fileRef = ref(firebaseStorage, `${directory}`);
 
   // Optionally delete the existing file first
-  try {
-    await deleteObject(fileRef);
-    console.log("File Deleted");
-  } catch (error) {
-    console.log({ deleteFileError: error });
+  if (fileRef) {
+    try {
+      await deleteObject(fileRef);
+      console.log("File Deleted");
+    } catch (error) {
+      console.error({ deleteFileError: error });
+    }
   }
 
   // Return a promise that resolves when the upload is complete
