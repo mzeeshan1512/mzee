@@ -29,7 +29,7 @@ const Tech = ({
         {...tech?.blob?.value?.svg?.props}
         width={80}
         height={80}
-        className="shrink-0 drop-shadow-lg"
+        className="shrink-0 drop-shadow-[0_2px_1px_var(--secondary)] dark:drop-shadow-[0_2px_1px_var(--primary)]"
         title={tech?.blob?.label}
         dangerouslySetInnerHTML={{
           __html: tech?.blob?.value?.svg?.code

@@ -62,7 +62,7 @@ const TechRenderer = ({
             {...item?.value?.svg?.props}
             width={25}
             height={25}
-            className="shrink-0 drop-shadow-lg"
+            className="shrink-0 drop-shadow-[0_2px_1px_var(--secondary)] dark:drop-shadow-[0_2px_1px_var(--primary)]"
             title={item.label}
             dangerouslySetInnerHTML={{
               __html: item?.value?.svg?.code
