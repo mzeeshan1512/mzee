@@ -65,7 +65,8 @@ export const sizeValidation = (
   if (value?.src?.url) {
     return true;
   }
-  return value && value?.src && value?.src?.size <= size * 1024 * 1024;
+  const s = size * 1024 * 1024;
+  return value && value?.src && value?.src?.size <= s;
 };
 
 const imageGallerySchema = yup.object().shape({
@@ -115,7 +116,7 @@ const videoGallerySchema = yup.object().shape({
         return fileType(value, "video");
       }
     )
-    .test("fileSize", "Banner video size exceeds 5MB limit.", (value: any) => {
+    .test("fileSize", "Banner video size exceeds 10MB limit.", (value: any) => {
       if (!value) return true;
       return sizeValidation(value, 10);
     })
@@ -130,7 +131,7 @@ const videoGallerySchema = yup.object().shape({
         return fileType(value, "video");
       }
     )
-    .test("fileSize", "Demo video size exceeds 5MB limit.", (value: any) => {
+    .test("fileSize", "Demo video size exceeds 10MB limit.", (value: any) => {
       if (!value) return true;
       return sizeValidation(value, 10);
     })

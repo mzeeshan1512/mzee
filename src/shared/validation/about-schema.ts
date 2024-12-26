@@ -14,7 +14,7 @@ const commonValidation = {
     .test(
       "startBeforeEnd",
       "Starting date/year must be before ending date/year",
-      function(start_date: any) {
+      function (start_date: any) {
         const { end_date, currently }: any = this.parent;
         if (currently) {
           return true;
@@ -27,7 +27,7 @@ const commonValidation = {
     .test(
       "endAfterStart",
       "Ending date/year must be after starting date/year",
-      function(end_date: any) {
+      function (end_date: any) {
         const { start_date, currently }: any = this.parent;
         if (currently) {
           return true;
@@ -186,9 +186,11 @@ const BioSchema = yup.object().shape({
     .test(
       "fileType",
       "Invalid file type. Only png,jpg,jpeg,gif,svgs are allowed.",
-      value => fileType(value)
+      (value) => fileType(value)
     )
-    .test("fileSize", "File size exceeds 5MB limit.", sizeValidation),
+    .test("fileSize", "File size exceeds 5MB limit.", (value) =>
+      sizeValidation(value, 5)
+    ),
   skills_loop: yup.array().nullable()
 });
 
