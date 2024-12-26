@@ -57,7 +57,7 @@ const TechRenderer = ({
   return (
     <ul className={`flex list-none gap-4 ${i! % 2 === 0 ? "justify-end" : ""}`}>
       {tech_stack?.map((item, index) => (
-        <li key={index} className="text-gradient text-lg font-semibold">
+        <li key={index} className="text-lg font-semibold">
           <RenderSvgAsDangerouslySetInnerHTML
             {...item?.value?.svg?.props}
             width={25}

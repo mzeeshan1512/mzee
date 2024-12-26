@@ -19,7 +19,7 @@ const Tech = ({
 }) => {
   return (
     <div
-      className="bg-transparent cursor-default p-5 flex justify-center gap-2 items-center text-4xl border rounded-xl lg:border-none drop-shadow hover:scale-125 hover:border-none"
+      className="bg-transparent cursor-default p-5 flex justify-center gap-2 items-center text-4xl border rounded-xl lg:border-none hover:scale-125 hover:border-none"
       data-aos="flip-up"
       data-aos-duration="1000"
       data-aos-easing="ease-in-out"

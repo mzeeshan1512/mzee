@@ -95,7 +95,13 @@ const Carousel = ({
   useWindowEvent("resize", handleResize);
 
   useEffect(() => {
-    if (autoPlay && !isAnimating && !dragStart && !hover) {
+    if (
+      autoPlay &&
+      !isAnimating &&
+      !dragStart &&
+      !hover &&
+      slides!?.length > visibleItems
+    ) {
       const timer = setInterval(() => {
         handleNext();
       }, autoPlaySpeed);
