@@ -100,8 +100,8 @@ const imageGallerySchema = yup.object().shape({
         })
     )
     .nullable()
-    //.required("Slider image(s) is required.")
-    //.min(1, "At least one slider image is required.")
+    //. required("Slider image(s) is required.")
+    //. min(1, "At least one slider image is required.")
     .max(10, "You can upload up to 10 slider images.")
 });
 
