@@ -66,18 +66,18 @@ export const buildFirestoreQuery = (
   conditions: firebaseCondition
 ): Query => {
   const queryConstraints: any[] = [];
-  // let filterConstraints:any[] =[];
 
-  // const conjuction =conditions.filterConjuctions?  conditions.filterConjuctions === "and" ? and : or : null;
   const filters: filtersParams[] = [
     { field: "is_archived", operator: "==", value: false },
     ...(conditions?.filters ?? [])
   ];
+
   const orderByConditions: orderByField | orderByField[] =
     conditions?.orderByFields ?? {
       field: "modified_at",
       direction: "desc"
     };
+
   // Apply filters
   if (filters) {
     filters?.forEach((filter) => {
@@ -108,7 +108,7 @@ export const buildFirestoreQuery = (
   if (conditions?.limit) {
     queryConstraints?.push(limit(conditions?.limit));
   }
-  // console.log({ q: JSON.stringify(queryConstraints) });
+
   return query(collectionRef, ...queryConstraints);
 };
 
@@ -201,11 +201,8 @@ export const fetchRecordsOnServer = () => {
       } catch (err) {
         error = err;
         console.error({ recordsError: err });
-        // toast.dismiss();
-        // toast.error(error.message ?? "No Data Found");
       } finally {
         loading = false;
-        // console.log({ data });
       }
     },
     get loading() {

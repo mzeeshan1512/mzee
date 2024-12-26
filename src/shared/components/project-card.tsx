@@ -17,7 +17,6 @@ const LinkRenderer = ({
   web_preview,
   i
 }: ProjectsBasicInfo & { i?: number } & videoUploadType) => {
-  console.log({ src });
   return (
     <ul className={`flex list-none gap-2 ${i! % 2 === 0 ? "justify-end" : ""}`}>
       {github_url && (
