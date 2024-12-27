@@ -81,8 +81,8 @@ const ImageRenderer = ({
   const images = [banner_image, ...(slider_images! ?? [])];
   return images?.length > 0 ? (
     <Carousel
-      // autoPlay
-      // infinite
+      autoPlay
+      infinite
       showArrows={false}
       showDots={false}
       responsive={{
