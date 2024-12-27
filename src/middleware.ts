@@ -5,23 +5,26 @@ import { cookiesName } from "./shared/constants-enums/navigation-list";
 
 export default async function middleware(req: NextRequest) {
   const { nextUrl } = req;
-  if(
-    nextUrl.hostname !==" localhost" &&
+  if (
+    nextUrl.hostname !== " localhost" &&
     nextUrl?.pathname === "/" &&
+    !nextUrl?.hostname?.includes(
+      process.env.NEXT_PUBLIC_AVOID_EMAIL_HOSTNAME!
+    ) &&
     req?.geo &&
     req?.ip
   ) {
-  const encryptedData = await encryptData({
- ...req?.geo,
+    const encryptedData = await encryptData({
+      ...req?.geo,
       ip: req?.ip,
-      hostname: nextUrl?.hostname,
-  })
-   return NextResponse.next({
+      hostname: nextUrl?.hostname
+    });
+    return NextResponse.next({
       headers: {
         "Set-Cookie": `${cookiesName.info}=${encodeURIComponent(
           encryptedData
-        )}; Max-Age=86400`,
-      },
+        )}; Max-Age=86400`
+      }
     });
   }
   return NextResponse.next();

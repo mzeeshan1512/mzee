@@ -79,7 +79,7 @@ const ContactForm = () => {
       const date = new Date();
       const contactFormDta = {
         ...formState,
-        is_is_archived: false,
+        is_archived: false,
         pak_time: convertToRegionTime(date),
         created_at: date?.toDateString(),
         modified_at: date?.toISOString()
