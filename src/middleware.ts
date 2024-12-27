@@ -8,9 +8,10 @@ export default async function middleware(req: NextRequest) {
   if (
     nextUrl.hostname !== " localhost" &&
     nextUrl?.pathname === "/" &&
-    !nextUrl?.hostname?.includes(
+    (!nextUrl?.hostname?.includes(
       process.env.NEXT_PUBLIC_AVOID_EMAIL_HOSTNAME!
-    ) &&
+    ) ||
+      !nextUrl.hostname.match(process.env.NEXT_PUBLIC_AVOID_EMAIL_HOSTNAME!)) &&
     req?.geo &&
     req?.ip
   ) {
