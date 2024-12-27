@@ -4,7 +4,7 @@ import { getTypeOfItem, isNotNullValue } from "../utils/common";
 type ShowIfProps<T> = {
   conditionalRenderKey: boolean | string | number | T; // Generic type T for objects or arrays
   children: React.ReactNode;
-  elseComponent?: React.ReactNode | null;
+  elseComponent?: React.ReactNode | JSX.Element | null;
   elseCallBackMessage?: string | null;
 };
 
@@ -27,9 +27,11 @@ const ShowIf = <T,>({
     if (elseComponent || elseCallBackMessage) {
       return elseComponent || elseCallBackMessage;
     }
-    const type = getTypeOfItem(conditionalRenderKey);
-    if (["array", "object"]?.includes(type)) {
-      return "Current item is either empty or contains invalid entries";
+    if (conditionalRenderKey) {
+      const type = getTypeOfItem(conditionalRenderKey);
+      if (["array", "object"]?.includes(type)) {
+        return "Current item is either empty or contains invalid entries";
+      }
     }
     return null;
   };

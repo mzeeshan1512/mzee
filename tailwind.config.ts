@@ -92,13 +92,18 @@ const config: Config = {
         'float-out': {
           '0%': { transform: 'translateY(0)', opacity: '1' },
           '100%': { transform: 'translateY(-20px)', opacity: '0' }
-        }
+        },
+          grayscale: {
+          '0%, 100%': { filter: 'grayscale(0%)' },
+          '50%': { filter: 'grayscale(100%)' },
+        },
       },
       animation: {
         spotlight: "spotlight 2s ease .75s 1 forwards",
         float: "float 6s ease-in-out infinite",
         'float-in': 'float-in 0.5s ease-out',
-        'float-out': 'float-out 0.5s ease-in'
+        'float-out': 'float-out 0.5s ease-in',
+        "grayscale-transform": "grayscale 4.3s ease-in-out infinite"
       }
     },
     variants: {

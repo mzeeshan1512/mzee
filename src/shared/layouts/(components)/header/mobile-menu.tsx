@@ -27,7 +27,7 @@ const MobileMenu = ({ appIcon, close, menuProps, open }: MobileMenuProps) => {
   useDocumentEvent("mousedown", handleClickOutside);
 
   return (
-    <div className={`fixed  ${open ? "z-[100] inset-0" : "-inset-0"} `}>
+    <div className={`fixed  ${open ? "z-[100] inset-0" : "-inset-0 -z-50"} `}>
       {/* Backdrop */}
       <div
         className={`${

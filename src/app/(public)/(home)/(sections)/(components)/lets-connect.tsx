@@ -4,17 +4,17 @@ import Button, { BlendMode } from "@/shared/components/button";
 import { useScrollIntoView } from "@/shared/hooks/use-scroll-into-view/use-scroll-into-view";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
 
-const LetsConnect = () => {
+const LetsConnect = ({ label = "Let's Connect" }: { label?: string }) => {
   const { scrollIntoView } = useScrollIntoView({
     targetId: sectionIds.contact
   });
   return (
     <Button
       blendMode={BlendMode.GRADIENT}
-      className="bg-primary-gradient hover:bg-primary-hover-gradient p-2"
+      className="bg-primary-gradient hover:bg-primary-hover-gradient p-3"
       onClick={() => scrollIntoView()}
     >
-      {"Let's Connect"}
+      {label}
     </Button>
   );
 };

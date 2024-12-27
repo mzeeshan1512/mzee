@@ -14,33 +14,42 @@ const sectionIds = {
   projects: "projects",
   contact: "contact",
   tech: "tech",
+  reviews: "reviews"
 };
 
 const navLinks: HeaderMenuList[] = [
   {
-    link:sectionIds.home,
-    title:"Home"
+    link: sectionIds.home,
+    title: "Home"
   },
   {
-    link:sectionIds.about,
-    title:"About"
-
+    link: sectionIds.about,
+    title: "About"
   },
   {
-    link:sectionIds.services,
-    title:"Services",
-    isStatic:true,
+    link: sectionIds.services,
+    title: "Services",
+    isStatic: true
   },
   {
-    link:sectionIds.projects,
-    title:"Projects"
-
+    link: sectionIds.tech,
+    title: "Tech & Tools",
+    isStatic: true
   },
   {
-    link:sectionIds.contact,
-    title:"Contact Us",
-    isStatic:true,
+    link: sectionIds.projects,
+    title: "Projects"
   },
+  {
+    link: sectionIds.reviews,
+    title: "Stories",
+    isStatic: true
+  },
+  {
+    link: sectionIds.contact,
+    title: "Contact Us",
+    isStatic: true
+  }
 ];
 
 const socialContact: SocialShareContent[] = [

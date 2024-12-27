@@ -29,7 +29,7 @@ const ParticleAnimation = ({
   const numParticles = lineCount;
   const mouse = { x: 0, y: 0 };
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     ctxRef.current = ctx;

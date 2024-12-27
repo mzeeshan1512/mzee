@@ -1,32 +1,39 @@
-"use client";
 import React from "react";
-import SectionContainer from "./(components)/section-wrapper";
+import SectionContainer, {
+  RenderErrorMessage
+} from "./(components)/section-wrapper";
 import SVGGradientBinder from "@/shared/components/svg-gradient-binder";
 import { sectionIds } from "@/shared/constants-enums/navigation-list";
-import { useMediaQuery } from "@/shared/hooks/use-media-query";
-import ShowIf from "@/shared/components/show-if";
 import Carousel from "@/shared/components/carousel";
+import ResponsiveRenderer from "./(components)/responsive-renderer";
+import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
+import { CollectionIDs } from "@/shared/firebase/collection-ids";
+import ShowIf from "@/shared/components/show-if";
 
 type Props = {
-  data?: ServicesListingData[] | null;
+  service?: Services_TechsTools | null;
   toggleGradient?: boolean;
-  slideId?: number;
+  loading?: boolean;
 };
 
-const ServiceCard = ({ data, slideId, toggleGradient }: Props) => {
+const ServiceCard = ({ service, toggleGradient }: Props) => {
   return (
-    <div className="group flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border lg:border-none p-4 lg:p-0 w-full">
+    <div className="group flex flex-col h-full lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border lg:border-none p-4 lg:p-0 w-full">
       <div className="flex justify-center" style={{ width: "6.75rem" }}>
         <SVGGradientBinder
-          className="lex-grow inline transform transition-transform duration-500 ease-in-out group-hover:rotate-[360deg]"
-          height="4em"
-          viewBox="0 0 24 24"
+          className="flex-grow inline transform transition-transform duration-500 ease-in-out group-hover:rotate-[360deg]"
+          {...service?.blob?.value?.svg?.props}
           linearGradientProps={{
-            id: `${slideId}`
+            id: service?.id
           }}
-          fill={toggleGradient ? "currentColor" : `url(#${slideId})`}
+          fill={toggleGradient ? "currentColor" : `url(#${service?.id})`}
         >
-          <path d="M21 17.9995V19.9995H3V17.9995H21ZM17.4038 3.90332L22 8.49951L17.4038 13.0957L15.9896 11.6815L19.1716 8.49951L15.9896 5.31753L17.4038 3.90332ZM12 10.9995V12.9995H3V10.9995H12ZM12 3.99951V5.99951H3V3.99951H12Z" />
+          <g
+            dangerouslySetInnerHTML={{
+              __html: service?.blob?.value?.svg?.code!
+            }}
+          />
+          {/* <path d="M21 17.9995V19.9995H3V17.9995H21ZM17.4038 3.90332L22 8.49951L17.4038 13.0957L15.9896 11.6815L19.1716 8.49951L15.9896 5.31753L17.4038 3.90332ZM12 10.9995V12.9995H3V10.9995H12ZM12 3.99951V5.99951H3V3.99951H12Z" /> */}
         </SVGGradientBinder>
       </div>
       <div className="flex flex-col gap-4 prose !text-inherit">
@@ -35,65 +42,64 @@ const ServiceCard = ({ data, slideId, toggleGradient }: Props) => {
             toggleGradient ? "text-gradient" : "!text-inherit"
           }`}
         >
-          Eiusmod officia nostrud {slideId}
+          {service?.title}
         </h2>
-        <p>
-          Commodo eu fugiat quis ad nostrud mollit dolore reprehenderit
-          consequat dolor. Laboris consequat labore exercitation velit Lorem qui
-          aliquip pariatur Lorem. Tempor ut voluptate eu exercitation sint non.
-        </p>
+        <p>{service?.description}</p>
       </div>
     </div>
   );
 };
 
-const Services = () => {
-  const mediumDeviceMedia1024 = useMediaQuery("(max-width: 1024px)", true, {
-    getInitialValueInEffect: false
+const Services = async () => {
+  const serverAction = fetchRecordsOnServer();
+  await serverAction.getDocuments({
+    collectionId: CollectionIDs.services,
+    conditions: {
+      orderByFields: {
+        field: "modified_at",
+        direction: "asc"
+      }
+    }
   });
-  // console.log(mediumDeviceMedia1024);
   return (
     <SectionContainer
       id={sectionIds.services}
-      title={sectionIds.services}
+      title={"Your Vision, Our Expertise"}
       quotation="Transforming ideas into reality with expert development, automation, and IT solutions"
+      className={
+        " !bg-grid-pattern-light dark:!bg-grid-pattern-dark !bg-grid-size relative"
+      }
       containerProps={{
-        className: "pt-4 mt-4"
+        className: "py-4 my-4"
       }}
     >
       <ShowIf
-        conditionalRenderKey={mediumDeviceMedia1024}
-        elseComponent={
-          <div className="hidden lg:grid grid-cols-1 gap-4 gap-y-12 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {[1, 2, 3, 4, 5].map((item, index) => (
-              <ServiceCard key={index} slideId={index} />
-            ))}
-          </div>
+        conditionalRenderKey={
+          serverAction?.data &&
+          Array.isArray(serverAction?.data) &&
+          serverAction?.data?.length > 0
         }
+        elseComponent={<RenderErrorMessage message="No Service Found" />}
       >
-        <Carousel
-          sliderContainerProps={{
-            className: ""
-          }}
-          responsive={{
-            desktop: {
-              breakpoint: { max: 3000, min: 1024 },
-              items: 3
-            },
-            tablet: {
-              breakpoint: { max: 1024, min: 464 },
-              items: 2
-            },
-            mobile: {
-              breakpoint: { max: 464, min: 0 },
-              items: 1
-            }
-          }}
+        <ResponsiveRenderer
+          elseChildren={
+            <div className="hidden lg:grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {serverAction.data?.map(
+                (service: Services_TechsTools, index: number) => (
+                  <ServiceCard key={index} service={service} />
+                )
+              )}
+            </div>
+          }
         >
-          {[1, 2, 3, 4, 5].map((item, index) => (
-            <ServiceCard key={index} slideId={index} />
-          ))}
-        </Carousel>
+          <Carousel autoPlay infinite showDots={false}>
+            {serverAction.data?.map(
+              (service: Services_TechsTools, index: number) => (
+                <ServiceCard key={index} service={service} />
+              )
+            )}
+          </Carousel>
+        </ResponsiveRenderer>
       </ShowIf>
     </SectionContainer>
   );

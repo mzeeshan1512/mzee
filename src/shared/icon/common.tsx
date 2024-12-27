@@ -76,4 +76,51 @@ const ChevronIcon = ({
   );
 };
 
-export { MenuToggler, Cross, ChevronIcon };
+const WebPreview = ({
+  fill = "currentColor",
+  height,
+  viewBox = "0 0 24 24",
+  width = 25,
+  ...rest
+}: svgProp) => {
+  return (
+    <svg
+      {...rest}
+      fill={fill}
+      viewBox={viewBox}
+      height={height?.toString() || width?.toString()}
+      width={width?.toString() || height?.toString()}
+    >
+      <path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z" />
+      <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z" />
+    </svg>
+  );
+};
+
+const InternalPreview = ({
+  fill = "currentColor",
+  height,
+  viewBox = "0 0 24 24",
+  width = 25,
+  ...rest
+}: svgProp) => {
+  return (
+    <svg
+      {...rest}
+      fill={fill}
+      viewBox={viewBox}
+      height={height?.toString() || width?.toString()}
+      width={width?.toString() || height?.toString()}
+    >
+      {/* <path d="M20.7084 4.41165L10.4586 14.6986H14.0488V16.6986H7.04883V9.69861H9.04883V13.2799L19.2916 3L20.7084 4.41165Z" />
+      <path d="M11 4.70581V6.70581H5V18.7058H17V12.7058H19V20.7058H3V4.70581H11Z" /> */}
+      <path
+        d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"
+        transform="rotate(180, 12, 12) translate(-5,5)"
+      />
+      <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z" />
+    </svg>
+  );
+};
+
+export { MenuToggler, Cross, ChevronIcon, WebPreview, InternalPreview };

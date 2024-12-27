@@ -8,7 +8,7 @@ import { useMediaQuery } from "@/shared/hooks/use-media-query";
 import { useWindowEvent } from "@/shared/hooks/use-window-event";
 /* inherit */
 import { HeaderProps } from "../types";
-import { AppIcon } from "../app-logo";
+import Logo from "../app-logo";
 import useScrollSpy from "@/shared/hooks/use-scroll-into-view/use-scroll-spy";
 //dynamic
 const Menu = dynamic(() => import("./menu"), { ssr: false });
@@ -40,7 +40,7 @@ const Header = ({
   });
 
   const classToggler = () => {
-    const value = window?.scrollY;
+    const value = typeof window !== "undefined" ? window?.scrollY : 0;
     if (value > 0) {
       if (matchMedia && centeredMode && floatingMenu) {
         if (!hideNavOnScroll) {
@@ -51,11 +51,13 @@ const Header = ({
           }, 200);
         }
       } else {
-        document.querySelector(".fixed")?.classList.add("glassomorhpic-effect");
+        document
+          .querySelector(".header")
+          ?.classList.add("glassomorhpic-effect");
       }
     } else {
       document
-        .querySelector(".fixed")
+        .querySelector(".header")
         ?.classList.remove("glassomorhpic-effect");
     }
   };
@@ -82,7 +84,7 @@ const Header = ({
           />
         </ShowIf>
         <ShowIf conditionalRenderKey={!appIcon?.hideIcon}>
-          <AppIcon {...appIcon} />
+          <Logo {...appIcon} />
         </ShowIf>
       </div>
     );
@@ -97,12 +99,12 @@ const Header = ({
       <header
         {...restHeaderProps}
         id={restHeaderProps.id || "header"}
-        className={`header w-screen fixed inset-x-0 top-0 z-50 h-20 transition-all duration-200 ease-in-out bg-transparent select-none ${
+        className={`header w-full inset-x-0 top-0 z-50 h-20 transition-all duration-200 ease-in-out bg-transparent select-none ${
           menuProps?.verticalLayout ? "sticky" : ""
         }  ${restHeaderProps?.className || ""} ${
           centeredMode || floatingMenu
-            ? "shadow-none flex justify-center p-4 lg:p-0 lg:pt-4"
-            : "shadow dark:shadow-white p-4"
+            ? "shadow-none flex justify-center p-4 lg:p-0 lg:pt-4 fixed"
+            : "shadow dark:shadow-white p-4 sticky"
         }`}
         onMouseOver={() => (floatingMenu ? toggleHovered(true) : () => {})}
         onMouseLeave={() => (floatingMenu ? toggleHovered(false) : () => {})}
@@ -193,10 +195,9 @@ const Header = ({
       <ShowIf
         conditionalRenderKey={
           mediumDeviceMedia &&
-          (!appIcon?.hideIcon ||
-            (!menuProps?.hideMenu &&
-              menuProps?.menuList &&
-              menuProps?.menuList?.length > 0))
+          !menuProps?.hideMenu &&
+          menuProps?.menuList &&
+          menuProps?.menuList?.length > 0
         }
       >
         <MobileMenu

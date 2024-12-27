@@ -1,19 +1,19 @@
-const CollectionIDs = {
-  skills: "about-skills",
-  experience: "about-experience",
-  education: "about-education",
-  courses_certification: "about-courses-certifications",
-  training: "about-trainings",
-  projects: "projects",
-  services: "services",
-  technologies: "technologies",
-  contact: "contact-form",
-  webInfo: "web-info",
-  loginLogs: "login-logs",
-  logs: "logs",
-  _2fa: "2fa",
-  myInfo: "about-my-info",
-  icons: "icons",
-};
+enum AboutPageColllectionIds {
+  experience = "about-experience",
+  education = "about-education",
+  training = "about-trainings",
+  courses_certification = "about-courses-certifications",
+  skills ="about-skills",
+}
+enum CollectionIDs {
+  myInfo = "about-my-info",
+  // skills= "about-skills",
+  projects = "projects",
+  services = "services",
+  technologies = "technologies",
+  contact = "contact-form",
+  webInfo = "web-info",
+  reviews = "reviews-feedbacks"
+}
 
-export { CollectionIDs };
+export { CollectionIDs, AboutPageColllectionIds };

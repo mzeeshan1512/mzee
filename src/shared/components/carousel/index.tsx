@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useLayoutEffect } from "react";
 import { ButtonProps, CarouselProps } from "./types";
 import Button from "../button";
 import { settingContentTailwindClass } from "@/shared/constants-enums/reused-tailwind-css";
@@ -26,10 +26,25 @@ const CarouselButton = ({
   );
 };
 
+const defaultResponsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
+
 const Carousel = ({
   responsive,
   autoPlay,
-  autoPlaySpeed,
+  autoPlaySpeed = 3000,
   children,
   draggable = true,
   infinite,
@@ -42,24 +57,30 @@ const Carousel = ({
   leftArrowProps,
   sliderContainerProps,
   sliderProps,
-  slidesProps
+  slidesProps,
+  defaultItems = 1
 }: CarouselProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
-  const [visibleItems, setVisibleItems] = useState<number>(1);
+  const [visibleItems, setVisibleItems] = useState<number>(
+    Math.floor(defaultItems)
+  );
   const [dragStart, setDragStart] = useState<number | null>(null);
   const [dragOffset, setDragOffset] = useState<number>(0);
+  const [hover, toggleHover] = useState<boolean>(false);
 
   const slidesElement = useMemo(() => {
     return slides ? slides : children ? React?.Children?.toArray(children) : [];
   }, [children, slides]);
 
   const handleResize = () => {
-    const windowWidth = window.innerWidth;
-    let items = 1;
+    const windowWidth =
+      typeof window !== "undefined" ? window?.innerWidth : 100;
+    let items = defaultItems;
+    const respConfig = { ...defaultResponsive, ...responsive };
 
-    if (responsive) {
-      Object?.entries(responsive)?.forEach(([_, config]) => {
+    if (respConfig) {
+      Object?.entries(respConfig)?.forEach(([_, config]) => {
         if (
           windowWidth >= config?.breakpoint?.min &&
           windowWidth <= config?.breakpoint?.max
@@ -71,18 +92,34 @@ const Carousel = ({
 
     setVisibleItems(items);
   };
-
   useWindowEvent("resize", handleResize);
-
   useEffect(() => {
-    if (autoPlay && !isAnimating && !dragStart) {
+    if (
+      autoPlay &&
+      !isAnimating &&
+      !dragStart &&
+      !hover &&
+      slidesElement?.length > visibleItems
+    ) {
       const timer = setInterval(() => {
         handleNext();
       }, autoPlaySpeed);
 
       return () => clearInterval(timer);
     }
-  }, [autoPlay, autoPlaySpeed, isAnimating, dragStart]);
+  }, [
+    autoPlay,
+    autoPlaySpeed,
+    isAnimating,
+    dragStart,
+    hover,
+    slidesElement?.length,
+    visibleItems
+  ]);
+
+  useLayoutEffect(() => {
+    handleResize();
+  }, []);
 
   const handlePrev = () => {
     if (!isAnimating) {
@@ -120,9 +157,11 @@ const Carousel = ({
   };
 
   const handleDragEnd = () => {
+    toggleHover(false);
     if (!draggable || dragStart === null) return;
 
-    const threshold = window.innerWidth * 0.2;
+    const threshold =
+      (typeof window !== "undefined" ? window?.innerWidth : 100) * 0.2;
     if (Math.abs(dragOffset) > threshold) {
       if (dragOffset > 0) {
         handlePrev();
@@ -140,7 +179,12 @@ const Carousel = ({
     const totalTranslate = activeIndex * slideWidth;
     const dragTranslate = Math.max(
       0,
-      Math.min((dragOffset / window.innerWidth) * 100, slideWidth)
+      Math.min(
+        (dragOffset /
+          (typeof window !== "undefined" ? window?.innerWidth : 100)) *
+          100,
+        slideWidth
+      )
     );
     return -(totalTranslate + dragTranslate);
   };
@@ -169,12 +213,13 @@ const Carousel = ({
         onTouchStart={handleDragStart}
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
+        onMouseOver={() => toggleHover(true)}
       >
         {slidesElement?.map((slide, index) => (
           <li
             key={index}
             {...slidesProps}
-            className={`w-[calc(100%-1rem)] flex-shrink-0 px-2 ${
+            className={`w-[calc(100%-1rem)] flex-shrink-0 ${
               slidesProps?.className || ""
             }`}
             style={{
@@ -219,8 +264,8 @@ const Carousel = ({
           }
         >
           {slidesElement?.map((_, index) => (
-            <Button
-              {...dotsProps}
+            <button
+              // {...dotsProps}
               key={index}
               onClick={() => {
                 if (!isAnimating) {
@@ -244,3 +289,5 @@ const Carousel = ({
 };
 
 export default Carousel;
+
+export { CarouselButton };

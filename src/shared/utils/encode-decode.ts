@@ -4,7 +4,7 @@ const secretKey = process.env.NEXT_PUBLIC_SECRET_KEY || "0.01.10.34"
 const encryptData = (
   data: unknown,
 ) => {
- return CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
+ return CryptoJS.AES.encrypt(JSON.stringify(data ?? {}), secretKey).toString();
 };
 
 const decryptData = (encryptedData:string)=> {

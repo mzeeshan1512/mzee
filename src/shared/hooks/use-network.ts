@@ -48,7 +48,6 @@ export function useNetwork() {
 
   useEffect(() => {
     const _navigator = navigator as any;
-
     if (_navigator.connection) {
       setStatus({ online: _navigator.onLine, ...getConnection() });
       _navigator.connection.addEventListener('change', handleConnectionChange);
