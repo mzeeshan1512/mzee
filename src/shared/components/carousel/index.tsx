@@ -113,7 +113,8 @@ const Carousel = ({
     isAnimating,
     dragStart,
     hover,
-    slidesElement?.length
+    slidesElement?.length,
+    visibleItems
   ]);
 
   useLayoutEffect(() => {

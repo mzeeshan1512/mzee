@@ -74,11 +74,10 @@ const TechRenderer = ({
 };
 
 const ImageRenderer = ({
-  i,
   banner_image,
   slider_images,
   title
-}: ProjectImageGallery & { i?: string; title: string; imgClass?: string }) => {
+}: ProjectImageGallery & { title: string; imgClass?: string }) => {
   const images = [banner_image, ...(slider_images! ?? [])];
   return images?.length > 0 ? (
     <Carousel
@@ -107,13 +106,7 @@ const ImageRenderer = ({
             key={item.src?.url}
             src={item.src?.url}
             alt={title}
-            className={`object-contain w-full h-full rounded-lg  ${
-              i ? (+i % 2 === 0 ? "order-1" : "order-2") : ""
-            }`}
-            data-aos={
-              i ? (+i! % 2 === 0 ? "zoom-in-right" : "zoom-in-left") : ""
-            }
-            data-aos-duration="1000"
+            className={`object-contain w-full h-full rounded-lg`}
           />
         );
       })}
@@ -180,13 +173,17 @@ const ProjectDetailedInfoCard = ({
       key={i}
       className={`mb-20 relative p-4 shadow shadow-primary-50 grid grid-cols-2 items-center`}
     >
-      <ImageRenderer
-        i={i.toString()}
-        {...imageGallery}
-        title={basicInfo.title}
-      />
+      <figure
+        className={`object-contain w-full h-full rounded-lg  ${
+          i ? (+i % 2 === 0 ? "order-1" : "order-2") : ""
+        }`}
+        data-aos={i ? (+i! % 2 === 0 ? "zoom-in-right" : "zoom-in-left") : ""}
+        data-aos-duration="1000"
+      >
+        <ImageRenderer {...imageGallery} title={basicInfo.title} />
+      </figure>
       <div
-        className={`relative h-full flex flex-col gap-4 ${
+        className={`relative z-10 h-full flex flex-col gap-4 ${
           i % 2 === 0 ? "order-2 text-right" : "order-1 text-left"
         }`}
         data-aos={i % 2 === 0 ? "zoom-in-left" : "zoom-in-right"}
@@ -207,8 +204,8 @@ const ProjectDetailedInfoCard = ({
         </div>
         {/* description */}
         <div
-          className={`relative -left-14 glassmorphic min-h-[10vw+50px] w-[calc(100%+3.5rem)] inset-y-0 bg-inherit rounded shadow-md shadow-primary-100 p-5 flex ${
-            i % 2 === 0 ? "justify-end" : ""
+          className={`relative glassmorphic min-h-[10vw+50px] w-[calc(100%+3.5rem)] inset-y-0 bg-inherit rounded shadow-md shadow-primary-100 p-5 flex ${
+            i % 2 === 0 ? "justify-end -left-14" : ""
           }`}
         >
           <p className="prose text-current text-justify !max-w-[90%]">

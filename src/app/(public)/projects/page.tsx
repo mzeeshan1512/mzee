@@ -26,18 +26,18 @@ const groupedByCategory = (
 ): Record<string, any> => {
   const groupedData: Record<string, any> = data;
   const category = project?.basicInfo.project_category?.label ?? "Others";
-  if (
-    project?.basicInfo?.is_featured ||
-    category === ProjectCategoryList.featured
-  ) {
-    if (!("Featured" in groupedData)) {
-      groupedData["Featured"] = [];
-    }
-    groupedData["Featured"].push(project);
-  } else {
-    if (!groupedData[`${category}`]) groupedData[`${category}`] = [];
-    groupedData[category]?.push(project);
-  }
+  // if (
+  //   project?.basicInfo?.is_featured ||
+  //   category === ProjectCategoryList.featured
+  // ) {
+  //   if (!("Featured" in groupedData)) {
+  //     groupedData["Featured"] = [];
+  //   }
+  //   groupedData["Featured"].push(project);
+  // } else {
+  if (!groupedData[`${category}`]) groupedData[`${category}`] = [];
+  groupedData[category]?.push(project);
+  // }
   return groupedData;
 };
 
