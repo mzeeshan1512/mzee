@@ -4,7 +4,7 @@ import { RenderSvgAsDangerouslySetInnerHTML } from "./svg-gradient-binder";
 import ShowIf from "./show-if";
 import TrustedRedirect from "./trusted-redirect";
 import { GitHub } from "../icon/social";
-import { InternalPreview, WebPreview } from "../icon/common";
+import { /* InternalPreview, */ WebPreview } from "../icon/common";
 import Carousel from "./carousel";
 import ProjectDemoVdeo from "./project-demo-video";
 
@@ -49,7 +49,6 @@ const LinkRenderer = ({
     </ul>
   );
 };
-
 const TechRenderer = ({
   i,
   tech_stack
@@ -62,7 +61,7 @@ const TechRenderer = ({
             {...item?.value?.svg?.props}
             width={25}
             height={25}
-            className="shrink-0 drop-shadow-[0_2px_1px_var(--secondary)] dark:drop-shadow-[0_2px_1px_var(--primary)]"
+            className="shrink-0 drop-shadow-[0_2px_1px_var(--secondary)] dark:drop-shadow-[0_2px_1px_var(--primary)] hover:scale-x-125"
             title={item.label}
             dangerouslySetInnerHTML={{
               __html: item?.value?.svg?.code
@@ -153,7 +152,7 @@ const ProjectInfoCard = ({
       )}
       <div className="absolute top-3/4 left-0 rounded-e-lg w-full h-full bg-slate-400 bg-opacity-10 transition-all duration-1000 ease-in-out group-hover:top-[58%] group-hover:bg-opacity-50">
         <div className="p-4">
-          <div className="flex justify-between">
+          <div className="flex justify-between flex-wrap">
             <h1 className="text-gradient">
               <strong>{basicInfo.title}</strong>
             </h1>

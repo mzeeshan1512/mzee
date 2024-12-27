@@ -50,7 +50,7 @@ const Projects = async () => {
     }
   });
   return (
-    <main className="container mx-auto mb-4 md:my-4 w-calc-10 block md:flex rounded items-start min-h-[calc(100vh-200px)]">
+    <main className="container mx-auto mb-4 md:my-4 w-calc-10 block md:flex md:flex-col gap-4 rounded items-start min-h-[calc(100vh-200px)]">
       {Object.values(ProjectCategoryList).map((category) => {
         return (
           <ShowIf

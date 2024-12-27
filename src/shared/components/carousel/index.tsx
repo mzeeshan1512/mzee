@@ -93,14 +93,13 @@ const Carousel = ({
     setVisibleItems(items);
   };
   useWindowEvent("resize", handleResize);
-
   useEffect(() => {
     if (
       autoPlay &&
       !isAnimating &&
       !dragStart &&
       !hover &&
-      slides!?.length > visibleItems
+      slidesElement?.length > visibleItems
     ) {
       const timer = setInterval(() => {
         handleNext();
@@ -108,7 +107,14 @@ const Carousel = ({
 
       return () => clearInterval(timer);
     }
-  }, [autoPlay, autoPlaySpeed, isAnimating, dragStart, hover]);
+  }, [
+    autoPlay,
+    autoPlaySpeed,
+    isAnimating,
+    dragStart,
+    hover,
+    slidesElement?.length
+  ]);
 
   useLayoutEffect(() => {
     handleResize();
