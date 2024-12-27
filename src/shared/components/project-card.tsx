@@ -81,8 +81,8 @@ const ImageRenderer = ({
   const images = [banner_image, ...(slider_images! ?? [])];
   return images?.length > 0 ? (
     <Carousel
-      autoPlay
-      infinite
+      // autoPlay
+      // infinite
       showArrows={false}
       showDots={false}
       responsive={{
@@ -99,6 +99,12 @@ const ImageRenderer = ({
           items: 1
         }
       }}
+      sliderContainerProps={{
+        className: "h-full"
+      }}
+      slidesProps={{
+        className: "!p-0 !h-full"
+      }}
     >
       {images?.map((item) => {
         return (
@@ -106,7 +112,7 @@ const ImageRenderer = ({
             key={item.src?.url}
             src={item.src?.url}
             alt={title}
-            className={`object-contain w-full h-full rounded-lg`}
+            className={`object-fill md:object-contain w-full h-full rounded-lg`}
           />
         );
       })}

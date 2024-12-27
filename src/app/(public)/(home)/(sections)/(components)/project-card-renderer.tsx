@@ -53,7 +53,7 @@ const ProjectCardRenderer = ({
           conditionalRenderKey={mediumDeviceMedia1024}
           elseComponent={<LoopProjects />}
         >
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid md:grid-cols-2 gap-4">
             <LoopProjects />
           </div>
         </ShowIf>
