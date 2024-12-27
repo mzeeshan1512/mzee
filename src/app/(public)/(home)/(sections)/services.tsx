@@ -92,7 +92,14 @@ const Services = async () => {
             </div>
           }
         >
-          <Carousel autoPlay infinite showDots={false}>
+          <Carousel
+            autoPlay
+            infinite
+            showDots={false}
+            slidesProps={{
+              className: "!p-2"
+            }}
+          >
             {serverAction.data?.map(
               (service: Services_TechsTools, index: number) => (
                 <ServiceCard key={index} service={service} />

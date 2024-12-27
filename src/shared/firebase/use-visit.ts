@@ -44,7 +44,7 @@ const saveVisit = async () => {
   }
   if (req && Object.keys(req)?.length > 0) {
     const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
-    const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
+    const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE;
     const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
     const currentDate: Date | any = new Date();
     const date = currentDate.toLocaleString();
