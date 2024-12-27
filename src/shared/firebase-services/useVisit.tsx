@@ -27,8 +27,7 @@ const getRecord = async (colId: any, ip: any) => {
 
 const saveVisit = async (req: any, mode: mode = "weblogs") => {
   const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
-  const emailTemplate: any =
-    process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_WEB_VISIT;
+  const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE;
   const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
   const currentDate: Date | any = new Date();
   const date = currentDate.toLocaleString();
