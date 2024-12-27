@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ShowIf from "@/shared/components/show-if";
-import ToolTip from "@/shared/components/tooltip";
 import { HeaderMenuList, MenuProps } from "../types";
 import ScrollSpy from "./scroll-spy";
 import { AppIcon } from "../app-logo";
@@ -14,9 +13,7 @@ type ContentProps = {
 } & MenuProps;
 
 const VisibleContent = ({
-  showToolTip,
   item,
-  toolTipPosition,
   showLogoAsRoute,
   activeClass,
   isInView
@@ -25,16 +22,11 @@ const VisibleContent = ({
     return <AppIcon />;
   }
   return (
-    <ToolTip
-      toolTipText={showToolTip ? item?.toolTipText || item?.title : ""}
-      position={toolTipPosition || "bottom"}
+    <div
+      className={`flex gap-2 ${isInView ? "active-tab" : activeClass || ""}`}
     >
-      <div
-        className={`flex gap-2 ${isInView ? "active-tab" : activeClass || ""}`}
-      >
-        {item.title}
-      </div>
-    </ToolTip>
+      {item.title}
+    </div>
   );
 };
 
@@ -45,11 +37,9 @@ const Menu = ({
   ulTagProps,
   liTagProps,
   isExactPath,
-  showToolTip,
   isStaticPageNavigation,
   staticScrollSpyPath,
   showLogoAsRoute,
-  toolTipPosition,
   isCollapsible
 }: MenuProps) => {
   const pathName = usePathname();
@@ -73,13 +63,11 @@ const Menu = ({
     return (
       <Link
         href={urlMatcher(item.link, "/")}
-        className={!showToolTip && isActivePathName(item) ? "active-tab" : ""}
+        className={isActivePathName(item) ? "active-tab" : ""}
         onClick={item.onClickCallBack}
       >
         <VisibleContent
           item={item}
-          toolTipPosition={toolTipPosition}
-          showToolTip={showToolTip}
           isCollapsible={isCollapsible}
           activeClass={isActivePathName(item) ? "active-tab" : ""}
           showLogoAsRoute={{
@@ -96,8 +84,6 @@ const Menu = ({
       <ScrollSpy id={item.link} href={"#" + item.link}>
         <VisibleContent
           item={item}
-          toolTipPosition={toolTipPosition}
-          showToolTip={showToolTip}
           isCollapsible={isCollapsible}
           showLogoAsRoute={{
             route: showLogoAsRoute?.route || "",
@@ -126,9 +112,9 @@ const Menu = ({
             <li
               key={item.title}
               {...liTagProps}
-              className={`relative px-2.5 cursor-pointer ${
-                showToolTip ? "" : "hover-bottom-outline"
-              } ${liTagProps?.className || ""}`}
+              className={`relative px-2.5 cursor-pointer hover-bottom-outline ${
+                liTagProps?.className || ""
+              }`}
             >
               <ShowIf
                 conditionalRenderKey={

@@ -39,7 +39,6 @@ This project is organized as follows:
 │   │   │   ├── pop-up.tsx
 │   │   │   ├── show-if.tsx
 │   │   │   ├── svg-gradient-binder.tsx
-│   │   │   ├── tooltip.tsx
 │   │   │   └── trusted-redirect.tsx
 │   │   ├── config                    # Configuration files
 │   │   │   ├── firebase.ts
