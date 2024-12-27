@@ -23,7 +23,7 @@ const Reviews = async () => {
       ],
       orderByFields: {
         field: "modified_at",
-        direction: "desc"
+        direction: "asc"
       },
       excludeFields: [
         "created_at",
