@@ -90,12 +90,12 @@ const ProjectViews = () => {
     },
     {
       title: "Featured",
-      data_key: "basicInfo.project_category.value",
+      data_key: "basicInfo.is_featured",
       cell: (item: ProjectsData) => {
         return (
           <Toggler
-            value={item.basicInfo?.is_featured}
-            name={item.id + "is_featured"}
+            value={item?.basicInfo?.is_featured}
+            name={item?.id + "is_featured"}
             onChange={() =>
               mutate({
                 collectionId: CollectionIDs.projects,
@@ -103,8 +103,8 @@ const ProjectViews = () => {
                 data: {
                   ...item,
                   basicInfo: {
-                    ...item.basicInfo,
-                    is_featured: !item.basicInfo.is_featured
+                    ...item?.basicInfo,
+                    is_featured: !item?.basicInfo?.is_featured
                   }
                 }
               })

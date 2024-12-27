@@ -9,10 +9,10 @@ enum ProjectCategoryList {
 }
 
 const optionsProjectCategoryList = [
-  {
-    value: ProjectCategoryList.featured,
-    label: ProjectCategoryList.featured
-  },
+  // {
+  //   value: ProjectCategoryList.featured,
+  //   label: ProjectCategoryList.featured
+  // },
   {
     value: ProjectCategoryList.notWorthy,
     label: ProjectCategoryList.notWorthy
@@ -52,7 +52,7 @@ const basicPrefilledFields: formFieldsList[] = [
     label: "Is Web Preview",
     radioCheckLabelPlacement: "left",
     colClassName: "align-self-center",
-    checked: true
+    checked: false
   },
   {
     type: "switch",
@@ -60,12 +60,9 @@ const basicPrefilledFields: formFieldsList[] = [
     label: "Is Featured",
     radioCheckLabelPlacement: "left",
     colClassName: "align-self-center",
-    checked: true,
+    checked: false,
     watchedKey: "project_category"
   }
-  // {
-  //   type: "switch",
-  // }
 ];
 
 const basicOptionalFields: formFieldsList[] = [

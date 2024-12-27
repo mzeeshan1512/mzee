@@ -91,16 +91,16 @@ const Content = ({
         label: "Project Category",
         required: true,
         options: optionsProjectCategoryList,
-        defaultValue: optionsProjectCategoryList[1],
-        value: optionsProjectCategoryList[1],
+        defaultValue: optionsProjectCategoryList[0],
+        value: optionsProjectCategoryList[0],
         isClearable: true,
-        impactedKey: {
-          key: "is_featured",
-          currentFieldValue: "project_category",
-          mode: "equateWithFieldValue",
-          nestedFieldKey: "value",
-          value: optionsProjectCategoryList?.[0]?.value
-        }
+        // impactedKey: {
+        //   key: "is_featured",
+        //   currentFieldValue: "project_category",
+        //   mode: "equateWithFieldValue",
+        //   nestedFieldKey: "value",
+        //   value: optionsProjectCategoryList?.[0]?.value
+        // }
       } as any,
       {
         type: "text",
