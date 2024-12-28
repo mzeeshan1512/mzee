@@ -125,14 +125,14 @@ interface ProjectsData extends commonData {
 }
 
 interface ReviewFeedback {
-  gmailName: string;
+  gmail_name: string;
   xCollab: string;
   organization: string;
   review: string;
-  fireBase_Image: string;
+  firebase_image: string;
   designation: string;
+  linkedin_profile: string;
   email: string;
-  avatar?: any;
   name: string;
   id: string;
 }
