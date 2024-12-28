@@ -21,7 +21,12 @@ const InfoModal = ({
   onSuccess
 }: Props) => {
   return (
-    <Modal open={modalData?.open} close={close} variant={variant}>
+    <Modal
+      open={modalData?.open}
+      close={close}
+      variant={variant}
+      showClose={false}
+    >
       <div className="d-flex flex-column justify-content-center align-items-center w-full h-full gap-3">
         <Warning
           fill={
