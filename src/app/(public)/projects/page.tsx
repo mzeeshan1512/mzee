@@ -1,3 +1,6 @@
+export const revalidate = 300;
+export const dynamic = "force-dynamic";
+
 import React from "react";
 import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
@@ -5,9 +8,9 @@ import ShowIf from "@/shared/components/show-if";
 import { ProjectInfoCard } from "@/shared/components/project-card";
 import Image from "next/image";
 import NoDataImg from "@/assets/content/not_found.png";
-import dynamic from "next/dynamic";
+import dynamicImport from "next/dynamic";
 
-const Carousel = dynamic(() => import("@/shared/components/carousel"), {
+const Carousel = dynamicImport(() => import("@/shared/components/carousel"), {
   ssr: false
 });
 
