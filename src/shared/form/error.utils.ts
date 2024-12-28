@@ -17,37 +17,59 @@ const validateField = (
 
 const validationSchema: ValidationSchema = {
   name: [
-    (value) => (!value ? "Name is required" : null),
+    (value) => (!value ? "Name is required." : null),
 
-    (value) => (value.length < 3 ? "Name must be at least 3 characters" : null)
+    (value) => (value.length < 3 ? "Name must be at least 3 characters." : null)
   ],
   designation: [
-    (value) => (!value ? "Designation is required" : null),
+    (value) => (!value ? "Designation is required." : null),
 
     (value) =>
-      value.length < 3 ? "Designation must be at least 3 characters" : null
+      value.length < 3 ? "Designation must be at least 3 characters." : null
   ],
   organization: [
-    (value) => (!value ? "Organization is required" : null),
+    (value) => (!value ? "Organization is required." : null),
     (value) =>
-      value.length < 3 ? "Organization must be at least 3 characters" : null
+      value.length < 3 ? "Organization must be at least 3 characters." : null
   ],
-  xCollab: [
-    (value) => (!value ? "Teamup/Colab is required" : null),
+  x_collab: [
+    (value) => (!value ? "Teamup/Colab is required." : null),
     (value) =>
-      value.length < 5 ? "Teamup/Colab must be at least 5 characters" : null
+      value.length < 5 ? "Teamup/Colab must be at least 5 characters." : null
+  ],
+  linked_profile: [
+    (value) => (!value ? "Linkedin Profile Link is required." : null),
+    (value) => {
+      try {
+        const url = new URL(value);
+        if (!url.href.startsWith("https://www.linkedin.com/in/")) {
+          return "URL must be a LinkedIn profile link (https://www.linkedin.com/in/).";
+        }
+        const profileSegment = url.href.replace(
+          "https://www.linkedin.com/in/",
+          ""
+        );
+        console.log({ profileSegment });
+        if (!profileSegment) {
+          return "The LinkedIn profile segment is empty.";
+        }
+        return null;
+      } catch {
+        return "Invalid URL format.";
+      }
+    }
   ],
   review: [
-    (value) => (!value ? "Review is required" : null),
+    (value) => (!value ? "Review is required." : null),
     (value) =>
-      value.length < 50 ? "Review must be at least 50 characters" : null,
+      value.length < 50 ? "Review must be at least 50 characters." : null,
     (value) =>
       value.length > 400
-        ? "Review must be at exceed more than 400 characters"
+        ? "Review must be at exceed more than 400 characters."
         : null
   ],
-  policyAgreed: [
-    (value) => (!value ? "Please acknowledge and agree to the policy" : null)
+  policy_agreed: [
+    (value) => (!value ? "Please acknowledge and agree to the policy." : null)
   ]
 };
 

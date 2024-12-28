@@ -9,6 +9,7 @@ interface FloatingInputProps extends React.ComponentProps<"div"> {
   textAreaProps?: React.ComponentProps<"textarea">;
   isTextBox?: boolean;
   helper?: string;
+  required?: boolean;
 }
 
 const FloatingOutlinedInput = ({
@@ -21,6 +22,7 @@ const FloatingOutlinedInput = ({
   textAreaProps,
   isTextBox,
   helper,
+  required,
   ...rest
 }: FloatingInputProps) => {
   const validationClass = React.useMemo(() => {
@@ -78,7 +80,7 @@ const FloatingOutlinedInput = ({
                 validationClass?.label || ""
             }
           >
-            {label}
+            {label} {required && <span className="text-red-400">*</span>}
           </label>
         )}
       </div>

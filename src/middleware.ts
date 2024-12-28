@@ -15,7 +15,7 @@ export default async function middleware(req: NextRequest) {
       const encryptedData = await encryptData({
         ...req?.geo,
         ip: req?.ip,
-        hostname: nextUrl?.hostname
+        host_name: nextUrl?.hostname
       });
       return NextResponse.next({
         headers: {

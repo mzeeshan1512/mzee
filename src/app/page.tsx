@@ -32,26 +32,38 @@ const formField = [
     name: "name",
     id: "name",
     type: "text",
-    label: "Name"
+    label: "Name",
+    required: true
   },
   {
     name: "designation",
     id: "designation",
     type: "text",
-    label: "Designation"
+    label: "Designation",
+    required: true
   },
   {
     name: "organization",
     id: "organization",
     type: "text",
-    label: "Organization"
+    label: "Organization",
+    required: true
   },
   {
-    name: "xCollab",
+    name: "x_collab",
     id: "xCollab ",
     type: "text",
     label: "Teamup/Colab",
-    helper: "work on same team etc."
+    helper: "work on same team etc.",
+    required: true
+  },
+  {
+    name: "linked_profile",
+    id: "linked_profile",
+    type: "url",
+    label: "LinkedIn Profile",
+    className: "md:col-span-2",
+    required: true
   },
   {
     name: "review",
@@ -59,19 +71,21 @@ const formField = [
     type: "text",
     label: "Review",
     className: "md:col-span-2",
-    isTextBox: true
-  },
-  {
-    name: "avatar",
-    id: "avatar",
-    type: "file",
-    accept: "image/*",
-    className: "md:col-span-2"
+    isTextBox: true,
+    required: true
   }
+
+  // {
+  //   name: "avatar",
+  //   id: "avatar",
+  //   type: "file",
+  //   accept: "image/*",
+  //   className: "md:col-span-2"
+  // }
 ];
 
 const agreedPolicy =
-  "By submitting, you agree to allow to use your google profile e.g.email,name and avatar.";
+  "By submitting, you agree to allow to use your google profile e.g.email, name and avatar.";
 
 const handleFileUpload = (file: any, directory: string) => {
   const fileRef = ref(firebaseStorage, `${directory}`);
@@ -103,10 +117,10 @@ const HomePage = () => {
     name: undefined,
     designation: undefined,
     organization: undefined,
-    xCollab: undefined,
+    x_collab: undefined,
     review: undefined,
-    policyAgreed: null,
-    avatar: null
+    policy_agreed: null,
+    linked_profile: null
   });
   const [errors, setErrors] = React.useState<Errors>({});
   const [isPending, startTransition] = React.useTransition();
@@ -140,21 +154,22 @@ const HomePage = () => {
         date: new Date(),
         pak_time: convertToRegionTime(date),
         created_at: date?.toDateString(),
-        modified_at: date?.toISOString()
+        modified_at: date?.toISOString(),
+        is_archived: true
       };
 
       if (user) {
         emailData.email = user?.email ?? null;
-        emailData.gmailName = user?.name ?? null;
+        emailData.gmail_name = user?.name ?? null;
       }
       const parsedFormData = { ...emailData };
-      if (formData.avatar) {
-        parsedFormData.avatar = await handleFileUpload(
-          formData.avatar,
-          `feeback-form/${user?.user_id}`
-        );
-      }
-      parsedFormData.fireBase_Image = user?.picture ?? null;
+      // if (formData.avatar) {
+      //   parsedFormData.avatar = await handleFileUpload(
+      //     formData.avatar,
+      //     `feeback-form/${user?.user_id}`
+      //   );
+      // }
+      parsedFormData.firebase_image = user?.picture ?? null;
       parsedFormData.is_approved = false;
       await addDoc(collection(fireStore, "reviews-feedbacks"), parsedFormData);
       await emailjs.send(
@@ -174,9 +189,10 @@ const HomePage = () => {
         name: undefined,
         designation: undefined,
         organization: undefined,
-        xCollab: undefined,
+        x_collab: undefined,
         review: undefined,
-        avatar: null
+        policy_agreed: null,
+        linked_profile: null
       });
       router.replace("/login");
     } catch (err: any) {
@@ -205,30 +221,38 @@ const HomePage = () => {
       <div className="md:col-span-2 flex justify-center w-full">
         <AppIcon />
       </div>
-      {formField.map((field, index) => (
-        <FloatingOutlinedInput
-          key={field.id + index}
-          inputProps={{
-            ...field,
-            onChange: handleChange,
-            value: formData[field?.name]! ?? "",
-            disabled: isPending
-          }}
-          textAreaProps={{
-            ...field,
-            onChange: handleChange as any,
-            value: formData[field?.name]! ?? "",
-            disabled: isPending
-          }}
-          label={field?.label!}
-          className={field.className}
-          error={errors[field?.name]}
-          isInvalid={errors[field?.name] ? true : false}
-          isValid={!errors[field?.name] && formData[field?.name] ? true : false}
-          isTextBox={field?.isTextBox}
-          helper={field?.helper}
-        />
-      ))}
+      {formField.map(
+        (
+          { className, label, required, helper, isTextBox, ...field },
+          index
+        ) => (
+          <FloatingOutlinedInput
+            key={field.id + index}
+            inputProps={{
+              ...field,
+              onChange: handleChange,
+              value: formData[field?.name]! ?? "",
+              disabled: isPending
+            }}
+            textAreaProps={{
+              ...field,
+              onChange: handleChange as any,
+              value: formData[field?.name]! ?? "",
+              disabled: isPending
+            }}
+            label={label!}
+            className={className}
+            error={errors[field?.name]}
+            isInvalid={errors[field?.name] ? true : false}
+            isValid={
+              !errors[field?.name] && formData[field?.name] ? true : false
+            }
+            isTextBox={isTextBox}
+            helper={helper}
+            required={required}
+          />
+        )
+      )}
       <div className="md:col-span-2">
         <div className=" flex items-center">
           <input
@@ -241,21 +265,21 @@ const HomePage = () => {
               if (e?.target?.checked) {
                 setFormData({
                   ...formData,
-                  policyAgreed: `${agreedPolicy}, date:${convertToRegionTime(
+                  policy_agreed: `${agreedPolicy}, date:${convertToRegionTime(
                     new Date()
                   )}`
                 });
               } else {
                 setFormData({
                   ...formData,
-                  policyAgreed: null
+                  policy_agreed: null
                 });
               }
               setErrors((prev) => ({
                 ...prev,
-                policyAgreed: validateField(
+                policy_agreed: validateField(
                   e?.target?.checked,
-                  validationSchema?.policyAgreed || []
+                  validationSchema?.policy_agreed || []
                 )
               }));
             }}
@@ -264,11 +288,11 @@ const HomePage = () => {
             htmlFor="checked-checkbox"
             className="ms-2 text-sm font-medium text-gray-300"
           >
-            {agreedPolicy}
+            {agreedPolicy} <span className="text-red-400">*</span>
           </label>
         </div>
-        {errors.policyAgreed && (
-          <small className="text-red-400 text-sm">{errors.policyAgreed}</small>
+        {errors.policy_agreed && (
+          <small className="text-red-400 text-sm">{errors.policy_agreed}</small>
         )}
       </div>
 
