@@ -29,23 +29,25 @@ const FormContent = (
 
   return (
     <>
-      <ConditionalRenderer condition={fetchingDocument || isFetching}>
-        <FormSkeletonLoader formFieldsList={fieldsList} />
+      <ConditionalRenderer
+        condition={!(fetchingDocument || isFetching)}
+        component={<FormSkeletonLoader formFieldsList={fieldsList} />}
+      >
+        <HookForms
+          {...props}
+          formId={mode}
+          validationSchema={
+            mode !== Mode.edit &&
+            (props?.fieldArrayName || props?.formType === "tabular-form")
+              ? props?.formValidationSchema?.array
+              : props?.formValidationSchema?.field
+          }
+          formType={mode === Mode.edit ? "field-form" : props?.formType}
+          fieldArrayName={mode === Mode.edit ? null : props?.fieldArrayName}
+          defaultValues={document}
+          dataId={docId}
+        />
       </ConditionalRenderer>
-      <HookForms
-        {...props}
-        formId={mode}
-        validationSchema={
-          mode !== Mode.edit &&
-          (props?.fieldArrayName || props?.formType === "tabular-form")
-            ? props?.formValidationSchema?.array
-            : props?.formValidationSchema?.field
-        }
-        formType={mode === Mode.edit ? "field-form" : props?.formType}
-        fieldArrayName={mode === Mode.edit ? null : props?.fieldArrayName}
-        defaultValues={document}
-        dataId={docId}
-      />
     </>
   );
 };

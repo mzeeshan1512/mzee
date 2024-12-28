@@ -14,6 +14,7 @@ import { EditIcon, Eye, EyeSlash, Trash } from "@/shared/icons/common";
 import { formFieldsList } from "@/shared/types/fields";
 import { parseObjectValues } from "@/shared/utils/common";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const ReviewsFeedBacks = () => {
@@ -56,8 +57,8 @@ const ReviewsFeedBacks = () => {
       data_key: "",
       cell: (item: ReviewFeedback) => (
         <Image
-          src={item?.avatar ?? item.fireBase_Image}
-          alt={item.name ?? item.gmailName}
+          src={item.firebase_image}
+          alt={item.name ?? item.gmail_name}
           width={40}
           height={40}
           className="avatar"
@@ -69,18 +70,20 @@ const ReviewsFeedBacks = () => {
       data_key: "name"
     },
     {
-      title: "Gmail Name",
-      data_key: "gmailName"
-    },
-    {
-      title: "Email",
-      data_key: "email"
+      title: "Linkedin Profile",
+      data_key: "linkedin_profile",
+      cell: (item: ReviewFeedback) => (
+        <Link href={item.linkedin_profile! ?? ""} target="_blank">
+          {item.linkedin_profile}
+        </Link>
+      )
     },
     {
       data_key: "actions",
       title: "Actions",
       headerCellCssClass: "justify-content-center",
       cell: (item: ReviewFeedback) => {
+        console.log({ item });
         return (
           <div className="d-flex gap-3 justify-content-center align-items-center">
             <EditIcon
@@ -135,6 +138,13 @@ const ReviewsFeedBacks = () => {
       disabled: !edit,
       col: 12
     },
+    {
+      type: "textarea",
+      name: "linkedin_profile",
+      label: "Review",
+      disabled: true,
+      col: 12
+    },
 
     {
       type: "text",
@@ -145,7 +155,7 @@ const ReviewsFeedBacks = () => {
     },
     {
       type: "text",
-      name: "gmailName",
+      name: "gmail_name",
       label: "Gmail Name",
       disabled: true
     },
@@ -173,7 +183,7 @@ const ReviewsFeedBacks = () => {
     },
     {
       type: "text",
-      name: "xCollab",
+      name: "x_colab",
       label: "Mode/Collaboration",
       disabled: true,
       col: 4
@@ -224,7 +234,7 @@ const ReviewsFeedBacks = () => {
     },
     {
       type: "text",
-      name: "hostname",
+      name: "host_name",
       label: "Hostname",
       disabled: true,
       col: 3
@@ -288,13 +298,13 @@ const ReviewsFeedBacks = () => {
           <div className="d-flex justify-content-between mt-2 px-3 align-items-center">
             <h3 className="d-flex gap-2 color-primary align-items-center m-0">
               <Image
-                src={modalData?.data?.avatar ?? modalData?.data.fireBase_Image}
-                alt={modalData?.data.name ?? modalData?.data.gmailName!}
+                src={modalData?.data?.avatar ?? modalData?.data.firebase_image}
+                alt={modalData?.data.name ?? modalData?.data.gmail_name!}
                 width={40}
                 height={40}
                 className="avatar"
               />
-              <i>{modalData?.data?.name ?? modalData?.data?.gmailName}</i>
+              <i>{modalData?.data?.name ?? modalData?.data?.gmail_name}</i>
             </h3>
             <Button onClick={() => setEdit(!edit)}>
               <EditIcon className="text-white" />

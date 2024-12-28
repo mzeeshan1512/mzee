@@ -74,7 +74,7 @@ interface blobOption {
 interface Services_TechsTools extends commonData {
   blob?: blobOption;
   description?: string;
-  category?: selectObject[]
+  category?: selectObject;
 }
 /* service data types end */
 
@@ -141,23 +141,24 @@ interface LogsInfo {
 }
 
 interface ReviewFeedback {
-  gmailName: string;
+  gmail_name: string;
+  linkedin_profile?: string;
   created_at: string;
   latitude: string;
-  xCollab: string;
+  x_colab: string;
   organization: string;
   pak_time: string;
   review: string;
-  hostname: string;
+  host_name: string;
   is_approved: boolean;
   is_archived: boolean;
   date: Date;
-  fireBase_Image: string;
+  firebase_image: string;
   designation: string;
   longitude: string;
   email: string;
   modified_at: string;
-  policyAgreed: string;
+  policy_agreed: string;
   avatar?: any;
   ip: string;
   name: string;
