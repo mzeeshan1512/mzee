@@ -256,33 +256,36 @@ const Carousel = ({
       )}
 
       {showDots && (
-        <div
-          {...dotsContainerProps}
-          className={
-            "absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-2 " +
-            (dotsContainerProps?.className || "")
-          }
-        >
-          {slidesElement?.map((_, index) => (
-            <button
-              // {...dotsProps}
-              key={index}
-              onClick={() => {
-                if (!isAnimating) {
-                  setIsAnimating(true);
-                  setActiveIndex(index);
-                  setTimeout(() => setIsAnimating(false), 500);
-                }
-              }}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === activeIndex
-                  ? "bg-white w-4"
-                  : "bg-white/50 hover:bg-white/75"
-              } ${dotsProps?.className || ""}`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+        <>
+          <br />
+          <div
+            {...dotsContainerProps}
+            className={
+              "absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 " +
+              (dotsContainerProps?.className || "")
+            }
+          >
+            {slidesElement?.map((_, index) => (
+              <button
+                // {...dotsProps}
+                key={index}
+                onClick={() => {
+                  if (!isAnimating) {
+                    setIsAnimating(true);
+                    setActiveIndex(index);
+                    setTimeout(() => setIsAnimating(false), 500);
+                  }
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex
+                    ? "bg-primary-200 w-4"
+                    : "bg-black/50 hover:bg-black/75 dark:bg-white/50 dark:hover:bg-white/75"
+                } ${dotsProps?.className || ""}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
