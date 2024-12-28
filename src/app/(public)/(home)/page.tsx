@@ -1,3 +1,5 @@
+export const revalidate = 300; // Revalidate every 5 minutes (300 seconds)
+
 import React from "react";
 import dynamic from "next/dynamic";
 import ShowIf from "@/shared/components/show-if";
