@@ -8,6 +8,7 @@ import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import ShowIf from "@/shared/components/show-if";
 import Carousel from "@/shared/components/carousel";
 import Image from "next/image";
+import TrustedRedirect from "@/shared/components/trusted-redirect";
 
 const Reviews = async () => {
   const serverAction = fetchRecordsOnServer();
@@ -65,6 +66,8 @@ const Reviews = async () => {
         <Carousel
           autoPlay
           infinite
+          draggable={false}
+          showArrows={false}
           responsive={{
             desktop: {
               breakpoint: { max: 3000, min: 1024 },
@@ -79,31 +82,34 @@ const Reviews = async () => {
               items: 1
             }
           }}
-          sliderContainerProps={{
-            className: serverAction?.data > 1 ? "overflow-visible" : ""
-          }}
         >
           {serverAction?.data.map((review: ReviewFeedback, index: number) => (
             <figure
               key={review.id + index}
-              className="flex flex-col items-center justify-center m-2 border p-8 text-center rounded-lg shadow-md shadow-primary-200 glassomorhpic-effect-center-nav "
+              className="flex flex-col !min-h-60 items-center justify-center gap-4 m-2 border p-8 text-center rounded-lg shadow-md shadow-primary-200 glassomorhpic-effect-center-nav "
             >
-              <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+              <blockquote className="max-w-2xl mx-auto text-gray-500 dark:text-gray-400">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {review?.review}
                 </h3>
-                <p>{review?.xCollab}</p>
+                <p className="mt-4">{review?.x_colab}</p>
               </blockquote>
               <figcaption className="flex items-center justify-center ">
                 <Image
-                  className="rounded-full w-10 h-10 border p-2"
-                  src={review?.fireBase_Image}
-                  alt={review?.gmailName ?? review?.name}
-                  width={50}
-                  height={50}
+                  className="rounded-full w-20 h-20 p-2 drop-shadow-md "
+                  src={review?.firebase_image}
+                  alt={review?.gmail_name ?? review?.name}
+                  width={80}
+                  height={80}
                 />
-                <div className="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
-                  <strong>{review?.gmailName ?? review?.name}</strong>
+                <div className="space-y-0.5 font-medium text-left rtl:text-right ms-3 hover-bottom-outline">
+                  <TrustedRedirect
+                    href={review?.linkedin_profile}
+                    symbol
+                    className="cursor-pointer !font-normal hover:!font-semibold"
+                  >
+                    <strong>{review?.gmail_name ?? review?.name}</strong>
+                  </TrustedRedirect>
                   <div className="text-sm text-gray-500 dark:text-gray-400 ">
                     {review.designation} at {review?.organization}
                   </div>

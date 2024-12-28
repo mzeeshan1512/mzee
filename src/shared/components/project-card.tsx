@@ -54,14 +54,14 @@ const TechRenderer = ({
   tech_stack
 }: ProjectsBasicInfo & { i?: number }) => {
   return (
-    <ul className={`flex list-none gap-4 ${i! % 2 === 0 ? "justify-end" : ""}`}>
+    <ul className={`flex list-none gap-2 ${i! % 2 === 0 ? "justify-end" : ""}`}>
       {tech_stack?.map((item, index) => (
         <li key={index} className="text-lg font-semibold">
           <RenderSvgAsDangerouslySetInnerHTML
             {...item?.value?.svg?.props}
             width={25}
             height={25}
-            className="shrink-0 drop-shadow-[0_2px_1px_var(--secondary)] dark:drop-shadow-[0_2px_1px_var(--primary)] hover:scale-x-125"
+            className="shrink-0 dark:shadow-slate-400 drop-shadow-lg hover:scale-x-125"
             title={item.label}
             dangerouslySetInnerHTML={{
               __html: item?.value?.svg?.code
@@ -81,8 +81,8 @@ const ImageRenderer = ({
   const images = [banner_image, ...(slider_images! ?? [])];
   return images?.length > 0 ? (
     <Carousel
-      // autoPlay
-      // infinite
+      autoPlay
+      infinite
       showArrows={false}
       showDots={false}
       responsive={{

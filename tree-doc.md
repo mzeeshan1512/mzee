@@ -16,7 +16,7 @@ Restructure project directory and add configuration, assets, components, and uti
   - **logos/**: Included app logos (`appLogo.png`, `chat.png`) for consistent brand representation.
   - **about.png**: Added image to be used in the about section or similar content.
 - **src/shared/**:
-  - **components/**: Created reusable components like `button.tsx`, `particles-animation.tsx`, `pop-up.tsx`, `show-if.tsx`, `svg-gradient-binder.tsx`, `tooltip.tsx`, and `trusted-redirect.tsx` to support common UI patterns across the app.
+  - **components/**: Created reusable components like `button.tsx`, `particles-animation.tsx`, `pop-up.tsx`, `show-if.tsx`, `svg-gradient-binder.tsx`, and `trusted-redirect.tsx` to support common UI patterns across the app.
   - **config/**: Added configuration files (`firebase.ts`, `index.ts`) to manage app-specific setups like Firebase.
   - **hooks/**:
     - Added custom hooks such as `use-scroll-into-view.ts`, `use-debounced-value.ts`, `use-media-query.ts`, `use-network.ts`, `use-reduced-motion.ts`, `use-timeout.ts`, and `use-window-event.ts` for improving app interactivity and performance.
