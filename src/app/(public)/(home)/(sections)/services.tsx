@@ -83,7 +83,16 @@ const Services = async () => {
       >
         <ResponsiveRenderer
           elseChildren={
-            <div className="hidden lg:grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div
+              className="hidden lg:grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              style={{
+                gridTemplateColumns: `repeat(${
+                  serverAction?.data?.length > 4
+                    ? 4
+                    : serverAction?.data?.length
+                }, minmax(0, 1fr))`
+              }}
+            >
               {serverAction.data?.map(
                 (service: Services_TechsTools, index: number) => (
                   <ServiceCard key={index} service={service} />

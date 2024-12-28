@@ -1,15 +1,20 @@
+export const revalidate = 300;
+export const dynamic = "force-dynamic";
+
 import React from "react";
-import dynamic from "next/dynamic";
+import dynamicImport from "next/dynamic";
 import { TabList as list } from "@/shared/components/tabs";
 import { AboutPageColllectionIds } from "@/shared/firebase/collection-ids";
 // dynamic loading
-const Tabs = dynamic(() => import("@/shared/components/tabs"));
-const TabContentContainer = dynamic(() =>
-  import("./(components-sections)/tab-content-container")
+const Tabs = dynamicImport(() => import("@/shared/components/tabs"));
+const TabContentContainer = dynamicImport(
+  () => import("./(components-sections)/tab-content-container")
 );
-const Overview = dynamic(() => import("./(components-sections)/overview"));
-const TanContent = dynamic(() =>
-  import("./(components-sections)/tabs-content")
+const Overview = dynamicImport(
+  () => import("./(components-sections)/overview")
+);
+const TanContent = dynamicImport(
+  () => import("./(components-sections)/tabs-content")
 );
 
 enum TabList {
