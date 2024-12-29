@@ -6,7 +6,7 @@ import TrustedRedirect from "./trusted-redirect";
 import { GitHub } from "../icon/social";
 import { /* InternalPreview, */ WebPreview } from "../icon/common";
 import Carousel from "./carousel";
-import ProjectDemoVdeo from "./project-demo-video";
+import ProjectDemoVdeo, { ProjectInfo } from "./project-demo-video";
 
 const LinkRenderer = ({
   github_url,
@@ -15,8 +15,13 @@ const LinkRenderer = ({
   src,
   title,
   web_preview,
+  description,
+  showInfo,
   i
-}: ProjectsBasicInfo & { i?: number } & videoUploadType) => {
+}: ProjectsBasicInfo & {
+  i?: number;
+  showInfo?: boolean;
+} & videoUploadType) => {
   return (
     <ul className={`flex list-none gap-2 ${i! % 2 === 0 ? "justify-end" : ""}`}>
       {github_url && (
@@ -44,6 +49,11 @@ const LinkRenderer = ({
           >
             <WebPreview />
           </TrustedRedirect>
+        </li>
+      )}
+      {showInfo && (
+        <li className="hover:scale-125 drop-shadow-md">
+          <ProjectInfo description={description ?? ""} title={title} />
         </li>
       )}
     </ul>
@@ -149,7 +159,7 @@ const ProjectInfoCard = ({
           </div>
         </div>
       )}
-      <div className="absolute top-3/4 left-0 rounded-e-lg w-full h-full bg-slate-400 bg-opacity-10 transition-all duration-1000 ease-in-out group-hover:top-[58%] group-hover:bg-opacity-50">
+      <div className="absolute top-3/4 left-0 rounded-e-lg w-full h-full bg-slate-400 bg-opacity-40 transition-all duration-1000 ease-in-out group-hover:top-[50%] group-hover:bg-opacity-70">
         <div className="p-4">
           <div className="flex justify-between flex-wrap">
             <h1 className="text-gradient">
@@ -158,7 +168,11 @@ const ProjectInfoCard = ({
             <TechRenderer {...basicInfo} />
           </div>
           <div className="hidden transition-all ease-in-out duration-1000 group-hover:block mt-4">
-            <LinkRenderer {...basicInfo} {...videoGallery?.demo_video} />
+            <LinkRenderer
+              {...basicInfo}
+              {...videoGallery?.demo_video}
+              showInfo
+            />
           </div>
         </div>
       </div>
