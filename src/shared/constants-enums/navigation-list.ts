@@ -77,7 +77,7 @@ const socialContact: SocialShareContent[] = [
     isTrusted: true
   },
   {
-    title: process.env.NEXT_PUBLIC_WHATSAPP,
+    title: process.env.NEXT_PUBLIC_PHONE,
     icon: WhatsApp,
     link: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP}`,
     color: "rgb(37, 211, 102)",
