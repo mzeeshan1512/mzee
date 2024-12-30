@@ -8,7 +8,7 @@ import "@/styles/hover-bottom-outline-effect.css";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_APP_Name,
-  description: process.env.NEXT_PUBLIC_APP_Name
+  description: process.env.NEXT_PUBLIC_APP_DESCRIPTION
 };
 
 export default function RootLayout({
