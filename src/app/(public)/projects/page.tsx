@@ -69,8 +69,8 @@ const Projects = async () => {
                 <i>{category}</i>
               </h1>
               <Carousel
-                // autoPlay
-                // infinite
+                autoPlay
+                infinite
                 defaultItems={serverAction?.data[category]?.length / 2}
                 slidesProps={{
                   className: "p-2"
