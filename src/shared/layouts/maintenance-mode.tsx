@@ -3,7 +3,6 @@ import FallBackLayout from "./fall-back-layout";
 import ParticleAnimation from "../components/particles-animation";
 import Countdown from "./(components)/count-down";
 import SocialIcons from "../components/social-share";
-import { socialContact } from "../constants-enums/navigation-list";
 
 const MaintenanceMode = () => {
   return (
@@ -28,7 +27,6 @@ const MaintenanceMode = () => {
             </p>
           )}
           <SocialIcons
-            socialContact={socialContact}
             linkProps={{
               className: "!text-[white] hover-gradient-background mt-2",
               style: { "--hover-color": "white" } as React.CSSProperties,

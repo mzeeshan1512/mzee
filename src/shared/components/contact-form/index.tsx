@@ -1,6 +1,5 @@
 import React from "react";
 import SocialIcons from "../social-share";
-import { socialContact } from "@/shared/constants-enums/navigation-list";
 import ContactForm from "./form";
 
 type Props = {
@@ -37,7 +36,6 @@ const ContactUs = ({
         </h1>
         {
           <SocialIcons
-            socialContact={socialContact}
             className="!flex !flex-col !gap-4"
             linkProps={{
               className: "flex gap-4 items-center"

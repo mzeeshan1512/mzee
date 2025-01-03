@@ -43,7 +43,7 @@ const validationSchema: ValidationSchema = {
     (value) => parseInvalidEnteries(value),
     (value) =>
       !/^\+?[1-9]\d{1,14}$/.test(value) ||
-      value === process.env.NEXT_PUBLIC_WHATSAPP
+      [process.env.NEXT_PUBLIC_WHATSAPP, process.env.PHONE]?.includes(value)
         ? "Contact must be a valid phone number"
         : null
   ],
