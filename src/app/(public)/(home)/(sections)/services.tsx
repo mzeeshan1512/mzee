@@ -64,7 +64,7 @@ const Services = async () => {
   return (
     <SectionContainer
       id={sectionIds.services}
-      title={"Your Vision, Our Expertise"}
+      title={"Your Vision, My Expertise"}
       quotation="Transforming ideas into reality with expert development, automation, and IT solutions"
       className={
         " !bg-grid-pattern-light dark:!bg-grid-pattern-dark !bg-grid-size relative"

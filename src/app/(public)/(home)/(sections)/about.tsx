@@ -100,7 +100,7 @@ const About = () => {
         ]?.map((item, index) => (
           <Counter
             heading={item.heading}
-            target={+item.target!}
+            target={Math.ceil(+item.target!)!}
             key={index}
             duration={item.duration}
             mainContainer={{
