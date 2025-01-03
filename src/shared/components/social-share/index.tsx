@@ -1,6 +1,7 @@
 import React, { ComponentProps } from "react";
 import TrustedRedirect, { TrustedRedirectProps } from "../trusted-redirect";
 import "./style.css";
+import { socialContact as SC } from "@/shared/constants-enums/navigation-list";
 
 interface SocialShareContent {
   title?: string;
@@ -20,7 +21,7 @@ interface SocialShareProps {
 
 const SocialIcons = ({
   size = 15,
-  socialContact = [],
+  socialContact = SC,
   linkProps,
   showTitle,
   className,

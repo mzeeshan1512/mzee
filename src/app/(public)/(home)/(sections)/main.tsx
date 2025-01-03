@@ -1,15 +1,20 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import {
-  sectionIds,
-  socialContact
-} from "@/shared/constants-enums/navigation-list";
+import { sectionIds } from "@/shared/constants-enums/navigation-list";
 import { DefaultBg } from "@/shared/app-config";
 import LetsConnect from "./(components)/lets-connect";
 
-const ParticleAnimation =dynamic(()=>import( "@/shared/components/particles-animation"),{ssr:false});
-const JumbledTextAnimation =dynamic(()=>import("@/shared/components/text-loop/jumbled-text-animation"),{ssr:false});
-const SocialIcons =dynamic(()=>import("@/shared/components/social-share"),{ssr:false});
+const ParticleAnimation = dynamic(
+  () => import("@/shared/components/particles-animation"),
+  { ssr: false }
+);
+const JumbledTextAnimation = dynamic(
+  () => import("@/shared/components/text-loop/jumbled-text-animation"),
+  { ssr: false }
+);
+const SocialIcons = dynamic(() => import("@/shared/components/social-share"), {
+  ssr: false
+});
 
 const Main = async () => {
   return (
@@ -55,7 +60,6 @@ const Main = async () => {
         >
           <LetsConnect />
           <SocialIcons
-            socialContact={socialContact}
             linkProps={{
               className: "!text-[white] hover-gradient-background",
               style: { "--hover-color": "white" } as React.CSSProperties

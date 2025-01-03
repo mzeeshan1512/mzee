@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import SocialIcons from "@/shared/components/social-share";
-import { socialContact } from "@/shared/constants-enums/navigation-list";
 import { fetchRecordsOnServer } from "@/shared/firebase/server-actions";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import ContactModal from "@/shared/components/contact-form/contact-modal";
@@ -65,10 +64,7 @@ const Overview = async () => {
               Software Engineer
             </p>
             <div data-aos="zoom-in" data-aos-duration="1000">
-              <SocialIcons
-                className="flex-wrap !gap-2"
-                socialContact={socialContact}
-              />
+              <SocialIcons className="flex-wrap !gap-2" />
             </div>
           </div>
         </div>
