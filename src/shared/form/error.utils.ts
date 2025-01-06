@@ -37,7 +37,7 @@ const validationSchema: ValidationSchema = {
         ? "Organization must be at least 3 characters longer."
         : null
   ],
-  x_collab: [
+  x_colab: [
     (value) => (!value ? "Teamup/Colab is required." : null),
     (value) =>
       value.length < 5
