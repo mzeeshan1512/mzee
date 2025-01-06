@@ -44,7 +44,7 @@ const validationSchema: ValidationSchema = {
         ? "Teamup/Colab must be at least 5 characters longer."
         : null
   ],
-  linked_profile: [
+  linkedin_profile: [
     (value) => (!value ? "Linkedin Profile Link is required." : null),
     (value) => {
       try {

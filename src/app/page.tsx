@@ -58,8 +58,8 @@ const formField = [
     required: true
   },
   {
-    name: "linked_profile",
-    id: "linked_profile",
+    name: "linkedin_profile",
+    id: "linkedin_profile",
     type: "url",
     label: "LinkedIn Profile",
     className: "md:col-span-2",
