@@ -50,8 +50,8 @@ const formField = [
     required: true
   },
   {
-    name: "x_collab",
-    id: "xCollab ",
+    name: "x_colab",
+    id: "x_colab ",
     type: "text",
     label: "Teamup/Colab",
     helper: "work on same team etc.",
