@@ -65,7 +65,7 @@ const validationSchema: ValidationSchema = {
       value.length < 50 ? "Review must be at least 50 characters." : null,
     (value) =>
       value.length > 400
-        ? "Review must be at exceed more than 400 characters."
+        ? "Review must not exceed more than 400 characters. i.e.(white spaces also consider as character)"
         : null
   ],
   policy_agreed: [
