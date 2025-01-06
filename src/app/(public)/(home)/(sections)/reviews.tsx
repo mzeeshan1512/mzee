@@ -82,16 +82,17 @@ const Reviews = async () => {
               items: 1
             }
           }}
+          sliderContainerProps={{
+            className: "items-strech"
+          }}
         >
           {serverAction?.data.map((review: ReviewFeedback, index: number) => (
             <figure
               key={review.id + index}
-              className="flex flex-col !min-h-60 items-center justify-center gap-4 m-2 border p-8 text-center rounded-lg shadow-md shadow-primary-200 glassomorhpic-effect-center-nav "
+              className="flex flex-col !min-h-60 h-full items-center justify-center gap-4 m-2 border p-8 text-center rounded-lg shadow-md shadow-primary-200 glassomorhpic-effect-center-nav "
             >
               <blockquote className="max-w-2xl mx-auto text-gray-500 dark:text-gray-400">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {review?.review}
-                </h3>
+                <h3 className="text-lg font-semibold">{review?.review}</h3>
                 <p className="mt-4">{review?.x_colab}</p>
               </blockquote>
               <figcaption className="flex items-center justify-center ">

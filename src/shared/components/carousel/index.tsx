@@ -261,7 +261,7 @@ const Carousel = ({
           <div
             {...dotsContainerProps}
             className={
-              "absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 " +
+              "absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 flex-wrap" +
               (dotsContainerProps?.className || "")
             }
           >
