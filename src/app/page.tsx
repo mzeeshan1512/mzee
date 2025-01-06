@@ -117,7 +117,7 @@ const HomePage = () => {
     name: undefined,
     designation: undefined,
     organization: undefined,
-    x_collab: undefined,
+    x_colab: undefined,
     review: undefined,
     policy_agreed: null,
     linked_profile: null
@@ -189,7 +189,7 @@ const HomePage = () => {
         name: undefined,
         designation: undefined,
         organization: undefined,
-        x_collab: undefined,
+        x_colab: undefined,
         review: undefined,
         policy_agreed: null,
         linked_profile: null
