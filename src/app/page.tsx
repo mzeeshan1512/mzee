@@ -111,17 +111,19 @@ const handleFileUpload = (file: any, directory: string) => {
   });
 };
 
+const defaultValues = {
+  name: null,
+  designation: null,
+  organization: null,
+  x_colab: null,
+  review: null,
+  policy_agreed: null,
+  linked_profile: null
+};
+
 const HomePage = () => {
   const router = useRouter();
-  const [formData, setFormData] = React.useState<FormData>({
-    name: undefined,
-    designation: undefined,
-    organization: undefined,
-    x_colab: undefined,
-    review: undefined,
-    policy_agreed: null,
-    linked_profile: null
-  });
+  const [formData, setFormData] = React.useState<FormData>(defaultValues);
   const [errors, setErrors] = React.useState<Errors>({});
   const [isPending, startTransition] = React.useTransition();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -185,15 +187,7 @@ const HomePage = () => {
       deleteCookie("access_token");
       toast.success("Your Response Has Been Recorded Successfully");
       await signOut(auth);
-      setFormData({
-        name: undefined,
-        designation: undefined,
-        organization: undefined,
-        x_colab: undefined,
-        review: undefined,
-        policy_agreed: null,
-        linked_profile: null
-      });
+      setFormData(defaultValues);
       router.replace("/login");
     } catch (err: any) {
       toast.error(err?.message ?? err?.code ?? "Something went wrong");
