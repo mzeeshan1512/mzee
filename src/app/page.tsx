@@ -256,7 +256,7 @@ const HomePage = () => {
       <div className="md:col-span-2">
         <div className=" flex items-center">
           <input
-            checked={formData.policyAgreed ? true : false}
+            checked={formData.policy_agreed ? true : false}
             id="checked-checkbox"
             type="checkbox"
             value=""
