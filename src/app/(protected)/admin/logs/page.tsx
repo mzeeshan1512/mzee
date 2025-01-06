@@ -41,13 +41,13 @@ const Logs = () => {
         breadCrumbs={{
           parent: {
             title: "Logs",
-            link: "",
+            link: ""
           },
           childList: [
             {
-              title: type === "login" ? "Login" : "Web",
+              title: type === "login" ? "Login" : "Web"
             }
-          ],
+          ]
         }}
         buttonControl={{
           onClick: () => {
@@ -55,13 +55,17 @@ const Logs = () => {
             navigator.replace(`${pathname}?type=${mode}`);
           },
           content: `View ${type === "login" ? "Web" : "Login"} Logs`,
-          hideIcon: true,
+          hideIcon: true
         }}
         tableDataKeyList={contentList}
-        showActionsColumn={false}
-        collectionId={type === "login" ? CollectionIDs.loginLogs : CollectionIDs.webInfo}
+        collectionId={
+          type === "login" ? CollectionIDs.loginLogs : CollectionIDs.webInfo
+        }
         fieldsList={[]}
         hideExport={true}
+        showEditButton={false}
+        showEyeIcon={false}
+        isStrikeThroughEffect={false}
       />
     </div>
   );

@@ -55,6 +55,24 @@ const DataTable = (props: DataTableProps) => {
     return sortData;
   }, [sortData, search]);
 
+  const getPaginatedData = () => {
+    if (dataList?.length < 1) {
+      return [];
+    }
+    let temp = dataList?.slice(
+      (currentPage - 1) * recordsPerPage,
+      (currentPage - 1) * recordsPerPage + recordsPerPage
+    );
+    if (temp?.length < 1) {
+      temp = temp?.slice(
+        (currentPage - 1) * recordsPerPage,
+        (currentPage - 1) * recordsPerPage + recordsPerPage
+      );
+      setCurrentPage(currentPage - 1);
+    }
+    return temp;
+  };
+
   return (
     <div className="d-flex flex-column gap-3">
       <ConditionalRenderer
@@ -124,35 +142,31 @@ const DataTable = (props: DataTableProps) => {
                 condition={!props.children}
                 component={props?.children}
               >
-                {dataList
-                  ?.slice(
-                    (currentPage - 1) * recordsPerPage,
-                    (currentPage - 1) * recordsPerPage + recordsPerPage
-                  )
-                  ?.map((item, index) => (
-                    <tr key={index}>
-                      <ConditionalRenderer condition={showSerialNumbers}>
-                        <td className="px-3">
-                          {(currentPage - 1) * recordsPerPage + index + 1}
-                        </td>
-                      </ConditionalRenderer>
-                      {props?.headerList?.map((headerItem, headerIndex) => (
-                        <td
-                          key={headerIndex}
-                          className={`px-3 ${
-                            typeof item.is_archived === "undefined" ||
-                            item.is_archived
-                              ? "strike-through"
-                              : ""
-                          }`}
-                        >
-                          {headerItem?.cell
-                            ? headerItem?.cell(item)
-                            : item[headerItem?.data_key!]}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
+                {getPaginatedData()?.map((item, index) => (
+                  <tr key={index}>
+                    <ConditionalRenderer condition={showSerialNumbers}>
+                      <td className="px-3">
+                        {(currentPage - 1) * recordsPerPage + index + 1}
+                      </td>
+                    </ConditionalRenderer>
+                    {props?.headerList?.map((headerItem, headerIndex) => (
+                      <td
+                        key={headerIndex}
+                        className={`px-3 ${
+                          (typeof item.is_archived === "undefined" ||
+                            item.is_archived) &&
+                          props.isStrikeThroughEffect
+                            ? "strike-through"
+                            : ""
+                        }`}
+                      >
+                        {headerItem?.cell
+                          ? headerItem?.cell(item)
+                          : item[headerItem?.data_key!]}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
               </ConditionalRenderer>
             </ConditionalRenderer>
           </tbody>

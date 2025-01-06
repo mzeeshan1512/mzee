@@ -75,9 +75,10 @@ interface ContentControllerProps {
   showEyeIcon?: boolean;
   showEditButton?: boolean;
   showSmartApprove?: boolean;
-  hideSearch?:boolean
-  hideExport?:boolean
-  isLoading?:boolean
+  hideSearch?: boolean;
+  hideExport?: boolean;
+  isLoading?: boolean;
+  isStrikeThroughEffect?: boolean;
 }
 
 type selectObject = {

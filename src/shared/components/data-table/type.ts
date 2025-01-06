@@ -8,16 +8,17 @@ interface TableHeaderProps {
 }
 
 interface DataTableProps extends TableHeaderProps {
-    data:GeneratorFunctionConstructor[] | any[],
-    tableCssClass?:string,
-    tableStyle?:CSSProperties,
-    children?:ReactNode,
-    hideSearch?:boolean,
-    hideExport?:boolean,
-    searchPlaceholder?:string,
-    recordsPerPage?:number,
-    isLoading?:boolean,
-    showSerialNumbers?:boolean,
+  data: GeneratorFunctionConstructor[] | any[];
+  tableCssClass?: string;
+  tableStyle?: CSSProperties;
+  children?: ReactNode;
+  hideSearch?: boolean;
+  hideExport?: boolean;
+  searchPlaceholder?: string;
+  recordsPerPage?: number;
+  isLoading?: boolean;
+  showSerialNumbers?: boolean;
+  isStrikeThroughEffect?: boolean;
 }
 
 export type {

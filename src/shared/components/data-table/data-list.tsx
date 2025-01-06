@@ -15,11 +15,12 @@ const DataList = ({
   collectionId,
   directoryParentKey,
   tableDataKeyList,
-  showActionsColumn=true,
-  showDeleteButton=true,
-  showSmartApprove=true,
-  showEditButton=true,
-  showEyeIcon=true,
+  showActionsColumn = true,
+  showDeleteButton = true,
+  showSmartApprove = true,
+  showEditButton = true,
+  showEyeIcon = true,
+  isStrikeThroughEffect = true,
   hideSearch,
   hideExport
 }: ContentControllerProps) => {
@@ -65,7 +66,7 @@ const DataList = ({
                       update({
                         collectionId: collectionId,
                         dataId: item?.id,
-                        data: { ...item, is_archived: !item?.is_archived },
+                        data: { ...item, is_archived: !item?.is_archived }
                       });
                     }}
                   >
@@ -88,7 +89,7 @@ const DataList = ({
                         title: item?.title!,
                         directory: directoryParentKey
                           ? item[directoryParentKey]?.directory
-                          : item?.directory,
+                          : item?.directory
                       })
                     }
                   >
@@ -100,8 +101,8 @@ const DataList = ({
                     </ConditionalRenderer> */}
               </div>
             );
-          },
-        },
+          }
+        }
       ];
     }
     return tableDataKeyList;
@@ -110,7 +111,14 @@ const DataList = ({
 
   return (
     <>
-      <DataTable data={data} headerList={ContentList} isLoading={isLoading} hideSearch={hideSearch} hideExport={hideExport} />
+      <DataTable
+        data={data}
+        headerList={ContentList}
+        isLoading={isLoading}
+        hideSearch={hideSearch}
+        hideExport={hideExport}
+        isStrikeThroughEffect={isStrikeThroughEffect}
+      />
       <ConditionalRenderer condition={confirmationModal}>
         <InfoModal
           modalData={confirmationModal!}
@@ -121,13 +129,12 @@ const DataList = ({
             mutate({
               collectionType: collectionId,
               id: confirmationModal?.id!,
-              directory: [confirmationModal?.directory!],
+              directory: [confirmationModal?.directory!]
             })
           }
         />
       </ConditionalRenderer>
       <ScreenLoader loading={isProcessing} />
-      
     </>
   );
 };
