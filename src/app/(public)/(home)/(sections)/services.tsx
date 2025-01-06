@@ -18,8 +18,11 @@ type Props = {
 
 const ServiceCard = ({ service, toggleGradient }: Props) => {
   return (
-    <div className="group flex flex-col h-full lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-3 border lg:border-none p-4 lg:p-0 w-full">
-      <div className="flex justify-center" style={{ width: "6.75rem" }}>
+    <div className="group flex flex-col h-full lg:flex-row justify-start items-start gap-3 shadow-md shadow-primary-200 lg:shadow-none border rounded-lg lg:border-none p-4 lg:p-0 w-full">
+      <div
+        className="flex justify-center sm:items-center w-full lg:w-[6.75rem]"
+        // style={{ width: "6.75rem" }}
+      >
         <SVGGradientBinder
           className="flex-grow inline transform transition-transform duration-500 ease-in-out group-hover:rotate-[360deg]"
           {...service?.blob?.value?.svg?.props}
@@ -102,8 +105,8 @@ const Services = async () => {
           }
         >
           <Carousel
-            autoPlay
-            infinite
+            // autoPlay
+            // infinite
             showDots={false}
             slidesProps={{
               className: "!p-2"
