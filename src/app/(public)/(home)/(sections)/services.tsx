@@ -105,8 +105,8 @@ const Services = async () => {
           }
         >
           <Carousel
-            // autoPlay
-            // infinite
+            autoPlay
+            infinite
             showDots={false}
             slidesProps={{
               className: "!p-2"
