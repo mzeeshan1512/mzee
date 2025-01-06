@@ -125,7 +125,10 @@ const ChatBox = ({
           </div>
           <div className="content"></div>
           <TrustedRedirect
-            href={`${process.env.NEXT_PUBLIC_WHATSAPP}?text=${request}`}
+            href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP}?text=${
+              request ?? ""
+            }`}
+            isTrusted
             target="_blank"
             className="bg-[#128c7e] rounded-full p-1.5 w-[30px] h-[30px] flex justify-center items-center text-white cursor-pointer"
           >
