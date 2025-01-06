@@ -19,23 +19,30 @@ const validationSchema: ValidationSchema = {
   name: [
     (value) => (!value ? "Name is required." : null),
 
-    (value) => (value.length < 3 ? "Name must be at least 3 characters." : null)
+    (value) =>
+      value.length < 3 ? "Name must be at least 3 characters longer." : null
   ],
   designation: [
     (value) => (!value ? "Designation is required." : null),
 
     (value) =>
-      value.length < 3 ? "Designation must be at least 3 characters." : null
+      value.length < 3
+        ? "Designation must be at least 3 characters longer."
+        : null
   ],
   organization: [
     (value) => (!value ? "Organization is required." : null),
     (value) =>
-      value.length < 3 ? "Organization must be at least 3 characters." : null
+      value.length < 3
+        ? "Organization must be at least 3 characters longer."
+        : null
   ],
   x_collab: [
     (value) => (!value ? "Teamup/Colab is required." : null),
     (value) =>
-      value.length < 5 ? "Teamup/Colab must be at least 5 characters." : null
+      value.length < 5
+        ? "Teamup/Colab must be at least 5 characters longer."
+        : null
   ],
   linked_profile: [
     (value) => (!value ? "Linkedin Profile Link is required." : null),
@@ -49,9 +56,11 @@ const validationSchema: ValidationSchema = {
           "https://www.linkedin.com/in/",
           ""
         );
-        console.log({ profileSegment });
         if (!profileSegment) {
           return "The LinkedIn profile segment is empty.";
+        }
+        if (profileSegment?.length < 5) {
+          return "The LinkedIn profile segment must contain atleast 5 characters.";
         }
         return null;
       } catch {
