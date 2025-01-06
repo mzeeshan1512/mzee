@@ -73,7 +73,7 @@ const About = () => {
               __html: process.env.NEXT_PUBLIC_ABOUT_INFO!
             }}
           />
-          <div className="flex gap-4">
+          <div className="flex gap-4 mt-4">
             <Link
               href="/about"
               className="bg-primary-gradient hover:bg-primary-hover-gradient p-3 rounded-lg text-white"
