@@ -2,18 +2,6 @@ import { cookiesName } from "@/routes";
 import { deleteCookie, getCookie } from "cookies-next";
 import { jwtDecode } from "jwt-decode";
 
-const getHtmlStringFromObject = (obj: { [key: string]: any }): string => {
-  let htmlString = "";
-  for (let key in obj) {
-    if (obj?.hasOwnProperty(key)) {
-      htmlString += `${key}: ${obj[key]}
-
-            `;
-    }
-  }
-  return htmlString;
-};
-
 const getSafeArrayValue = (
   array: any,
   index: number,
@@ -59,7 +47,6 @@ const parseObjectValues = (obj: any): GenericObject => {
 };
 
 export {
-  getHtmlStringFromObject,
   getSafeArrayValue,
   getUserInfo,
   getBase64,

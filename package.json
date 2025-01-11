@@ -30,6 +30,7 @@
     "react-quill": "^2.0.0",
     "react-scroll": "^1.9.0",
     "react-select": "^5.7.7",
+    "resend": "^4.0.1",
     "sass": "^1.68.0",
     "sass-loader": "^14.2.1",
     "typescript": "5.2.2",

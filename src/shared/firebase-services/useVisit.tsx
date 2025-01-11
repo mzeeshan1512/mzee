@@ -1,19 +1,18 @@
-import emailjs from "emailjs-com";
 import {
   addDoc,
   collection,
   getDocs,
   getFirestore,
   query,
-  where,
+  where
 } from "firebase/firestore";
 import { fireStore, firebaseApp } from "@/shared/config/firebase";
 import { CollectionIDs } from "@/shared/constants/collection-ids";
-import { getHtmlStringFromObject } from "../utils/common";
 import { deleteCookie, getCookie } from "cookies-next";
 import { cookiesName } from "@/routes";
+import { sendEmail } from "../email";
 
-type mode= "login" | "weblogs" 
+type mode = "login" | "weblogs";
 
 const getRecord = async (colId: any, ip: any) => {
   const documents: any = [];
@@ -61,22 +60,16 @@ const saveVisit = async (req: any, mode: mode = "weblogs") => {
       ),
       payload
     );
-
-    await emailjs.send(
-      serviceId,
-      emailTemplate,
-      {
-        message: getHtmlStringFromObject(payload),
-        text:
-          mode === "login"
-            ? "Some tries to Access Admin Panel"
-            : "Some one Visit your website",
-        subject:
-          (mode === "login" ? `Login Attempt` : "New Web Visit") +
-          ` (${payload.hostname})`
-      },
-      publicKey
-    );
+    await sendEmail({
+      payload: payload,
+      textMessage:
+        mode === "login"
+          ? "Some tries to Access Admin Panel"
+          : "Some one Visit your website",
+      subject:
+        (mode === "login" ? `Login Attempt` : "New Web Visit") +
+        ` (${payload.hostname})`
+    });
   } catch (e) {
     // console.log({e})
   } finally {
@@ -84,7 +77,7 @@ const saveVisit = async (req: any, mode: mode = "weblogs") => {
   }
 };
 
-const saveLoginInfo = async (mode?:mode) => {
+const saveLoginInfo = async (mode?: mode) => {
   let cookie: any = await getCookie(cookiesName?.info);
   cookie = cookie ? JSON?.parse(cookie) : null;
   if (cookie) {

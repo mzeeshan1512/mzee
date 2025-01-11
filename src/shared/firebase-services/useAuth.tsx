@@ -23,16 +23,16 @@ import {
   setDoc,
   where
 } from "firebase/firestore";
-import emailjs from "emailjs-com";
 //utils
 import { CollectionIDs } from "@/shared/constants/collection-ids";
 import { authProtect, authRoutes, cookiesName } from "@/routes";
 import { showError, showSuccess } from "@/shared/utils/toast";
-import { getHtmlStringFromObject, getUserLogOut } from "@/shared/utils/common";
+import { getUserLogOut } from "@/shared/utils/common";
 import { auth, fireStore } from "@/shared/config/firebase";
 import { chatLogo } from "@/shared/config";
 import { AuthContext } from "../context";
 import { delete_Doc } from "./useCollections";
+import { sendEmail } from "../email";
 
 const useAuth = () => {
   const navigate = useRouter();
@@ -67,9 +67,6 @@ const useAuth = () => {
           id: isVerified?.id || "1"
         });
       }
-      const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
-      const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE;
-      const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
       const auth2FACode: any = Math.floor(
         100000 + Math.random() * 900000
       ).toString();
@@ -77,18 +74,14 @@ const useAuth = () => {
         ...payload,
         auth2FACode: auth2FACode
       });
-      await emailjs.send(
-        serviceId,
-        emailTemplate,
-        {
-          message: getHtmlStringFromObject(payload),
-          text:
-            "We have detected a login attempt from your account. Please enter the following code to verify your identity: " +
-            auth2FACode,
-          subject: "2FA Verification (mzee.vercel.app)"
-        },
-        publicKey
-      );
+      await sendEmail({
+        payload: payload,
+        textMessage:
+          "We have detected a login attempt from your account. Please enter the following code to verify your identity: " +
+          auth2FACode,
+        subject: "2FA Verification (mzee.vercel.app)"
+      });
+
       showSuccess("Verification Token sent Successfully");
     } catch (error: any) {
       showError(error);
