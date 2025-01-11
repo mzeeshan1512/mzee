@@ -1,6 +1,5 @@
 "use client";
 import { useState, useTransition } from "react";
-import emailjs from "emailjs-com";
 import Button from "@/shared/components/button";
 import toast from "@/shared/components/toast";
 import { FloatingOutlinedInput } from "./inputs";
@@ -9,7 +8,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { fireStore } from "@/shared/firebase/config";
 import { CollectionIDs } from "@/shared/firebase/collection-ids";
 import { convertToRegionTime } from "@/shared/utils/date";
-import { getHtmlStringFromObject } from "@/shared/firebase/use-visit";
+import { sendEmail } from "@/shared/email";
 
 interface FormData {
   [field: string]: string | undefined;
@@ -73,9 +72,6 @@ const ContactForm = () => {
   const [isPending, startTransition] = useTransition();
   const saveData = async () => {
     try {
-      const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
-      const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE;
-      const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
       const date = new Date();
       const contactFormDta = {
         ...formState,
@@ -88,16 +84,11 @@ const ContactForm = () => {
         collection(fireStore, CollectionIDs.contact),
         contactFormDta
       );
-      await emailjs.send(
-        serviceId,
-        emailTemplate,
-        {
-          message: getHtmlStringFromObject(contactFormDta),
-          text: "Some one submits a quote to you, Details are as follows:",
-          subject: `${formState.name}, submits the contact form`
-        },
-        publicKey
-      );
+      await sendEmail({
+        payload: contactFormDta,
+        textMessage: "Some one submits a quote to you, Details are as follows:",
+        subject: `${formState.name}, submits the contact form`
+      });
       toast.success("Your Response Has Been Recorded Successfully");
       setFormState({
         name: undefined,

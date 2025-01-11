@@ -1,4 +1,3 @@
-import emailjs from "emailjs-com";
 import {
   addDoc,
   collection,
@@ -13,18 +12,7 @@ import { cookiesName } from "@/shared/constants-enums/navigation-list";
 import { CollectionIDs } from "./collection-ids";
 import { decryptData } from "../utils/encode-decode";
 import { convertToRegionTime } from "../utils/date";
-
-const getHtmlStringFromObject = (obj: { [key: string]: any }): string => {
-  let htmlString = "";
-  for (let key in obj) {
-    if (obj?.hasOwnProperty(key)) {
-      htmlString += `${key}: ${obj[key]}
-
-            `;
-    }
-  }
-  return htmlString;
-};
+import { sendEmail } from "../email";
 
 const getRecord = async (colId: any, ip: any) => {
   const documents: any = [];
@@ -38,14 +26,11 @@ const getRecord = async (colId: any, ip: any) => {
 
 const saveVisit = async () => {
   let req: any = getCookie(cookiesName.info);
-  deleteCookie(cookiesName.info);
   if (req) {
     req = decryptData(req!);
+    deleteCookie(cookiesName.info);
   }
   if (req && Object.keys(req)?.length > 0) {
-    const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
-    const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE;
-    const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
     const currentDate: Date | any = new Date();
     const date = currentDate.toLocaleString();
     const time = currentDate.toLocaleTimeString();
@@ -73,21 +58,15 @@ const saveVisit = async () => {
       }
       const db = getFirestore(firebaseApp);
       await addDoc(collection(db, CollectionIDs.webInfo), payload);
-
-      await emailjs.send(
-        serviceId,
-        emailTemplate,
-        {
-          message: getHtmlStringFromObject(payload),
-          text: "Some one Visit your website",
-          subject: "New Web Visit" + ` (${payload.hostname})`
-        },
-        publicKey
-      );
+      await sendEmail({
+        payload: payload,
+        textMessage: "Some one Visit your website",
+        subject: "New Web Visit" + ` (${payload.hostname})`
+      });
     } catch (error) {
       console.error({ error });
     }
   }
 };
 
-export { getRecord, saveVisit, getHtmlStringFromObject };
+export { getRecord, saveVisit };
