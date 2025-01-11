@@ -12,16 +12,4 @@ const decryptData = (encryptedData:string)=> {
   return JSON.parse(decryptedBytes.toString(CryptoJS.enc.Utf8));
 };
 
-const getHtmlStringFromObject = (obj: { [key: string]: any }): string => {
-  let htmlString = "";
-  for (let key in obj) {
-    if (obj?.hasOwnProperty(key)) {
-      htmlString += `${key}: ${obj[key]}
-
-            `;
-    }
-  }
-  return htmlString;
-};
-
-export { decryptData, encryptData, getHtmlStringFromObject };
+export { decryptData, encryptData };

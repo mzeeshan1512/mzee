@@ -6,18 +6,15 @@ import { FloatingOutlinedInput } from "@/shared/form/inputs";
 import { AppIcon } from "@/shared/layouts/app-logo";
 import { addDoc, collection } from "firebase/firestore";
 import React from "react";
-import emailjs from "emailjs-com";
 import { auth, firebaseStorage, fireStore } from "@/shared/firebase/config";
 import { convertToRegionTime } from "@/shared/utils/date";
-import {
-  decryptData,
-  getHtmlStringFromObject
-} from "@/shared/utils/encode-decode";
+import { decryptData } from "@/shared/utils/encode-decode";
 import { deleteCookie, getCookie } from "cookies-next";
 import { jwtDecode } from "jwt-decode";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
+import { sendEmail } from "@/shared/email";
 
 interface FormData {
   [field: string]: string | undefined | null;
@@ -137,9 +134,7 @@ const HomePage = () => {
   const saveData = async () => {
     toast.dismiss();
     try {
-      const serviceId: any = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
-      const emailTemplate: any = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE;
-      const publicKey: any = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
+      debugger;
       let req: any = getCookie("gtmth");
       deleteCookie("gtmth");
       if (req) {
@@ -174,16 +169,11 @@ const HomePage = () => {
       parsedFormData.firebase_image = user?.picture ?? null;
       parsedFormData.is_approved = false;
       await addDoc(collection(fireStore, "reviews-feedbacks"), parsedFormData);
-      await emailjs.send(
-        serviceId,
-        emailTemplate,
-        {
-          message: getHtmlStringFromObject(emailData),
-          text: "Some one gives you a feedback, Details are as follows:",
-          subject: `${formData?.name}, submits the review or feedback form`
-        },
-        publicKey
-      );
+      await sendEmail({
+        payload: emailData,
+        textMessage: "Some one gives you a feedback, Details are as follows:",
+        subject: `${formData?.name}, submits the review or feedback form`
+      });
       deleteCookie("access_token");
       toast.success("Your Response Has Been Recorded Successfully");
       await signOut(auth);
