@@ -21,7 +21,7 @@
 }
 
 .social-icons :hover .icon {
-  color: var(--hover-color, inherit) !important;
+  color: var(--hover-color, white) !important;
   /* border-color: var(--hover-bg, transparent) !important; */
   border: none;
   background: var(--hover-bg, transparent) !important;

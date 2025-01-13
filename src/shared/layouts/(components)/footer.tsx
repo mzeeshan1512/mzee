@@ -21,11 +21,11 @@ const Footer = ({
       </ShowIf>
       {/* Footer Text */}
       <p className="my-1 text-center select-none">
-        <span>Copyright © {new Date().getFullYear()} &nbsp; </span>
-        <span className="cursor-pointer underline">
-          {process.env.NEXT_PUBLIC_FOOTER_TITLE}
+        <span>© {new Date().getFullYear()} </span>
+        <span className="border-l px-2 border-r mx-2">
+          All rights reserved ✨
         </span>
-        <span>&nbsp; All Rights Reserved.</span>
+        <span>Empowering dreams, protecting creativity.</span>
       </p>
       {/* Conditional Footer Callback Component */}
       <ShowIf conditionalRenderKey={footerCallBackComponent}>
