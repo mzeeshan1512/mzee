@@ -29,7 +29,7 @@ const LinkRenderer = ({
     <ul className={`flex list-none gap-2 ${i! % 2 === 0 ? "justify-end" : ""}`}>
       {github_url &&
         project_category?.value !== ProjectCategoryList.industrial && (
-          <li className="hover:scale-125 drop-shadow-md">
+          <li className="hover:scale-125 drop-shadow-md" title="Github">
             <TrustedRedirect href={github_url} isTrusted>
               <GitHub />
             </TrustedRedirect>
@@ -41,12 +41,15 @@ const LinkRenderer = ({
         </li>
       )} */}
       {src && (
-        <li className="hover:scale-125 drop-shadow-md cursor-pointer">
+        <li
+          className="hover:scale-125 drop-shadow-md cursor-pointer"
+          title="Demo"
+        >
           <ProjectDemoVdeo {...src} title={title} />
         </li>
       )}
       {demo_link && (
-        <li className="hover:scale-125 drop-shadow-md">
+        <li className="hover:scale-125 drop-shadow-md" title="Preview Link">
           <TrustedRedirect
             href={demo_link}
             className={disable_demo ? "opacity-50 cursor-not-allowed" : ""}
@@ -56,7 +59,7 @@ const LinkRenderer = ({
         </li>
       )}
       {showInfo && (
-        <li className="hover:scale-125 drop-shadow-md">
+        <li className="hover:scale-125 drop-shadow-md" title="Info">
           <ProjectInfo description={description ?? ""} title={title} />
         </li>
       )}
@@ -70,13 +73,13 @@ const TechRenderer = ({
   return (
     <ul className={`flex list-none gap-2 ${i! % 2 === 0 ? "justify-end" : ""}`}>
       {tech_stack?.map((item, index) => (
-        <li key={index} className="text-lg font-semibold">
+        <li key={index} className="text-lg font-semibold" title={item.label}>
           <RenderSvgAsDangerouslySetInnerHTML
             {...item?.value?.svg?.props}
             width={25}
             height={25}
-            className="shrink-0 dark:shadow-slate-400 drop-shadow-lg hover:scale-x-125"
-            title={item.label}
+            className="shrink-0 dark:shadow-slate-400 drop-shadow-lg hover:scale-110"
+            // title={item.label}
             dangerouslySetInnerHTML={{
               __html: item?.value?.svg?.code
             }}
