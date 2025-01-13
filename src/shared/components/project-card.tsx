@@ -8,7 +8,7 @@ import { /* InternalPreview, */ WebPreview } from "../icon/common";
 import Carousel from "./carousel";
 import ProjectDemoVdeo, { ProjectInfo } from "./project-demo-video";
 import { DefaultBg } from "../app-config";
-import { ProjectCategoryList } from "@/app/(public)/projects/page";
+import { ProjectCategoryList } from "../utils/common";
 
 const LinkRenderer = ({
   github_url,
