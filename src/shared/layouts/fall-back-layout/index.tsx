@@ -4,14 +4,18 @@ import ShowIf from "@/shared/components/show-if";
 import "./styles.css";
 import { useInterval } from "@/shared/hooks/use-interval";
 
+type messageProps = {
+  message?: string;
+  subTextMessage?: string;
+};
+
 type FallBackErrorLayoutProps = {
   children: React.ReactNode;
   code?: "400" | "404" | "500" | "OOPS";
-  message?: string;
   customContent?: boolean;
-};
+} & messageProps;
 
-const RenderErrorMessage = ({ message }: { message: string }) => {
+const RenderErrorMessage = ({ message, subTextMessage }: messageProps) => {
   const [streamedText, setStreamedText] = React.useState<string>("");
 
   const typeCharacter = () => {
@@ -28,17 +32,25 @@ const RenderErrorMessage = ({ message }: { message: string }) => {
   const { stop } = useInterval(typeCharacter, 50, { autoInvoke: true });
 
   return (
-    <div className="container text-center py-2 px-5 text-base flex items-center gap-1 justify-center">
-      <p>{streamedText}</p>
-      <span className="blinking-caret" />
-    </div>
+    <>
+      <div className="container text-center py-2 px-5 text-base flex items-center gap-1 justify-center">
+        <p>{streamedText}</p>
+        <span className="blinking-caret" />
+      </div>
+      {streamedText?.length >= message?.length! && subTextMessage && (
+        <strong className="text-center">
+          <i>{subTextMessage}</i>
+        </strong>
+      )}
+    </>
   );
 };
 
 const RenderErrorComponent = ({
   children,
   code = "404",
-  message
+  message,
+  subTextMessage
 }: FallBackErrorLayoutProps) => {
   const errorcode = React.useMemo(() => {
     let part3 = code?.[2] || null;
@@ -62,7 +74,10 @@ const RenderErrorComponent = ({
       </div>
       {/* message */}
       <ShowIf conditionalRenderKey={message}>
-        <RenderErrorMessage message={message!} />
+        <RenderErrorMessage
+          message={message!}
+          subTextMessage={subTextMessage}
+        />
       </ShowIf>
       {children}
     </div>

@@ -50,7 +50,8 @@ const TrustedRedirect: React.FC<
       if (!trustedDomains?.includes(domain)) {
         return {
           valid: false,
-          message: "Domain not trusted.",
+          message:
+            "The domain or URL you’re trying to access cannot be trusted. Proceed with caution to avoid potential risks like phishing or malware..",
           redirectDomain: url
         };
       }

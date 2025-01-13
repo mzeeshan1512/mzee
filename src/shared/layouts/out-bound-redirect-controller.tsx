@@ -5,9 +5,10 @@ import FallBackLayout from "@/shared/layouts/fall-back-layout";
 import { getValidSessionItem, removeSessionItem } from "@/shared/utils/common";
 import { useSearchParams, useRouter } from "next/navigation";
 import React from "react";
+import ShowIf from "../components/show-if";
 
 const OutBoundRedirectController = () => {
-  const [url, setUrl] = React.useState<string | null>("");
+  const [url, setUrl] = React.useState<string | null>(null);
   const searchParams = useSearchParams();
   const navigate = useRouter();
 
@@ -20,9 +21,8 @@ const OutBoundRedirectController = () => {
       const session = getValidSessionItem("url", true);
       if (session) {
         setUrl(session);
-        return `${searchParams.get("message")} ${session}`;
       }
-      return null;
+      return `${searchParams.get("message")}`;
     }
     return null;
   }, [searchParams?.get("message")]);
@@ -32,16 +32,22 @@ const OutBoundRedirectController = () => {
   }
 
   return (
-    <FallBackLayout code="OOPS" message={errorMessage || ""}>
+    <FallBackLayout
+      code="OOPS"
+      message={errorMessage || ""}
+      subTextMessage={url ?? ""}
+    >
       <div className="flex justify-center gap-2">
-        <Button
-          variant="primary"
-          blendMode={BlendMode.GRADIENT}
-          onClick={() => handleOpenInNewTab()}
-          style={{ color: "white" }}
-        >
-          Proceed
-        </Button>
+        <ShowIf conditionalRenderKey={url}>
+          <Button
+            variant="primary"
+            blendMode={BlendMode.GRADIENT}
+            onClick={() => handleOpenInNewTab()}
+            style={{ color: "white" }}
+          >
+            Proceed
+          </Button>
+        </ShowIf>
         <Button
           variant="danger"
           blendMode={BlendMode.GRADIENT}
