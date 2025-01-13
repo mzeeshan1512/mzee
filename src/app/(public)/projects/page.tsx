@@ -14,9 +14,10 @@ const Carousel = dynamicImport(() => import("@/shared/components/carousel"), {
   ssr: false
 });
 
-enum ProjectCategoryList {
-  featured = "Featured",
+export enum ProjectCategoryList {
+  // featured = "Featured",
   worthy = "Worthy",
+  industrial = "Corporate Milestones",
   notWorthy = "Not Worthy",
   youtubeCloned = "Youtube Cloned",
   cloned = "Cloned",

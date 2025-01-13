@@ -7,6 +7,8 @@ import { GitHub } from "../icon/social";
 import { /* InternalPreview, */ WebPreview } from "../icon/common";
 import Carousel from "./carousel";
 import ProjectDemoVdeo, { ProjectInfo } from "./project-demo-video";
+import { DefaultBg } from "../app-config";
+import { ProjectCategoryList } from "@/app/(public)/projects/page";
 
 const LinkRenderer = ({
   github_url,
@@ -17,6 +19,7 @@ const LinkRenderer = ({
   web_preview,
   description,
   showInfo,
+  project_category,
   i
 }: ProjectsBasicInfo & {
   i?: number;
@@ -24,13 +27,14 @@ const LinkRenderer = ({
 } & videoUploadType) => {
   return (
     <ul className={`flex list-none gap-2 ${i! % 2 === 0 ? "justify-end" : ""}`}>
-      {github_url && (
-        <li className="hover:scale-125 drop-shadow-md">
-          <TrustedRedirect href={github_url} isTrusted>
-            <GitHub />
-          </TrustedRedirect>
-        </li>
-      )}
+      {github_url &&
+        project_category?.value !== ProjectCategoryList.industrial && (
+          <li className="hover:scale-125 drop-shadow-md">
+            <TrustedRedirect href={github_url} isTrusted>
+              <GitHub />
+            </TrustedRedirect>
+          </li>
+        )}
       {/* {web_preview && (
         <li className="hover:scale-125 drop-shadow-md cursor-pointer">
           <InternalPreview />
@@ -116,18 +120,42 @@ const ImageRenderer = ({
         className: "!p-0 !h-full"
       }}
     >
-      {images?.map((item) => {
+      {images?.map((item, index) => {
         return (
           <img
-            key={item.src?.url}
-            src={item.src?.url}
+            key={item?.src?.url ?? index}
+            src={item?.src?.url ?? DefaultBg?.src}
+            // onError={(e: any) => {
+            //   e.target.src = DefaultBg?.src;
+            // }}
             alt={title}
+            loading="lazy"
             className={`object-fill md:object-contain w-full h-full rounded-lg`}
           />
         );
       })}
     </Carousel>
   ) : null;
+};
+
+const RenderCreditContent = ({
+  content_ownership,
+  content_ownership_link,
+  disable_demo,
+  textColor
+}: ProjectsBasicInfo & { textColor?: string }) => {
+  return (
+    <ShowIf conditionalRenderKey={content_ownership && content_ownership_link}>
+      <TrustedRedirect
+        href={content_ownership_link}
+        disable={disable_demo}
+        className={textColor ?? ""}
+      >
+        <span>🔗 CC:</span>
+        <span className="ms-1 hovered-text-gradient ">{content_ownership}</span>
+      </TrustedRedirect>
+    </ShowIf>
+  );
 };
 
 const ProjectInfoCard = ({
@@ -167,19 +195,19 @@ const ProjectInfoCard = ({
             </h1>
             <TechRenderer {...basicInfo} />
           </div>
-          <div className="hidden transition-all ease-in-out duration-1000 group-hover:block mt-4">
+          <div className="hidden transition-all ease-in-out duration-1000 group-hover:block mt-2">
             <LinkRenderer
               {...basicInfo}
               {...videoGallery?.demo_video}
               showInfo
             />
+            <RenderCreditContent {...basicInfo} textColor="text-white mt-2" />
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 const ProjectDetailedInfoCard = ({
   basicInfo,
   imageGallery,
@@ -232,18 +260,7 @@ const ProjectDetailedInfoCard = ({
             {basicInfo?.description}
           </p>
         </div>
-        <ShowIf
-          conditionalRenderKey={
-            basicInfo?.content_ownership && basicInfo?.content_ownership_link
-          }
-        >
-          <TrustedRedirect href={basicInfo.content_ownership_link}>
-            CC:{" "}
-            <span className="hovered-text-gradient">
-              {basicInfo.content_ownership}
-            </span>
-          </TrustedRedirect>
-        </ShowIf>
+        <RenderCreditContent {...basicInfo} />
         {/* tech */}
         <TechRenderer {...basicInfo} i={i} />
         {/* links */}
