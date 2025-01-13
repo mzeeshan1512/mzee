@@ -134,7 +134,7 @@ const HomePage = () => {
   const saveData = async () => {
     toast.dismiss();
     try {
-      debugger;
+      // debugger;
       let req: any = getCookie("gtmth");
       deleteCookie("gtmth");
       if (req) {

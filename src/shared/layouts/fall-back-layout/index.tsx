@@ -34,7 +34,11 @@ const RenderErrorComponent = ({
         <span>{errorcode[2]}</span>
       </div>
       {/* message */}
-      {message && <small>{message ?? "Something went wrong"}</small>}
+      {message && (
+        <small className="text-center">
+          {message ?? "Something went wrong"}
+        </small>
+      )}
       {children}
     </div>
   );
