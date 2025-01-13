@@ -9,20 +9,11 @@ import { ProjectInfoCard } from "@/shared/components/project-card";
 import Image from "next/image";
 import NoDataImg from "@/assets/content/not_found.png";
 import dynamicImport from "next/dynamic";
+import { ProjectCategoryList } from "@/shared/utils/common";
 
 const Carousel = dynamicImport(() => import("@/shared/components/carousel"), {
   ssr: false
 });
-
-export enum ProjectCategoryList {
-  // featured = "Featured",
-  worthy = "Worthy",
-  industrial = "Corporate Milestones",
-  notWorthy = "Not Worthy",
-  youtubeCloned = "Youtube Cloned",
-  cloned = "Cloned",
-  others = "Others"
-}
 
 const groupedByCategory = (
   data: Record<string, any>,

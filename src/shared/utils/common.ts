@@ -36,6 +36,16 @@ const removeSessionItem = (key: string): void => {
   window?.sessionStorage?.removeItem(key);
 };
 
+export enum ProjectCategoryList {
+  // featured = "Featured",
+  worthy = "Worthy",
+  industrial = "Corporate Milestones",
+  notWorthy = "Not Worthy",
+  youtubeCloned = "Youtube Cloned",
+  cloned = "Cloned",
+  others = "Others"
+}
+
 export {
   isNotNullValue,
   getTypeOfItem,
