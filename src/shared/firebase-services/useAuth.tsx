@@ -203,7 +203,7 @@ const useAuth = () => {
         : getCookie(cookiesName?.accessToken);
       if (accessToken) {
         const userInfo = jwtDecode(accessToken);
-        console.log({ userInfo });
+        // console.log({ userInfo });
         if (
           userInfo &&
           Object.keys(userInfo)?.length > 1 &&

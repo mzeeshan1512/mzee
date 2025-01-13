@@ -2,10 +2,11 @@ import { formFieldsList } from "@/shared/types/fields";
 
 enum ProjectCategoryList {
   featured = "Featured",
-  worthy ="Worthy",
+  worthy = "Worthy",
   notWorthy = "Not Worthy",
   youtubeCloned = "Youtube Cloned",
-  cloned= "Cloned"
+  cloned = "Cloned",
+  industrial = "Corporate Milestones"
 }
 
 const optionsProjectCategoryList = [
@@ -28,6 +29,10 @@ const optionsProjectCategoryList = [
   {
     value: ProjectCategoryList.worthy,
     label: ProjectCategoryList.worthy
+  },
+  {
+    value: ProjectCategoryList.industrial,
+    label: ProjectCategoryList.industrial
   }
 ];
 
