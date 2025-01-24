@@ -36,8 +36,8 @@ const DataTable = (props: DataTableProps) => {
     let data = [...props?.data];
     Object?.keys(sortOrderList)?.forEach((key) => {
       data?.sort((a, b) => {
-        let aData = JSON.stringify(a[key]);
-        let bData = JSON.stringify(b[key]);
+        let aData = JSON?.stringify(a[key])?.split('')?.sort()?.join('');
+        let bData = JSON?.stringify(b[key])?.split('')?.sort()?.join('');
         if (sortOrderList[key] === "asc") {
           return aData > bData ? 1 : -1;
         } else {
