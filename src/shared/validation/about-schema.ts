@@ -19,7 +19,7 @@ const commonValidation = {
         if (currently) {
           return true;
         }
-        return start_date <= end_date;
+        return start_date?.split('')?.sort()?.join('') <= end_date?.split('')?.sort()?.join('');
       }
     ),
   end_date: yup
@@ -32,7 +32,7 @@ const commonValidation = {
         if (currently) {
           return true;
         }
-        return start_date <= end_date;
+        return start_date?.split('')?.sort()?.join('') <= end_date?.split('')?.sort()?.join('');
       }
     )
 };
