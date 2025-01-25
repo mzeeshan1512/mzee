@@ -34,7 +34,7 @@ Welcome to the **mzee** repository! This project is designed to provide a collec
 - **user-interface/v1** - [Deployed at mzee.vercel.app](https://mzee.vercel.app)
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under MTEL (Mzee-Techvians Exclusive License) License.
 
 ---
 
